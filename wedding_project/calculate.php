@@ -105,11 +105,11 @@
 
 
                 <table class="table table-light table-hover">
-                    <thead style="font-size: 16px;">
+                    <thead class="thead-light" style="font-size: 16px;">
                         <tr>
                             <th scope="col">#</th>
                             <!-- <th scope="col">กิจกรรม</th> -->
-                            <th scope="col">ของที่ต้องใช้</th>
+                            <th scope="col">อุปกรณ์</th>
                             <th scope="col">จำนวน</th>
 
                         </tr>
@@ -152,7 +152,7 @@
                         ?>
                         <?php foreach($query as $key => $value){?>
                         <tr>
-                            <td colspan="4"><b><?=$value['a_name']?></b></td>
+                            <td colspan="5" class="text-center" style="background-color: #edab93; color:white ;"><b><?=$value['a_name']?></b></td>
                         </tr>
                         <?php
                         // echo $sql;
@@ -167,7 +167,7 @@
                                 <th scope="row"><?php echo $n; ?></th>
                                 <!-- <td><?php echo $row['a_name']; ?></td> -->
                                 <td><?php echo $row['item_name']; ?></td>
-                                <td>.....</td>
+                                <td><?php echo $row['amount']; ?></td>
                             </tr>
 
                             <input type="hidden" name="a_id[]" value="<?= $row['a_id'] ?>">

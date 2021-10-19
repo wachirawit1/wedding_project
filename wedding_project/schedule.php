@@ -204,7 +204,7 @@ include('condb.php');
 
                     ?>
 
-                        <table class="table  table-light table-hover">
+                        <table class="table  table-light table-hover ">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">#</th>

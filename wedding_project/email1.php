@@ -49,7 +49,8 @@ include('condb.php');
             color: #edab93 !important;
         }
 
-        #saveEmail {
+        #saveEmail,
+        #sendEmail {
             background-color: #edab93;
             color: white;
         }
@@ -90,7 +91,7 @@ include('condb.php');
 
         <?php
         $userid = $_SESSION['userid'];
-        $sql = "SELECT `header`, `detail`, `e_id` FROM `email_detail` WHERE e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid)";
+        $sql = "SELECT `header`, `detail`, `e_id` FROM `email` WHERE e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid)";
         $query = mysqli_query($conn, $sql);
         $num_row = mysqli_num_rows($query);
         $row = mysqli_fetch_array($query);
@@ -145,81 +146,67 @@ include('condb.php');
 
     <div class="container shadow bg-light border text-center mb-3">
         <h4 class="my-3">เพิ่มรายชื่อและอีเมลแขก</h4>
+        <form class="my-3">
+            <div class="row my-3" id="row2">
+                <div class="col">
+                    <input type="text" class="form-control" id="e_name" name="name" placeholder="ชื่อ-นามสกุลแขก">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="relation" name="relation" placeholder="ความสัมพันธ์">
+                </div>
+                <div class="col">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="อีเมล">
+                </div>
+
+            </div>
+            <div class="row justify-content-md-center my-3">
+                <div class="col col-2">
+                    <button class="btn" type="button" id="sendEmail" onclick="send_email(this)">ส่ง</button>
+                </div>
+            </div>
+        </form>
+        <div class="my-3 border-bottom"></div>
+
         <?php
         $userid = $_SESSION['userid'];
-        $sql = "SELECT * FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid)";
+        $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))";
         $query = mysqli_query($conn, $sql);
         $num = mysqli_num_rows($query);
 
         $i = 1;
-        if ($num == 0) {
-        ?>
-            <form class="my-3">
+        if ($num == 0) { ?>
+            <div class="alert alert-danger" role="alert" id="none">
+                ยังไม่มีรายชื่อแขก
+            </div>
+            <div id="show">
+
+            </div>
+        <?php
+        } else { ?>
+            <h4 class='my-3'>รายชื่อแขก</h4>
+            <?php while ($row = mysqli_fetch_array($query)) { ?>
                 <div id="show">
-                    <div class="row my-3" id="row2">
-                        <div class="col-1" id="index">1</div>
+                    <div class="row my-3">
+                        <div class="col-1" id="index"><?= $i ?></div>
                         <div class="col">
-                            <input type="text" class="form-control" id="e_name1" name="name" placeholder="ชื่อ-นามสกุลแขก">
+                            <input type="text" class="form-control" name="name" placeholder="ชื่อ-นามสกุลแขก" value="<?= $row['e_name'] ?>" readonly>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" id="relation1" name="relation" placeholder="ความสัมพันธ์">
+                            <input type="text" class="form-control" name="relation" placeholder="ความสัมพันธ์" value="<?= $row['relation'] ?>" readonly>
                         </div>
                         <div class="col">
-                            <input type="email" class="form-control" id="email1" name="email" placeholder="อีเมล">
+                            <input type="email" class="form-control" name="email" placeholder="อีเมล" value="<?= $row['address'] ?>" readonly>
                         </div>
                         <div class="col col-2">
-                            <button class="btn btn-primary" type="button" id="sendEmail1" onclick="send_email(this)">ส่ง</button>
+                            <button type="button" class="btn btn-success">ส่งแล้ว</button>
                         </div>
-                    </div>
-                </div>
-            </form>
-            <?php
-        } else {
 
-            while ($row = mysqli_fetch_array($query)) {
-            ?>
-                <div class="row my-3" id="row2">
-                    <div class="col-1" id="index"><?= $i ?></div>
-                    <div class="col">
-                        <input type="text" class="form-control" readonly name="name" value="<?= $row['e_name'] ?>">
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" readonly name="relation" value="<?= $row['relation'] ?>">
-                    </div>
-                    <div class="col">
-                        <input type="email" class="form-control" readonly name="email" value="<?= $row['address'] ?>">
-                    </div>
-                    <div class="col col-2">
-                        <button type="button" class="btn btn-success" disabled>ส่งแล้ว</button>
                     </div>
                 </div>
-            <?php
-                $i++;
+        <?php $i++;
             }
-            ?>
+        } ?>
 
-            <div id="show">
-                <div class="row my-3" id="row2">
-                    <div class="col-1" id="index"><?= $i ?></div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="e_name<?= $i ?>" name="name" placeholder="ชื่อ-นามสกุลแขก">
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="relation<?= $i ?>" name="relation" placeholder="ความสัมพันธ์">
-                    </div>
-                    <div class="col">
-                        <input type="email" class="form-control" id="email<?= $i ?>" name="email" placeholder="อีเมล">
-                    </div>
-                    <div class="col col-2">
-                        <button type="button" class="btn btn-primary" id="sendEmail<?= $i ?>" data-count="0" onclick="send_email(this)">ส่ง</button>
-                    </div>
-
-                </div>
-            </div>
-            </form>
-        <?php
-        }
-        ?>
     </div>
 
     <footer class="bg-light text-center text-lg-start">
@@ -275,9 +262,9 @@ include('condb.php');
         }
 
         function send_email(e) {
-            var e_name = $('#e_name' + count);
-            var relation = $('#relation' + count);
-            var email = $('#email' + count);
+            var e_name = $('#e_name');
+            var relation = $('#relation');
+            var email = $('#email');
             var header = $('#header');
             var detail = $('#detail');
 
@@ -288,12 +275,11 @@ include('condb.php');
             if (email.val() != "") {
                 console.log("SEND MAIL");
 
-                $('#sendEmail' + count).html('กำลังส่ง');
-                $('#sendEmail' + count).attr('class', "btn btn-warning");
+                $('#sendEmail').html('กำลังส่ง');
 
                 $.ajax({
                     url: 'sendEmail.php',
-                    cache: false,
+                    // cache: false,
                     // contentType: false,
                     // processData: false,
                     method: 'POST',
@@ -308,33 +294,40 @@ include('condb.php');
 
                     },
                     success: function(data) {
-                        $('#sendEmail' + count).html('ส่งแล้ว');
-                        $('#sendEmail' + count).attr('class', "btn btn-success");
-                        $('#sendEmail' + count).attr('disabled', "");
-                        e_name.attr("readonly", "");
-                        relation.attr("readonly", "");
-                        email.attr("readonly", "");
                         count++;
-
+                        alert('ส่งสำเร็จ');
                         let html = `
+
                             <div class="row my-3" id="row2">
                                 <div class="col-1" id="index">${count}</div>
                                 <div class="col">
-                                    <input type="text" class="form-control" id="e_name${count}" name="name" placeholder="ชื่อแขก">
+                                    <input type="text" class="form-control"  name="name" value="${e_name.val()}" placeholder="ชื่อแขก">
                                 </div>
                                 <div class="col">
-                                    <input type="text" class="form-control" id="relation${count}" name="relation" placeholder="ความสัมพันธ์">
+                                    <input type="text" class="form-control"  name="relation" value="${relation.val()}" placeholder="ความสัมพันธ์">
                                 </div>
                                 <div class="col">
-                                    <input type="email" class="form-control" id="email${count}" name="email" placeholder="อีเมล">
+                                    <input type="email" class="form-control"  name="email" value="${email.val()}" placeholder="อีเมล">
                                 </div>
                                 <div class="col col-2">
-                                    <button class="btn btn-primary" type="button" id="sendEmail${count}" data-count="${count}" onclick="send_email(this)">ส่ง</button>
+                                    <button class="btn btn-success" type="button"  onclick="send_email(this)">ส่งแล้ว</button>
                                 </div>
                             </div>
                             `;
 
                         $('#show').append(html);
+
+                        e_name.val('');
+                        relation.val('');
+                        email.val('');
+                        $('#sendEmail').html('ส่ง');
+                        $('#none').replaceWith(
+                            "<h4 class='my-3'>รายชื่อแขก</h4>"
+                        )
+
+                    },
+                    error: function(error) {
+
                     }
                 });
             }

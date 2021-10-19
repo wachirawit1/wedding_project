@@ -74,7 +74,7 @@ if (isset($_POST['email'])) {
 
 
         include('condb.php');
-        $sql = "INSERT INTO `email`(`e_name`, `relation`, `address`, `e_status`, `e_id`) VALUES ('$e_name','$relation','$email','sent',(SELECT event.e_id FROM event WHERE event.userid = $userid))";
+        $sql = "INSERT INTO `email_list`(`e_name`, `relation`, `address`, `e_status`, `email_id`) VALUES ('test','test','test','sent',(SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid)))";
         mysqli_query($conn, $sql);
     } else {
         $status = "failed";

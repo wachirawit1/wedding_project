@@ -209,6 +209,7 @@ if(isset($_POST['id'])&& !empty($_POST['id'])){
                                 <a href="?del=<?=$row['p_id']?>" class="btn btn-danger">ลบโพสต์นี้</a>
                             </div>
                     <?php } ?>
+                    <button class="btn btn-success">ติดต่อสอบถาม</button> <?= $row['s_tel'] ?>
                 </div>
             </div>
             

@@ -124,7 +124,7 @@
                 $query = mysqli_query($conn, $sql);
                 while ($row = mysqli_fetch_array($query)) { ?>
                     <form action="view_post.php" method="POST">
-                        <div class="col mb-4">
+                        <div class="col mb-4 ">
                             <div class="card">
                                 <img src="img/<?= $row['picture'] ?>" class="card-img-top" alt="...">
                                 <div class="card-body">
