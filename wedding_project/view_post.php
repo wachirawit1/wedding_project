@@ -70,7 +70,7 @@ if(isset($_POST['id'])&& !empty($_POST['id'])){
         }
         
         a.nav-link:hover {
-            color: #edab93 !important;
+            color: #dbb89a !important;
         }
         .nav-item .btn {
             border: 1px solid grey;
@@ -92,7 +92,7 @@ if(isset($_POST['id'])&& !empty($_POST['id'])){
 
    
     <div class="card">
-        <div class="py-5">
+        <div class="pb-5">
             <h1 class="display-4 mt-5 text-center"><?=$row['p_name']?></h1>
         </div>  
         <div class="container pb-5">
@@ -209,7 +209,9 @@ if(isset($_POST['id'])&& !empty($_POST['id'])){
                                 <a href="?del=<?=$row['p_id']?>" class="btn btn-danger">ลบโพสต์นี้</a>
                             </div>
                     <?php } ?>
-                    <button class="btn btn-success">ติดต่อสอบถาม</button> <?= $row['s_tel'] ?>
+                    <h5><b>ติดต่อสอบถาม : </b></h5> 
+                    <p class="ml-4"><?= $row['s_tel'] ?></p>
+
                 </div>
             </div>
             

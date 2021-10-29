@@ -31,7 +31,7 @@ include('condb.php');
         }
 
         .nav-item {
-            font-size: 19px;
+            font-size: 16px;
             padding-left: 16px;
             padding-right: 16px;
         }
@@ -44,7 +44,7 @@ include('condb.php');
 
 
         a.nav-link:hover {
-            color: #edab93 !important;
+            color: #dbb89a !important;
         }
     </style>
 
@@ -131,7 +131,7 @@ include('condb.php');
                                     foreach ($query1 as $key => $value) {
                                     ?>
                                         <tr>
-                                            <td colspan="4" class="text-center" style="background-color: #edab93; color:white ;"><?php echo $value['a_name']; ?></td>
+                                            <td colspan="4" class="text-center" style="background-color: #dbb89a; color:white ;"><?php echo $value['a_name']; ?></td>
                                         </tr>
                                         <?php
                                         $a_id = $value['a_id'];
@@ -175,7 +175,7 @@ include('condb.php');
                 <button type="button" class="btn btn-primary" id="calculate">คำนวณ</button>
             </div>
             <div class="col-md-5">
-                งบประมาณที่ต้องใช้
+                งบประมาณที่ใช้
             </div>
             <div class="col-md-4 text-danger" id="demo">
                 <?php

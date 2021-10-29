@@ -44,7 +44,7 @@
 
 
         a.nav-link:hover {
-            color: #edab93 !important;
+            color: #dbb89a !important;
         }
     </style>
 
@@ -81,7 +81,7 @@
         <hr class="my-4">
         <p>หากคุณคิดว่าใช่ คลิกเลย!!</p>
         <p class="lead">
-            <a class="btn btn-light btn-lg" href="add_event.php" role="button" style="background-color: #edab93;">เริ่มใช้ทันที</a>
+            <a class="btn btn-light btn-lg" href="add_event.php" role="button" style="background-color: #dbb89a;">เริ่มใช้ทันที</a>
         </p>
     </div> -->
 

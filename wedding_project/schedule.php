@@ -46,7 +46,7 @@ include('condb.php');
 
 
         a.nav-link:hover {
-            color: #edab93 !important;
+            color: #dbb89a !important;
         }
     </style>
 
@@ -221,7 +221,7 @@ include('condb.php');
                                 foreach ($query1 as $key => $value) {
                                 ?>
                                     <tr>
-                                        <td colspan="5" class="text-center" style="background-color: #edab93; color:white ;"><?php echo $value['a_name']; ?></td>
+                                        <td colspan="5" class="text-center" style="background-color: #dbb89a; color:white ;"><?php echo $value['a_name']; ?></td>
                                     </tr>
                                     <?php
                                     $a_id = $value['a_id'];
@@ -269,7 +269,7 @@ include('condb.php');
 
         <div class="row my-4 ">
             <div class="col-md-5 bold font-weight-bold">
-                งบประมาณที่ ต้องใช้ </div>
+                งบประมาณที่ใช้ </div>
             <div class="col-md-4 text-danger">
                 <?php
 
@@ -288,23 +288,10 @@ include('condb.php');
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>
-        // var id = $("#id");
 
         function changeStatus(uid) {
             document.getElementsByName(uid)[0].className = "btn btn-success";
             document.getElementsByName(uid)[0].innerHTML = "เตรียมแล้ว";
-
-            // $.ajax({
-            //     url: 'status_db.php',
-            //     method: 'POST',
-            //     dataType: 'json',
-            //     data: {
-            //         id: uid
-            //     },
-            //     success: function(response) {
-
-            //     }
-            // });
 
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
@@ -317,9 +304,7 @@ include('condb.php');
             xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhttp.send(params);
         }
-    </script>
-
-    <script>
+   
         let date = document.getElementById('date');
         let days = document.getElementById('days');
         let hours = document.getElementById('hours')

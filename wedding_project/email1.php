@@ -46,12 +46,12 @@ include('condb.php');
 
 
         a.nav-link:hover {
-            color: #edab93 !important;
+            color: #dbb89a !important;
         }
 
         #saveEmail,
         #sendEmail {
-            background-color: #edab93;
+            background-color: #dbb89a;
             color: white;
         }
     </style>
@@ -91,7 +91,7 @@ include('condb.php');
 
         <?php
         $userid = $_SESSION['userid'];
-        $sql = "SELECT `header`, `detail`, `e_id` FROM `email` WHERE e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid)";
+        $sql = "SELECT `header`, `detail`, `e_id` , `attach_file` FROM `email` WHERE e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid)";
         $query = mysqli_query($conn, $sql);
         $num_row = mysqli_num_rows($query);
         $row = mysqli_fetch_array($query);
@@ -104,6 +104,20 @@ include('condb.php');
             <div class="form-group">
                 <textarea class="form-control" type="text" id="detail" placeholder="เพิ่มคำอธิบาย เช่น หมายเลขพร้อมเพย์" rows="4" cols="50"></textarea>
             </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">อัพโหลด</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="imgInp" name="image" type="file" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">เลือกการ์ดเชิญ</label>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+
+                <img src="" alt="การ์ดเชิญของคุณ" id="blah" width="900" height="400">
+
+            </div>
             <div class="form-group text-center">
                 <button class="btn " id="saveEmail" onclick="saveEmail()">บันทึก</button>
             </div>
@@ -114,6 +128,21 @@ include('condb.php');
             <div class="form-group">
                 <textarea class="form-control" type="text" id="detail" placeholder="เพิ่มคำอธิบาย เช่น หมายเลขพร้อมเพย์" rows="4" cols="50"><?= $row['detail'] ?></textarea>
             </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">อัพโหลด</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="imgInp" name="image" type="file" value="" aria-describedby="inputGroupFileAddon01">
+                    <input type="hidden" id="fileName" name="fileName" value="<?= $row['attach_file'] ?>">
+                    <label class="custom-file-label" for="inputGroupFile01">เลือกการ์ดเชิญ</label>
+                </div>
+            </div>
+            <div class="row justify-content-md-center p-0">
+
+                <img src="uploads/<?= $row['attach_file'] ?>" class="rounded ms-auto d-block p-3" alt="การ์ดเชิญของคุณ" id="blah" width="900" height="400">
+
+            </div>
             <div class="form-group text-center">
                 <button class="btn " id="saveEmail" onclick="saveEmail()">บันทึก</button>
             </div>
@@ -122,92 +151,78 @@ include('condb.php');
 
     </div>
 
-    <div class="container shadow bg-light border text-center mb-3 p-3">
-        <div class="row justify-content-md-center">
-            <div class="col col-lg-2">
-                <img src="" alt="การ์ดเชิญของคุณ" id="blah" style="height: 200px; width: 300px;">
-            </div>
-        </div>
-        <div class="row justify-content-md-center">
-            <div class="col-md-5">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupFileAddon01">อัพโหลด</span>
+
+    <div id="email_list" data-aos="fade-up" data-aos-duration="800" style="display: none;">
+        <div class="container shadow bg-light border text-center mb-3">
+            <h4 class="my-3">เพิ่มรายชื่อและอีเมลแขก</h4>
+            <form class="my-3">
+                <div class="row my-3" id="row2">
+                    <div class="col">
+                        <input type="text" class="form-control" id="e_name" name="name" placeholder="ชื่อ-นามสกุลแขก" autofocus>
                     </div>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="imgInp" name="image" type="file" aria-describedby="inputGroupFileAddon01">
-                        <label class="custom-file-label" for="inputGroupFile01">เลือกการ์ดเชิญ</label>
+                    <div class="col">
+                        <input type="text" class="form-control" id="relation" name="relation" placeholder="ความสัมพันธ์">
+                    </div>
+                    <div class="col">
+                        <input type="email" class="form-control" id="email" name="email" onkeyup="check_mail()" placeholder="อีเมล">
+                    </div>
+
+                </div>
+                <div class="row justify-content-md-center my-3">
+                    <div class="col col-2">
+                        <button class="btn" type="button" id="sendEmail" onclick="send_email(this)">ส่ง</button>
                     </div>
                 </div>
-            </div>
-        </div>
+            </form>
+            <div class="my-3 border-bottom"></div>
 
+            <?php
+            $userid = $_SESSION['userid'];
+            $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))";
+            $query = mysqli_query($conn, $sql);
+            $num = mysqli_num_rows($query);
+
+            $i = 1;
+            if ($num == 0) { ?>
+                <div id="email_list">
+                    <div class="alert alert-danger" role="alert" id="none">
+                        ยังไม่มีรายชื่อแขก
+                    </div>
+                    <div id="show">
+
+                    </div>
+                </div>
+            <?php
+            } else { ?>
+                <h4 class='my-3'>รายชื่อแขก</h4>
+                <?php while ($row = mysqli_fetch_array($query)) { ?>
+                    <div>
+                        <div id="show">
+                            <div class="row my-3">
+                                <div class="col-1" id="index"><?= $i ?></div>
+                                <div class="col">
+                                    <input type="text" class="form-control" name="name" placeholder="ชื่อ-นามสกุลแขก" value="<?= $row['e_name'] ?>" readonly>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" name="relation" placeholder="ความสัมพันธ์" value="<?= $row['relation'] ?>" readonly>
+                                </div>
+                                <div class="col">
+                                    <input type="email" class="form-control" name="email" placeholder="อีเมล" id="emailSent" value="<?= $row['address'] ?>" readonly>
+                                </div>
+                                <div class="col col-2">
+                                    <button type="button" class="btn btn-success" disabled>ส่งแล้ว</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+            <?php $i++;
+                }
+            } ?>
+
+        </div>
     </div>
 
-    <div class="container shadow bg-light border text-center mb-3">
-        <h4 class="my-3">เพิ่มรายชื่อและอีเมลแขก</h4>
-        <form class="my-3">
-            <div class="row my-3" id="row2">
-                <div class="col">
-                    <input type="text" class="form-control" id="e_name" name="name" placeholder="ชื่อ-นามสกุลแขก">
-                </div>
-                <div class="col">
-                    <input type="text" class="form-control" id="relation" name="relation" placeholder="ความสัมพันธ์">
-                </div>
-                <div class="col">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="อีเมล">
-                </div>
-
-            </div>
-            <div class="row justify-content-md-center my-3">
-                <div class="col col-2">
-                    <button class="btn" type="button" id="sendEmail" onclick="send_email(this)">ส่ง</button>
-                </div>
-            </div>
-        </form>
-        <div class="my-3 border-bottom"></div>
-
-        <?php
-        $userid = $_SESSION['userid'];
-        $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))";
-        $query = mysqli_query($conn, $sql);
-        $num = mysqli_num_rows($query);
-
-        $i = 1;
-        if ($num == 0) { ?>
-            <div class="alert alert-danger" role="alert" id="none">
-                ยังไม่มีรายชื่อแขก
-            </div>
-            <div id="show">
-
-            </div>
-        <?php
-        } else { ?>
-            <h4 class='my-3'>รายชื่อแขก</h4>
-            <?php while ($row = mysqli_fetch_array($query)) { ?>
-                <div id="show">
-                    <div class="row my-3">
-                        <div class="col-1" id="index"><?= $i ?></div>
-                        <div class="col">
-                            <input type="text" class="form-control" name="name" placeholder="ชื่อ-นามสกุลแขก" value="<?= $row['e_name'] ?>" readonly>
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" name="relation" placeholder="ความสัมพันธ์" value="<?= $row['relation'] ?>" readonly>
-                        </div>
-                        <div class="col">
-                            <input type="email" class="form-control" name="email" placeholder="อีเมล" value="<?= $row['address'] ?>" readonly>
-                        </div>
-                        <div class="col col-2">
-                            <button type="button" class="btn btn-success">ส่งแล้ว</button>
-                        </div>
-
-                    </div>
-                </div>
-        <?php $i++;
-            }
-        } ?>
-
-    </div>
 
     <footer class="bg-light text-center text-lg-start">
         <!-- Copyright -->
@@ -222,13 +237,12 @@ include('condb.php');
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <!-- <script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
         AOS.init({
             duration: 1000
         });
-    </script> -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script>
+
         // let img = $('#blah');
         // if (!img.val()) {
         //     img.attr('class', "d-none");
@@ -242,24 +256,83 @@ include('condb.php');
             }
         }
 
+        if ($('#header').val() != "" && $('#detail').val() != "" && $('#filename').val() != "") {
+            $('#email_list').css('display', '');
+        }
+
         let count = <?= $i ?>;
         //บันทึกข้อความที่เพิ่มในการส่งเมล
         function saveEmail() {
             var header = $('#header');
             var detail = $('#detail');
-            $.ajax({
-                url: 'saveEmail.php',
-                method: 'POST',
-                data: {
-                    header: header.val(),
-                    detail: detail.val()
-                },
-                success: function(data) {
-                    alert(data);
-                }
-            });
+            let fileName = $('#fileName');
+            let img = $('#imgInp');
+
+            let file_data = $('#imgInp').prop("files")[0];
+            let form_data = new FormData();
+
+            form_data.append("file", file_data);
+            form_data.append("header", header.val());
+            form_data.append("detail", detail.val());
+            form_data.append("fileName", fileName.val());
+
+            //  for (var value of form_data.values()) {
+            //     console.log(value);
+            // }
+
+
+            if (isNotEmpty(header) && isNotEmpty(detail) && isNotEmpty(img)) {
+                $('#email_list').css('display', '');
+
+
+                $.ajax({
+                    url: 'saveEmail.php',
+                    dataType: 'json',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'POST',
+                    success: function(data) {
+                        console.log(data);
+                        alert(data.status);
+                        fileName.val(data.fileName);
+                    }
+                });
+            }
+
+            function isNotEmpty(caller) {
+                if (caller.val() == "") {
+                    caller.css('border', '1px solid red');
+
+                    return false;
+                } else caller.css('border', '');
+
+                return true;
+            }
 
         }
+        let email = document.getElementById('email');
+        let emailSent = document.getElementById('emailSent');
+        let emailArray = [];
+
+        // function check_mail() {
+
+        //     for (let i = 0; i < emailSent.length; i++) {
+        //         if (emailSent[i].value) {
+        //             emailArray.push(emailSent[i].value)
+        //         }
+        //         if (email.value == emailArray) {
+        //             console.log('wow');
+        //             email.style.border = "1px solid red";
+        //             document.getElementById('sendEmail').setAttribute("disabled", "");
+
+        //         }
+        //     }
+
+
+        // }
+
 
         function send_email(e) {
             var e_name = $('#e_name');
@@ -267,53 +340,64 @@ include('condb.php');
             var email = $('#email');
             var header = $('#header');
             var detail = $('#detail');
+            let fileName = $('#fileName');
 
-            // let file_data = $('#imgInp').prop("files")[0];
-            // let form_data = new FormData();
-            // form_data.append("file", file_data);
+            let file_data = $('#imgInp').prop("files")[0];
+            let form_data = new FormData();
+
+            form_data.append("file", file_data);
+            form_data.append("e_name", $('#e_name').val());
+            form_data.append("relation", $('#relation').val());
+            form_data.append("email", $("#email").val());
+            form_data.append("header", $('#header').val());
+            form_data.append("detail", $('#detail').val());
+            form_data.append("fileName", fileName.val());
+
+            for (var value of form_data.values()) {
+                console.log(value);
+            }
 
             if (email.val() != "") {
                 console.log("SEND MAIL");
-
                 $('#sendEmail').html('กำลังส่ง');
 
                 $.ajax({
                     url: 'sendEmail.php',
-                    // cache: false,
-                    // contentType: false,
-                    // processData: false,
-                    method: 'POST',
-                    dataType: 'json',
-                    data: {
-                        e_name: e_name.val(),
-                        relation: relation.val(),
-                        email: email.val(),
-                        header: header.val(),
-                        detail: detail.val(),
-                        // form_data
+                    dataType: 'text',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data:
+                        // e_name: e_name.val(),
+                        // relation: relation.val(),
+                        // email: email.val(),
+                        // header: header.val(),
+                        // detail: detail.val(),
+                        form_data
 
-                    },
+                        ,
+                    type: 'POST',
                     success: function(data) {
-                        count++;
+                        console.log(data);
                         alert('ส่งสำเร็จ');
                         let html = `
-
                             <div class="row my-3" id="row2">
                                 <div class="col-1" id="index">${count}</div>
                                 <div class="col">
-                                    <input type="text" class="form-control"  name="name" value="${e_name.val()}" placeholder="ชื่อแขก">
+                                    <input type="text" class="form-control"  name="name" value="${e_name.val()}" readonly>
                                 </div>
                                 <div class="col">
-                                    <input type="text" class="form-control"  name="relation" value="${relation.val()}" placeholder="ความสัมพันธ์">
+                                    <input type="text" class="form-control"  name="relation" value="${relation.val()}" readonly>
                                 </div>
                                 <div class="col">
-                                    <input type="email" class="form-control"  name="email" value="${email.val()}" placeholder="อีเมล">
+                                    <input type="email" class="form-control"  name="email" value="${email.val()}" readonly>
                                 </div>
                                 <div class="col col-2">
-                                    <button class="btn btn-success" type="button"  onclick="send_email(this)">ส่งแล้ว</button>
+                                    <button class="btn btn-success" type="button"  onclick="send_email(this)" disabled>ส่งแล้ว</button>
                                 </div>
                             </div>
                             `;
+                        count++;
 
                         $('#show').append(html);
 

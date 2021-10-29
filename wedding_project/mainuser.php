@@ -48,7 +48,7 @@
 
 
         a.nav-link:hover {
-            color: #edab93 !important;
+            color: #dbb89a !important;
         }
     </style>
 
@@ -150,7 +150,7 @@
                                 </div>
                                 <input type="hidden" name="id" value="<?= $row['id'] ?>">
                                 <div class="text-center p-2">
-                                    <button type="submit" class="btn btn-block" style="background-color: #edab93 ;color:white;" name="btn_submit">ดูโพสต์</button>
+                                    <button type="submit" class="btn btn-block" style="background-color: #dbb89a ;color:white;" name="btn_submit">ดูโพสต์</button>
                                 </div>
                             </div>
                         </div>

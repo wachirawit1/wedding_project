@@ -122,7 +122,7 @@ include('condb.php');
     <div class="jumbotron">
         <h1 class="display-4 mt-5 text-center">โพสต์ของฉัน</h1>
         <div class="text-right">
-            <a href="create_post.php" class="btn btn-lg" style="background-color: #edab93;">สร้างโพสต์ใหม่</a>
+            <a href="create_post.php" class="btn btn-lg" style="background-color: #dbb89a;">สร้างโพสต์ใหม่</a>
         </div>
     </div>
     <div class="container-fluid">
@@ -144,7 +144,7 @@ include('condb.php');
                         <h5 class="card-title text-center"><?=$value['name']?></h5>
                     </div>
                     <?php if($value['status'] == 1){ ?>
-                    <a href="view_post.php?id=<?=$value['id']?>" class="btn btn-lg mx-2 my-3" style="background-color: #edab93;">ดูโพสต์</a>
+                    <a href="view_post.php?id=<?=$value['id']?>" class="btn btn-lg mx-2 my-3" style="background-color: #dbb89a;">ดูโพสต์</a>
                     <?php }else{ ?>
                         <a href="view_post.php?id=<?=$value['id']?>" class="btn btn-lg btn-danger mx-2 my-3" >ไม่อนุมัติโพสต์</a>
                     <?php } ?>

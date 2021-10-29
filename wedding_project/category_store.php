@@ -71,12 +71,12 @@ include('condb.php');
     ?>
     <?php include('navbar_admin.php') ?>
 
-    
 
-    <div class="container mt-1 mb-5 pb-5 bg-light shadow rounded" >
+
+    <div class="container mt-1 mb-5 pb-5 bg-light shadow rounded">
         <!-- <div class="row"> -->
         <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#addmodal">
-            เพิ่มประเพณี
+            เพิ่มหมวดหมู่ร้านค้า
         </button>
 
 
@@ -84,13 +84,12 @@ include('condb.php');
         <table class="table table-light table-hover ">
             <thead>
                 <th scope="col">#</th>
-                <th scope="col">ประเพณี</th>
-                <th scope="col">รูปภาพ</th>
+                <th scope="col">หมวดหมู่</th>
                 <th scope="col">ตัวเลือก</th>
             </thead>
             <?php include('condb.php');
 
-            $sql = "SELECT * FROM traditional  ORDER BY t_id DESC";
+            $sql = "SELECT * FROM category  ORDER BY cate_id DESC";
             $query = mysqli_query($conn, $sql);
             ?>
             <tbody>
@@ -100,17 +99,14 @@ include('condb.php');
                 while ($row = mysqli_fetch_array($query)) {
                 ?>
 
-
                     <!-- <th scope="row"><?php echo $i++ ?></th> -->
-                    <th class="align-middle " scope="row"><?php echo $row['t_id'] ?></th>
-                    <td class="align-middle"><?php echo $row['trad_name'] ?></td>
-                    <td class="align-middle"><img src="assets/tradition_img/<?= $row['trad_img'] ?>" width="150px"></td>
+                    <th class="align-middle " scope="row"><?php echo $row['cate_id'] ?></th>
+                    <td class="align-middle"><?php echo $row['cate_name'] ?></td>
+
 
                     <td class="align-middle">
-                        <a href="t_action.php?t_id=<?php echo $row['t_id']; ?>" class="btn btn-success">จัดการพิธีการ</a>
-
-                        <a href="#edit<?= $row['t_id'] ?>" class="btn btn-warning" data-toggle="modal">แก้ไข</a>
-                        <a href="#delete<?php echo $row['t_id']; ?>" class="btn btn-danger" data-toggle="modal">ลบ</a>
+                        <a href="#edit<?= $row['cate_id'] ?>" class="btn btn-warning" data-toggle="modal">แก้ไข</a>
+                        <a href="#delete<?php echo $row['cate_id']; ?>" class="btn btn-danger" data-toggle="modal">ลบ</a>
                     </td>
                     </tr>
                 <?php } ?>
@@ -121,41 +117,26 @@ include('condb.php');
     </div>
 
 
-    <!-- popup เพิ่มประเพณี -->
+    <!-- popup เพิ่มหมวดหมู่ -->
     <div class="modal fade" id="addmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลประเพณี</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มหมวดหมู่ร้านค้า</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="trad_add.php" method="POST" enctype="multipart/form-data">
+                <form action="category_add.php" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
 
                         <div class="form-group row">
-                            <label for="#" class="col-sm-3 col-form-label">วัฒนธรรรม</label>
+                            <label for="#" class="col-sm-3 col-form-label">หมวดหมู่</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="trad_name" id="#" placeholder="ไทย จีน เป็นต้น">
+                                <input type="text" class="form-control" name="cate_name" id="#">
                             </div>
                         </div>
 
-
-                        <div class="form-group row">
-                            <label for="#" class="col-sm-3 col-form-label">รูปภาพ</label>
-                            <div class="col-sm-9">
-                                <img src="" class="my-2" id="blah" alt="traditional pic" width="200">
-
-                                <div class="input-group mb-3">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile02" value="" name="trad_img" onchange="readURL(this);">
-                                        <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                     <div class="modal-footer">
@@ -166,16 +147,16 @@ include('condb.php');
             </div>
         </div>
     </div>
-    </div>
+
 
     <?php
-    $sql_del = "SELECT * FROM traditional";
+    $sql_del = "SELECT * FROM category ";
     $query_del = mysqli_query($conn, $sql_del);
     while ($row = mysqli_fetch_array($query_del)) {
-        $t_id = $row['t_id'];
+        $cate_id = $row['cate_id'];
     ?>
         <!--- ลบ ---->
-        <div class="modal fade" id="delete<?php echo $t_id ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+        <div class="modal fade" id="delete<?php echo $cate_id ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -184,13 +165,16 @@ include('condb.php');
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        ต้องการลบ?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                        <a href="trad_del.php?id=<?php echo $t_id ?>" type="button" class="btn btn-primary">ยืนยัน</a>
-                    </div>
+                    <form action="category_del.php" method="POST">
+                        <div class="modal-body">
+                            ต้องการลบ?
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="cate_id" value="<?= $cate_id; ?>">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                            <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -201,13 +185,13 @@ include('condb.php');
 
 
     <?php
-    $sql_edit = "SELECT * FROM traditional";
+    $sql_edit = "SELECT * FROM category";
     $query_edit = mysqli_query($conn, $sql_edit);
     while ($row = mysqli_fetch_array($query_edit)) {
-        $t_id = $row['t_id']
+        $cate_id = $row['cate_id'];
     ?>
         <!-- แก้ไข -->
-        <div class="modal fade" id="edit<?= $t_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="edit<?= $cate_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -216,29 +200,13 @@ include('condb.php');
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="trad_edit.php" method="POST" enctype="multipart/form-data">
+                    <form action="category_edit.php" method="POST" enctype="multipart/form-data">
                         <div class="modal-body">
-                            <input type="hidden" value="<?= $t_id ?>" name="t_id" id="t_id">
+                            <input type="hidden" value="<?= $cate_id ?>" name="cate_id" id="cate_id">
                             <div class="form-group row">
-                                <label for="#" class="col-sm-3 col-form-label">วัฒนธรรรม</label>
+                                <label for="#" class="col-sm-3 col-form-label">หมวดหมู่</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="trad_name" id="#" value="<?= $row['trad_name'] ?>" placeholder="">
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row">
-                                <label for="#" class="col-sm-3 col-form-label">รูปภาพ</label>
-                                <div class="col-sm-9">
-                                    <img src="assets/tradition_img/<?php echo $row['trad_img'] ?>" class="my-2" id="blah<?php echo $t_id; ?>" alt="traditional pic" width="200">
-
-                                    <div class="input-group mb-3">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="inputGroupFile02" value="<?php echo $row['trad_img']; ?>" name="trad_img" onchange="readURL<?php echo $t_id; ?>(this);">
-                                            <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
-                                        </div>
-
-                                    </div>
+                                    <input type="text" class="form-control" name="cate_name" id="#" value="<?= $row['cate_name'] ?>" placeholder="">
                                 </div>
                             </div>
 
@@ -260,7 +228,7 @@ include('condb.php');
 
 
 
-    <footer class="bg-light text-center text-lg-start bg-white border fixed-bottom" >
+    <footer class="bg-light text-center text-lg-start bg-white border fixed-bottom">
         <!-- Copyright -->
         <div class="text-center p-3">
             © 2020 Copyright:
@@ -269,39 +237,6 @@ include('condb.php');
         <!-- Copyright -->
     </footer>
 
-    <?php
-    $sql_del = "SELECT * FROM traditional";
-    $query_del = mysqli_query($conn, $sql_del);
-    while ($row = mysqli_fetch_array($query_del)) {
-        $t_id = $row['t_id'];
-    ?>
-        <script type="text/javascript">
-            function readURL<?php echo $t_id ?>(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        $('#blah<?php echo $t_id; ?>').attr('src', e.target.result);
-                    }
-
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-        </script>
-    <?php } ?>
-    <script type="text/javascript">
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    $('#blah').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 
 
 

@@ -7,37 +7,44 @@ if (isset($_POST['email'])) {
     session_start();
     $userid = $_SESSION['userid'];
     $e_name =  $_POST['e_name'];
+    $get_detail = $_POST['detail'];
     $name = "Wedding Planner";
     $relation = $_POST['relation'];
     $email = $_POST['email'];
     $header = $_POST['header'];
-    $detail = "เรียนคุณ" . $e_name . " " . $_POST['detail'];
-
-    // if(isset($_FILES['file'])){
-    //     $errors= array();
+    $file_name=$_POST['fileName'];
+    // if(isset($_FILES['file']['name'])){
     //     $file_name = $_FILES['file']['name'];
-    //     $file_size = $_FILES['file']['size'];
-    //     $file_tmp = $_FILES['file']['tmp_name'];
-    //     $file_type = $_FILES['file']['type'];
-    //     $file_ext=strtolower(end(explode('.',$_FILES['file']['name'])));
-        
-    //     $expensions= array("jpeg","jpg","png","pdf");
-        
-    //     if(in_array($file_ext,$expensions)=== false){
-    //        $errors[]="extension not allowed, please choose a PDF, JPEG or PNG file.";
-    //     }
-        
-    //     if($file_size > 2097152) {
-    //        $errors[]='File size must be excately 2 MB';
-    //     }
-        
-    //     if(empty($errors)==true) {
-    //        move_uploaded_file($file_tmp,"uploads/".$file_name); //The folder where you would like your file to be saved
-    //        echo "Success";
-    //     }else{
-    //        print_r($errors);
-    //     }
-    //  }
+    // }else{
+    //     $file_name = $_POST['fileName'];
+    // }
+    // $file_name = $_FILES['file']['name'];
+    // if (!$file_name) {
+    //     $file_name = $_POST['fileName'];
+    // }
+    
+   
+
+    include('condb.php');
+    $sql = "INSERT INTO `email_list`(`e_name`, `relation`, `address`, `e_status`, `email_id`) VALUES ('$e_name','$relation','$email','sent',(SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid)))";
+    $query = mysqli_query($conn, $sql);
+
+    if($query){
+        $last_id = mysqli_insert_id($conn) ;
+    }
+
+
+    $detail = '
+    <br>
+    เรียน คุณ' . $e_name . ' <br>
+    ' . $get_detail . ' <br>
+    ------------------------------------------------------------------------------------------------ <br>
+    กดลิงค์นี้เพื่อยืนยันการเข้าร่วมงาน http://localhost/wedding_project/replying.php?id='. $last_id .'  <br>
+    ------------------------------------------------------------------------------------------------';
+
+
+    
+
 
 
 
@@ -59,9 +66,9 @@ if (isset($_POST['email'])) {
 
     //Email Settings
     $mail->isHTML(true);
-    // $mail->addAttachment("uploads/".$filename);
     $mail->setFrom($email, $name);
     $mail->addAddress($email); // Send to mail
+    $mail->AddAttachment("uploads/$file_name");
     $mail->Subject = $header;
     $mail->Body = $detail;
 
@@ -71,15 +78,13 @@ if (isset($_POST['email'])) {
     if ($mail->send()) {
         $status = "success";
         $response = "Email is sent";
-
-
-        include('condb.php');
-        $sql = "INSERT INTO `email_list`(`e_name`, `relation`, `address`, `e_status`, `email_id`) VALUES ('test','test','test','sent',(SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid)))";
-        mysqli_query($conn, $sql);
     } else {
         $status = "failed";
         $response = "Something is wrong" . $mail->ErrorInfo;
+
+        $sql = "DELETE FROM `email_list` WHERE id = $last_id ";
+        mysqli_query($conn,$sql);
     }
 
-    echo json_encode(array("status" => $status, "response" => $response));
+    echo json_encode(array("status" => $status, "response" => $response, "fileName" => $file_name));
 }

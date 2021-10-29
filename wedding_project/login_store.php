@@ -127,7 +127,7 @@ if (isset($_SESSION['username'])) { ?>
 
 
 
-                  <button id="login" class="btn btn-block login-btn mb-4" style="background-color: #edab93;" type="submit">เข้าสู่ระบบ</button>
+                  <button id="login" class="btn btn-block login-btn mb-4" style="background-color: #dbb89a;" type="submit">เข้าสู่ระบบ</button>
                 </form>
 
                 <p class="login-card-footer-text">ไม่มีบัญชี? <a href="regis_store.php" class="">สมัครที่นี่</a></p>

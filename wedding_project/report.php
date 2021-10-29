@@ -1,0 +1,286 @@
+<?php session_start();
+include('condb.php');
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+    <!-- icon -->
+    <script src="https://kit.fontawesome.com/80c612fc1e.js" crossorigin="anonymous"></script>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <title>wedding</title>
+
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #ffffff;
+        }
+
+        .nav-item {
+            font-size: 16px;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        #showCountDown {
+            font-size: 30px;
+        }
+
+        a.nav-link {
+            color: grey;
+        }
+
+
+        a.nav-link:hover {
+            color: #dbb89a !important;
+        }
+
+        #saveEmail,
+        #sendEmail {
+            background-color: #dbb89a;
+            color: white;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <?php
+    if (!isset($_SESSION['username'])) { ?>
+        <div class='alert alert-danger' role='alert'>
+            <h4 class='alert-heading'>แจ้งเตือน !</h4>
+            <p>คุณยังไม่ได้เข้าสู่ระบบ โปรดเข้าสู่ระบบอีกครั้ง</p>
+            <hr>
+            <p class='mb-0'><a href='login.php' class='alert-link'>กลับไปเข้าสู่ระบบ</a></p>
+        </div>
+    <?php
+        exit;
+    }
+    ?>
+    <?php include('navbaruser.php'); ?>
+
+
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-4 ">
+                <?php
+
+                $userid = $_SESSION['userid'];
+                $sql = "SELECT * FROM event where userid = '$userid'";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_array($result);
+
+                ?>
+                <input type="hidden" class="form-control" id="date" name="date" value="<?php if (isset($row['due_date'])) {
+                                                                                            echo $row['due_date'];
+                                                                                        } else {
+                                                                                            echo "";
+                                                                                        } ?>">
+                <div class="list-group shadow" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">ข้อมูล</a>
+                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">อุปกรณ์</a>
+                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">การตอบรับอีเมล</a>
+                    <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+                </div>
+            </div>
+            <div class="col-8 shadow">
+                <div class="">
+                    <div class="tab-content" id="nav-tabContent">
+                        <!-- data1 -->
+                        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                            <!-- Display the countdown timer in an element -->
+                            <div class="row my-3">
+                                <div id="showCountDown" class="mt-4 text-center col">
+                                    <span id="days" class="bg-white border rounded text-center p-2 mx-1"></span> :
+                                    <span id="hours" class="bg-white border rounded text-center p-2 mx-1"></span> :
+                                    <span id="minutes" class="bg-white border rounded text-center p-2 mx-1"></span> :
+                                    <span id="seconds" class="bg-white border rounded text-center p-2 mx-1"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- data2 -->
+                        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+                        <!-- data3 -->
+                        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+                            <?php
+                            $userid = $_SESSION['userid'];
+                            $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))";
+                            $query = mysqli_query($conn, $sql);
+                            $n = 1;
+                            ?>
+
+                            <div class="px-3 py-2 d-flex justify-content-end">
+                                <button class="btn btn-success" onclick="ExportToExcel('xlsx')">
+                                    <i class="bi bi-file-earmark-excel"></i>ดาวน์โหลด
+                                </button>
+                            </div>
+
+                            <table id="tbl_exporttable_to_xls" class="table mt-1 bg-white table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">ชื่อ-นามสกุล</th>
+                                        <th scope="col">ความสัมพันธ์</th>
+                                        <th scope="col">ที่อยู่อีเมล</th>
+                                        <th scope="col">การตอบรับ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php while ($row = mysqli_fetch_array($query)) { ?>
+                                        <tr>
+                                            <th scope="row"><?= $n ?></th>
+                                            <td><?= $row['e_name'] ?></td>
+                                            <td><?= $row['relation'] ?></td>
+                                            <td><?= $row['address'] ?></td>
+                                            <td class="replying">
+                                                <?php
+                                                $reply = $row['replying'];
+                                                if ($reply == "accept") {
+                                                    $reply = "เข้าร่วม";
+                                                    echo $reply;
+                                                } else if ($reply == "reject") {
+                                                    $reply = "ไม่เข้าร่วม";
+                                                    echo $reply;
+                                                } else {
+                                                    $reply = "รอการตอบรับ";
+                                                    echo $reply;
+                                                } ?>
+                                            </td>
+                                        </tr>
+                                    <?php $n++;
+                                    } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- data4 -->
+                        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <footer class="bg-light text-center text-lg-start " style="position:fixed; bottom: 0px; right: 0px; left: 0px;">
+        <!-- Copyright -->
+        <div class="text-center p-3 border-top bg-white">
+            © 2020 Copyright:
+            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+        // AOS.init({
+        //     duration: 1000
+        // });
+        $(document).ready(function() {
+            let replying = $('.replying');
+            replying.each(function() {
+                console.log($(this).html().trim());
+                if ($(this).html().trim() == "เข้าร่วม") {
+                    $(this).append('<i class="bi bi-check-circle-fill"></i>')
+                    $(this).attr("class", "text-success");
+                } else if ($(this).html().trim() == "ไม่เข้าร่วม") {
+                    $(this).append('<i class="bi bi-x-circle-fill"></i>')
+                    $(this).attr("class", "text-danger");
+                } else {
+                    $(this).append('<i class="bi bi-clock"></i>')
+                    $(this).attr("class", "text-warning");
+                }
+
+            });
+        });
+
+        function ExportToExcel(type, fn, dl) {
+            var elt = document.getElementById('tbl_exporttable_to_xls');
+            var wb = XLSX.utils.table_to_book(elt, {
+                sheet: "sheet1"
+            });
+            return dl ?
+                XLSX.write(wb, {
+                    bookType: type,
+                    bookSST: true,
+                    type: 'base64'
+                }) :
+                XLSX.writeFile(wb, fn || ('รายชื่อแขก.' + (type || 'xlsx')));
+        }
+
+        let date = document.getElementById('date');
+        let days = document.getElementById('days');
+        let hours = document.getElementById('hours')
+        let minutes = document.getElementById('minutes');
+        let seconds = document.getElementById('seconds');
+        if (date.value) {
+
+
+            // Set the date we're counting down to
+            var countDownDate = new Date(date.value).getTime();
+
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+
+                // Get today's date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the result in the element with id="demo"
+                document.getElementById("days").innerHTML = days + " วัน ";
+                document.getElementById("hours").innerHTML = hours + " ชั่วโมง ";
+                document.getElementById("minutes").innerHTML = minutes + " นาที ";
+                document.getElementById("seconds").innerHTML = seconds + " วินาที ";
+
+                if (!countDownDate) {
+                    document.getElementById("showCountDown").innerHTML = "ยังไม่กำหนด";
+                }
+
+                // If the count down is finished, write some text
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("showCountDown").innerHTML = "ครบกำหนด";
+                }
+            }, 1000);
+        } else if (!date.value) {
+
+            document.getElementById('showCountDown').style.display = "none";
+        }
+    </script>
+
+</body>
+
+</html>

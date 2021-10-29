@@ -50,7 +50,7 @@ include('condb.php');
 
 
         a.nav-link:hover {
-            color: #edab93 !important;
+            color: #dbb89a !important;
         }
     </style>
 
@@ -130,7 +130,7 @@ include('condb.php');
         <div >
             <h2 class="mt-5 text-center">โพสต์ของฉัน</h2>
             <div class="text-right">
-                <a href="create_post.php" class="btn " style="background-color: #edab93;">สร้างโพสต์ใหม่</a>
+                <a href="create_post.php" class="btn " style="background-color: #dbb89a;">สร้างโพสต์ใหม่</a>
             </div>
         </div>
         <hr>
@@ -150,7 +150,7 @@ include('condb.php');
                         <div class="card-body">
                             <h5 class="card-title text-center"><?= $value['name'] ?></h5>
                             <?php if ($value['status'] == 1) { ?>
-                                <a href="view_storepost.php?id=<?= $value['id'] ?>" class="btn  col-12" style="background-color: #edab93;">ดูโพสต์</a>
+                                <a href="view_storepost.php?id=<?= $value['id'] ?>" class="btn  col-12" style="background-color: #dbb89a;">ดูโพสต์</a>
                             <?php } elseif ($value['status'] == 2) { ?>
                                 <a href="view_storepost.php?id=<?= $value['id'] ?>" class="btn  col-12 btn-danger">ไม่อนุมัติโพสต์</a>
                             <?php } else { ?>

@@ -41,7 +41,7 @@
             color: grey;
         }
         a.nav-link:hover {
-            color: #edab93 !important;
+            color: #dbb89a !important;
         }
     </style>
 

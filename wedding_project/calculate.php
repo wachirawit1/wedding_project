@@ -40,7 +40,7 @@
         }
 
         a.nav-link:hover {
-            color: #edab93 !important;
+            color: #dbb89a !important;
         }
     </style>
 
@@ -152,7 +152,7 @@
                         ?>
                         <?php foreach($query as $key => $value){?>
                         <tr>
-                            <td colspan="5" class="text-center" style="background-color: #edab93; color:white ;"><b><?=$value['a_name']?></b></td>
+                            <td colspan="5" class="text-center" style="background-color: #dbb89a; color:white ;"><b><?=$value['a_name']?></b></td>
                         </tr>
                         <?php
                         // echo $sql;

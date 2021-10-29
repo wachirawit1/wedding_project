@@ -69,7 +69,7 @@
 
 
         a.nav-link:hover {
-            color: #edab93 !important;
+            color: #dbb89a !important;
         }
     </style>
 </head>
@@ -286,7 +286,7 @@
                         <div class="card-body">
                             <!-- คำนวณเงิน -->
                             <center>
-                                <a href="" class="btn">
+                                <a href="report.php" class="btn">
                                     <i class="fas fa-check-square" id="icon"></i>
                                 </a>
                             </center>
