@@ -100,63 +100,21 @@
         </nav>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน!!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ต้องการออกจากระบบ?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    <a href="logout.php?logout=1" type="button" class="btn btn-success">ยืนยัน</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
+
 
 
 
     <div>
         <!-- content -->
 
-        <div class="container">
+        <?php
+        $userid = $_SESSION['userid'];
+        include('condb.php');
+        $sql = "SELECT status FROM event WHERE userid = '$userid'";
+        $status = mysqli_fetch_array(mysqli_query($conn, $sql));
+        $status = $status['status'];
+        ?>
 
-            <!-- progress -->
-            <?php
-            $userid = $_SESSION['userid'];
-            include('condb.php');
-            $sql = "SELECT status FROM event WHERE userid = '$userid'";
-            $status = mysqli_fetch_array(mysqli_query($conn, $sql));
-            $status = $status['status'];
-            $style = "";
-            $aria_valuenow = "";
-            $data = "0%";
-
-            if ($status == 0 || !isset($status)) {
-            ?>
-                <div class="progress row my-5">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            <?php } elseif ($status == 1) {
-                $style = "width: 25%";
-                $aria_valuenow = "25";
-                $data = "25%";
-            ?>
-                <div class="progress row my-5">
-                    <div class="progress-bar bg-success" role="progressbar" style="<?php echo $style; ?>" aria-valuenow="<?php echo $aria_valuenow ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $data; ?></div>
-                </div>
-            <?php }
-
-            ?>
-        </div>
 
         <div data-aos="fade-right">
             <div class="container p-5 ">
@@ -166,13 +124,7 @@
                             <!-- คำนวณเงิน -->
                             <center>
                                 <form action="t_select.php">
-                                    <button class="btn" <?php if ($status == 0 || !isset($status)) {
-                                                            echo "";
-                                                        } else {
-                                                            if ($status == 1 && $status > 0) {
-                                                                echo " ";
-                                                            }
-                                                        } ?>>
+                                    <button class="btn">
                                         <i class="fas fa-dollar-sign" id="icon"></i>
                                     </button>
                                 </form>
@@ -181,24 +133,11 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p class="text-center <?php if ($status == 0) {
-                                                            echo "";
-                                                        } else {
-                                                            if ($status == 1 && $status > 0) {
-                                                                echo "text-muted";
-                                                            }
-                                                        } ?>">สร้างงานแต่งงาน & คำนวณงบประมาณ</p>
+                                <p class="text-center">สร้างงานแต่งงาน</p>
                             </div>
                         </div>
                         <div class="row ">
                             <div class="col text-center text-success">
-                                <?php if ($status == 0 || !isset($status)) {
-                                    echo "";
-                                } else {
-                                    if ($status == 1 && $status > 0) {
-                                        echo "(สำเร็จแล้ว)";
-                                    }
-                                } ?>
                             </div>
                         </div>
                     </div>
@@ -211,12 +150,7 @@
                             <!-- กำหนดการ -->
                             <center>
                                 <form action="schedule.php">
-                                    <button class="btn" <?php if (!isset($status) || $status > 1) {
-                                                            echo " disabled";
-                                                        } else {
-                                                            echo "";
-                                                        }
-                                                        ?>>
+                                    <button class="btn">
                                         <i class="far fa-calendar-alt card-text" id="icon"></i>
                                     </button>
                                 </form>
@@ -225,12 +159,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p class="text-center <?php if (!isset($status) || $status > 1) {
-                                                            echo " text-muted";
-                                                        } else {
-                                                            echo "";
-                                                        }
-                                                        ?>">กำหนดการ</p>
+                                <p class="text-center">กำหนดการ & งบประมาณ</p>
                             </div>
 
                         </div>

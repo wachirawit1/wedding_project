@@ -117,7 +117,95 @@ include('condb.php');
                             </div>
                         </div>
                         <!-- data2 -->
-                        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+                        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                            <div class="row justify-content-md-end m-3">
+                                <div class="col col-md-2">
+                                    <a href="edit_schedule.php" class="btn btn-primary"><i class="fas fa-edit">แก้ไข</i></a>
+                                </div>
+                            </div>
+
+                            <div style=" height: 510px; overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">
+
+                                <div class="row bg-light p-4 rounded">
+
+                                    <div class="col">
+                                        <?php
+                                        $userid = $_SESSION['userid'];
+                                        $sql = "SELECT * FROM `activity_event` 
+                    INNER JOIN activity ON activity_event.a_id = activity.a_id 
+                    INNER JOIN item_list ON activity_event.list_id = item_list.list_id 
+                    WHERE e_id = (SELECT e_id FROM event WHERE event.userid = $userid )
+                    ";
+                                        $query1 = mysqli_query($conn, $sql . " GROUP BY activity_event.a_id");
+                                        $row = mysqli_fetch_array($query1);
+
+                                        
+                                            
+
+                                        ?>
+
+                                            <table class="table  table-light table-hover ">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <!-- <th scope="col">กิจกรรม</th> -->
+                                                        <th scope="col">อุปกรณ์</th>
+                                                        <th scope="col">จำนวน</th>
+                                                        <th scope="col">ราคา</th>
+                                                        <th scope="col"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <?php
+                                                    foreach ($query1 as $key => $value) {
+                                                    ?>
+                                                        <tr>
+                                                            <td colspan="5" class="text-center" style="background-color: #dbb89a; color:white ;"><?php echo $value['a_name']; ?></td>
+                                                        </tr>
+                                                        <?php
+                                                        $a_id = $value['a_id'];
+                                                        $query = mysqli_query($conn, $sql . " AND activity_event.a_id='$a_id'");
+
+                                                        $n = 1;
+                                                        $budget = 0;
+                                                        foreach ($query as $row) {
+                                                        ?>
+
+
+                                                            <tr>
+                                                                <th scope="row"><?php echo $n; ?></th>
+                                                                <!-- <td><?php echo $row['a_name']; ?></td> -->
+                                                                <td><?php echo $row['item_name']; ?></td>
+                                                                <td><?php echo $row['amount']; ?></td>
+                                                                <td><?php echo number_format($row['price'], 0); ?></td>
+                                                                <td>
+
+                                                                    <?php
+                                                                    if ($row['status'] == 'uncheck' || $row['status'] == '') { ?>
+                                                                        <button class="btn btn-danger" id="btn_status" name="<?= $row['ae_id'] ?>" onclick="changeStatus('<?= $row['ae_id'] ?>')">ยังไม่เตรียม</button>
+                                                                    <?php } else { ?>
+                                                                        <button class="btn btn-success" name="<?= $row['ae_id'] ?>">เตรียมแล้ว</button>
+                                                                    <?php } ?>
+
+
+                                                                </td>
+                                                                <input type="hidden" name="id" id="id" value="<?= $row['ae_id'] ?>">
+                                                            </tr>
+
+
+
+                                                    <?php $n++;
+                                                        }
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                         
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- data3 -->
                         <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
                             <?php
@@ -184,14 +272,14 @@ include('condb.php');
 
 
 
-    <footer class="bg-light text-center text-lg-start " style="position:fixed; bottom: 0px; right: 0px; left: 0px;">
+    <!-- <footer class="bg-light text-center text-lg-start " >
         <!-- Copyright -->
         <div class="text-center p-3 border-top bg-white">
             © 2020 Copyright:
             <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
         </div>
         <!-- Copyright -->
-    </footer>
+    </footer> -->
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

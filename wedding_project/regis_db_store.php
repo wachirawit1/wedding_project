@@ -12,7 +12,7 @@ if (isset($_POST['register'])) {
 	// $tel = $_POST['tel'];
 	$s_email = mysqli_real_escape_string($conn, $_POST['s_email']);
 	$s_name = $_POST['s_name'];
-	$category = $_POST['category'];
+	$cate_id = $_POST['category'];
 	$s_tel = $_POST['s_tel'];
 
 	$date1 = date("Ymd_His");
@@ -61,8 +61,8 @@ if (isset($_POST['register'])) {
 		} else {
 			$password = md5($password);
 
-			$sql = "INSERT INTO `store`(`username`, `password`, `s_name`, `s_email`, `category`, `s_tel`, `s_img`, `date`) 
-			VALUES ('$username','$password','$s_name','$s_email', '$category' , '$s_tel' , '$newname' , current_timestamp())";
+			$sql = "INSERT INTO `store`(`username`, `password`, `s_name`, `s_email`, `cate_id`, `s_tel`, `s_img`, `date`) 
+			VALUES ('$username','$password','$s_name','$s_email', '$cate_id' , '$s_tel' , '$newname' , current_timestamp())";
 			$result1 = mysqli_query($conn,$sql) ;
 
 

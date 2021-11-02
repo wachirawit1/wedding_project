@@ -1,3 +1,15 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        let n = $('.dropdown-item.waves-effect.waves-light').length;
+        if (n > 0) {
+            $('.badge').text(n);
+        } else {
+            $('.badge').hide();
+        }
+
+    });
+</script>
 <nav class="navbar navbar-expand-lg py-3 navbar-light bg-white  sticky-top">
     <a class="navbar-brand" href="#"><img src="assets/images/logo2.png" width="120px"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,11 +30,8 @@
             <li class="nav-item ">
                 <a class="nav-link" href="#">เกี่ยวกับ <span class="sr-only"></span></a>
             </li>
-            <li class="nav-item order-1">
-                <a class=" nav-link btn-link" style="border-radius: 15px;" href="#">
-                    <i class="fas fa-bell text-secondary"></i><span class="badge badge-light ml-1 ">4</span>
-                </a>
-            </li>
+
+
             <li class="nav-item dropdown ">
                 <!-- check login -->
                 <?php
@@ -52,27 +61,59 @@
                     </div>
                 </div>
             </li>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-5" aria-controls="navbarSupportedContent-5" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-5">
+
+                <ul class="navbar-nav ml-auto nav-flex-icons">
+                    <li class="nav-item avatar dropdown">
+                        <a class="nav-link waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <i class="fas fa-bell">
+                                <span class="badge badge-danger ml-2"></span>
+                            </i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5">
+                            <?php
+                            $userid = $_SESSION['userid'];
+
+                            include('condb.php');
+                            $sql = "SELECT status FROM event WHERE userid = '$userid'";
+                            $status = mysqli_fetch_array(mysqli_query($conn, $sql));
+                            $status = $status['status'];
+                            if ($status == "") {
+                            } else if ($status == "1") { ?>
+                                <div class="dropdown-item waves-effect waves-light">
+                                    คุณสร้างอีเวนท์สำเร็จ
+                                </div>
+
+                            <?php } ?>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </ul>
     </div>
 </nav>
 
- <!-- Modal -->
- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน!!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ต้องการออกจากระบบ?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">ยกเลิก</button>
-                    <a href="logout.php?logout=1" type="button" class="btn btn-danger">ยืนยัน</a>
-                </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน!!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ต้องการออกจากระบบ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">ยกเลิก</button>
+                <a href="logout.php?logout=1" type="button" class="btn btn-danger">ยืนยัน</a>
             </div>
         </div>
     </div>
+</div>
