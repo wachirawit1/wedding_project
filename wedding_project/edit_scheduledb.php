@@ -19,7 +19,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Wedding</title>
 
 
     <style>
@@ -53,14 +53,15 @@
             if ($value) {
 
                 $sql = "UPDATE activity_event SET price = $value WHERE a_id = '$a' AND list_id = '$l' AND activity_event.e_id = (SELECT event.e_id FROM event WHERE event.userid =  $userid ) ";
-                
+                // echo $sql . "<br>";
                 mysqli_query($conn, $sql);
             } else {
                 $sql = "UPDATE activity_event SET price = $value WHERE a_id = '$a' AND list_id = '$l' AND activity_event.e_id = (SELECT event.e_id FROM event WHERE event.userid =  $userid ) ";
-                
+
                 mysqli_query($conn, $sql);
             }
         }
+        // exit;
 
         //อัพเดตงบประมาณ
         $sql = "UPDATE `event` SET `total_budget`= $all_budget WHERE userid = $userid ";

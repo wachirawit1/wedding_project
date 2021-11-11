@@ -1,7 +1,16 @@
 <?php session_start();
 include('condb.php');
-if(isset($_GET['id'])&& !empty($_GET['id'])){
-    $p_id = $_GET['id'];
+if(isset($_GET['id']) || isset($_POST['id'])){
+
+    //$p_id = $_GET['id'];
+    
+    if(isset($_GET['id'])){
+        $p_id = $_GET['id'];
+    }else if(isset($_POST['id'])){
+        $p_id = $_POST['id'];
+    }
+
+
     $sql = "SELECT *,post.id as p_id,post.name as p_name FROM post LEFT JOIN store ON post.u_id = store.s_id WHERE post.id = '$p_id'";
     $query= mysqli_query($conn,$sql);
     $row = mysqli_fetch_assoc($query);

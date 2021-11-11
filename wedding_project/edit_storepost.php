@@ -2,7 +2,15 @@
 include('condb.php');
 // print_r($_SESSION);
 // exit();
-$id = $_GET['id'];
+
+//$id = $_GET['id'];
+
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+}else if(isset($_POST['id'])){
+    $id = $_POST['id'];
+}
+
 $sql_post = "SELECT * FROM post WHERE id = $id";
 $query_post = mysqli_query($conn,$sql_post);
 $row_post = mysqli_fetch_assoc($query_post);
@@ -189,6 +197,7 @@ $row_post = mysqli_fetch_assoc($query_post);
                 <div class="form-group">
                 <h4>แกลเลอรี่</h4>
                     <div class="row">
+                        <input type="hidden" name="id" value="<?=$id?>">
                         <input type="hidden" name="o_gallery1" value="<?=$row_post['gallery1']?>">
                         <input type="hidden" name="o_gallery2" value="<?=$row_post['gallery2']?>">
                         <input type="hidden" name="o_gallery3" value="<?=$row_post['gallery3']?>">

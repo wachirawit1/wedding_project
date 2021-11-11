@@ -81,7 +81,7 @@
                     <?php
                     if (isset($_SESSION['username'])) {
                         echo "<a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
-                        echo "ยินดีต้อนรับ"." "."คุณ" . $_SESSION['name'] . "</a>";
+                        echo "สวัสดี"." "."คุณ" . $_SESSION['name'] . "</a>";
                     } else {
                         echo "<script type='text/javascript'>";
                         echo "alert('ยังไม่ได้เข้าสู่ระบบ โปรดเข้าสู่ระบบอีกครั้ง');";

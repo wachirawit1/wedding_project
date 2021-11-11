@@ -25,7 +25,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <title>wedding</title>
     <style>
@@ -66,6 +65,27 @@
     <?php include('navbaruser.php') ?>
 
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ต้องการออกจากระบบ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">ยกเลิก</button>
+                    <a href="logout.php?logout=1" type="button" class="btn btn-danger">ยืนยัน</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- breadcrumb -->
     <nav aria-label="breadcrumb position-static">
         <ol class="breadcrumb" style=" background-color: #ffffff;">
@@ -77,7 +97,7 @@
 
 
 
-    <div class="container p-4 my-2 bg-light shadow" id="box">
+    <div class="container p-4 my-2 bg-light" id="box">
 
        
 
@@ -107,11 +127,11 @@
                 } ?>
 
                 <div class="col-6 mt-4 mb-3">
-                    <div class="card bg-white" >
+                    <div class="card bg-white" style="width: 500px; ">
                         <form action="t_activity.php" method="POST">
                             <img class="card-img-top" src="<?php echo $path . $row['trad_img'] ?>" alt="Card image cap" style="height: 400px;">
                             <div class="card-body">
-                                <h3 class="card-title "><?php echo $row['trad_name'] ?></h3>
+                                <h2 class="card-title font-weight-bold"><?php echo $row['trad_name'] ?></h5>
                                     <input type="hidden" name="t_id" id="" value="<?php echo $row['t_id'] ?>">
                                     <input type="hidden" name="traditional" value="<?php echo $row['trad_name'] ?>">
                                     <button type="submit" class="btn btn-primary d-block ml-auto" style="width: fit-content;">เลือก</button>

@@ -119,6 +119,10 @@ if (isset($_SESSION['username'])) {
                         </div>
                       </div>
                     </span>
+                    <div class="d-flex justify-content-end mt-3">
+
+                      <a href="forgot_pass.php">ลืมรหัสผ่าน</a>
+                    </div>
 
                     <script type="text/javascript">
                       function showpassword() {

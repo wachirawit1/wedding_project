@@ -9,9 +9,9 @@
             <!-- <li class="nav-item ">
                     <a class="nav-link" href="mainadmin.php">หน้าแรก <span class="sr-only">(current)</span></a>
                 </li> -->
-            <li class="nav-item ">
+            <!----<li class="nav-item ">
                 <a class="nav-link" href="mainstore.php">หน้าแรก<span class="sr-only">(current)</span></a>
-            </li>
+            </li> ---->
             <li class="nav-item ">
                 <a class="nav-link" href="storepost.php">โพสต์ของคุณ<span class="sr-only">(current)</span></a>
             </li>

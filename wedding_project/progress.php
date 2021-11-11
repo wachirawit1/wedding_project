@@ -189,7 +189,7 @@
                         <div class="card-body">
                             <!-- ส่งจดหมาย -->
                             <center>
-                                <a href="email.php" class="btn">
+                                <a href="card_template.php" class="btn">
                                     <i class="far fa-envelope " id="icon"></i>
                                 </a>
                             </center>

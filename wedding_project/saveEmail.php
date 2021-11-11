@@ -10,19 +10,23 @@ $detail = $_POST['detail'];
 
 $date1 = date("Ymd_His");
 $numrand = (mt_rand());
-$upload = $_FILES['file']['name'];
-if ($upload != '') {
 
-    $path = "uploads/";
-    $type = strrchr($_FILES['file']['name'], ".");
-    $newname = $numrand . "-" . $date1 . $type;
-    $path_copy = $path . $newname;
-    $path_link = "uploads/" . $newname;
+if (isset($_FILES['file'])) {
+    $upload = $_FILES['file']['name'];
+    if ($upload != '') {
 
-    move_uploaded_file($_FILES['file']['tmp_name'], $path_copy);
+        $path = "uploads/";
+        $type = strrchr($_FILES['file']['name'], ".");
+        $newname = $numrand . "-" . $date1 . $type;
+        $path_copy = $path . $newname;
+        $path_link = "uploads/" . $newname;
+
+        move_uploaded_file($_FILES['file']['tmp_name'], $path_copy);
+    } else {
+        $newname = $_POST['fileName'];
+    }
 } else {
-    $newname = $_POST['fileName'] ;
-    
+    $newname = $_POST['fileName'];
 }
 
 $check = "SELECT * FROM `email` WHERE e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid)";
@@ -37,4 +41,4 @@ if ($num_check == 0) {
     $query = mysqli_query($conn, $sql);
 }
 
-echo json_encode(array("status" =>"บันทึกสำเร็จแล้ว", "fileName" => $newname));
+echo json_encode(array("status" => "บันทึกสำเร็จแล้ว", "fileName" => $newname));

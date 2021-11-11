@@ -69,7 +69,7 @@ include('condb.php');
     <?php include('navbaruser.php') ?>
 
     <!-- breadcrumb -->
-    <nav aria-label="breadcrumb" >
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style=" background-color: #ffffff;">
             <li class="breadcrumb-item"><a href="mainuser.php">Home</a></li>
             <li class="breadcrumb-item"><a href="progress.php">progress</a></li>
@@ -88,85 +88,75 @@ include('condb.php');
 
     <div class="container p-4 mb-4 shadow bg-light rounded">
 
-        <h1 class="text-center text-muted font-weight-bold">แก้ไขงบประมาณ</h1>
+        <h2 class="text-center text-secondary">แก้ไขงบประมาณ</h2>
 
 
 
-        <div data-aos="fade-up" style=" height: 510px; overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">
+        <div class="overflow-auto" style=" height: 500px;">
 
-            <div class="row m-4 bg-light p-4 rounded">
 
-                <div class="col">
-                    <?php
-                    $userid = $_SESSION['userid'];
-                    $sql = "SELECT * FROM `activity_event` 
+            <?php
+            $userid = $_SESSION['userid'];
+            $sql = "SELECT * FROM `activity_event` 
                     INNER JOIN activity ON activity_event.a_id = activity.a_id 
                     INNER JOIN item_list ON activity_event.list_id = item_list.list_id 
                     WHERE e_id = (SELECT e_id FROM event WHERE event.userid = $userid )
                     ";
 
-                    $query1 = mysqli_query($conn, $sql . " GROUP BY activity_event.a_id");
-                    $row = mysqli_fetch_array($query1);
+            $query1 = mysqli_query($conn, $sql . " GROUP BY activity_event.a_id");
+            $row = mysqli_fetch_array($query1);
 
-                    if (!isset($row)) { ?>
-                        <div>
-                            <h3 class="display-4 text-center text-secondary">ยังไม่มีข้อมูล</h3>
-                        </div>
-                    <?php } else {
-
-                    ?>
-                        <form action="edit_scheduledb.php" method="post">
-                            <table class="table table-light table-hover">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <!-- <th scope="col">กิจกรรม</th> -->
-                                        <th scope="col">อุปกรณ์</th>
-                                        <th scope="col">งบประมาณ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <?php
-                                    foreach ($query1 as $key => $value) {
-                                    ?>
-                                        <tr>
-                                            <td colspan="4" class="text-center" style="background-color: #dbb89a; color:white ;"><?php echo $value['a_name']; ?></td>
-                                        </tr>
-                                        <?php
-                                        $a_id = $value['a_id'];
-                                        $query = mysqli_query($conn, $sql . " AND activity_event.a_id='$a_id'");
-
-                                        $n = 1;
-                                        $budget = 0;
-                                        foreach ($query as $row) {
-                                        ?>
-
-                                            <tr>
-                                                <th scope="row"><?php echo $n; ?></th>
-                                                <!-- <td><?php echo $row['a_name']; ?></td> -->
-                                                <td><?php echo $row['item_name']; ?></td>
-                                                <td><input type="number" class="budget" name="budget[]" id="" value="<?php echo $row['price']; ?>" placeholder="<?php echo $row['price']; ?>"></td>
-                                            </tr>
-                                            <input type="hidden" name="a_id[]" value="<?= $row['a_id'] ?>">
-                                            <input type="hidden" name="list_id[]" value="<?= $row['list_id'] ?>">
-
-                                    <?php $n++;
-                                        }
-                                    }
-                                    ?>
-
-                                </tbody>
-                            </table>
-                        <?php } ?>
-
-
-
-
-
+            if (!isset($row)) { ?>
+                <div>
+                    <h3 class="display-4 text-center text-secondary">ยังไม่มีข้อมูล</h3>
                 </div>
+            <?php } else {
 
-            </div>
+            ?>
+                <form action="edit_scheduledb.php" method="post">
+                    <table class="table table-light table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <!-- <th scope="col">กิจกรรม</th> -->
+                                <th scope="col">อุปกรณ์</th>
+                                <th scope="col">งบประมาณ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php
+                            foreach ($query1 as $key => $value) {
+                            ?>
+                                <tr>
+                                    <td colspan="4" class="text-center" style="background-color: #dbb89a; color:white ;"><?php echo $value['a_name']; ?></td>
+                                </tr>
+                                <?php
+                                $a_id = $value['a_id'];
+                                $query = mysqli_query($conn, $sql . " AND activity_event.a_id='$a_id'");
+
+                                $n = 1;
+                                $budget = 0;
+                                foreach ($query as $row) {
+                                ?>
+
+                                    <tr>
+                                        <th scope="row"><?php echo $n; ?></th>
+                                        <!-- <td><?php echo $row['a_name']; ?></td> -->
+                                        <td><?php echo $row['item_name']; ?></td>
+                                        <td><input type="number" class="budget" name="budget[]" id="" value="<?php echo $row['price']; ?>" placeholder="<?php echo $row['price']; ?>"></td>
+                                    </tr>
+                                    <input type="hidden" name="a_id[]" value="<?= $row['a_id'] ?>">
+                                    <input type="hidden" name="list_id[]" value="<?= $row['list_id'] ?>">
+
+                            <?php $n++;
+                                }
+                            }
+                            ?>
+
+                        </tbody>
+                    </table>
+                <?php } ?>
 
         </div>
 
@@ -177,13 +167,13 @@ include('condb.php');
             <div class="col-md-5">
                 งบประมาณที่ใช้
             </div>
-            <div class="col-md-4 text-danger" id="demo">
+            <div class="col-md-4 text-success" id="demo">
                 <?php
 
                 $sql = "SELECT total_budget FROM event WHERE userid = $userid ";
                 $query = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_array($query);
-                echo "฿".number_format($row['total_budget'], 2);
+                echo "฿" . number_format($row['total_budget'], 2);
 
                 ?>
             </div>

@@ -93,28 +93,9 @@
     <?php include('navbar_store.php') ?>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน!!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ต้องการออกจากระบบ?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    <a href="logout.php?logout=1" type="button" class="btn btn-success">ยืนยัน</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <!-- breadcrums -->
-    <nav aria-label="breadcrumb" style="margin-top: 75px;">
+    <nav aria-label="breadcrumb" >
         <ol class="breadcrumb" style=" background-color: #ffffff;">
             <li class="breadcrumb-item"><a href="mainuser.php">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">profile</li>

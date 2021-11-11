@@ -37,7 +37,7 @@
                 <?php
                 if (isset($_SESSION['username'])) {
                     echo "<a class='nav-link dropdown-toggle text-secondary' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
-                    echo "ยินดีต้อนรับ" . " " . "คุณ" . $_SESSION['name'] . "</a>";
+                    echo "สวัสดี" . " " . "คุณ" . $_SESSION['name'] . "</a>";
                 } else {
                     echo "<script type='text/javascript'>";
                     echo "alert('ยังไม่ได้เข้าสู่ระบบ โปรดเข้าสู่ระบบอีกครั้ง');";
@@ -68,7 +68,7 @@
 
                 <ul class="navbar-nav ml-auto nav-flex-icons">
                     <li class="nav-item avatar dropdown">
-                        <a class="nav-link waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <a class="nav-link btn waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <i class="fas fa-bell">
                                 <span class="badge badge-danger ml-2"></span>
                             </i>

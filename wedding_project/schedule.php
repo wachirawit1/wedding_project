@@ -68,26 +68,6 @@ include('condb.php');
     ?>
     <?php include('navbaruser.php') ?>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน!!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ต้องการออกจากระบบ?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                    <a href="logout.php?logout=1" type="button" class="btn btn-danger">ยืนยัน</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- breadcrumb -->
     <nav aria-label="breadcrumb">
@@ -164,6 +144,30 @@ include('condb.php');
 
         <div class="row my-3">
             <div class="col">
+                ชุดแต่งงาน
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" name="" id="">
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-primary">ตกลง</button>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col">
+                แหวน
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" name="" id="">
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-primary">ตกลง</button>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col">
                 จำนวนแขกในงาน
             </div>
             <div class="col">
@@ -174,6 +178,21 @@ include('condb.php');
             </div>
         </div>
 
+        <div class="row my-4 ">
+            <div class="col-md-5 bold font-weight-bold">
+                งบประมาณที่ใช้
+            </div>
+            <div class="col-md-4 text-success">
+                <?php
+
+                $sql = "SELECT total_budget FROM event WHERE userid = $userid ";
+                $query = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_array($query);
+                echo "฿" . number_format($row['total_budget'], 2);
+
+                ?>
+            </div>
+        </div>
 
         <div class="row justify-content-md-end m-3">
             <div class="col col-md-1">
@@ -181,11 +200,9 @@ include('condb.php');
             </div>
         </div>
 
-        <div data-aos="fade-up" style=" height: 510px; overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">
+        <div class="overflow-auto" style=" height: 500px; ">
 
-            <div class="row bg-light p-4 rounded">
-
-                <div class="col">
+            
                     <?php
                     $userid = $_SESSION['userid'];
                     $sql = "SELECT * FROM `activity_event` 
@@ -204,7 +221,7 @@ include('condb.php');
 
                     ?>
 
-                        <table class="table  table-light table-hover ">
+                        <table class="table table-light table-hover ">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">#</th>
@@ -262,24 +279,11 @@ include('condb.php');
                             </tbody>
                         </table>
                     <?php } ?>
-                </div>
-            </div>
+                
         </div>
 
 
-        <div class="row my-4 ">
-            <div class="col-md-5 bold font-weight-bold">
-                งบประมาณที่ใช้ </div>
-            <div class="col-md-4 text-danger">
-                <?php
-
-                $sql = "SELECT total_budget FROM event WHERE userid = $userid ";
-                $query = mysqli_query($conn, $sql);
-                $row = mysqli_fetch_array($query);
-                echo "฿" . number_format($row['total_budget'], 2);
-
-                ?> </div>
-        </div>
+        
 
     </div>
 
@@ -288,7 +292,6 @@ include('condb.php');
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>
-
         function changeStatus(uid) {
             document.getElementsByName(uid)[0].className = "btn btn-success";
             document.getElementsByName(uid)[0].innerHTML = "เตรียมแล้ว";
@@ -304,7 +307,7 @@ include('condb.php');
             xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhttp.send(params);
         }
-   
+
         let date = document.getElementById('date');
         let days = document.getElementById('days');
         let hours = document.getElementById('hours')
@@ -348,7 +351,7 @@ include('condb.php');
                 }
             }, 1000);
         } else if (!date.value) {
-            
+
             document.getElementById('showCountDown').style.display = "none";
         }
     </script>
@@ -386,11 +389,6 @@ include('condb.php');
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script>
-        AOS.init({
-            duration: 1000
-        });
-    </script>
 </body>
 
 

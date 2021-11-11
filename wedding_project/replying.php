@@ -56,39 +56,67 @@
     include('condb.php');
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
+
+        $sql = "SELECT `replying` FROM `email_list` WHERE id = $id";
+        $result = mysqli_query($conn, $sql);
+        $reply_check = mysqli_fetch_array($result);
+        if ($reply_check['replying'] != "") { ?>
+
+            <div data-aos="fade-down">
+                <div class="container p-3 bg-light mt-5 shadow-lg " id="success">
+                    <h3 class="text-center">คุณได้ตอบกลับเรียบร้อยแล้ว</h3>
+                    <div class="d-flex justify-content-center text-center">
+                        <div class="col col-md-4">
+                            <p class="text-success">การตอบกลับเสร็จสิ้น</p>
+                            <h1><i class="bi bi-check-circle text-success"></i></h1>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        <?php } else { ?>
+
+            <div data-aos="fade-down">
+                <div class="container p-3 bg-light mt-5 shadow-lg" id="replying">
+                    <h3 class="text-center">ต้องการเข้าร่วมงานแต่งหรือไม่??</h3>
+                    <input type="hidden" name="id" id="id" value="<?= $id ?>">
+
+                    <div class="d-flex justify-content-center text-center p-4">
+                        <div class="col col-md-4">
+                            <button class="btn btn-block btn-outline-danger" id="reject">ไม่เข้าร่วม</button>
+                        </div>
+                        <div class="col col-md-4">
+                            <button class="btn btn-block btn-outline-warning" id="notsure">ไม่แน่ใจ</button>
+                        </div>
+                        <div class="col col-md-4">
+                            <button class="btn btn-block btn-outline-success" id="accept">เข้าร่วม</button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div data-aos="fade-down">
+                <div class="container p-3 bg-light mt-5 shadow-lg " id="success" style="display: none;">
+                    <h3 class="text-center">การตอบกลับเสร็จสิ้น</h3>
+                    <div class="d-flex justify-content-center text-center">
+                        <div class="col col-md-4">
+                            <p class="text-success">ขอบคุณสำหรับการตอบกลับ</p>
+                            <h1><i class="bi bi-check-circle text-success"></i></h1>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    <?php }
     }
     ?>
-    <div data-aos="fade-down">
-        <div class="container p-3 bg-light mt-5 shadow-lg" id="replying">
-            <h3 class="text-center">ต้องการเข้าร่วมงานแต่งหรือไม่??</h3>
-            <input type="hidden" name="id" id="id" value="<?= $id ?>">
-
-            <div class="d-flex justify-content-center text-center p-4">
-                <div class="col col-md-4">
-                    <button class="btn btn-block btn-outline-danger" id="reject">ไม่เข้าร่วม</button>
-                </div>
-                <div class="col col-md-4">
-                    <button class="btn btn-block btn-outline-success" id="accept">เข้าร่วม</button>
-                </div>
-            </div>
 
 
-
-        </div>
-    </div>
-
-    <div data-aos="fade-down">
-        <div class="container p-3 bg-light mt-5 shadow-lg " id="success" style="display: none;">
-            <h3 class="text-center">การตอบกลับเสร็จสิ้น</h3>
-            <div class="d-flex justify-content-center text-center">
-                <div class="col col-md-4">
-                    <p class="text-success">ขอบคุณสำหรับการตอบกลับ</p>
-                    <h1><i class="bi bi-check-circle text-success"></i></h1>
-                </div>
-
-            </div>
-        </div>
-    </div>
+    
 
     <?php
     if (isset($_POST['reject']) && isset($_POST['id'])) {
@@ -97,16 +125,19 @@
 
         $sql = "UPDATE `email_list` SET `replying`='$replying' WHERE id = $id ";
         mysqli_query($conn, $sql);
-        
-    } else if (isset($_POST['accept']) && isset($_POST['id'])) {
+    } else if (isset($_POST['notsure']) && isset($_POST['id'])) {
+        $replying = $_POST['notsure'];
+        $id = $_POST['id'];
+
+        $sql = "UPDATE `email_list` SET `replying`='$replying' WHERE id = $id ";
+        mysqli_query($conn, $sql);
+    }else if (isset($_POST['accept']) && isset($_POST['id'])) {
         $replying = $_POST['accept'];
         $id = $_POST['id'];
 
         $sql = "UPDATE `email_list` SET `replying`='$replying' WHERE id = $id ";
         mysqli_query($conn, $sql);
-
     }
-
     ?>
 
     <!-- Optional JavaScript -->
@@ -124,8 +155,7 @@
             let reject = "reject";
             let id = $('#id');
 
-            console.log(reject);
-            console.log(id.val());
+            
             $.ajax({
                 type: "POST",
                 url: "replying.php",
@@ -142,12 +172,32 @@
             });
         });
 
+        $('#notsure').on("click", function() {
+            let notsure = "notsure";
+            let id = $('#id');
+
+            
+            $.ajax({
+                type: "POST",
+                url: "replying.php",
+                cache: false,
+                data: {
+                    notsure: notsure,
+                    id: id.val()
+                },
+                success: function(data) {
+                    $('#replying').css("display", "none");
+                    $('#success').css("display", "");
+                    alert('เสร็จสิ้น');
+                }
+            });
+        });
+
         $('#accept').on("click", function() {
             let accept = "accept";
             let id = $('#id');
 
-            console.log(accept);
-            console.log(id.val());
+            
             $.ajax({
                 type: "POST",
                 url: "replying.php",

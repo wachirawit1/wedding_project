@@ -32,7 +32,7 @@ include('condb.php');
         }
 
         .nav-item {
-            font-size: 19px;
+            font-size: 16px;
             padding-left: 16px;
             padding-right: 16px;
         }
@@ -150,7 +150,7 @@ include('condb.php');
         }
     }
     ?>
-    <?php include('navbar_store.php') ?>
+   
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

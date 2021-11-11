@@ -69,11 +69,11 @@
     }
     ?>
     <?php include('navbaruser.php') ?>
-    
+
 
 
     <div data-aos="fade-up" data-aos-anchor-placement="center-center">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -110,13 +110,13 @@
         </div>
 
         <div class="row row-cols-md-6">
-        <?php
+            <?php
             include('condb.php');
             $sql = "SELECT * FROM `category`";
             $query = mysqli_query($conn, $sql);
             while ($row = mysqli_fetch_array($query)) { ?>
                 <div class="col">
-                    <a class="card my-4 btn btn-sm bg-light border" href="#">
+                    <a class="card my-4 btn btn-sm bg-light border" href="category.php?cate_id=<?= $row['cate_id'] ?>&cate_name=<?= $row['cate_name'] ?>">
 
                         <div class="card-body">
                             <div class="card-text text-secondary"><?= $row['cate_name'] ?></div>
@@ -134,11 +134,11 @@
                 <p class="lead text-secondary">สามารถเลือกสินค้าคุณภาพตามที่คุณต้องการ</p>
             </div>
             <div class="row row-cols-1 row-cols-md-3">
-            <?php
+                <?php
                 $sql = "SELECT * FROM `post` WHERE status = 1";
                 $query = mysqli_query($conn, $sql);
                 while ($row = mysqli_fetch_array($query)) { ?>
-                   <form action="view_post.php" method="POST">
+                    <form action="view_post.php" method="POST">
                         <div class="col mb-4">
                             <div class="card">
                                 <img src="img/<?= $row['picture'] ?>" class="card-img-top" alt="...">

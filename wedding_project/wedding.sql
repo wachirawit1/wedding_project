@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2021 at 07:04 PM
+-- Generation Time: Nov 11, 2021 at 02:31 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.5
 
@@ -50,7 +50,8 @@ INSERT INTO `activity` (`a_id`, `a_name`, `a_detail`, `t_id`) VALUES
 ('a00010', 'ทดสอบ2', 'จ้ำข้าวเหนียว', '3'),
 ('a00011', 'ชิ่งชารา1', 'จ้ำข้าวเจ้า', '3'),
 ('a00012', 'ชิ่งชารา1', 'เช่าหนี่มา', '2'),
-('a00013', 'พิธีทดสอบ', 'เริ่มเวลา 8.00น.-12.00น.', '1');
+('a00013', 'พิธีทดสอบ', 'เริ่มเวลา 8.00น.-12.00น.', '1'),
+('a00014', 'คว่ำบาตร', 'เริ่ม 8.00น.-12.00', '4');
 
 -- --------------------------------------------------------
 
@@ -72,8 +73,8 @@ CREATE TABLE `activity_event` (
 --
 
 INSERT INTO `activity_event` (`ae_id`, `a_id`, `list_id`, `price`, `e_id`, `status`) VALUES
-(1, 'a00001', 'l00001', 3500, '1', 'check'),
-(2, 'a00001', 'l00002', 0, '1', 'uncheck'),
+(1, 'a00001', 'l00001', 450, '1', 'check'),
+(2, 'a00001', 'l00002', 150, '1', 'check'),
 (3, 'a00001', 'l00003', 0, '1', 'uncheck'),
 (4, 'a00001', 'l00004', 0, '1', 'uncheck'),
 (5, 'a00001', 'l00005', 0, '1', 'uncheck'),
@@ -145,79 +146,79 @@ INSERT INTO `activity_event` (`ae_id`, `a_id`, `list_id`, `price`, `e_id`, `stat
 (71, 'a00013', 'l00004', 0, '1', 'uncheck'),
 (72, 'a00013', 'l00005', 0, '1', 'uncheck'),
 (73, 'a00013', 'l00006', 0, '1', 'uncheck'),
-(74, 'a00001', 'l00001', 0, '1', 'uncheck'),
-(75, 'a00001', 'l00002', 0, '1', 'uncheck'),
-(76, 'a00001', 'l00003', 0, '1', 'uncheck'),
-(77, 'a00001', 'l00004', 0, '1', 'uncheck'),
-(78, 'a00001', 'l00005', 0, '1', 'uncheck'),
-(79, 'a00001', 'l00006', 0, '1', 'uncheck'),
-(80, 'a00001', 'l00007', 0, '1', 'uncheck'),
-(81, 'a00001', 'l00008', 0, '1', 'uncheck'),
-(82, 'a00001', 'l00009', 0, '1', 'uncheck'),
-(83, 'a00001', 'l00010', 0, '1', 'uncheck'),
-(84, 'a00001', 'l00011', 0, '1', 'uncheck'),
-(85, 'a00001', 'l00012', 0, '1', 'uncheck'),
-(86, 'a00001', 'l00013', 0, '1', 'uncheck'),
-(87, 'a00001', 'l00014', 0, '1', 'uncheck'),
-(88, 'a00001', 'l00015', 0, '1', 'uncheck'),
-(89, 'a00001', 'l00016', 0, '1', 'uncheck'),
-(90, 'a00001', 'l00017', 0, '1', 'uncheck'),
-(91, 'a00001', 'l00018', 0, '1', 'uncheck'),
-(92, 'a00001', 'l00019', 0, '1', 'uncheck'),
-(93, 'a00001', 'l00020', 0, '1', 'uncheck'),
-(94, 'a00001', 'l00021', 0, '1', 'uncheck'),
-(95, 'a00001', 'l00022', 0, '1', 'uncheck'),
-(96, 'a00001', 'l00023', 0, '1', 'uncheck'),
-(97, 'a00001', 'l00024', 0, '1', 'uncheck'),
-(98, 'a00001', 'l00025', 0, '1', 'uncheck'),
-(99, 'a00002', 'l00025', 0, '1', 'uncheck'),
-(100, 'a00002', 'l00026', 0, '1', 'uncheck'),
-(101, 'a00002', 'l00027', 0, '1', 'uncheck'),
-(102, 'a00002', 'l00028', 0, '1', 'uncheck'),
-(103, 'a00002', 'l00029', 0, '1', 'uncheck'),
-(104, 'a00002', 'l00030', 0, '1', 'uncheck'),
-(105, 'a00002', 'l00031', 0, '1', 'uncheck'),
-(106, 'a00002', 'l00032', 0, '1', 'uncheck'),
-(107, 'a00002', 'l00033', 0, '1', 'uncheck'),
-(108, 'a00002', 'l00034', 0, '1', 'uncheck'),
-(109, 'a00002', 'l00035', 0, '1', 'uncheck'),
-(110, 'a00002', 'l00036', 0, '1', 'uncheck'),
-(111, 'a00002', 'l00037', 0, '1', 'uncheck'),
-(112, 'a00003', 'l00038', 0, '1', 'uncheck'),
-(113, 'a00003', 'l00039', 0, '1', 'uncheck'),
-(114, 'a00003', 'l00040', 0, '1', 'uncheck'),
-(115, 'a00003', 'l00041', 0, '1', 'uncheck'),
-(116, 'a00003', 'l00042', 0, '1', 'uncheck'),
-(117, 'a00003', 'l00043', 0, '1', 'uncheck'),
-(118, 'a00003', 'l00044', 0, '1', 'uncheck'),
-(119, 'a00003', 'l00045', 0, '1', 'uncheck'),
-(120, 'a00003', 'l00046', 0, '1', 'uncheck'),
-(121, 'a00003', 'l00047', 0, '1', 'uncheck'),
-(122, 'a00004', 'l00043', 0, '1', 'uncheck'),
-(123, 'a00004', 'l00044', 0, '1', 'uncheck'),
-(124, 'a00004', 'l00045', 0, '1', 'uncheck'),
-(125, 'a00004', 'l00046', 0, '1', 'uncheck'),
-(126, 'a00004', 'l00047', 0, '1', 'uncheck'),
-(127, 'a00004', 'l00048', 0, '1', 'uncheck'),
-(128, 'a00004', 'l00049', 0, '1', 'uncheck'),
-(129, 'a00005', 'l00050', 0, '1', 'uncheck'),
-(130, 'a00005', 'l00051', 0, '1', 'uncheck'),
-(131, 'a00005', 'l00052', 0, '1', 'uncheck'),
-(132, 'a00005', 'l00053', 0, '1', 'uncheck'),
-(133, 'a00006', 'l00055', 0, '1', 'uncheck'),
-(134, 'a00006', 'l00056', 0, '1', 'uncheck'),
-(135, 'a00006', 'l00057', 0, '1', 'uncheck'),
-(136, 'a00006', 'l00058', 0, '1', 'uncheck'),
-(137, 'a00006', 'l00059', 0, '1', 'uncheck'),
-(138, 'a00006', 'l00060', 0, '1', 'uncheck'),
-(139, 'a00006', 'l00061', 0, '1', 'uncheck'),
-(140, 'a00006', 'l00062', 0, '1', 'uncheck'),
-(141, 'a00006', 'l00063', 0, '1', 'uncheck'),
-(142, 'a00013', 'l00001', 0, '1', 'uncheck'),
-(143, 'a00013', 'l00003', 0, '1', 'uncheck'),
-(144, 'a00013', 'l00004', 0, '1', 'uncheck'),
-(145, 'a00013', 'l00005', 0, '1', 'uncheck'),
-(146, 'a00013', 'l00006', 0, '1', 'uncheck');
+(74, 'a00001', 'l00001', 0, '2', 'uncheck'),
+(75, 'a00001', 'l00002', 0, '2', 'uncheck'),
+(76, 'a00001', 'l00003', 0, '2', 'uncheck'),
+(77, 'a00001', 'l00004', 0, '2', 'uncheck'),
+(78, 'a00001', 'l00005', 0, '2', 'uncheck'),
+(79, 'a00001', 'l00006', 0, '2', 'uncheck'),
+(80, 'a00001', 'l00007', 0, '2', 'uncheck'),
+(81, 'a00001', 'l00008', 0, '2', 'uncheck'),
+(82, 'a00001', 'l00009', 0, '2', 'uncheck'),
+(83, 'a00001', 'l00010', 0, '2', 'uncheck'),
+(84, 'a00001', 'l00011', 0, '2', 'uncheck'),
+(85, 'a00001', 'l00012', 0, '2', 'uncheck'),
+(86, 'a00001', 'l00013', 0, '2', 'uncheck'),
+(87, 'a00001', 'l00014', 0, '2', 'uncheck'),
+(88, 'a00001', 'l00015', 0, '2', 'uncheck'),
+(89, 'a00001', 'l00016', 0, '2', 'uncheck'),
+(90, 'a00001', 'l00017', 0, '2', 'uncheck'),
+(91, 'a00001', 'l00018', 0, '2', 'uncheck'),
+(92, 'a00001', 'l00019', 0, '2', 'uncheck'),
+(93, 'a00001', 'l00020', 0, '2', 'uncheck'),
+(94, 'a00001', 'l00021', 0, '2', 'uncheck'),
+(95, 'a00001', 'l00022', 0, '2', 'uncheck'),
+(96, 'a00001', 'l00023', 0, '2', 'uncheck'),
+(97, 'a00001', 'l00024', 0, '2', 'uncheck'),
+(98, 'a00001', 'l00025', 0, '2', 'uncheck'),
+(99, 'a00002', 'l00025', 0, '2', 'uncheck'),
+(100, 'a00002', 'l00026', 0, '2', 'uncheck'),
+(101, 'a00002', 'l00027', 0, '2', 'uncheck'),
+(102, 'a00002', 'l00028', 0, '2', 'uncheck'),
+(103, 'a00002', 'l00029', 0, '2', 'uncheck'),
+(104, 'a00002', 'l00030', 0, '2', 'uncheck'),
+(105, 'a00002', 'l00031', 0, '2', 'uncheck'),
+(106, 'a00002', 'l00032', 0, '2', 'uncheck'),
+(107, 'a00002', 'l00033', 0, '2', 'uncheck'),
+(108, 'a00002', 'l00034', 0, '2', 'uncheck'),
+(109, 'a00002', 'l00035', 0, '2', 'uncheck'),
+(110, 'a00002', 'l00036', 0, '2', 'uncheck'),
+(111, 'a00002', 'l00037', 0, '2', 'uncheck'),
+(112, 'a00003', 'l00038', 0, '2', 'uncheck'),
+(113, 'a00003', 'l00039', 0, '2', 'uncheck'),
+(114, 'a00003', 'l00040', 0, '2', 'uncheck'),
+(115, 'a00003', 'l00041', 0, '2', 'uncheck'),
+(116, 'a00003', 'l00042', 0, '2', 'uncheck'),
+(117, 'a00003', 'l00043', 0, '2', 'uncheck'),
+(118, 'a00003', 'l00044', 0, '2', 'uncheck'),
+(119, 'a00003', 'l00045', 0, '2', 'uncheck'),
+(120, 'a00003', 'l00046', 0, '2', 'uncheck'),
+(121, 'a00003', 'l00047', 0, '2', 'uncheck'),
+(122, 'a00004', 'l00043', 0, '2', 'uncheck'),
+(123, 'a00004', 'l00044', 0, '2', 'uncheck'),
+(124, 'a00004', 'l00045', 0, '2', 'uncheck'),
+(125, 'a00004', 'l00046', 0, '2', 'uncheck'),
+(126, 'a00004', 'l00047', 0, '2', 'uncheck'),
+(127, 'a00004', 'l00048', 0, '2', 'uncheck'),
+(128, 'a00004', 'l00049', 0, '2', 'uncheck'),
+(129, 'a00005', 'l00050', 0, '2', 'uncheck'),
+(130, 'a00005', 'l00051', 0, '2', 'uncheck'),
+(131, 'a00005', 'l00052', 0, '2', 'uncheck'),
+(132, 'a00005', 'l00053', 0, '2', 'uncheck'),
+(133, 'a00006', 'l00055', 0, '2', 'uncheck'),
+(134, 'a00006', 'l00056', 0, '2', 'uncheck'),
+(135, 'a00006', 'l00057', 0, '2', 'uncheck'),
+(136, 'a00006', 'l00058', 0, '2', 'uncheck'),
+(137, 'a00006', 'l00059', 0, '2', 'uncheck'),
+(138, 'a00006', 'l00060', 0, '2', 'uncheck'),
+(139, 'a00006', 'l00061', 0, '2', 'uncheck'),
+(140, 'a00006', 'l00062', 0, '2', 'uncheck'),
+(141, 'a00006', 'l00063', 0, '2', 'uncheck'),
+(142, 'a00013', 'l00001', 0, '2', 'uncheck'),
+(143, 'a00013', 'l00003', 0, '2', 'uncheck'),
+(144, 'a00013', 'l00004', 0, '2', 'uncheck'),
+(145, 'a00013', 'l00005', 0, '2', 'uncheck'),
+(146, 'a00013', 'l00006', 0, '2', 'uncheck');
 
 -- --------------------------------------------------------
 
@@ -321,7 +322,11 @@ INSERT INTO `activity_listitem` (`id`, `a_id`, `list_id`) VALUES
 (99, 'a00013', 'l00003'),
 (100, 'a00013', 'l00004'),
 (101, 'a00013', 'l00005'),
-(102, 'a00013', 'l00006');
+(102, 'a00013', 'l00006'),
+(103, 'a00014', 'l00012'),
+(104, 'a00014', 'l00013'),
+(105, 'a00014', 'l00017'),
+(106, 'a00014', 'l00018');
 
 -- --------------------------------------------------------
 
@@ -345,7 +350,7 @@ INSERT INTO `category` (`cate_id`, `cate_name`) VALUES
 (4, 'ชุดแต่งงาน'),
 (5, 'ตกแต่งหน้างาน'),
 (6, 'แหวนแต่งงาน'),
-(7, 'อาหาร');
+(7, 'อาหาร&เครื่องดื่ม');
 
 -- --------------------------------------------------------
 
@@ -366,7 +371,9 @@ CREATE TABLE `comments` (
 
 INSERT INTO `comments` (`comment_id`, `comment_subject`, `comment_text`, `comment_status`) VALUES
 (14, 'asdsd', 'fsdf', 1),
-(15, 'asdsd', 'dsgfdg', 1);
+(15, 'asdsd', 'dsgfdg', 1),
+(16, '???????', '555+', 1),
+(17, 'wow', 'asdf', 1);
 
 -- --------------------------------------------------------
 
@@ -378,6 +385,7 @@ CREATE TABLE `email` (
   `email_id` int(11) NOT NULL,
   `header` varchar(50) NOT NULL,
   `detail` varchar(1000) NOT NULL,
+  `attach_file` varchar(100) NOT NULL,
   `e_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -385,8 +393,8 @@ CREATE TABLE `email` (
 -- Dumping data for table `email`
 --
 
-INSERT INTO `email` (`email_id`, `header`, `detail`, `e_id`) VALUES
-(1, 'การ์ดเชิญวันแต่งงานของคุณโบเบ้และคุณบักบอม', 'เนื่องจากวันที่ 30 มีนาคม 2565 เป็นฤกษ์ดี จึงได้เชิญชวนมาในวันแต่งงานนี้ สามารถชำระค่าซองล่วงหน้าได้ที่ หมายเลขพร้อมเพย์ 0999170023(โทรศัพท์) หรือสามารถชำระได้ภายในวันงาน จึงเรียนมาเพื่อทราบ วชิรวิทย์', 1);
+INSERT INTO `email` (`email_id`, `header`, `detail`, `attach_file`, `e_id`) VALUES
+(1, 'งานแต่งงานของคุณอักขระและคุณลูกศร', 'เนื่องจากวันที่ 6 พ.ย. 2564 เป็นฤกษ์งามยามดี เป็นวันแต่งงานของ ใบเฟิร์น และ ป๊อปปี้ จึงอยากเรียนเชิญท่านมาเข้าร่วมงานแต่งงานในครั้งนี้เพื่อเป็นสักขีพยาน ณ โรงแรมเทพนคร เวลา 8.00 น. เป็นต้นไป 555', '1109261927-20211025_231517.png', 1);
 
 -- --------------------------------------------------------
 
@@ -400,21 +408,23 @@ CREATE TABLE `email_list` (
   `relation` varchar(50) NOT NULL,
   `address` varchar(50) NOT NULL,
   `e_status` varchar(50) NOT NULL,
-  `email_id` int(11) NOT NULL
+  `email_id` int(11) NOT NULL,
+  `replying` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `email_list`
 --
 
-INSERT INTO `email_list` (`id`, `e_name`, `relation`, `address`, `e_status`, `email_id`) VALUES
-(1, 'วชิรวิทย์ กุลสุทธิชัย', 'เพื่อนเจ้าบ่าว', 'wachirawitku@kkumail.com', 'sent', 1),
-(2, 'ปลาหยุด', 'พี่ชายเจ้าสาว', 'wachirawitzy@gmail.com', 'sent', 1),
-(3, 'test', 'แอบแซ่บเจ้าบ่าว', 'wachirawitku@kkumail.com', 'sent', 1),
-(4, 'วชิรวิทย์ ', 'wow', 'wachirawitku@kkumail.com', 'sent', 1),
-(5, 'ดริวเข้มมี่', 'test', 'wachirawitku@kkumail.com', 'sent', 1),
-(6, 'test', 'test', 'wachirawitku@kkumail.com', 'sent', 1),
-(7, 'test', 'test', 'test', 'sent', 1);
+INSERT INTO `email_list` (`id`, `e_name`, `relation`, `address`, `e_status`, `email_id`, `replying`) VALUES
+(1, 'อทิตยา พันขันธ์', 'เพื่อนเจ้าอาวาส', 'athitayaph@kkumail.com', 'sent', 1, 'accept'),
+(2, 'โอเว่นซัง', 'เมียพระสงฆ์', 'atsadawut_cha@kkumail.com', 'sent', 1, 'reject'),
+(3, 'วชิรวิทย์ กุลสุทธิชัย', 'dasd', 'wachirawitku@kkumail.com', 'sent', 1, 'accept'),
+(4, 'ภูวิศ กิจวิวัฒน์กุล', 'ภรรยาบิดาเจ้าพ่อ', 'puvit@kkumail.com', 'sent', 1, 'reject'),
+(5, 'ทดสอบ', 'ทดสอบ', 'wachirawitku@kkumail.com', 'sent', 1, 'reject'),
+(6, 'ืทดสอบ1', '', 'wachirawitku@kkumail.com', 'sent', 1, 'notsure'),
+(7, 'drew', 'อื่นๆ', 'piano_teerapaopong@hotmail.com', 'sent', 1, ''),
+(8, 'โยธกาฐ์ ธีระกระโปก', 'เพื่อนเจ้าบ่าว', 'piano_teerapaopong@hotmail.com', 'sent', 1, '');
 
 -- --------------------------------------------------------
 
@@ -436,7 +446,8 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`e_id`, `userid`, `t_id`, `due_date`, `total_budget`, `status`) VALUES
-(1, '1', 1, '2021-11-06', 3500, 1);
+(1, '1', 1, '2022-01-22', 600, 1),
+(2, '3', 1, '0000-00-00', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -597,7 +608,8 @@ CREATE TABLE `post` (
 INSERT INTO `post` (`id`, `id_store`, `name`, `u_id`, `picture`, `detail`, `price`, `gallery1`, `gallery2`, `gallery3`, `gallery4`, `gallery5`, `gallery6`, `status`, `note`, `create_datetime`) VALUES
 (3, 1, 'ทดสอบ8', 1, '1630171350preview.png', 'ddeeกกกกกกกก', 12, '', '', '', '', '', '', 1, '', '2021-09-07 14:27:01'),
 (6, 1, 'test2', 1, '1630171698preview.png', 'test', 2, '', '', '', '', '', '', 1, '', '2021-09-30 14:59:07'),
-(7, 1, 'gallery', 1, '1630915388i1.jpg', 'gallery', 50, 'g11630912486i1.jpg', 'g21630915315i5.jpg', 'g31630915302i5.jpg', '', '', '', 1, '', '2021-09-30 14:33:09');
+(7, 1, 'gallery', 1, '1630915388i1.jpg', 'gallery', 50, 'g11630912486i1.jpg', 'g21630915315i5.jpg', 'g31630915302i5.jpg', '', '', '', 1, '', '2021-09-30 14:33:09'),
+(11, 2, 'แพ็คเกจอุปกรณ์งานแต่งงาน', 2, '1636469334function1.jpg', 'สำหรับพิธีงานเช้า', 2500, 'g11636469334your_pic_name.png', 'g21636469334colored-watercolor-spiral-nebula-galaxy-background_125540-465.jpg', 'g31636469334215113041_345782823620701_8166952386019439361_n.jpg', '', '', '', 2, 'ไม่เหมาะสม', '2021-11-09 18:02:38');
 
 -- --------------------------------------------------------
 
@@ -622,7 +634,8 @@ CREATE TABLE `store` (
 --
 
 INSERT INTO `store` (`s_id`, `username`, `password`, `s_name`, `s_email`, `cate_id`, `s_tel`, `s_img`, `date`) VALUES
-(1, 'user', '25f9e794323b453885f5181f1b624d0b', 'store', 'store@store.com', 1, '0613254595', '161632991520210827_215418.jpg', '2021-08-27');
+(1, 'user', '25f9e794323b453885f5181f1b624d0b', 'store', 'store@store.com', 1, '0613254595', '161632991520210827_215418.jpg', '2021-08-27'),
+(2, 'store', '25f9e794323b453885f5181f1b624d0b', 'flowerest', 'store_indy@hotmail.com', 1, '0446169072', '136517684720211102_212240.png', '2021-11-02');
 
 -- --------------------------------------------------------
 
@@ -643,7 +656,8 @@ CREATE TABLE `traditional` (
 INSERT INTO `traditional` (`t_id`, `trad_name`, `trad_img`) VALUES
 (1, 'วัฒนธรรมไทย', '41589094720210418_021445.jpg'),
 (2, 'วัฒนธรรมจีน', '142000061320210418_023201.jpg'),
-(3, 'วัฒนธรรมสากล', '170043857820210418_030220.jpg');
+(3, 'วัฒนธรรมสากล', '170043857820210418_030220.jpg'),
+(4, 'อิสาน', '155396974820211109_223817.jpg');
 
 --
 -- Indexes for dumped tables
@@ -747,19 +761,19 @@ ALTER TABLE `activity_event`
 -- AUTO_INCREMENT for table `activity_listitem`
 --
 ALTER TABLE `activity_listitem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `cate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `cate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `email`
@@ -771,7 +785,7 @@ ALTER TABLE `email`
 -- AUTO_INCREMENT for table `email_list`
 --
 ALTER TABLE `email_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `event`
@@ -795,13 +809,13 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `store`
 --
 ALTER TABLE `store`
-  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `traditional`

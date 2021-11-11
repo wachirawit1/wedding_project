@@ -48,7 +48,7 @@
             <div class="alert alert-success " role="alert">
               <h5 class="card-title text-center">เข้าสู่ระบบสำเร็จ !!</h5>
             </div>
-            <meta http-equiv="refresh" content="2; url=mainstore.php">
+            <meta http-equiv="refresh" content="2; url=storepost.php">
           </div>
         </div>
     <?php } else {

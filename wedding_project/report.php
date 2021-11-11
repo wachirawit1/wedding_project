@@ -89,6 +89,7 @@ include('condb.php');
                 $row = mysqli_fetch_array($result);
 
                 ?>
+
                 <input type="hidden" class="form-control" id="date" name="date" value="<?php if (isset($row['due_date'])) {
                                                                                             echo $row['due_date'];
                                                                                         } else {
@@ -100,6 +101,7 @@ include('condb.php');
                     <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">การตอบรับอีเมล</a>
                     <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
                 </div>
+
             </div>
             <div class="col-8 shadow">
                 <div class="">
@@ -107,6 +109,9 @@ include('condb.php');
                         <!-- data1 -->
                         <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                             <!-- Display the countdown timer in an element -->
+                            <div class="d-flex justify-content-center mt-3">
+                                <h2>นับถอยหลังวันแต่งงาน</h2>
+                            </div>
                             <div class="row my-3">
                                 <div id="showCountDown" class="mt-4 text-center col">
                                     <span id="days" class="bg-white border rounded text-center p-2 mx-1"></span> :
@@ -115,6 +120,11 @@ include('condb.php');
                                     <span id="seconds" class="bg-white border rounded text-center p-2 mx-1"></span>
                                 </div>
                             </div>
+
+                            <div class="d-flex justify-content-center p-4">
+                                <span class="text-success" style="font-size: 19px;"><?php echo "งบประมาณที่ใช้ : " . number_format($row['total_budget'], 2) . " บาท"; ?></span>
+                            </div>
+
                         </div>
                         <!-- data2 -->
                         <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
@@ -139,69 +149,69 @@ include('condb.php');
                                         $query1 = mysqli_query($conn, $sql . " GROUP BY activity_event.a_id");
                                         $row = mysqli_fetch_array($query1);
 
-                                        
-                                            
+
+
 
                                         ?>
 
-                                            <table class="table  table-light table-hover ">
-                                                <thead class="thead-light">
+                                        <table class="table  table-light table-hover ">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <!-- <th scope="col">กิจกรรม</th> -->
+                                                    <th scope="col">อุปกรณ์</th>
+                                                    <th scope="col">จำนวน</th>
+                                                    <th scope="col">ราคา</th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <?php
+                                                foreach ($query1 as $key => $value) {
+                                                ?>
                                                     <tr>
-                                                        <th scope="col">#</th>
-                                                        <!-- <th scope="col">กิจกรรม</th> -->
-                                                        <th scope="col">อุปกรณ์</th>
-                                                        <th scope="col">จำนวน</th>
-                                                        <th scope="col">ราคา</th>
-                                                        <th scope="col"></th>
+                                                        <td colspan="5" class="text-center" style="background-color: #dbb89a; color:white ;"><?php echo $value['a_name']; ?></td>
                                                     </tr>
-                                                </thead>
-                                                <tbody>
-
                                                     <?php
-                                                    foreach ($query1 as $key => $value) {
+                                                    $a_id = $value['a_id'];
+                                                    $query = mysqli_query($conn, $sql . " AND activity_event.a_id='$a_id'");
+
+                                                    $n = 1;
+                                                    $budget = 0;
+                                                    foreach ($query as $row) {
                                                     ?>
+
+
                                                         <tr>
-                                                            <td colspan="5" class="text-center" style="background-color: #dbb89a; color:white ;"><?php echo $value['a_name']; ?></td>
+                                                            <th scope="row"><?php echo $n; ?></th>
+                                                            <!-- <td><?php echo $row['a_name']; ?></td> -->
+                                                            <td><?php echo $row['item_name']; ?></td>
+                                                            <td><?php echo $row['amount']; ?></td>
+                                                            <td><?php echo number_format($row['price'], 0); ?></td>
+                                                            <td>
+
+                                                                <?php
+                                                                if ($row['status'] == 'uncheck' || $row['status'] == '') { ?>
+                                                                    <button class="btn btn-danger" id="btn_status" name="<?= $row['ae_id'] ?>" onclick="changeStatus('<?= $row['ae_id'] ?>')">ยังไม่เตรียม</button>
+                                                                <?php } else { ?>
+                                                                    <button class="btn btn-success" name="<?= $row['ae_id'] ?>">เตรียมแล้ว</button>
+                                                                <?php } ?>
+
+
+                                                            </td>
+                                                            <input type="hidden" name="id" id="id" value="<?= $row['ae_id'] ?>">
                                                         </tr>
-                                                        <?php
-                                                        $a_id = $value['a_id'];
-                                                        $query = mysqli_query($conn, $sql . " AND activity_event.a_id='$a_id'");
-
-                                                        $n = 1;
-                                                        $budget = 0;
-                                                        foreach ($query as $row) {
-                                                        ?>
-
-
-                                                            <tr>
-                                                                <th scope="row"><?php echo $n; ?></th>
-                                                                <!-- <td><?php echo $row['a_name']; ?></td> -->
-                                                                <td><?php echo $row['item_name']; ?></td>
-                                                                <td><?php echo $row['amount']; ?></td>
-                                                                <td><?php echo number_format($row['price'], 0); ?></td>
-                                                                <td>
-
-                                                                    <?php
-                                                                    if ($row['status'] == 'uncheck' || $row['status'] == '') { ?>
-                                                                        <button class="btn btn-danger" id="btn_status" name="<?= $row['ae_id'] ?>" onclick="changeStatus('<?= $row['ae_id'] ?>')">ยังไม่เตรียม</button>
-                                                                    <?php } else { ?>
-                                                                        <button class="btn btn-success" name="<?= $row['ae_id'] ?>">เตรียมแล้ว</button>
-                                                                    <?php } ?>
-
-
-                                                                </td>
-                                                                <input type="hidden" name="id" id="id" value="<?= $row['ae_id'] ?>">
-                                                            </tr>
 
 
 
-                                                    <?php $n++;
-                                                        }
+                                                <?php $n++;
                                                     }
-                                                    ?>
-                                                </tbody>
-                                            </table>
-                                         
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+
                                     </div>
                                 </div>
                             </div>
@@ -220,43 +230,53 @@ include('condb.php');
                                     <i class="bi bi-file-earmark-excel"></i>ดาวน์โหลด
                                 </button>
                             </div>
-
-                            <table id="tbl_exporttable_to_xls" class="table mt-1 bg-white table-hover">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">ชื่อ-นามสกุล</th>
-                                        <th scope="col">ความสัมพันธ์</th>
-                                        <th scope="col">ที่อยู่อีเมล</th>
-                                        <th scope="col">การตอบรับ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php while ($row = mysqli_fetch_array($query)) { ?>
+                            <div class="overflow-auto" style="height: auto;">
+                                <table id="tbl_exporttable_to_xls" class="table mt-1 bg-white table-hover">
+                                    <thead class="thead-light">
                                         <tr>
-                                            <th scope="row"><?= $n ?></th>
-                                            <td><?= $row['e_name'] ?></td>
-                                            <td><?= $row['relation'] ?></td>
-                                            <td><?= $row['address'] ?></td>
-                                            <td class="replying">
-                                                <?php
-                                                $reply = $row['replying'];
-                                                if ($reply == "accept") {
-                                                    $reply = "เข้าร่วม";
-                                                    echo $reply;
-                                                } else if ($reply == "reject") {
-                                                    $reply = "ไม่เข้าร่วม";
-                                                    echo $reply;
-                                                } else {
-                                                    $reply = "รอการตอบรับ";
-                                                    echo $reply;
-                                                } ?>
-                                            </td>
+                                            <th scope="col">#</th>
+                                            <th scope="col">ชื่อ-นามสกุล</th>
+                                            <th scope="col">ความสัมพันธ์</th>
+                                            <th scope="col">ที่อยู่อีเมล</th>
+                                            <th scope="col">การตอบรับ</th>
                                         </tr>
-                                    <?php $n++;
-                                    } ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php while ($row = mysqli_fetch_array($query)) { ?>
+                                            <tr>
+                                                <th scope="row"><?= $n ?></th>
+                                                <td><?= $row['e_name'] ?></td>
+                                                <td>
+                                                    <?php if ($row['relation'] == "") {
+                                                        echo "ไม่ระบุ";
+                                                    } else {
+                                                        echo $row['relation'];
+                                                    } ?>
+                                                </td>
+                                                <td><?= $row['address'] ?></td>
+                                                <td class="replying">
+                                                    <?php
+                                                    $reply = $row['replying'];
+                                                    if ($reply == "accept") {
+                                                        $reply = "เข้าร่วม";
+                                                        echo $reply;
+                                                    } else if ($reply == "reject") {
+                                                        $reply = "ไม่เข้าร่วม";
+                                                        echo $reply;
+                                                    } else if ($reply == "notsure") {
+                                                        $reply = "ไม่แน่ใจ";
+                                                        echo $reply;
+                                                    } else {
+                                                        $reply = "รอการตอบรับ";
+                                                        echo $reply;
+                                                    } ?>
+                                                </td>
+                                            </tr>
+                                        <?php $n++;
+                                        } ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <!-- data4 -->
                         <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
@@ -272,14 +292,14 @@ include('condb.php');
 
 
 
-    <!-- <footer class="bg-light text-center text-lg-start " >
-        <!-- Copyright -->
+    <!-- <footer class="bg-light text-center text-lg-start " > 
+        
         <div class="text-center p-3 border-top bg-white">
             © 2020 Copyright:
             <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
         </div>
-        <!-- Copyright -->
-    </footer> -->
+        
+    </footer>  -->
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -299,9 +319,12 @@ include('condb.php');
                 } else if ($(this).html().trim() == "ไม่เข้าร่วม") {
                     $(this).append('<i class="bi bi-x-circle-fill"></i>')
                     $(this).attr("class", "text-danger");
+                } else if ($(this).html().trim() == "ไม่แน่ใจ") {
+                    $(this).append('<i class="bi bi-question-circle"></i>')
+                    $(this).attr("class", "text-warning");
                 } else {
                     $(this).append('<i class="bi bi-clock"></i>')
-                    $(this).attr("class", "text-warning");
+                    $(this).attr("class", "text-info");
                 }
 
             });
