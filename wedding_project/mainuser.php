@@ -8,7 +8,7 @@
     <!-- icon -->
     <script src="https://kit.fontawesome.com/80c612fc1e.js" crossorigin="anonymous"></script>
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -22,7 +22,6 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <title>wedding</title>
@@ -106,24 +105,25 @@
         <div class="my-3">
             <h1 class="display-5 text-secondary">เลือกหมวดหมู่ร้านค้า</h1>
             <p class="lead text-secondary">สามารถเลือกสินค้าคุณภาพตามที่คุณต้องการ</p>
-            <hr class="my-2">
-        </div>
+            
 
-        <div class="row row-cols-md-6">
-            <?php
-            include('condb.php');
-            $sql = "SELECT * FROM `category`";
-            $query = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_array($query)) { ?>
-                <div class="col">
-                    <a class="card my-4 btn btn-sm bg-light border" href="category.php?cate_id=<?= $row['cate_id'] ?>&cate_name=<?= $row['cate_name'] ?>">
 
-                        <div class="card-body">
+            <div class="row row-cols-2 row-cols-md-6">
+                <?php
+                include('condb.php');
+                $sql = "SELECT * FROM `category`";
+                $query = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_array($query)) { ?>
+                    <a class="border text-decoration-none" href="category.php?cate_id=<?= $row['cate_id'] ?>&cate_name=<?= $row['cate_name'] ?>">
+                        <div class="col text-center p-2">
+                            <div class="">
+                                <img src="assets/images/cate_icon/<?= $row['cate_pic'] ?>" alt="img" width="100" >
+                            </div>
                             <div class="card-text text-secondary"><?= $row['cate_name'] ?></div>
                         </div>
                     </a>
-                </div>
-            <?php } ?>
+                <?php } ?>
+            </div>
         </div>
     </div>
 
@@ -132,6 +132,7 @@
             <div class="my-3">
                 <h1 class="display-5 text-secondary">เลือกรายการสินค้า</h1>
                 <p class="lead text-secondary">สามารถเลือกสินค้าคุณภาพตามที่คุณต้องการ</p>
+                <hr class="my-2">
             </div>
             <div class="row row-cols-1 row-cols-md-3">
                 <?php
@@ -140,8 +141,8 @@
                 while ($row = mysqli_fetch_array($query)) { ?>
                     <form action="view_post.php" method="POST">
                         <div class="col mb-4">
-                            <div class="card">
-                                <img src="img/<?= $row['picture'] ?>" class="card-img-top" alt="...">
+                            <div class="card h-100">
+                                <img src="img/<?= $row['picture'] ?>" class="card-img-top" alt="post">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $row['name'] ?></h5>
                                     <p class="card-text">

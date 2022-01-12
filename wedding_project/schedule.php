@@ -9,7 +9,7 @@ include('condb.php');
     <script src="https://kit.fontawesome.com/80c612fc1e.js" crossorigin="anonymous"></script>
 
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -22,6 +22,8 @@ include('condb.php');
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <title>wedding</title>
     <style>
@@ -90,17 +92,35 @@ include('condb.php');
 
         <h2 class="text-center text-secondary ">สร้างกำหนดการ</h2>
 
+        <div class="row my-3">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <h5>เช็คลิสต์</h5>
+                        <p class="text-secondary" id="text-progress"></p>
+                    </div>
+                </div>
+                <div class="row justify-content-start">
+                    <div class="col-5">
+                        <div class="w3-light-grey w3-round-xlarge my-3">
+                            <div class="w3-container w3-green w3-round-xlarge" id="progress" style="width:25%">25%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
         <form action="scheduledb.php" method="POST">
             <div class="form-group row">
 
                 <label for="date" class="col-sm-2 col-form-label text-danger">กำหนดวันแต่งงาน</label>
                 <div class="col-sm-8">
-                    <input type="date" class="form-control" id="date" name="date" value="<?php if (isset($row['due_date'])) {
-                                                                                                echo $row['due_date'];
-                                                                                            } else {
-                                                                                                echo "";
-                                                                                            } ?>">
+                    <input type="date" class="count form-control" id="date" name="date" value="<?php if (isset($row['due_date'])) {
+                                                                                                    echo $row['due_date'];
+                                                                                                } else {
+                                                                                                    echo "";
+                                                                                                } ?>">
                 </div>
                 <div class="col-sm-2">
                     <button type="submit" class="btn btn-success">บันทึก</button>
@@ -118,9 +138,12 @@ include('condb.php');
             </div>
         </div>
 
-        <div class="row my-3">
+        <!-- <div class="row my-3">
             <div class="col">
                 สถานที่แต่งงาน
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" name="" id="">
             </div>
             <div class="col">
                 <input type="text" class="form-control" name="" id="">
@@ -138,6 +161,9 @@ include('condb.php');
                 <input type="text" class="form-control" name="" id="">
             </div>
             <div class="col">
+                <input type="text" class="form-control" name="" id="">
+            </div>
+            <div class="col">
                 <button class="btn btn-outline-primary">ตกลง</button>
             </div>
         </div>
@@ -150,13 +176,19 @@ include('condb.php');
                 <input type="number" class="form-control" name="" id="">
             </div>
             <div class="col">
+                <input type="number" class="form-control" name="" id="">
+            </div>
+            <div class="col">
                 <button class="btn btn-outline-primary">ตกลง</button>
             </div>
         </div>
 
         <div class="row my-3">
             <div class="col">
-                แหวน
+                แหวนแต่งงาน
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" name="" id="">
             </div>
             <div class="col">
                 <input type="number" class="form-control" name="" id="">
@@ -176,7 +208,7 @@ include('condb.php');
             <div class="col">
                 <button class="btn btn-outline-primary">ตกลง</button>
             </div>
-        </div>
+        </div> -->
 
         <div class="row my-4 ">
             <div class="col-md-5 bold font-weight-bold">
@@ -202,88 +234,88 @@ include('condb.php');
 
         <div class="overflow-auto" style=" height: 500px; ">
 
-            
-                    <?php
-                    $userid = $_SESSION['userid'];
-                    $sql = "SELECT * FROM `activity_event` 
+
+            <?php
+            $userid = $_SESSION['userid'];
+            $sql = "SELECT * FROM `activity_event` 
                     INNER JOIN activity ON activity_event.a_id = activity.a_id 
                     INNER JOIN item_list ON activity_event.list_id = item_list.list_id 
                     WHERE e_id = (SELECT e_id FROM event WHERE event.userid = $userid )
                     ";
-                    $query1 = mysqli_query($conn, $sql . " GROUP BY activity_event.a_id");
-                    $row = mysqli_fetch_array($query1);
+            $query1 = mysqli_query($conn, $sql . " GROUP BY activity_event.a_id");
+            $row = mysqli_fetch_array($query1);
 
-                    if (!isset($row)) { ?>
-                        <div>
-                            <h3 class="display-4 text-center text-secondary">ยังไม่มีข้อมูล</h3>
-                        </div>
-                    <?php } else {
+            if (!isset($row)) { ?>
+                <div>
+                    <h3 class="display-4 text-center text-secondary">ยังไม่มีข้อมูล</h3>
+                </div>
+            <?php } else {
 
-                    ?>
+            ?>
 
-                        <table class="table table-light table-hover ">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <!-- <th scope="col">กิจกรรม</th> -->
-                                    <th scope="col">อุปกรณ์</th>
-                                    <th scope="col">จำนวน</th>
-                                    <th scope="col">ราคา</th>
-                                    <th scope="col"></th>
+                <table class="table table-light table-hover ">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <!-- <th scope="col">กิจกรรม</th> -->
+                            <th scope="col">อุปกรณ์</th>
+                            <th scope="col">จำนวน</th>
+                            <th scope="col">ราคา</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php
+                        foreach ($query1 as $key => $value) {
+                        ?>
+                            <tr>
+                                <td colspan="5" class="text-center" style="background-color: #dbb89a; color:white ;"><?php echo $value['a_name']; ?></td>
+                            </tr>
+                            <?php
+                            $a_id = $value['a_id'];
+                            $query = mysqli_query($conn, $sql . " AND activity_event.a_id='$a_id'");
+
+                            $n = 1;
+                            $budget = 0;
+                            foreach ($query as $row) {
+                            ?>
+
+
+                                <tr class="count">
+                                    <th scope="row"><?php echo $n; ?></th>
+                                    <!-- <td><?php echo $row['a_name']; ?></td> -->
+                                    <td><?php echo $row['item_name']; ?></td>
+                                    <td><?php echo $row['amount']; ?></td>
+                                    <td><?php echo number_format($row['price'], 0); ?></td>
+                                    <td>
+
+                                        <?php
+                                        if ($row['status'] == 'uncheck' || $row['status'] == '') { ?>
+                                            <button class="btn btn-danger" id="btn_status" name="<?= $row['ae_id'] ?>" onclick="changeStatus('<?= $row['ae_id'] ?>')">ยังไม่เตรียม</button>
+                                        <?php } else { ?>
+                                            <button class="task btn btn-success" name="<?= $row['ae_id'] ?>">เตรียมแล้ว</button>
+                                        <?php } ?>
+
+
+                                    </td>
+                                    <input type="hidden" name="id" id="id" value="<?= $row['ae_id'] ?>">
                                 </tr>
-                            </thead>
-                            <tbody>
-
-                                <?php
-                                foreach ($query1 as $key => $value) {
-                                ?>
-                                    <tr>
-                                        <td colspan="5" class="text-center" style="background-color: #dbb89a; color:white ;"><?php echo $value['a_name']; ?></td>
-                                    </tr>
-                                    <?php
-                                    $a_id = $value['a_id'];
-                                    $query = mysqli_query($conn, $sql . " AND activity_event.a_id='$a_id'");
-
-                                    $n = 1;
-                                    $budget = 0;
-                                    foreach ($query as $row) {
-                                    ?>
-
-
-                                        <tr>
-                                            <th scope="row"><?php echo $n; ?></th>
-                                            <!-- <td><?php echo $row['a_name']; ?></td> -->
-                                            <td><?php echo $row['item_name']; ?></td>
-                                            <td><?php echo $row['amount']; ?></td>
-                                            <td><?php echo number_format($row['price'], 0); ?></td>
-                                            <td>
-
-                                                <?php
-                                                if ($row['status'] == 'uncheck' || $row['status'] == '') { ?>
-                                                    <button class="btn btn-danger" id="btn_status" name="<?= $row['ae_id'] ?>" onclick="changeStatus('<?= $row['ae_id'] ?>')">ยังไม่เตรียม</button>
-                                                <?php } else { ?>
-                                                    <button class="btn btn-success" name="<?= $row['ae_id'] ?>">เตรียมแล้ว</button>
-                                                <?php } ?>
-
-
-                                            </td>
-                                            <input type="hidden" name="id" id="id" value="<?= $row['ae_id'] ?>">
-                                        </tr>
 
 
 
-                                <?php $n++;
-                                    }
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    <?php } ?>
-                
+                        <?php $n++;
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            <?php } ?>
+
         </div>
 
 
-        
+
 
     </div>
 
@@ -292,14 +324,44 @@ include('condb.php');
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>
+        let count = $(".count").length;
+        let task = $(".task").length;
+        $(document).ready(function() {
+
+            let totalCount = task / count * 100;
+            let toPercent = parseInt(totalCount) + "%";
+
+            $("#text-progress").html("เตรียมงานไปแล้ว(" + task + "จาก" + count + ")");
+            $("#progress").attr("style", "width:" + toPercent);
+            $("#progress").html(toPercent);
+
+
+        });
+
         function changeStatus(uid) {
+
             document.getElementsByName(uid)[0].className = "btn btn-success";
             document.getElementsByName(uid)[0].innerHTML = "เตรียมแล้ว";
+
 
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
-                    alert(xhttp.responseText);
+                    swal({
+                        title: "การแจ้งเตือน",
+                        text: "อัปเดตข้อมูลแล้ว",
+                        icon: "success",
+                        button: "ตกลง"
+                    });
+
+                    task++; //checklist
+
+                    let totalCount = task / count * 100;
+                    let toPercent = parseInt(totalCount) + "%";
+
+                    $("#text-progress").html("เตรียมงานไปแล้ว(" + task + "จาก" + count + ")");
+                    $("#progress").attr("style", "width:" + toPercent);
+                    $("#progress").html(toPercent);
                 }
             }
             var params = 'id=' + uid;
@@ -350,6 +412,9 @@ include('condb.php');
                     document.getElementById("showCountDown").innerHTML = "ครบกำหนด";
                 }
             }, 1000);
+
+            task = task + 1;
+
         } else if (!date.value) {
 
             document.getElementById('showCountDown').style.display = "none";

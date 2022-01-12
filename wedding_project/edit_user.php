@@ -1,7 +1,7 @@
 <html>
 
 <!-- favicon -->
-<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+<link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -13,6 +13,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <title>wedding</title>
 
@@ -70,16 +71,25 @@
 
         if ($sql) { ?>
 
-            <div class="card box d-flex mt-5">
+            <!-- <div class="card box d-flex mt-5">
                 <div class="card-header">แจ้งเตือน</div>
                 <div class="card-body">
                     <div class="alert alert-success " role="alert">
                         <h5 class="card-title text-center">แก้ไขข้อมูลสำเร็จ !!</h5>
                     </div>
-                    <meta http-equiv="refresh" content="2; url=profile.php">
                 </div>
-            </div>
+            </div> -->
 
+            <script>
+                swal({
+                    title: "การแจ้งเตือน",
+                    text: "แก้ไขข้อมูลสำเร็จ",
+                    icon: "success",
+                    button: false
+                });
+            </script>
+
+            <meta http-equiv="refresh" content="2; url=profile.php">
 
 
         <?php

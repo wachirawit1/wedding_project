@@ -3,7 +3,7 @@
 
 <head>
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
     <!-- effect -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -57,7 +57,7 @@
     ?>
 
     <div data-aos="fade-up" data-aos-anchor-placement="center-center">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -67,13 +67,13 @@
             <div class="carousel-inner">
 
                 <div class="carousel-item active ">
-                    <img class="d-block w-100 " height="500px" src="assets/images/pic1.png" alt="First slide">
+                    <img class="d-block w-100 " height="400px" src="assets/images/pic1.png" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" height="500px" src="assets/images/pic2.png" alt="Second slide">
+                    <img class="d-block w-100" height="400px" src="assets/images/pic2.png" alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" height="500px" src="assets/images/pic3.png" alt="Third slide">
+                    <img class="d-block w-100" height="400px" src="assets/images/pic3.png" alt="Third slide">
                 </div>
             </div>
 
@@ -91,23 +91,24 @@
         <div class="my-3">
             <h1 class="display-5 text-secondary">เลือกหมวดหมู่ร้านค้า</h1>
             <p class="lead text-secondary">สามารถเลือกสินค้าคุณภาพตามที่คุณต้องการ</p>
-            <hr class="my-2">
-        </div>
 
-        <div class="row row-cols-md-5">
-            <?php
-            include('condb.php');
-            $sql = "SELECT * FROM `category` ";
-            $query = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_array($query)) { ?>
-                <div class="col">
-                    <a class="card my-4 btn btn-light bg-light border" href="category.php?cate_id=<?= $row['cate_id'] ?>&cate_name=<?= $row['cate_name']?>">
-                        <div class="card-body">
+
+            <div class="row row-cols-2 row-cols-md-5">
+                <?php
+                include('condb.php');
+                $sql = "SELECT * FROM `category` ";
+                $query = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_array($query)) { ?>
+                    <a class="border text-decoration-none" href="category.php?cate_id=<?= $row['cate_id'] ?>&cate_name=<?= $row['cate_name'] ?>">
+                        <div class="col text-center p-2">
+                            <div class="">
+                            <img src="assets/images/cate_icon/<?= $row['cate_pic'] ?>" alt="img" width="100" >
+                            </div>
                             <div class="card-text text-secondary"><?= $row['cate_name'] ?></div>
                         </div>
                     </a>
-                </div>
-            <?php } ?>
+                <?php } ?>
+            </div>
         </div>
     </div>
     <div class="container-fluid bg-light">
@@ -125,7 +126,7 @@
                     <form action="view_post.php" method="POST">
                         <div class="col mb-4 ">
                             <div class="card">
-                                <img src="img/<?= $row['picture'] ?>" class="card-img-top" alt="..." height="125">
+                                <img src="img/<?= $row['picture'] ?>" class="card-img-top" alt="post">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $row['name'] ?></h5>
                                     <p class="card-text">

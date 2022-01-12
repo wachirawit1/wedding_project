@@ -9,7 +9,7 @@
         <!-- icon -->
         <script src="https://kit.fontawesome.com/80c612fc1e.js" crossorigin="anonymous"></script>
         <!-- favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+        <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -111,11 +111,11 @@
             <div>
                 <h2 class="mt-5 text-center">โพสต์ของฉัน</h2>
                 <div class="text-right">
-                    <a href="create_post.php" class="btn " style="background-color: #dbb89a;">สร้างโพสต์ใหม่</a>
+                    <a href="create_post.php" class="btn " style="background-color: #dbb89a;color: white;">สร้างโพสต์ใหม่</a>
                 </div>
             </div>
             <hr>
-            <div class="row d-block justify-content-center">
+            <div class="row row row-cols-1 row-cols-md-4 ">
 
 
                 <?php
@@ -138,7 +138,7 @@
                     foreach ($query_select as $value) {
                     ?>
                         <div class="col-12 col-md-4 mb-5">
-                            <div class="card h-100">
+                            <div class="card ">
                                 <img src="img/<?= $value['picture'] ?>" class="card-img-top" height="250px" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title text-center"><?= $value['name'] ?></h5>
@@ -169,7 +169,7 @@
                                                 <form action="edit_storepost.php" method="POST">
                                                     <input type="hidden" name="id" value="<?= $value['id'] ?>">
                                                     <!--<a href="edit_storepost.php?id=<?= $value['id'] ?>" class="btn col-12 col-md-6 btn-secondary">แก้ไข</a>-->
-                                                    <button type="submit" class="btn col-12 btn-secondary" style="width:100%;" name="btn_submit2">แก้ไข</button>
+                                                    <button type="submit" class="btn col-12" style="width:100%;background-color: #dbb89a ;color: white;" name="btn_submit2">แก้ไข</button>
                                                 </form>
                                             </div>
                                         </div>

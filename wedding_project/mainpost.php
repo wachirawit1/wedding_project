@@ -9,12 +9,15 @@ include('condb.php');
     <!-- icon -->
     <script src="https://kit.fontawesome.com/80c612fc1e.js" crossorigin="anonymous"></script>
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -103,13 +106,9 @@ include('condb.php');
         </center>
     </div> -->
 
-    <div class="jumbotron">
-        <h1 class="display-5 mt-5 text-center">โพสต์ทั้งหมด</h1>
-        <!-- <div class="text-right">
-            <a href="create_post.php" class="btn btn-lg" style="background-color: #dbb89a;">สร้างโพสต์ใหม่</a>
-        </div> -->
-    </div>
-    <div class="container-fluid">
+    
+    <div class="container">
+        <h1 class="display-5 my-5 text-center">โพสต์ทั้งหมด</h1>
 
         <hr>
         <div class="row row-cols-1 row-cols-md-3">
@@ -121,15 +120,23 @@ include('condb.php');
 
             foreach ($query_select as $value) {
             ?>
-                <div class="col mb-4">
-                    <div class="card h-100">
-                        <img src="img/<?= $value['picture'] ?>" class="card-img-top h-75" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title text-center"><?= $value['name'] ?></h5>
+                <form action="view_post.php" method="POST">
+                    <div class="col mb-4">
+                        <div class="card h-100">
+                            <img src="img/<?= $value['picture'] ?>" class="card-img-top" alt="post">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $value['name'] ?></h5>
+                                <p class="card-text">
+                                    <?= $value['detail'] ?>
+                                </p>
+                            </div>
+                            <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                            <div class="text-center p-2">
+                                <button type="submit" class="btn btn-block" style="background-color: #dbb89a ;color:white;" name="btn_submit">ดูโพสต์</button>
+                            </div>
                         </div>
-                        <a href="view_post.php?id=<?= $value['id'] ?>" class="btn btn-lg mx-2 my-3" style="background-color: #dbb89a;">ดูโพสต์</a>
                     </div>
-                </div>
+                </form>
             <?php } ?>
         </div>
     </div>

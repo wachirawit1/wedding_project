@@ -10,7 +10,7 @@ include('condb.php');
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
 
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -20,9 +20,15 @@ include('condb.php');
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <!-- download excel template -->
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 
     <title>wedding</title>
 
@@ -113,7 +119,7 @@ include('condb.php');
             </div>
             <div class="row justify-content-md-center">
 
-                <img src="" alt="การ์ดเชิญของคุณ" id="blah" width="900" height="400">
+                <img src="" alt="การ์ดเชิญของคุณ" id="blah" width="300" height="400">
 
             </div>
             <div class="form-group text-center">
@@ -138,7 +144,7 @@ include('condb.php');
             </div>
             <div class="row justify-content-md-center p-0">
 
-                <img src="uploads/<?= $row['attach_file'] ?>" class="rounded ms-auto d-block p-3" alt="การ์ดเชิญของคุณ" id="blah" width="900" height="400">
+                <img src="uploads/<?= $row['attach_file'] ?>" class="rounded ms-auto d-block p-3" alt="การ์ดเชิญของคุณ" id="blah" width="300" height="400">
 
             </div>
             <div class="form-group text-center">
@@ -152,19 +158,13 @@ include('condb.php');
 
     <div id="email_list" data-aos="fade-up" data-aos-duration="800" style="display: none;">
         <div class="container shadow bg-light border text-center mb-3">
-            <h4 class="my-3">เพิ่มรายชื่อและอีเมลแขก</h4>
-            <form class="my-3">
+            <h4 class="my-3">การส่งการ์ดเชิญ</h4>
+            <!-- <form class="my-3">
                 <div class="row my-3" id="row2">
                     <div class="col">
                         <input type="text" class="form-control" id="e_name" name="name" placeholder="ชื่อ-นามสกุลแขก" autofocus>
                     </div>
                     <div class="col input-group">
-                        <!-- <input type="text" class="form-control" id="relation" name="relation" placeholder="ความสัมพันธ์">
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-warning input-group-text" data-container="body" data-toggle="popover" data-placement="top" data-content="ไม่จำเป็นต้องระบุ">
-                                <i class="bi bi-exclamation-circle"></i>
-                            </button>
-                        </div> -->
                         <select class="form-control" id="relation" name="relation">
                             <option>เลือกความสัมพันธ์</option>
                             <option value="เพื่อนเจ้าบ่าว">เพื่อนเจ้าบ่าว</option>
@@ -184,41 +184,144 @@ include('condb.php');
                         <button class="btn" type="button" id="sendEmail" onclick="send_email(this)">ส่ง</button>
                     </div>
                 </div>
-            </form>
-            <div class="my-3 border-bottom"></div>
+            </form> -->
 
-            <?php
-            $userid = $_SESSION['userid'];
-            $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))";
-            $query = mysqli_query($conn, $sql);
-            $num = mysqli_num_rows($query);
 
-            $i = 1;
-            if ($num == 0) { ?>
-                <div id="email_list">
-                    <div class="alert alert-danger" role="alert" id="none">
-                        ยังไม่มีรายชื่อแขก
+            <div class="my-3">
+                <b>วิธีการส่งการ์ดเชิญ</b>
+            </div>
+
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left text-decoration-none" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                1. ดาวน์โหลดเทมเพลท Excel
+                            </button>
+                        </h2>
                     </div>
-                    <div id="show">
 
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <button class="btn btn-primary" onclick="ExportToExcel('xlsx')">
+                                <i class="bi bi-download"></i> ดาวน์โหลด
+                            </button>
+                        </div>
                     </div>
                 </div>
-            <?php
-            } else { ?>
-                <h4 class='my-3'>รายชื่อแขก</h4>
-                <?php while ($row = mysqli_fetch_array($query)) { ?>
-                    <div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left text-decoration-none collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                2. กรอกรายชื่อแขกลงใน Excel ที่ได้ดาวน์โหลดไว้ <u>คลิกเพื่อดูตัวอย่าง</u>
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ลำดับ</th>
+                                        <th scope="col">ชื่อ-นามสกุล</th>
+                                        <th scope="col">ความสัมพันธ์</th>
+                                        <th scope="col">ที่อยู่อีเมล</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>ประยุทธ จันท์โอชะ</td>
+                                        <td>เพื่อนเจ้าบ่าว</td>
+                                        <td>prayut@hotmail.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>ประวิด น้ำ</td>
+                                        <td>เพื่อนเจ้าสาว</td>
+                                        <td>prawit@gmail.com</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left te text-decoration-none collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                3. อัปโหลดไฟล์ Excel โดยการเลือกไฟล์ Excel ที่ได้ทำการกรอกข้อมูลแล้ว
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="my-3 p-3">
+
+                            <div class="d-flex justify-content-start">
+                                <input type="file" id="excel_file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" value="" onchange="saveAndSend()" />
+                            </div>
+
+                            <div id="excel_data" class="mt-5"></div>
+
+                            <div class="d-flex justify-content-end">
+                                <button id="enable" class="btn btn-primary" onclick="send_email()" disabled>บันทึกและส่ง</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <table id="tbl_exporttable_to_xls" class="table mt-1 bg-white table-hover" style="display: none;">
+                <tr>
+                    <th scope="col">ลำดับ</th>
+                    <th scope="col">ชื่อ-นามสกุล</th>
+                    <th scope="col">ความสัมพันธ์</th>
+                    <th scope="col">ที่อยู่อีเมล</th>
+                </tr>
+            </table>
+
+
+            <div class="my-3 border-bottom"></div>
+
+            <div id="here">
+                <?php
+                $userid = $_SESSION['userid'];
+                $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))";
+                $query = mysqli_query($conn, $sql);
+                $num = mysqli_num_rows($query);
+
+                $i = 1;
+                if ($num == 0) { ?>
+                    <div id="email_list">
+                        <div class="alert alert-danger" role="alert" id="none">
+                            ยังไม่มีรายชื่อแขก
+                        </div>
+                        <div id="show">
+
+                        </div>
+                    </div>
+                <?php
+                } else { ?>
+                    <h4 class='my-3'>รายชื่อแขก</h4>
+                    <?php while ($row = mysqli_fetch_array($query)) { ?>
+
                         <div id="show">
                             <div class="row my-3">
                                 <div class="col-1" id="index"><?= $i ?></div>
                                 <div class="col">
-                                    <input type="text" class="form-control" name="name"  value="<?= $row['e_name'] ?>" readonly>
+                                    <input type="text" class="form-control" name="name" value="<?= $row['e_name'] ?>" readonly>
                                 </div>
                                 <div class="col">
                                     <input type="text" class="form-control" name="relation" value="<?= $row['relation'] ?>" readonly>
                                 </div>
                                 <div class="col">
-                                    <input type="email" class="form-control" name="email"  id="emailSent" value="<?= $row['address'] ?>" readonly>
+                                    <input type="email" class="form-control" name="email" id="emailSent" value="<?= $row['address'] ?>" readonly>
                                 </div>
                                 <div class="col col-2">
                                     <button type="button" class="btn btn-success" disabled>ส่งแล้ว</button>
@@ -226,11 +329,11 @@ include('condb.php');
 
                             </div>
                         </div>
-                    </div>
-            <?php $i++;
-                }
-            } ?>
 
+                <?php $i++;
+                    }
+                } ?>
+            </div>
         </div>
     </div>
 
@@ -257,9 +360,6 @@ include('condb.php');
             duration: 1000
         });
 
-        $(function() {
-            $('[data-toggle="popover"]').popover()
-        })
 
         // let img = $('#blah');
         // if (!img.val()) {
@@ -313,7 +413,12 @@ include('condb.php');
                     type: 'POST',
                     success: function(data) {
                         console.log(data);
-                        alert(data.status);
+                        swal({
+                            title: "การแจ้งเตือน",
+                            text: "บันทึกข้อมูลสำเร็จ",
+                            icon: "success",
+                            button: "ตกลง"
+                        });
                         fileName.val(data.fileName);
                     },
                     error: function(err) {
@@ -334,32 +439,32 @@ include('condb.php');
             }
 
         }
-        let email = document.getElementById('email');
-        let emailSent = document.getElementById('emailSent');
-        let emailArray = [];
 
-        // function check_mail() {
-
-        //     for (let i = 0; i < emailSent.length; i++) {
-        //         if (emailSent[i].value) {
-        //             emailArray.push(emailSent[i].value)
-        //         }
-        //         if (email.value == emailArray) {
-        //             console.log('wow');
-        //             email.style.border = "1px solid red";
-        //             document.getElementById('sendEmail').setAttribute("disabled", "");
-
-        //         }
-        //     }
+        function saveAndSend() {
+            $("#enable").removeAttr("disabled");
+        }
 
 
-        // }
+
+        function send_email() {
+
+            let nameArr = [];
+            let relationArr = [];
+            let emailArr = [];
+
+            //array ต่างๆ
+            $(".name").each(function() {
+                nameArr.push($(this).val());
+            });
+            $(".relation").each(function() {
+                relationArr.push($(this).val());
+            });
+            $(".email").each(function() {
+                emailArr.push($(this).val());
+            });
 
 
-        function send_email(e) {
-            var e_name = $('#e_name');
-            var relation = $('#relation');
-            var email = $('#email');
+
             var header = $('#header');
             var detail = $('#detail');
             let fileName = $('#fileName');
@@ -367,76 +472,165 @@ include('condb.php');
             let file_data = $('#imgInp').prop("files")[0];
             let form_data = new FormData();
 
+            form_data.append("nameArr", nameArr);
+            form_data.append("relationArr", relationArr);
+            form_data.append("emailArr", emailArr);
             form_data.append("file", file_data);
-            form_data.append("e_name", $('#e_name').val());
-            form_data.append("relation", $('#relation').val());
-            form_data.append("email", $("#email").val());
             form_data.append("header", $('#header').val());
             form_data.append("detail", $('#detail').val());
             form_data.append("fileName", fileName.val());
 
-            for (var value of form_data.values()) {
-                console.log(value);
+            //เอาไว้ทดสอบการแสดงผลข้อมูลใน form_data
+            // for (var value of form_data.values()) {
+            //     console.log(value);
+            // }
+
+            $("#enable").html('<div class="spinner-border text-light" role="status"><span class="sr-only">Loading...</span></div>');
+
+            $.ajax({
+                url: 'sendEmail.php',
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                method: 'POST',
+                success: function(data) {
+                    // let append_element = $("#excel_data").html();
+                    // $("#here").append(append_element);
+
+                    $("#enable").html('บันทึกและส่ง');
+
+                    swal({
+                        title: "การแจ้งเตือน",
+                        text: "ส่งอีเมลแล้ว",
+                        icon: "success",
+                        button: "ตกลง"
+                    });
+
+                    $("#excel_data").html(" ");
+
+                },
+                error: function(data) {
+                    console.log(data);
+                    swal({
+                        title: "การแจ้งเตือน",
+                        text: "ส่งอีเมลไม่สำเร็จ",
+                        icon: "error",
+                        button: "ตกลง"
+                    });
+                }
+            });
+
+
+        }
+
+        //download excel template
+        function ExportToExcel(type, fn, dl) {
+            var elt = document.getElementById('tbl_exporttable_to_xls');
+            var wb = XLSX.utils.table_to_book(elt, {
+                sheet: "sheet1"
+            });
+            return dl ?
+                XLSX.write(wb, {
+                    bookType: type,
+                    bookSST: true,
+                    type: 'base64'
+                }) :
+                XLSX.writeFile(wb, fn || ('รายชื่อแขก.' + (type || 'xlsx')));
+        }
+
+        //convert excel to html
+        const excel_file = document.getElementById('excel_file');
+
+        excel_file.addEventListener('change', (event) => {
+
+            if (!['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'].includes(event.target.files[0].type)) {
+                document.getElementById('excel_data').innerHTML = '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
+
+                excel_file.value = '';
+
+                return false;
             }
 
-            if (email.val() != "") {
-                console.log("SEND MAIL");
-                $('#sendEmail').html('กำลังส่ง');
+            var reader = new FileReader();
 
-                $.ajax({
-                    url: 'sendEmail.php',
-                    dataType: 'text',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    data:
-                        // e_name: e_name.val(),
-                        // relation: relation.val(),
-                        // email: email.val(),
-                        // header: header.val(),
-                        // detail: detail.val(),
-                        form_data
+            reader.readAsArrayBuffer(event.target.files[0]);
 
-                        ,
-                    type: 'POST',
-                    success: function(data) {
-                        console.log(data);
-                        alert('ส่งสำเร็จ');
-                        let html = `
-                            <div class="row my-3" id="row2">
-                                <div class="col-1" id="index">${count}</div>
-                                <div class="col">
-                                    <input type="text" class="form-control"  name="name" value="${e_name.val()}" readonly>
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control"  name="relation" value="${relation.val()}" readonly>
-                                </div>
-                                <div class="col">
-                                    <input type="email" class="form-control"  name="email" value="${email.val()}" readonly>
-                                </div>
-                                <div class="col col-2">
-                                    <button class="btn btn-success" type="button"  onclick="send_email(this)" disabled>ส่งแล้ว</button>
-                                </div>
-                            </div>
-                            `;
-                        count++;
+            reader.onload = function(event) {
 
-                        $('#show').append(html);
+                var data = new Uint8Array(reader.result);
 
-                        e_name.val('');
-                        relation.val('');
-                        email.val('');
-                        $('#sendEmail').html('ส่ง');
-                        $('#none').replaceWith(
-                            "<h4 class='my-3'>รายชื่อแขก</h4>"
-                        )
+                var work_book = XLSX.read(data, {
+                    type: 'array'
+                });
 
-                    },
-                    error: function(error) {
+                var sheet_name = work_book.SheetNames;
+
+                var sheet_data = XLSX.utils.sheet_to_json(work_book.Sheets[sheet_name[0]], {
+                    header: 1
+                });
+
+                if (sheet_data.length > 0) {
+                    var table_output = '<table class="table table-striped table-bordered">';
+
+                    for (var row = 0; row < sheet_data.length; row++) {
+
+                        table_output += '<tr>';
+
+                        for (var cell = 0; cell < sheet_data[row].length; cell++) {
+
+                            if (row == 0) {
+
+                                table_output += '<th>' + sheet_data[row][cell] + '</th>';
+
+                            } else {
+                                let className = "";
+                                if (cell == 1) {
+                                    className = "name";
+                                } else if (cell == 2) {
+                                    className = "relation";
+                                } else if (cell == 3) {
+                                    className = "email";
+                                }
+
+                                table_output += '<td>' + sheet_data[row][cell] + '<input type="hidden" class="' + className + '" value="' + sheet_data[row][cell] + '">'
+                                '</td>';
+
+                            }
+
+                        }
+
+                        table_output += '</tr>';
 
                     }
-                });
+
+                    table_output += '</table>';
+
+                    document.getElementById('excel_data').innerHTML = table_output;
+                }
+
+                excel_file.value = '';
+
             }
+
+        });
+
+        function test() {
+
+            $.ajax({
+                url: "testpage.php",
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    nameArr: nameArr,
+                    relationArr: relationArr,
+                    emailArr: emailArr
+                },
+                success: function(data) {
+                    console.log(data.status);
+                }
+            });
 
         }
     </script>

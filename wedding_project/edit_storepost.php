@@ -22,7 +22,7 @@ $row_post = mysqli_fetch_assoc($query_post);
     <!-- icon -->
     <script src="https://kit.fontawesome.com/80c612fc1e.js" crossorigin="anonymous"></script>
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
     <!-- Required meta tags -->
     <meta charset="utf-8">

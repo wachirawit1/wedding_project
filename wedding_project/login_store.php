@@ -19,7 +19,7 @@ if (isset($_SESSION['username'])) { ?>
   <title>Login Page</title>
 
   <!-- favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
   <!-- button Icon -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">

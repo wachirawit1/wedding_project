@@ -6,7 +6,7 @@ include('condb.php');
 
 <head>
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -149,7 +149,7 @@ include('condb.php');
             <?php
             if(isset($_POST["action"]) && $_POST["action"] == "search"){
                 echo "ผลการค้นหา : \"".$_POST["search"]."\"";
-                $where_condition = "WHERE cate_name LIKE '%".$_POST["strsearch"]."%' ";
+                $where_condition = "WHERE cate_name LIKE '%".$_POST["search"]."%' ";
             }else{
                 $where_condition = "";
             }

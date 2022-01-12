@@ -4,7 +4,7 @@
 <head>
 
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,16 +45,24 @@
         $result = mysqli_query($conn, $sql);
 
         if ($result) { ?>
-            <div class="card box d-flex mt-5">
+            <!-- <div class="card box d-flex mt-5">
                 <div class="card-header">แจ้งเตือน</div>
                 <div class="card-body">
                     <h5 class="card-title">กำหนดวันที่จัดงาน</h5>
                     <div class="alert alert-success " role="alert">
                         <p class="card-text">สำเร็จ!!</p>
-                        <meta http-equiv="refresh" content="2; url=schedule.php">
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <script>
+                swal({
+                    title: "การแจ้งเตือน",
+                    text: "อัปเดตข้อมูลสำเร็จ",
+                    icon: "success",
+                    button: false
+                });
+            </script>
+            <meta http-equiv="refresh" content="2; url=schedule.php">
         <?php } else { ?>
             <div class="card box d-flex mt-5">
                 <div class="card-header">แจ้งเตือน</div>
@@ -71,7 +80,7 @@
 
     </div>
 
-    
+
 
 
 

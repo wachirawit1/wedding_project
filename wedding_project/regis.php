@@ -26,7 +26,7 @@ if (isset($_SESSION['username'])) {
 
 <head>
   <!-- favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
   <!-- button Icon -->
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
