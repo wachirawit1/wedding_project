@@ -19,6 +19,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <title>wedding</title>
     <style>
         body {
@@ -52,7 +54,7 @@
 
         $a_id = $_POST['a_id'];
         $list_id = $_POST['list_id'];
-        $t_id = $_POST['t_id'] ;
+        $t_id = $_POST['t_id'];
 
 
 
@@ -69,8 +71,9 @@
         $result = mysqli_query($conn, $sql);
 
 
-        $sql = "SELECT e_id FROM event WHERE userid = '$userid' ";
+        $sql = "SELECT e_id FROM event WHERE userid = '$userid' AND status = '' ";
         $result = mysqli_query($conn, $sql);
+
         $row = mysqli_fetch_array($result);
         $get_eid = $row['e_id'];
 
@@ -89,7 +92,7 @@
             $l = $list_id[$index];
 
 
-            $sql = "INSERT INTO activity_event (a_id , list_id, e_id, status) VALUES ( '$a' , '$l' , '$get_eid', 'uncheck' ) ";
+            $sql = "INSERT INTO activity_event (a_id , list_id, e_id, ae_status) VALUES ( '$a' , '$l' , '$get_eid', 'uncheck' ) ";
             mysqli_query($conn, $sql);
         }
 
@@ -105,16 +108,16 @@
 
 
         ?>
-            <div class="card box d-flex mt-5">
-                <div class="card-header">แจ้งเตือน</div>
-                <div class="card-body">
-                    <h5 class="card-title">การสร้างงานแต่งงาน</h5>
-                    <div class="alert alert-success " role="alert">
-                        <p class="card-text">สำเร็จ!!</p>
-                        <meta http-equiv="refresh" content="2; url=progress.php">
-                    </div>
-                </div>
-            </div>
+            
+            <script>
+                swal({
+                    title: "การแจ้งเตือน",
+                    text: "สร้างงานแต่งงานสำเร็จ",
+                    icon: "success",
+                    button: false
+                });
+            </script>
+            <meta http-equiv="refresh" content="2; url=progress.php">
         <?php
 
         } else { ?>

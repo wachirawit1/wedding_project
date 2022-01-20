@@ -77,7 +77,7 @@ include('condb.php');
     <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0  flex-wrap flex-md-nowrap justify-content-between">
     <a class="navbar-brand" href="traditional.php" style="line-height: 25px; ">
                 <div class="d-table m-auto">
-                    <img src="assets/images/logo2.png" width="160px"></a>
+                    <img src="assets/images/logo.png" width="70"></a>
                     
                 </div>
     </div>

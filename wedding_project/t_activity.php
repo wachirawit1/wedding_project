@@ -22,7 +22,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <title>wedding</title>
     <style>
@@ -30,20 +30,25 @@
             font-family: 'Prompt', sans-serif;
             background-color: #ffffff;
         }
+
         .nav-item {
             font-size: 16px;
             padding-left: 16px;
             padding-right: 16px;
         }
+
         a.nav-link {
             color: grey;
         }
+
         a.nav-link:hover {
             color: #dbb89a !important;
         }
+
         a.nav-link {
             color: grey;
         }
+
         a.nav-link:hover {
             color: #dbb89a !important;
         }
@@ -89,7 +94,7 @@
     </div>
 
     <!-- breadcrumb -->
-    <nav aria-label="breadcrumb position-static" >
+    <nav aria-label="breadcrumb position-static">
         <ol class="breadcrumb" style=" background-color: #ffffff;">
             <li class="breadcrumb-item"><a href="mainuser.php">Home</a></li>
             <li class="breadcrumb-item"><a href="progress.php">progress</a></li>

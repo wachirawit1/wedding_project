@@ -16,7 +16,10 @@ include('condb.php');
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -76,6 +79,14 @@ include('condb.php');
     ?>
     <?php include('navbaruser.php'); ?>
 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style=" background-color: #ffffff;">
+            <li class="breadcrumb-item"><a href="mainuser.php">Home</a></li>
+            <li class="breadcrumb-item"><a href="progress.php">progress</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+    </nav>
+
 
     <div class="container">
         <div class="row mt-3">
@@ -97,8 +108,7 @@ include('condb.php');
                 <div class="list-group shadow" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">ข้อมูล</a>
                     <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">อุปกรณ์</a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">การตอบรับอีเมล</a>
-                    <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">การตอบรับการเข้าร่วมงาน</a>
                 </div>
 
             </div>
@@ -141,10 +151,11 @@ include('condb.php');
                                         <?php
                                         $userid = $_SESSION['userid'];
                                         $sql = "SELECT * FROM `activity_event` 
-                    INNER JOIN activity ON activity_event.a_id = activity.a_id 
-                    INNER JOIN item_list ON activity_event.list_id = item_list.list_id 
-                    WHERE e_id = (SELECT e_id FROM event WHERE event.userid = $userid )
-                    ";
+                                        INNER JOIN activity ON activity_event.a_id = activity.a_id 
+                                        INNER JOIN item_list ON activity_event.list_id = item_list.list_id 
+                                        INNER JOIN event ON activity_event.e_id = event.e_id
+                                        WHERE activity_event.e_id = (SELECT e_id FROM event WHERE event.userid = $userid )
+                                        AND event.status = 1  ";
                                         $query1 = mysqli_query($conn, $sql . " GROUP BY activity_event.a_id");
                                         $row = mysqli_fetch_array($query1);
 
@@ -191,7 +202,7 @@ include('condb.php');
                                                             <td>
 
                                                                 <?php
-                                                                if ($row['status'] == 'uncheck' || $row['status'] == '') { ?>
+                                                                if ($row['ae_status'] == 'uncheck' || $row['ae_status'] == '') { ?>
                                                                     <button class="btn btn-danger" id="btn_status" name="<?= $row['ae_id'] ?>" onclick="changeStatus('<?= $row['ae_id'] ?>')">ยังไม่เตรียม</button>
                                                                 <?php } else { ?>
                                                                     <button class="btn btn-success" name="<?= $row['ae_id'] ?>">เตรียมแล้ว</button>
@@ -221,64 +232,92 @@ include('condb.php');
                             $userid = $_SESSION['userid'];
                             $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))";
                             $query = mysqli_query($conn, $sql);
+                            $num_rows = mysqli_num_rows($query);
                             $n = 1;
                             ?>
 
-                            <div class="px-3 py-2 d-flex justify-content-end">
-                                <button class="btn btn-success" onclick="ExportToExcel('xlsx')">
+                            <div class="py-2 d-flex justify-content-end">
+
+                                <select id="myFilter" class="form-control" style="width: 9rem;">
+                                    <option value="">ทั้งหมด</option>
+                                    <option value="รอการตอบรับ">รอการตอบรับ</option>
+                                    <option value="เข้าร่วม">เข้าร่วม</option>
+                                    <option value="ไม่เข้าร่วม">ไม่เข้าร่วม</option>
+                                    <option value="ไม่แน่ใจ">ไม่แน่ใจ</option>
+                                </select>
+                                <button class="btn btn-success ml-2" onclick="ExportToExcel('xlsx')">
                                     <i class="bi bi-file-earmark-excel"></i>ดาวน์โหลด
                                 </button>
+
                             </div>
                             <div class="overflow-auto" style="height: auto;">
-                                <table id="tbl_exporttable_to_xls" class="table mt-1 bg-white table-hover">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">ชื่อ-นามสกุล</th>
-                                            <th scope="col">ความสัมพันธ์</th>
-                                            <th scope="col">ที่อยู่อีเมล</th>
-                                            <th scope="col">การตอบรับ</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php while ($row = mysqli_fetch_array($query)) { ?>
+                                <?php
+                                if ($num_rows == 0) { ?>
+                                    <table class="table mt-1 bg-white table-hover">
+                                        <thead class="thead-light">
                                             <tr>
-                                                <th scope="row"><?= $n ?></th>
-                                                <td><?= $row['e_name'] ?></td>
-                                                <td>
-                                                    <?php if ($row['relation'] == "") {
-                                                        echo "ไม่ระบุ";
-                                                    } else {
-                                                        echo $row['relation'];
-                                                    } ?>
-                                                </td>
-                                                <td><?= $row['address'] ?></td>
-                                                <td class="replying">
-                                                    <?php
-                                                    $reply = $row['replying'];
-                                                    if ($reply == "accept") {
-                                                        $reply = "เข้าร่วม";
-                                                        echo $reply;
-                                                    } else if ($reply == "reject") {
-                                                        $reply = "ไม่เข้าร่วม";
-                                                        echo $reply;
-                                                    } else if ($reply == "notsure") {
-                                                        $reply = "ไม่แน่ใจ";
-                                                        echo $reply;
-                                                    } else {
-                                                        $reply = "รอการตอบรับ";
-                                                        echo $reply;
-                                                    } ?>
-                                                </td>
+                                                <th scope="col">#</th>
+                                                <th scope="col">ชื่อ-นามสกุล</th>
+                                                <th scope="col">ความสัมพันธ์</th>
+                                                <th scope="col">ที่อยู่อีเมล</th>
+                                                <th scope="col">การตอบรับ</th>
                                             </tr>
-                                        <?php $n++;
-                                        } ?>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                    </table>
+                                    <!-- แจ้งเตือน -->
+                                    <div class="alert alert-warning" role="alert">
+                                        ดูเหมือนว่าคุณยังไม่ได้ส่งอีเมบใช่ไหม? <a href="SendingE.php" class="alert-link">กลับไปส่งอีเมลเดี๋ยวนี้</a>
+                                    </div>
+
+                                <?php } else { ?>
+                                    <table id="tbl_exporttable_to_xls" class="table mt-1 bg-white table-hover">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">ชื่อ-นามสกุล</th>
+                                                <th scope="col">ความสัมพันธ์</th>
+                                                <th scope="col">ที่อยู่อีเมล</th>
+                                                <th scope="col">การตอบรับ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="myTable">
+                                            <?php while ($row = mysqli_fetch_array($query)) { ?>
+                                                <tr>
+                                                    <th scope="row"><?= $n ?></th>
+                                                    <td><?= $row['e_name'] ?></td>
+                                                    <td>
+                                                        <?php if ($row['relation'] == "") {
+                                                            echo "ไม่ระบุ";
+                                                        } else {
+                                                            echo $row['relation'];
+                                                        } ?>
+                                                    </td>
+                                                    <td><?= $row['address'] ?></td>
+                                                    <td class="replying">
+                                                        <?php
+                                                        $reply = $row['replying'];
+                                                        if ($reply == "accept") {
+                                                            $reply = "เข้าร่วม";
+                                                            echo $reply;
+                                                        } else if ($reply == "reject") {
+                                                            $reply = "ไม่เข้าร่วม";
+                                                            echo $reply;
+                                                        } else if ($reply == "notsure") {
+                                                            $reply = "ไม่แน่ใจ";
+                                                            echo $reply;
+                                                        } else {
+                                                            $reply = "รอการตอบรับ";
+                                                            echo $reply;
+                                                        } ?>
+                                                    </td>
+                                                </tr>
+                                            <?php $n++;
+                                            } ?>
+                                        </tbody>
+                                    </table>
+                                <?php } ?>
                             </div>
                         </div>
-                        <!-- data4 -->
-                        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
                     </div>
 
                 </div>
@@ -327,6 +366,15 @@ include('condb.php');
                 }
 
             });
+
+            $("#myFilter").on("change", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+
         });
 
         function ExportToExcel(type, fn, dl) {
@@ -340,7 +388,7 @@ include('condb.php');
                     bookSST: true,
                     type: 'base64'
                 }) :
-                XLSX.writeFile(wb, fn || ('รายชื่อแขก.' + (type || 'xlsx')));
+                XLSX.writeFile(wb, fn || ('การตอบรับการเข้าร่วมงาน.' + (type || 'xlsx')));
         }
 
         let date = document.getElementById('date');
@@ -348,6 +396,7 @@ include('condb.php');
         let hours = document.getElementById('hours')
         let minutes = document.getElementById('minutes');
         let seconds = document.getElementById('seconds');
+
         if (date.value) {
 
 

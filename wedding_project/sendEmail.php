@@ -56,8 +56,8 @@ for ($i = 0; $i < sizeof($name_array); $i++) {
     $mail->isSMTP();
     $mail->Host = "smtp.gmail.com";
     $mail->SMTPAuth = true;
-    $mail->Username = "khemloveice@gmail.com"; // enter your email address
-    $mail->Password = "0999170023dd"; // enter your password
+    $mail->Username = "weddingplanner.official2021@gmail.com"; // enter your email address
+    $mail->Password = "WDplanner2021"; // enter your password
     $mail->Port = 465;
     $mail->SMTPSecure = "ssl";
 

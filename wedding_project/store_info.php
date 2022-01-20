@@ -20,7 +20,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <title>wedding</title>
     <style>
@@ -97,7 +97,7 @@
     <!-- breadcrums -->
     <nav aria-label="breadcrumb" >
         <ol class="breadcrumb" style=" background-color: #ffffff;">
-            <li class="breadcrumb-item"><a href="mainuser.php">Home</a></li>
+            <li class="breadcrumb-item"><a href="storepost.php">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">profile</li>
         </ol>
     </nav>

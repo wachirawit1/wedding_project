@@ -14,13 +14,16 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <title>wedding</title>
     <style>
@@ -128,10 +131,10 @@
                         $sql = "SELECT * FROM activity WHERE";
                         $isFirst = true;
                         foreach ($activity as $value) {
-                            if($isFirst){
+                            if ($isFirst) {
                                 $sql .= " a_id='$value'";
                                 $isFirst = false;
-                            }else{
+                            } else {
                                 $sql .= " OR a_id='$value'";
                             }
                         }
@@ -150,34 +153,34 @@
                         //     }
                         // }
                         ?>
-                        <?php foreach($query as $key => $value){?>
-                        <tr>
-                            <td colspan="5" class="text-center" style="background-color: #dbb89a; color:white ;"><b><?=$value['a_name']?></b></td>
-                        </tr>
-                        <?php
-                        // echo $sql;
-                        // exit();
-                        $a_id = $value['a_id'];
-                        $sql = "SELECT * FROM activity_listitem LEFT JOIN item_list ON activity_listitem.list_id = item_list.list_id WHERE activity_listitem.a_id = '$a_id'";
-                        $query = mysqli_query($conn, $sql);
-                        $n = 1;
-                        while ($row = mysqli_fetch_array($query)) {
-                        ?>
+                        <?php foreach ($query as $key => $value) { ?>
                             <tr>
-                                <th scope="row"><?php echo $n; ?></th>
-                                <!-- <td><?php echo $row['a_name']; ?></td> -->
-                                <td><?php echo $row['item_name']; ?></td>
-                                <td><?php echo $row['amount']; ?></td>
+                                <td colspan="5" class="text-center" style="background-color: #dbb89a; color:white ;"><b><?= $value['a_name'] ?></b></td>
                             </tr>
+                            <?php
+                            // echo $sql;
+                            // exit();
+                            $a_id = $value['a_id'];
+                            $sql = "SELECT * FROM activity_listitem LEFT JOIN item_list ON activity_listitem.list_id = item_list.list_id WHERE activity_listitem.a_id = '$a_id'";
+                            $query = mysqli_query($conn, $sql);
+                            $n = 1;
+                            while ($row = mysqli_fetch_array($query)) {
+                            ?>
+                                <tr>
+                                    <th scope="row"><?php echo $n; ?></th>
+                                    <!-- <td><?php echo $row['a_name']; ?></td> -->
+                                    <td><?php echo $row['item_name']; ?></td>
+                                    <td><?php echo $row['amount']; ?></td>
+                                </tr>
 
-                            <input type="hidden" name="a_id[]" value="<?= $row['a_id'] ?>">
-                            <input type="hidden" name="list_id[]" value="<?= $row['list_id'] ?>">
-                            <input type="hidden" name="t_id" value="<?= $t_id ?>">
-                        <?php 
-                        $n++;
-                        }
-                        ?>
-                        <?php }?>
+                                <input type="hidden" name="a_id[]" value="<?= $row['a_id'] ?>">
+                                <input type="hidden" name="list_id[]" value="<?= $row['list_id'] ?>">
+                                <input type="hidden" name="t_id" value="<?= $t_id ?>">
+                            <?php
+                                $n++;
+                            }
+                            ?>
+                        <?php } ?>
                     </tbody>
                 </table>
 
@@ -209,24 +212,6 @@
 
 
 
-
-    <script>
-        let calculate = document.getElementById('calculate');
-        calculate.onclick = function calculate() {
-            let item = [];
-            let budget = document.getElementsByClassName('budget');
-            for (let i = 0; i < budget.length; i++) {
-                if (budget[i].value) {
-                    item.push(budget[i].value)
-                }
-            }
-            document.getElementById('demo').innerHTML = item.reduce(
-                (sumBudget, item) => sumBudget + parseInt(item), 0
-            )
-
-
-        }
-    </script>
 
 
     <footer class="bg-light text-center text-lg-start mt-3">

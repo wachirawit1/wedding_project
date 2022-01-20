@@ -219,8 +219,8 @@ include('condb.php');
                     </div>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                         <div class="card-body">
-                            <table class="table table-striped">
-                                <thead>
+                            <table class="table bg-white ">
+                                <thead class="thead-light">
                                     <tr>
                                         <th scope="col">ลำดับ</th>
                                         <th scope="col">ชื่อ-นามสกุล</th>
@@ -309,30 +309,36 @@ include('condb.php');
                 <?php
                 } else { ?>
                     <h4 class='my-3'>รายชื่อแขก</h4>
-                    <?php while ($row = mysqli_fetch_array($query)) { ?>
 
-                        <div id="show">
-                            <div class="row my-3">
-                                <div class="col-1" id="index"><?= $i ?></div>
-                                <div class="col">
-                                    <input type="text" class="form-control" name="name" value="<?= $row['e_name'] ?>" readonly>
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" name="relation" value="<?= $row['relation'] ?>" readonly>
-                                </div>
-                                <div class="col">
-                                    <input type="email" class="form-control" name="email" id="emailSent" value="<?= $row['address'] ?>" readonly>
-                                </div>
-                                <div class="col col-2">
-                                    <button type="button" class="btn btn-success" disabled>ส่งแล้ว</button>
-                                </div>
 
-                            </div>
-                        </div>
 
-                <?php $i++;
-                    }
-                } ?>
+
+                    <table class="table bg-white table-hover ">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">ลำดับ</th>
+                                <th scope="col">ชื่อ</th>
+                                <th scope="col">ความสัมพันธ์</th>
+                                <th scope="col">ที่อยู่อีเมล</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($row = mysqli_fetch_array($query)) { ?>
+                                <tr>
+                                    <th scope="row"><?= $i ?></th>
+                                    <td><?= $row['e_name'] ?></td>
+                                    <td><?= $row['relation'] ?></td>
+                                    <td><?= $row['address'] ?></td>
+                                </tr>
+                        <?php $i++;
+                            }
+                        } ?>
+                        </tbody>
+                    </table>
+
+                   
+
+
             </div>
         </div>
     </div>
@@ -485,6 +491,13 @@ include('condb.php');
             //     console.log(value);
             // }
 
+            swal({
+                        title: "การแจ้งเตือน",
+                        text: "ขั้นตอนนี้จำเป็นต้องใช้เวลาจำนวนมาก",
+                        icon: "warning",
+                        button: "ตกลง"
+                    });
+
             $("#enable").html('<div class="spinner-border text-light" role="status"><span class="sr-only">Loading...</span></div>');
 
             $.ajax({
@@ -496,8 +509,8 @@ include('condb.php');
                 data: form_data,
                 method: 'POST',
                 success: function(data) {
-                    // let append_element = $("#excel_data").html();
-                    // $("#here").append(append_element);
+                    let append_element = $("#excel_data").html();
+                    $("#here").append(append_element);
 
                     $("#enable").html('บันทึกและส่ง');
 
@@ -572,7 +585,7 @@ include('condb.php');
                 });
 
                 if (sheet_data.length > 0) {
-                    var table_output = '<table class="table table-striped table-bordered">';
+                    var table_output = '<table class="table table-striped ">';
 
                     for (var row = 0; row < sheet_data.length; row++) {
 
@@ -616,23 +629,7 @@ include('condb.php');
 
         });
 
-        function test() {
-
-            $.ajax({
-                url: "testpage.php",
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    nameArr: nameArr,
-                    relationArr: relationArr,
-                    emailArr: emailArr
-                },
-                success: function(data) {
-                    console.log(data.status);
-                }
-            });
-
-        }
+        
     </script>
 
 </body>

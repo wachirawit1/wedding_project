@@ -1,137 +1,293 @@
-<!DOCTYPE HTML>
+<!doctype html>
 <html>
+<?php
+session_start();
+include('condb.php');
+?>
 
 <head>
-    <meta charset="utf-8" />
-    <title>Convert Excel to HTML Table using JavaScript</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+    <!-- icon -->
+    <script src="https://kit.fontawesome.com/80c612fc1e.js" crossorigin="anonymous"></script>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
+
+    <!-- web font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- card font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
 
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>wedding</title>
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #ffffff;
+        }
+
+        .nav-item {
+            font-size: 16px;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        a.nav-link {
+            color: grey;
+        }
+
+
+        a.nav-link:hover {
+            color: #dbb89a !important;
+        }
+
+        .test {
+            font-family: 'Chakra Petch', sans-serif
+        }
+    </style>
 </head>
 
 <body>
-    <form action="new.php" method="POST">
-        <button type="submit" name="submit">ok</button>
-    </form>
-
     <?php
-
-    if (isset($_POST['submit'])) { ?>
-        <script>
-            swal({
-                text: "yeah",
-                icon: "success",
-                button: false
-            });
-        </script>
-        <meta http-equiv="refresh" content="2; url=new.php">
-    <?php }
-
+    if (!isset($_SESSION['username'])) { ?>
+        <div class='alert alert-danger' role='alert'>
+            <h4 class='alert-heading'>แจ้งเตือน !</h4>
+            <p>คุณยังไม่ได้เข้าสู่ระบบ โปรดเข้าสู่ระบบอีกครั้ง</p>
+            <hr>
+            <p class='mb-0'><a href='login.php' class='alert-link'>กลับไปเข้าสู่ระบบ</a></p>
+        </div>
+    <?php
+        exit;
+    }
     ?>
 
+    <?php include('navbaruser.php') ?>
 
-    <div class="container">
-        <div class="container">
-            <div class="row row-cols-3">
-                <div class="col border">Column</div>
-                <div class="col border">Column</div>
-                <div class="col border">Column</div>
-                <div class="col border">Column</div>
+    <!-- breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style=" background-color: #ffffff;">
+            <li class="breadcrumb-item"><a href="mainuser.php">Home</a></li>
+            <li class="breadcrumb-item"><a href="progress.php">progress</a></li>
+            <li class="breadcrumb-item"><a href="card_template.php">template</a></li>
+            <li class="breadcrumb-item active" aria-current="page">create card</li>
+        </ol>
+    </nav>
+
+
+    <div class="container p-3 bg-light shadow">
+
+        <h3 class="text-center ">สร้างการ์ดเชิญ</h3>
+
+        <div class="row">
+            <div class="col border-right">
+                <div style="width: 30rem;" class="test">
+                    <div class="position-relative">
+                        <?php
+                        $card = $_POST['card'];
+                        if ($card == 1) { ?>
+                            <img src="assets/images/invite_card/c1_template.png" alt="" width="100%" crossorigin="anonymous">
+                            <div class="position-absolute" id="husband" style="color:white;top: 16rem;left:0; right: 0; text-align: center;">ชื่อเจ้าบ่าว</div>
+                            <div class="position-absolute" id="wife" style=" color:white;top: 22rem;left:0; right: 0; text-align: center;">ชื่อเจ้าสาว</div>
+                            <div class="position-absolute" style="color:white;top: 30rem; left:0; right: 0; text-align: center;">เวลา</div>
+                            <div class="position-absolute" style="color:white;top: 27rem;left:0; right: 0; text-align: center;">สถานที่</div>
+                        <?php } elseif ($card == 2) { ?>
+                            <img src="assets/images/invite_card/c2_template.png" alt="" width="100%" crossorigin="anonymous">
+                            <div class="position-absolute" id="husband" style="color:#d09e6a;top: 12rem;left:0; right: 0; text-align: center;">ชื่อเจ้าบ่าว</div>
+                            <div class="position-absolute" id="wife" style=" color:#d09e6a;top: 20rem;left:0; right: 0; text-align: center;">ชื่อเจ้าสาว</div>
+                            <div class="position-absolute" style="color:#d09e6a;top: 24.5rem; left:0; right: 0; text-align: center;">เวลา</div>
+                            <div class="position-absolute" style="color:#d09e6a;top: 29rem;left:0; right: 0; text-align: center;">สถานที่</div>
+                        <?php } else { ?>
+                            <img src="assets/images/invite_card/c3_template.png" alt="" width="100%" crossorigin="anonymous">
+                            <div class="position-absolute" id="husband" style="color:#5d5956;top: 14rem;left:0; right: 0; text-align: center;">ชื่อเจ้าบ่าว</div>
+                            <div class="position-absolute" id="wife" style=" color:#5d5956;top: 22rem;left:0; right: 0; text-align: center;">ชื่อเจ้าสาว</div>
+                            <div class="position-absolute" style="color:#5d5956;top: 33rem; left:0; right: 0; text-align: center;">เวลา</div>
+                            <div class="position-absolute" style="color:#5d5956;top: 30rem;left:0; right: 0; text-align: center;">สถานที่</div>
+                        <?php } ?>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-center">
+                    <div class="m-4 text-center">
+                        <div class="col">
+                            <div class="row ">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="husband_input" placeholder="ชื่อเจ้าบ่าว" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-primary" type="button" id="button-addon2">ตกลง</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="wife_input" placeholder="ชื่อเจ้าสาว" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-primary" type="button" id="button-addon2">ตกลง</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="#" placeholder="สถานที่" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-primary" type="button" id="button-addon2">ตกลง</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="toCanvas"> <a href="javascript:void(0);" class="btn btn-primary"> ดูตัวอย่างรูปภาพ </a></span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
-    <div class="container">
-        <h2 class="text-center mt-4 mb-4">Convert Excel to HTML Table using JavaScript</h2>
-        <div class="card">
-            <div class="card-header"><b>Select Excel File</b></div>
-            <div class="card-body">
+    <div class="container bg-light my-3 p-3 shadow">
+        <div class="row justify-content-center ">
+            <div class="col">
 
-                <input type="file" id="excel_file" />
+                <div class="justify-content-start">
+                    <h4 class="">ตัวอย่างรูปภาพ : </h4>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <span class="mr-2"><button id="save" disabled class="btn btn-success">ดาวน์โหลด</button></span>
+                    <button class="btn btn-primary" id="next" disabled>ถัดไป</button>
+                </div>
+
+
+                <div class="toPic text-center">
+                    <!-- the image will show on this -->
+                    <!-- <a href="javascript:void(0);" class="btn btn-danger"> To Image </a> -->
+                </div>
 
             </div>
         </div>
-        <div id="excel_data" class="mt-5"></div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+    <!-- <div>
+
+            <h5>
+                <label for="imgW">Image Width:</label>
+                <input type="number" value="" id="imgW" placeholder="Image Width" class="form-control">
+                <label for="imgH">Image Height:</label>
+                <input type="number" value="" id="imgH" placeholder="Image Height" class="form-control">
+                <label for="imgFileName">File Name:</label>
+                <input type="text" placeholder="File Name" id="imgFileName" class="form-control">
+                <label for="sel">File Type:</label>
+                <select id="sel" class="form-control">
+                    <option value="png">png</option>
+                    <option value="jpeg">jpeg</option>
+                    <option value="bmp">bmp</option>
+                </select>
+            </h5>
+        </div> -->
+
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-    <script>
-        const excel_file = document.getElementById('excel_file');
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script> -->
+    <script type="text/javascript" src="captureHTML/html2canvas.min.js"></script>
+    <script type="text/javascript" src="captureHTML/canvas2image.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            let husband = $('#husband');
+            $('#husband_input').on('input', function() {
+                husband.html($('#husband_input').val());
+            })
 
-        excel_file.addEventListener('change', (event) => {
+            let wife = $('#wife');
+            $('#wife_input').on('input', function() {
+                wife.html($('#wife_input').val());
+            })
+        });
 
-            if (!['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'].includes(event.target.files[0].type)) {
-                document.getElementById('excel_data').innerHTML = '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
+        var test = $(".test").get(0);
+        // to canvas
+        $('.toCanvas').click(function(e) {
+            html2canvas(test).then(function(canvas) {
+                // canvas width
+                var canvasWidth = canvas.width;
+                // canvas height
+                var canvasHeight = canvas.height;
+                // render canvas
+                // $('.toCanvas').after(canvas);
+                // show 'to image' button
+                // $('.toPic').show(1000);
+                // convert canvas to image
+                // $('.toPic').click(function(e) {
+                var img = Canvas2Image.convertToImage(canvas, canvasWidth, canvasHeight);
+                // render image
+                $(".toPic").html(img);
 
-                excel_file.value = '';
+                jQuery("html, body").animate({
+                    scrollTop: jQuery(window).height()
+                }, 1500);
 
-                return false;
-            }
+                $('#save').removeAttr('disabled');
 
-            var reader = new FileReader();
 
-            reader.readAsArrayBuffer(event.target.files[0]);
+                // save
+                $('#save').click(function(e) {
+                    let type = $('#sel').val(); // image type
+                    let w = $('#imgW').val(); // image width
+                    let h = $('#imgH').val(); // image height
+                    let f = "รูปภาพการ์ดเชิญ" // file name
+                    w = (w === '') ? canvasWidth : w;
+                    h = (h === '') ? canvasHeight : h;
+                    // save as image
+                    Canvas2Image.saveAsImage(canvas, w, h, type, f);
 
-            reader.onload = function(event) {
-
-                var data = new Uint8Array(reader.result);
-
-                var work_book = XLSX.read(data, {
-                    type: 'array'
+                    $('#next').removeAttr('disabled');
                 });
-
-                var sheet_name = work_book.SheetNames;
-
-                var sheet_data = XLSX.utils.sheet_to_json(work_book.Sheets[sheet_name[0]], {
-                    header: 1
-                });
-
-                if (sheet_data.length > 0) {
-                    var table_output = '<table class="table table-striped table-bordered">';
-
-                    for (var row = 0; row < sheet_data.length; row++) {
-
-                        table_output += '<tr class="yeah">';
-
-                        for (var cell = 0; cell < sheet_data[row].length; cell++) {
-
-                            if (row == 0) {
-
-                                table_output += '<th>' + sheet_data[row][cell] + '</th>';
-
-                            } else {
-
-                                table_output += '<td>' + sheet_data[row][cell] + '</td>';
-
-                            }
-
-                        }
-
-                        table_output += '</tr>';
-
-                    }
-
-                    table_output += '</table>';
-
-                    document.getElementById('excel_data').innerHTML = table_output;
-                }
-
-                excel_file.value = '';
-
-            }
-
+                // });
+            });
         });
     </script>
-
 </body>
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36251023-1']);
+    _gaq.push(['_setDomainName', 'jqueryscript.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+</script>
 
 </html>
-

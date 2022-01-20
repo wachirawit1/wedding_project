@@ -55,11 +55,18 @@
 
             if ($value) {
 
-                $sql = "UPDATE activity_event SET price = $value WHERE a_id = '$a' AND list_id = '$l' AND activity_event.e_id = (SELECT event.e_id FROM event WHERE event.userid =  $userid ) ";
-                // echo $sql . "<br>";
+                $sql = "UPDATE activity_event  
+                SET price = $value
+                WHERE a_id = '$a' AND list_id = '$l' 
+                AND activity_event.e_id = (SELECT event.e_id FROM event WHERE event.userid =  $userid AND status = 1 ) ";
+                
                 mysqli_query($conn, $sql);
             } else {
-                $sql = "UPDATE activity_event SET price = $value WHERE a_id = '$a' AND list_id = '$l' AND activity_event.e_id = (SELECT event.e_id FROM event WHERE event.userid =  $userid ) ";
+                
+                $sql = "UPDATE activity_event  
+                SET price = $value
+                WHERE a_id = '$a' AND list_id = '$l' 
+                AND activity_event.e_id = (SELECT event.e_id FROM event WHERE event.userid =  $userid AND status = 1 ) ";
 
                 mysqli_query($conn, $sql);
             }

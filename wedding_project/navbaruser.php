@@ -22,10 +22,10 @@
                 <a class="nav-link" href="mainuser.php">หน้าแรก <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="progress.php">อีเวนท์<span class="sr-only"></span></a>
+                <a class="nav-link" href="#post">โพสต์ <span class="sr-only"></span></a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="mainpost.php">โพสต์ <span class="sr-only"></span></a>
+                <a class="nav-link" href="progress.php">อีเวนท์<span class="sr-only"></span></a>
             </li>
             <li class="nav-item ">
                 <a class="nav-link" href="#">เกี่ยวกับ <span class="sr-only"></span></a>
@@ -80,7 +80,7 @@
                             include('condb.php');
                             $sql = "SELECT status FROM event WHERE userid = '$userid'";
                             $status = mysqli_fetch_array(mysqli_query($conn, $sql));
-                            $status = $status['status'];
+                            $status = isset($status['status']);
                             if ($status == "") {
                             } else if ($status == "1") { ?>
                                 <div class="dropdown-item waves-effect waves-light">

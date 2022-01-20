@@ -6,7 +6,7 @@ include('condb.php');
 
 <head>
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -254,7 +254,7 @@ include('navbar_admin.php');
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                        <button class="btn btn-success" type="submit" class="btn btn-primary">เพิ่ม</button>
+                        <button class="btn btn-primary" type="submit" class="btn btn-primary">เพิ่ม</button>
                     </div>
                 </form>
             </div>

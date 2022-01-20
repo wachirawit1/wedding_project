@@ -1,5 +1,7 @@
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow sticky-top">
-    <a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" width="70" ></a>
+    <a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" width="70"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -11,7 +13,7 @@
                 <a class="nav-link" href="index.php">หน้าหลัก <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="#">โพสต์ <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#post">โพสต์ <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">เกี่ยวกับ <span class="sr-only">(current)</span></a>
@@ -22,7 +24,7 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <button class="btn px-4" data-toggle="modal" data-target="#login_store">เข้าสู่ระบบร้านค้า</button>
+                <button class="btn px-4" style="border: 1px solid #dbb89a; color: #dbb89a;" data-toggle="modal" data-target="#login_store">เข้าสู่ระบบร้านค้า</button>
             </li>
             <li class="nav-item">
                 <button class="btn px-4" data-toggle="modal" data-target="#login" style="color: grey;">สมัครสมาชิก/เข้าสู่ระบบ</button>
@@ -35,9 +37,9 @@
 
 <!-- form login -->
 <!-- <?php
-session_start();
-if (isset($_SESSION['username'])) {
-    if (isset($_SESSION['type']) == "01") { ?>
+        session_start();
+        if (isset($_SESSION['username'])) {
+            if (isset($_SESSION['type']) == "01") { ?>
         <script>
             alert('คุณได้เข้าสู่ระบบแล้ว');
             window.location = 'mainuser.php';
@@ -55,8 +57,8 @@ if (isset($_SESSION['username'])) {
     <?php } ?>
 
 <?php } else {
-    echo "";
-}
+            echo "";
+        }
 ?> -->
 <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -68,66 +70,53 @@ if (isset($_SESSION['username'])) {
                 </button>
             </div>
             <div class="modal-body">
-                <?php
 
-                if (isset($_SESSION['errors'])) { ?>
-                    <div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>
-                        <?php echo $_SESSION['errors']; ?>
-                    </div>
-                <?php
-                    $_SESSION['errors'] = null;
-                } else {
-                    $_SESSION['errors'] = null;
-                    echo $_SESSION['errors'];
-                }
-
-                ?>
+                <div id="errors"></div>
 
 
 
-                <form action="clogin.php" method="POST">
-                    <div class="form-group">
-                        <label for="email" class="sr-only">ชื่อผู้ใช้</label>
-                        <input type="text" name="username" id="username" class="form-control" placeholder="ชื่อผู้ใช้">
-                    </div>
-                    <div class="form-group mb-4">
-                        <label for="password" class="sr-only">รหัสผ่าน</label>
-                        <span>
-                            <div class="input-group">
 
-                                <input type="password" name="password" class="form-control" id="password" placeholder="รหัสผ่าน" value="" required>
+                <div class="form-group">
+                    <label for="email" class="sr-only">ชื่อผู้ใช้</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="ชื่อผู้ใช้">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="password" class="sr-only">รหัสผ่าน</label>
+                    <span>
+                        <div class="input-group">
 
-                                <div class="input-group-append">
-                                    <span class="input-group-text" onclick="showpassword()"><img src="assets/images/eye.png" width="10" alt=""></span>
-                                </div>
+                            <input type="password" name="password" class="form-control" id="password" placeholder="รหัสผ่าน" value="" required>
+
+                            <div class="input-group-append">
+                                <span class="input-group-text" onclick="showpassword()"><img src="assets/images/eye.png" width="10" alt=""></span>
                             </div>
-                        </span>
-                        <div class="d-flex justify-content-end mt-3">
-
-                            <a href="forgot_pass.php">ลืมรหัสผ่าน</a>
                         </div>
+                    </span>
+                    <div class="d-flex justify-content-end mt-3">
 
-                        <script type="text/javascript">
-                            function showpassword() {
-                                var data = document.getElementById('password');
-                                if (data.type == 'password') {
-                                    data.type = 'text';
+                        <a href="forgot_pass.php">ลืมรหัสผ่าน</a>
+                    </div>
 
-                                } else {
-                                    data.type = 'password';
+                    <script type="text/javascript">
+                        function showpassword() {
+                            var data = document.getElementById('password');
+                            if (data.type == 'password') {
+                                data.type = 'text';
 
-                                }
+                            } else {
+                                data.type = 'password';
 
                             }
-                        </script>
+
+                        }
+                    </script>
 
 
-                    </div>
+                </div>
 
 
 
-                    <button id="login" class="btn btn-block login-btn mb-4" style="background-color: #dbb89a;" type="submit">เข้าสู่ระบบ</button>
-                </form>
+                <button type="button" id="login" class="btn btn-block login-btn mb-4" style="background-color: #dbb89a; color: white;" onclick="login_user()">เข้าสู่ระบบ</button>
 
                 <p class="login-card-footer-text">ไม่มีบัญชี? <a href="regis.php" class="">สมัครที่นี่</a></p>
 
@@ -150,86 +139,151 @@ if (isset($_SESSION['username'])) {
                 </button>
             </div>
             <div class="modal-body">
-                <form action="clogin_store.php" method="POST">
-                    <!-- notification -->
+                <!-- notification -->
 
-                    <?php
-
-                    if (isset($_SESSION['errors'])) { ?>
-                        <div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>
-                            <?php echo $_SESSION['errors']; ?>
-                        </div>
-                    <?php
-                        $_SESSION['errors'] = null;
-                    } else {
-                        $_SESSION['errors'] = null;
-                        echo $_SESSION['errors'];
-                    }
-
-                    ?>
+                <div id="serrors"></div>
 
 
-                    <div class="form-group">
-                        <label for="email" class="sr-only">ชื่อผู้ใช้</label>
-                        <input type="text" name="username" id="username" class="form-control" placeholder="ชื่อผู้ใช้">
-                    </div>
-                    <div class="form-group mb-4">
-                        <label for="password" class="sr-only">รหัสผ่าน</label>
-                        <span>
-                            <div class="input-group">
 
-                                <input type="password" name="password" class="form-control" id="password" placeholder="รหัสผ่าน" value="" required>
+                <div class="form-group">
+                    <label for="email" class="sr-only">ชื่อผู้ใช้</label>
+                    <input type="text" name="username" id="susername" class="form-control" placeholder="ชื่อผู้ใช้">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="password" class="sr-only">รหัสผ่าน</label>
+                    <span>
+                        <div class="input-group">
 
-                                <div class="input-group-append">
-                                    <span class="input-group-text" onclick="showpassword()"><img src="assets/images/eye.png" width="10" alt=""></span>
-                                    <!-- <button type="button" id="eyeop" onclick="showpassword()" class="input-group-text"><span class="glyphicon glyphicon-eye-open"></span></button> -->
-                                </div>
+                            <input type="password" name="password" class="form-control" id="spassword" placeholder="รหัสผ่าน" value="" required>
+
+                            <div class="input-group-append">
+                                <span class="input-group-text" onclick="showpassword()"><img src="assets/images/eye.png" width="10" alt=""></span>
+                                <!-- <button type="button" id="eyeop" onclick="showpassword()" class="input-group-text"><span class="glyphicon glyphicon-eye-open"></span></button> -->
                             </div>
-                        </span>
+                        </div>
+                    </span>
 
-                        <script type="text/javascript">
-                            function showpassword() {
-                                var data = document.getElementById('password');
-                                if (data.type == 'password') {
-                                    data.type = 'text';
+                    <script type="text/javascript">
+                        function showpassword() {
+                            var data = document.getElementById('spassword');
+                            if (data.type == 'password') {
+                                data.type = 'text';
 
-                                } else {
-                                    data.type = 'password';
-
-                                }
+                            } else {
+                                data.type = 'password';
 
                             }
-                        </script>
+
+                        }
+                    </script>
 
 
-                    </div>
+                </div>
 
-                    <button id="login" class="btn btn-block login-btn mb-4" style="background-color: #dbb89a;" type="submit">เข้าสู่ระบบ</button>
-                </form>
+                <button type="button" id="slogin" class="btn btn-block login-btn mb-4" style="background-color: #dbb89a;color: white;" onclick="login_store()">เข้าสู่ระบบ</button>
 
                 <p class="login-card-footer-text">ไม่มีบัญชี? <a href="regis_store.php" class="">สมัครที่นี่</a></p>
             </div>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
-    function login() {
-        let formdata = new FormData();
-        formdata.append("username", $('#username').val());
-        formdata.append('password', $('#password').val());
-        $.ajax({
-            url: 'clogin.php',
-            type: 'POST',
-            dataType: 'json',
-            data: formdata,
-            success: function(data) {
+    // user*****
+    function login_user() {
+        if ($('#username').val() != "" && $('#password').val() != "") {
+            let formdata = new FormData();
+            formdata.append("username", $('#username').val());
+            formdata.append('password', $('#password').val());
+            $.ajax({
+                url: 'clogin.php',
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formdata,
+                method: 'POST',
+                success: function(data) {
+                    if (data.type == 01) {
 
-            },
-            error: function() {
+                        setTimeout(function() {
+                            swal({
+                                title: "การแจ้งเตือน",
+                                text: "เข้าสู่ระบบสำเร็จ",
+                                icon: "success",
+                                button: "ตกลง"
+                            }).then((value) => {
+                                window.location = "mainuser.php";
+                            });
+                        }, 1000)
 
-            }
-        });
+
+                    } else {
+                        setTimeout(function() {
+                            swal({
+                                title: "การแจ้งเตือน",
+                                text: "เข้าสู่ระบบสำเร็จ",
+                                icon: "success",
+                                button: "ตกลง"
+                            }).then((value) => {
+                                window.location = "traditional.php";
+                            });
+                        }, 1000)
+                    }
+                },
+                error: function(data) {
+                    // console.error(data);
+                    // console.log("no");
+                    $("#errors").html("<div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</div>");
+                }
+            });
+        } else {
+            $("#errors").html("<div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>กรุณากรอกข้อมูล</div>");
+
+        }
     }
-</script> -->
+
+    // store*****
+    function login_store() {
+        if ($('#susername').val() != "" && $('#spassword').val() != "") {
+            let formdata = new FormData();
+            formdata.append("susername", $('#susername').val());
+            formdata.append('spassword', $('#spassword').val());
+            $.ajax({
+                url: 'clogin_store.php',
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formdata,
+                method: 'POST',
+                success: function(data) {
+
+                    setTimeout(function() {
+                        swal({
+                            title: "การแจ้งเตือน",
+                            text: "เข้าสู่ระบบสำเร็จ",
+                            icon: "success",
+                            button: "ตกลง"
+                        }).then((value) => {
+                            window.location = "storepost.php";
+                        });
+                    }, 1000)
+
+
+
+                },
+                error: function(data) {
+                    console.log(data.text);
+                    // console.error(data);
+                    // console.log("no");
+                    $("#serrors").html("<div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</div>");
+                }
+            });
+        } else {
+            $("#serrors").html("<div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>กรุณากรอกข้อมูล</div>");
+
+        }
+    }
+</script>

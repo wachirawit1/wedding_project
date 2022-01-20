@@ -26,6 +26,10 @@
 
     <title>wedding</title>
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Prompt', sans-serif;
             background-color: white;
@@ -105,7 +109,7 @@
         <div class="my-3">
             <h1 class="display-5 text-secondary">เลือกหมวดหมู่ร้านค้า</h1>
             <p class="lead text-secondary">สามารถเลือกสินค้าคุณภาพตามที่คุณต้องการ</p>
-            
+
 
 
             <div class="row row-cols-2 row-cols-md-6">
@@ -117,7 +121,7 @@
                     <a class="border text-decoration-none" href="category.php?cate_id=<?= $row['cate_id'] ?>&cate_name=<?= $row['cate_name'] ?>">
                         <div class="col text-center p-2">
                             <div class="">
-                                <img src="assets/images/cate_icon/<?= $row['cate_pic'] ?>" alt="img" width="100" >
+                                <img src="assets/images/cate_icon/<?= $row['cate_pic'] ?>" alt="img" width="100">
                             </div>
                             <div class="card-text text-secondary"><?= $row['cate_name'] ?></div>
                         </div>
@@ -127,36 +131,38 @@
         </div>
     </div>
 
-    <div class="container-fluid bg-light">
-        <div class="container py-3">
-            <div class="my-3">
-                <h1 class="display-5 text-secondary">เลือกรายการสินค้า</h1>
-                <p class="lead text-secondary">สามารถเลือกสินค้าคุณภาพตามที่คุณต้องการ</p>
-                <hr class="my-2">
-            </div>
-            <div class="row row-cols-1 row-cols-md-3">
-                <?php
-                $sql = "SELECT * FROM `post` WHERE status = 1";
-                $query = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_array($query)) { ?>
-                    <form action="view_post.php" method="POST">
-                        <div class="col mb-4">
-                            <div class="card h-100">
-                                <img src="img/<?= $row['picture'] ?>" class="card-img-top" alt="post">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?= $row['name'] ?></h5>
-                                    <p class="card-text">
-                                        <?= $row['detail'] ?>
-                                    </p>
-                                </div>
-                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                                <div class="text-center p-2">
-                                    <button type="submit" class="btn btn-block" style="background-color: #dbb89a ;color:white;" name="btn_submit">ดูโพสต์</button>
+    <div data-spy="scroll" data-target="#navbar" data-offset="0">
+        <div class="container-fluid bg-light" id="post">
+            <div class="container py-3">
+                <div class="my-3">
+                    <h1 class="display-5 text-secondary">เลือกรายการสินค้า</h1>
+                    <p class="lead text-secondary">สามารถเลือกสินค้าคุณภาพตามที่คุณต้องการ</p>
+                    <hr class="my-2">
+                </div>
+                <div class="row row-cols-1 row-cols-md-3">
+                    <?php
+                    $sql = "SELECT * FROM `post` WHERE status = 1";
+                    $query = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_array($query)) { ?>
+                        <form action="view_post.php" method="POST">
+                            <div class="col mb-4">
+                                <div class="card h-100">
+                                    <img src="img/<?= $row['picture'] ?>" class="card-img-top" alt="post">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= $row['name'] ?></h5>
+                                        <p class="card-text">
+                                            <?= $row['detail'] ?>
+                                        </p>
+                                    </div>
+                                    <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                    <div class="text-center p-2">
+                                        <button type="submit" class="btn btn-block" style="background-color: #dbb89a ;color:white;" name="btn_submit">ดูโพสต์</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                <?php } ?>
+                        </form>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     </div>

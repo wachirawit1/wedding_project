@@ -14,13 +14,15 @@ include('condb.php');
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -79,10 +81,11 @@ include('condb.php');
             <li class="breadcrumb-item active" aria-current="page">select traditional</li>
         </ol>
     </nav>
+
     <?php
 
     $userid = $_SESSION['userid'];
-    $sql = "SELECT * FROM event where userid = '$userid'";
+    $sql = "SELECT * FROM event where userid = '$userid' AND status = 1";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
 
@@ -138,77 +141,6 @@ include('condb.php');
             </div>
         </div>
 
-        <!-- <div class="row my-3">
-            <div class="col">
-                สถานที่แต่งงาน
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" name="" id="">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" name="" id="">
-            </div>
-            <div class="col">
-                <button class="btn btn-outline-primary">ตกลง</button>
-            </div>
-        </div>
-
-        <div class="row my-3">
-            <div class="col">
-                ของชำร่วย
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" name="" id="">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" name="" id="">
-            </div>
-            <div class="col">
-                <button class="btn btn-outline-primary">ตกลง</button>
-            </div>
-        </div>
-
-        <div class="row my-3">
-            <div class="col">
-                ชุดแต่งงาน
-            </div>
-            <div class="col">
-                <input type="number" class="form-control" name="" id="">
-            </div>
-            <div class="col">
-                <input type="number" class="form-control" name="" id="">
-            </div>
-            <div class="col">
-                <button class="btn btn-outline-primary">ตกลง</button>
-            </div>
-        </div>
-
-        <div class="row my-3">
-            <div class="col">
-                แหวนแต่งงาน
-            </div>
-            <div class="col">
-                <input type="number" class="form-control" name="" id="">
-            </div>
-            <div class="col">
-                <input type="number" class="form-control" name="" id="">
-            </div>
-            <div class="col">
-                <button class="btn btn-outline-primary">ตกลง</button>
-            </div>
-        </div>
-
-        <div class="row my-3">
-            <div class="col">
-                จำนวนแขกในงาน
-            </div>
-            <div class="col">
-                <input type="number" class="form-control" name="" id="">
-            </div>
-            <div class="col">
-                <button class="btn btn-outline-primary">ตกลง</button>
-            </div>
-        </div> -->
 
         <div class="row my-4 ">
             <div class="col-md-5 bold font-weight-bold">
@@ -217,7 +149,7 @@ include('condb.php');
             <div class="col-md-4 text-success">
                 <?php
 
-                $sql = "SELECT total_budget FROM event WHERE userid = $userid ";
+                $sql = "SELECT total_budget FROM event WHERE userid = $userid AND status = 1";
                 $query = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_array($query);
                 echo "฿" . number_format($row['total_budget'], 2);
@@ -227,6 +159,15 @@ include('condb.php');
         </div>
 
         <div class="row justify-content-md-end m-3">
+            <div class="row">
+                <div class="col">
+                    <select id="myFilter" class="form-control">
+                        <option value="">ทั้งหมด</option>
+                        <option value="เตรียมแล้ว">เตรียมแล้ว</option>
+                        <option value="ยังไม่เตรียม">ยังไม่เตรียม</option>
+                    </select>
+                </div>
+            </div>
             <div class="col col-md-1">
                 <a href="edit_schedule.php" class="btn btn-primary"><i class="fas fa-edit">แก้ไข</i></a>
             </div>
@@ -238,10 +179,11 @@ include('condb.php');
             <?php
             $userid = $_SESSION['userid'];
             $sql = "SELECT * FROM `activity_event` 
-                    INNER JOIN activity ON activity_event.a_id = activity.a_id 
-                    INNER JOIN item_list ON activity_event.list_id = item_list.list_id 
-                    WHERE e_id = (SELECT e_id FROM event WHERE event.userid = $userid )
-                    ";
+            INNER JOIN activity ON activity_event.a_id = activity.a_id 
+            INNER JOIN item_list ON activity_event.list_id = item_list.list_id 
+            INNER JOIN event ON activity_event.e_id = event.e_id
+            WHERE activity_event.e_id = (SELECT e_id FROM event WHERE event.userid = $userid )
+            AND event.status = 1  ";
             $query1 = mysqli_query($conn, $sql . " GROUP BY activity_event.a_id");
             $row = mysqli_fetch_array($query1);
 
@@ -264,7 +206,7 @@ include('condb.php');
                             <th scope="col"></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="myTable">
 
                         <?php
                         foreach ($query1 as $key => $value) {
@@ -291,7 +233,7 @@ include('condb.php');
                                     <td>
 
                                         <?php
-                                        if ($row['status'] == 'uncheck' || $row['status'] == '') { ?>
+                                        if ($row['ae_status'] == 'uncheck' || $row['status'] == '') { ?>
                                             <button class="btn btn-danger" id="btn_status" name="<?= $row['ae_id'] ?>" onclick="changeStatus('<?= $row['ae_id'] ?>')">ยังไม่เตรียม</button>
                                         <?php } else { ?>
                                             <button class="task btn btn-success" name="<?= $row['ae_id'] ?>">เตรียมแล้ว</button>
@@ -326,14 +268,27 @@ include('condb.php');
     <script>
         let count = $(".count").length;
         let task = $(".task").length;
+
+        console.log(count);
+        console.log(task);
         $(document).ready(function() {
 
+            // tasking progress
             let totalCount = task / count * 100;
             let toPercent = parseInt(totalCount) + "%";
 
             $("#text-progress").html("เตรียมงานไปแล้ว(" + task + "จาก" + count + ")");
             $("#progress").attr("style", "width:" + toPercent);
             $("#progress").html(toPercent);
+
+            // filter
+            $("#myFilter").on("change", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
 
 
         });
@@ -370,55 +325,66 @@ include('condb.php');
             xhttp.send(params);
         }
 
-        let date = document.getElementById('date');
-        let days = document.getElementById('days');
-        let hours = document.getElementById('hours')
-        let minutes = document.getElementById('minutes');
-        let seconds = document.getElementById('seconds');
-        if (date.value) {
+       
+            let date = document.getElementById('date');
+            let days = document.getElementById('days');
+            let hours = document.getElementById('hours')
+            let minutes = document.getElementById('minutes');
+            let seconds = document.getElementById('seconds');
+            if (date.value) {
 
 
-            // Set the date we're counting down to
-            var countDownDate = new Date(date.value).getTime();
+                // Set the date we're counting down to
+                var countDownDate = new Date(date.value).getTime();
 
-            // Update the count down every 1 second
-            var x = setInterval(function() {
+                // Update the count down every 1 second
+                var x = setInterval(function() {
 
-                // Get today's date and time
-                var now = new Date().getTime();
+                    // Get today's date and time
+                    var now = new Date().getTime();
 
-                // Find the distance between now and the count down date
-                var distance = countDownDate - now;
+                    // Find the distance between now and the count down date
+                    var distance = countDownDate - now;
 
-                // Time calculations for days, hours, minutes and seconds
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    // Time calculations for days, hours, minutes and seconds
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Display the result in the element with id="demo"
-                document.getElementById("days").innerHTML = days + " วัน ";
-                document.getElementById("hours").innerHTML = hours + " ชั่วโมง ";
-                document.getElementById("minutes").innerHTML = minutes + " นาที ";
-                document.getElementById("seconds").innerHTML = seconds + " วินาที ";
+                    // Display the result in the element with id="demo"
+                    document.getElementById("days").innerHTML = days + " วัน ";
+                    document.getElementById("hours").innerHTML = hours + " ชั่วโมง ";
+                    document.getElementById("minutes").innerHTML = minutes + " นาที ";
+                    document.getElementById("seconds").innerHTML = seconds + " วินาที ";
 
-                if (!countDownDate) {
-                    document.getElementById("showCountDown").innerHTML = "ยังไม่กำหนด";
-                }
+                    if (!countDownDate) {
+                        document.getElementById("showCountDown").innerHTML = "ยังไม่กำหนด";
+                    }
 
-                // If the count down is finished, write some text
-                if (distance < 0) {
-                    clearInterval(x);
-                    document.getElementById("showCountDown").innerHTML = "ครบกำหนด";
-                }
-            }, 1000);
+                    // If the count down is finished, write some text
+                    if (distance < 0) {
+                        clearInterval(x);
+                        document.getElementById("showCountDown").innerHTML = "ครบกำหนด";
+                    }
+                }, 1000);
 
-            task = task + 1;
+                task++;
 
-        } else if (!date.value) {
+                let totalCount = task / count * 100;
+                let toPercent = parseInt(totalCount) + "%";
 
-            document.getElementById('showCountDown').style.display = "none";
-        }
+                $("#text-progress").html("เตรียมงานไปแล้ว(" + task + "จาก" + count + ")");
+                $("#progress").attr("style", "width:" + toPercent);
+                $("#progress").html(toPercent);
+
+            } else if (!date.value) {
+
+                document.getElementById('showCountDown').style.display = "none";
+            }
+        
+        
+            
     </script>
 
 

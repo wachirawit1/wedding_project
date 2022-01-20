@@ -10,7 +10,7 @@ if (isset($_SESSION['username'])) {
       alert('คุณได้สมัครสมาชิกแล้ว');
       window.location = 'mainshop.php';
     </script>
-    <?php }else{ ?>
+  <?php } else { ?>
     <script>
       alert('คุณได้สมัครสมาชิกแล้ว');
       window.location = 'mainshop.php';
@@ -27,12 +27,13 @@ if (isset($_SESSION['username'])) {
 <head>
   <!-- favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
-  <!-- button Icon -->
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
 
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
+
+  <!-- font family -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <!-- เอฟเฟค -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -69,7 +70,7 @@ if (isset($_SESSION['username'])) {
         }
 
         reader.readAsDataURL(input.files[0]);
-      }
+      } 
     }
   </script>
   <br>
@@ -85,7 +86,7 @@ if (isset($_SESSION['username'])) {
           <div class="card">
             <div class="card-body mx-3">
               <center>
-                <img class="img1" src="assets/images/logo2.png" alt="logo" width="20%">
+                <img class="img1" src="assets/images/logo.png" alt="logo" width="100">
                 <h3 class="my-4">สมัครบัญชีผู้ใช้</h3>
 
               </center>
@@ -94,7 +95,7 @@ if (isset($_SESSION['username'])) {
 
 
               <?php
-              
+
               if ($_SESSION['errors'] != null) {
                 echo "<div class='alert alert-danger py-2' role='alert'>";
                 echo $_SESSION['errors'];
@@ -106,7 +107,7 @@ if (isset($_SESSION['username'])) {
 
 
 
-              <form  action="regis_db.php" method="POST" class="form-horizontal" enctype="multipart/form-data">
+              <form action="regis_db.php" method="POST" class="form-horizontal" enctype="multipart/form-data">
 
                 <div class="form-group row">
                   <label for="staticEmail" class="col-sm-2 col-form-label">ชื่อผู้ใช้</label>
@@ -158,7 +159,7 @@ if (isset($_SESSION['username'])) {
 
 
 
-                    <input type="password" name="cfpassword" class="form-control" id="" placeholder="" pattern=".{6,}" required >
+                    <input type="password" name="cfpassword" class="form-control" id="" placeholder="" pattern=".{6,}" required>
 
                   </div>
                 </div>
@@ -251,22 +252,7 @@ if (isset($_SESSION['username'])) {
 
                 <input type="hidden" name="mtype" value="01">
 
-                <!-- <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-2 col-form-label">ประเภทผู้ใช้</label>
-                  <div class="col-sm-10">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="mtype" id="" value="01" checked>
-                      <label class="form-check-label" for="exampleRadios1"> ผู้ใช้
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="mtype" id="" value="02">
-                      <label class="form-check-label" for="exampleRadios2"> ร้านค้า
-                      </label>
-                    </div>
 
-                  </div>
-                </div> -->
 
 
 
@@ -288,11 +274,11 @@ if (isset($_SESSION['username'])) {
 
 
         </div>
-        <div class="col-md-2">
-        </div>
+
+
       </div>
     </div>
-    <br>
+
   </div>
 
 

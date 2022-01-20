@@ -17,11 +17,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
+    <!-- swal -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
     <title>wedding</title>
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Prompt', sans-serif;
             background-color: #ffffff;
@@ -102,7 +108,7 @@
                     <a class="border text-decoration-none" href="category.php?cate_id=<?= $row['cate_id'] ?>&cate_name=<?= $row['cate_name'] ?>">
                         <div class="col text-center p-2">
                             <div class="">
-                            <img src="assets/images/cate_icon/<?= $row['cate_pic'] ?>" alt="img" width="100" >
+                                <img src="assets/images/cate_icon/<?= $row['cate_pic'] ?>" alt="img" width="100">
                             </div>
                             <div class="card-text text-secondary"><?= $row['cate_name'] ?></div>
                         </div>
@@ -111,36 +117,38 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid bg-light">
-        <div class="container py-3">
-            <div class="my-3">
-                <h1 class="display-5 text-secondary">เลือกรายการสินค้า</h1>
-                <p class="lead text-secondary">สามารถเลือกสินค้าคุณภาพตามที่คุณต้องการ</p>
-                <hr class="my-2">
-            </div>
-            <div class="row row-cols-1 row-cols-md-3">
-                <?php
-                $sql = "SELECT * FROM `post` WHERE status = 1";
-                $query = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_array($query)) { ?>
-                    <form action="view_post.php" method="POST">
-                        <div class="col mb-4 ">
-                            <div class="card">
-                                <img src="img/<?= $row['picture'] ?>" class="card-img-top" alt="post">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?= $row['name'] ?></h5>
-                                    <p class="card-text">
-                                        <?= $row['detail'] ?>
-                                    </p>
-                                </div>
-                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                                <div class="text-center p-2">
-                                    <button type="submit" class="btn btn-block" style="background-color: #dbb89a ;color:white;" name="btn_submit">ดูโพสต์</button>
+    <div data-spy="scroll" data-target="#navbar" data-offset="0">
+        <div class="container-fluid bg-light" id="post">
+            <div class="container py-3">
+                <div class="my-3">
+                    <h1 class="display-5 text-secondary">เลือกรายการสินค้า</h1>
+                    <p class="lead text-secondary">สามารถเลือกสินค้าคุณภาพตามที่คุณต้องการ</p>
+                    <hr class="my-2">
+                </div>
+                <div class="row row-cols-1 row-cols-md-3">
+                    <?php
+                    $sql = "SELECT * FROM `post` WHERE status = 1";
+                    $query = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_array($query)) { ?>
+                        <form action="view_post.php" method="POST">
+                            <div class="col mb-4 ">
+                                <div class="card">
+                                    <img src="img/<?= $row['picture'] ?>" class="card-img-top" alt="post">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= $row['name'] ?></h5>
+                                        <p class="card-text">
+                                            <?= $row['detail'] ?>
+                                        </p>
+                                    </div>
+                                    <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                    <div class="text-center p-2">
+                                        <button type="submit" class="btn btn-block" style="background-color: #dbb89a ;color:white;" name="btn_submit">ดูโพสต์</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                <?php } ?>
+                        </form>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     </div>
@@ -162,7 +170,7 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
@@ -170,6 +178,8 @@
         AOS.init({
             duration: 1000
         });
+
+       
     </script>
 
 </body>

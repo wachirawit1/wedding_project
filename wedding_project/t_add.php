@@ -5,7 +5,12 @@ include('condb.php');
 $sql_id = "SELECT * FROM activity ORDER BY a_id DESC LIMIT 1";
 $query_id = mysqli_query($conn, $sql_id);
 $row_id = mysqli_fetch_assoc($query_id);
-$a_id = ++$row_id['a_id'];
+$a_id = "";
+if ($row_id['a_id'] == "") {
+    $a_id = "a0001";
+} else {
+    $a_id = ++$row_id['a_id'];
+}
 $a_name = $_POST['a_name'];
 $t_id = $_POST['t_id'];
 $a_detail = $_POST['a_detail'];

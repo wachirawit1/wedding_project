@@ -41,7 +41,7 @@
         $userid = $_SESSION['userid'];
         $date = $_POST['date'];
 
-        $sql = "UPDATE `event` SET `due_date`= '$date' WHERE userid = $userid";
+        $sql = "UPDATE `event` SET `due_date`= '$date' WHERE userid = $userid AND status = 1";
         $result = mysqli_query($conn, $sql);
 
         if ($result) { ?>

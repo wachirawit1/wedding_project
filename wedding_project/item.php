@@ -6,7 +6,7 @@ include('condb.php');
 
 <head>
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -20,7 +20,6 @@ include('condb.php');
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <title>wedding</title>
@@ -166,7 +165,7 @@ include('navbar_admin.php');
         </div>
     </div>
     <!-- popup เพิ่มitem -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

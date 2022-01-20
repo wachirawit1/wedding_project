@@ -108,106 +108,107 @@
     </div> -->
 
         <div class="container">
-            <div>
-                <h2 class="mt-5 text-center">โพสต์ของฉัน</h2>
-                <div class="text-right">
-                    <a href="create_post.php" class="btn " style="background-color: #dbb89a;color: white;">สร้างโพสต์ใหม่</a>
+            
+                <div>
+                    <h2 class="mt-5 text-center">โพสต์ของฉัน</h2>
+                    <div class="text-right">
+                        <a href="create_post.php" class="btn " style="background-color: #dbb89a;color: white;">สร้างโพสต์ใหม่</a>
+                    </div>
                 </div>
-            </div>
-            <hr>
-            <div class="row row row-cols-1 row-cols-md-4 ">
+                <hr>
+                <div class="row row row-cols-1 row-cols-md-4 ">
 
 
-                <?php
-                $id_store = $_SESSION['s_id'];
-                $sql_select = "SELECT * FROM post WHERE id_store = '$id_store'";
-                $query_select = mysqli_query($conn, $sql_select);
-                $num = mysqli_num_rows($query_select);
-                if ($num == 0) { ?>
+                    <?php
+                    $id_store = $_SESSION['s_id'];
+                    $sql_select = "SELECT * FROM post WHERE id_store = '$id_store'";
+                    $query_select = mysqli_query($conn, $sql_select);
+                    $num = mysqli_num_rows($query_select);
+                    if ($num == 0) { ?>
 
-                   
+
                         <div class="alert alert-warning d-block " role="alert">
                             <h4 class="alert-heading">แจ้งเตือน</h4>
                             <p>ร้านของคุณยังไม่มีโพสต์</p>
                             <hr>
                             <p class="mb-0">เริ่มสร้างโพสต์เลย</p>
                         </div>
-    
-
-                    <?php } else {
-                    foreach ($query_select as $value) {
-                    ?>
-                        <div class="col-12 col-md-4 mb-5">
-                            <div class="card ">
-                                <img src="img/<?= $value['picture'] ?>" class="card-img-top" height="250px" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center"><?= $value['name'] ?></h5>
 
 
-                                    <?php if ($value['status'] == 1) { ?>
-                                        <form action="view_storepost.php" method="POST">
-                                            <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                            <!--<a href="view_storepost.php?id=<?= $value['id'] ?>" class="btn  col-12" style="background-color: #dbb89a;">ดูโพสต์</a>-->
-                                            <button type="submit" class="btn col-12" style="background-color: #dbb89a;" name="btn_submit">ดูโพสต์</button>
-                                        </form>
-                                    <?php } elseif ($value['status'] == 2) { ?>
-                                        <form action="view_storepost.php" method="POST">
-                                            <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                            <!--<a href="view_storepost.php?id=<?= $value['id'] ?>" class="btn  col-12 btn-danger">ไม่อนุมัติโพสต์</a>-->
-                                            <button type="submit" class="btn col-12 btn-danger" name="btn_submit">ไม่อนุมัติโพสต์</button>
-                                        </form>
-                                    <?php } else { ?>
-                                        <div class="row">
-                                            <div class="col-12 col-xl-6">
-                                                <form action="view_storepost.php" method="POST">
-                                                    <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                                    <!--<a href="view_storepost.php?id=<?= $value['id'] ?>" class="btn col-12 col-md-6 btn-warning">กำลังตรวจสอบ</a>-->
-                                                    <button type="submit" class="btn col-12 btn-warning" name="btn_submit">กำลังตรวจสอบ</button>
-                                                </form>
+                        <?php } else {
+                        foreach ($query_select as $value) {
+                        ?>
+                            <div class="col-12 col-md-4 mb-5">
+                                <div class="card ">
+                                    <img src="img/<?= $value['picture'] ?>" class="card-img-top" height="250px" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center"><?= $value['name'] ?></h5>
+
+
+                                        <?php if ($value['status'] == 1) { ?>
+                                            <form action="view_storepost.php" method="POST">
+                                                <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                                                <!--<a href="view_storepost.php?id=<?= $value['id'] ?>" class="btn  col-12" style="background-color: #dbb89a;">ดูโพสต์</a>-->
+                                                <button type="submit" class="btn col-12" style="background-color: #dbb89a;" name="btn_submit">ดูโพสต์</button>
+                                            </form>
+                                        <?php } elseif ($value['status'] == 2) { ?>
+                                            <form action="view_storepost.php" method="POST">
+                                                <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                                                <!--<a href="view_storepost.php?id=<?= $value['id'] ?>" class="btn  col-12 btn-danger">ไม่อนุมัติโพสต์</a>-->
+                                                <button type="submit" class="btn col-12 btn-danger" name="btn_submit">ไม่อนุมัติโพสต์</button>
+                                            </form>
+                                        <?php } else { ?>
+                                            <div class="row">
+                                                <div class="col-12 col-xl-6">
+                                                    <form action="view_storepost.php" method="POST">
+                                                        <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                                                        <!--<a href="view_storepost.php?id=<?= $value['id'] ?>" class="btn col-12 col-md-6 btn-warning">กำลังตรวจสอบ</a>-->
+                                                        <button type="submit" class="btn col-12 btn-warning" name="btn_submit">กำลังตรวจสอบ</button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-12 col-xl-6">
+                                                    <form action="edit_storepost.php" method="POST">
+                                                        <input type="hidden" name="id" value="<?= $value['id'] ?>">
+                                                        <!--<a href="edit_storepost.php?id=<?= $value['id'] ?>" class="btn col-12 col-md-6 btn-secondary">แก้ไข</a>-->
+                                                        <button type="submit" class="btn col-12" style="width:100%;background-color: #dbb89a ;color: white;" name="btn_submit2">แก้ไข</button>
+                                                    </form>
+                                                </div>
                                             </div>
-                                            <div class="col-12 col-xl-6">
-                                                <form action="edit_storepost.php" method="POST">
-                                                    <input type="hidden" name="id" value="<?= $value['id'] ?>">
-                                                    <!--<a href="edit_storepost.php?id=<?= $value['id'] ?>" class="btn col-12 col-md-6 btn-secondary">แก้ไข</a>-->
-                                                    <button type="submit" class="btn col-12" style="width:100%;background-color: #dbb89a ;color: white;" name="btn_submit2">แก้ไข</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    <?php } ?>
+                                        <?php } ?>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                <?php }
-                } ?>
+                    <?php }
+                    } ?>
 
-
+                
             </div>
         </div>
-
-        <footer class="bg-light text-center text-lg-start">
-            <!-- Copyright -->
-            <div class="text-center p-3">
-                © 2020 Copyright:
-                <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-            </div>
-            <!-- Copyright -->
-        </footer>
-
-
+    </body>
+    <footer class="bg-light text-center text-lg-start">
+        <!-- Copyright -->
+        <div class="text-center p-3">
+            © 2020 Copyright:
+            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
 
 
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script>
-            AOS.init({
-                duration: 1000
-            });
-        </script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        AOS.init({
+            duration: 1000
+        });
+    </script>
     </body>
 
 
