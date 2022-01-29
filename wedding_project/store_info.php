@@ -229,7 +229,7 @@
         <!-- Copyright -->
         <div class="text-center p-3">
             © 2020 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            <a class="text-dark" href="https://mdbootstrap.com/">weddingplanner.com</a>
         </div>
         <!-- Copyright -->
     </footer>

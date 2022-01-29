@@ -179,7 +179,7 @@
                                     <!-- กำหนดการ -->
                                     <center>
                                         <form action="schedule.php">
-                                            <button class="btn">
+                                            <button class="btn" disabled>
                                                 <i class="far fa-calendar-alt card-text" id="icon"></i>
                                             </button>
                                         </form>
@@ -247,27 +247,53 @@
                     </div>
 
 
+                    <?php
+                    if (isset($status['status']) == 0 || !isset($status['status'])) { ?>
 
-
-                    <div class="col" style=" width: 50px; height:100px">
-                        <div class="card">
-                            <div class="card-body">
-                                <!-- ส่งจดหมาย -->
-                                <center>
-                                    <a href="card_template.php" class="btn">
-                                        <i class="far fa-envelope " id="icon"></i>
-                                    </a>
-                                </center>
+                        <div class="col" style=" width: 50px; height:100px">
+                            <div class="card">
+                                <div class="card-body">
+                                    <!-- ส่งจดหมาย -->
+                                    <center>
+                                        <form action="card_template.php">
+                                            <button class="btn" disabled>
+                                                <i class="far fa-envelope " id="icon"></i>
+                                            </button>
+                                        </form>
+                                    </center>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col">
-                                <p class="text-center ">ส่งการ์ดเชิญ</p>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <p class="text-center ">ส่งการ์ดเชิญ</p>
+                                </div>
+
                             </div>
 
                         </div>
+                    <?php } else { ?>
+                        <div class="col" style=" width: 50px; height:100px">
+                            <div class="card">
+                                <div class="card-body">
+                                    <!-- ส่งจดหมาย -->
+                                    <center>
+                                        <form action="card_template.php">
+                                            <button class="btn" >
+                                                <i class="far fa-envelope " id="icon"></i>
+                                            </button>
+                                        </form>
+                                    </center>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <p class="text-center ">ส่งการ์ดเชิญ</p>
+                                </div>
 
-                    </div>
+                            </div>
+
+                        </div>
+                    <?php } ?>
 
                     <div class="col">
                         <center><i class="fas fa-angle-double-right" id="arrow"></i></center>
@@ -300,22 +326,13 @@
     </div>
 
 
-    <footer class="bg-light text-center text-lg-start" style="position:fixed; bottom: 0px; right: 0px; left: 0px;">
-        <!-- Copyright -->
-        <div class="text-center p-3 border-top bg-white">
-            © 2020 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
-
 
 
 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- icon -->

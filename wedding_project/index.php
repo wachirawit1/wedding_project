@@ -4,6 +4,15 @@
 <head>
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
+
+    <!-- icon -->
+    <script src="https://kit.fontawesome.com/80c612fc1e.js" crossorigin="anonymous"></script>
+
+    <!-- footer style -->
+    <link rel="stylesheet" href="footer_style.css">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+
     <!-- effect -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -21,7 +30,7 @@
 
     <!-- swal -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
+
     <title>wedding</title>
     <style>
         html {
@@ -153,14 +162,44 @@
         </div>
     </div>
 
-    <footer class="bg-white text-center text-lg-start" style="left : 0 ;right : 0; text-align: center;">
-        <!-- Copyright -->
-        <div class="text-center p-3 border-top">
-            © 2020 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    <footer class="footer-16371 ">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-9 text-center">
+                    <div class="footer-site-logo mb-4">
+                        <a href="#">Colorlib</a>
+                    </div>
+                    <ul class="list-unstyled nav-links mb-5">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Legal</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+
+                    <div class="social mb-4">
+                        <h3>Stay in touch</h3>
+                        <ul class="list-unstyled">
+                            <li class="in"><a href="#"><span class="icon-instagram"></span></a></li>
+                            <li class="fb"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="tw"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="pin"><a href="#"><span class="icon-pinterest"></span></a></li>
+                            <li class="dr"><a href="#"><span class="icon-dribbble"></span></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="copyright">
+                        <p class="mb-0"><small>&copy; Colorlib. All Rights Reserved.</small></p>
+                    </div>
+
+
+                </div>
+            </div>
         </div>
-        <!-- Copyright -->
     </footer>
+
 
 
 
@@ -171,15 +210,12 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     <script>
         AOS.init({
             duration: 1000
         });
-
-       
     </script>
 
 </body>

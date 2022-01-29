@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
 
+    <!-- sweet alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <title>wedding</title>
     <style>
         body {
@@ -116,7 +119,7 @@
     ?>
 
 
-    
+
 
     <?php
     if (isset($_POST['reject']) && isset($_POST['id'])) {
@@ -131,7 +134,7 @@
 
         $sql = "UPDATE `email_list` SET `replying`='$replying' WHERE id = $id ";
         mysqli_query($conn, $sql);
-    }else if (isset($_POST['accept']) && isset($_POST['id'])) {
+    } else if (isset($_POST['accept']) && isset($_POST['id'])) {
         $replying = $_POST['accept'];
         $id = $_POST['id'];
 
@@ -155,7 +158,7 @@
             let reject = "reject";
             let id = $('#id');
 
-            
+
             $.ajax({
                 type: "POST",
                 url: "replying.php",
@@ -167,8 +170,12 @@
                 success: function(data) {
                     $('#replying').css("display", "none");
                     $('#success').css("display", "");
-                    alert('เสร็จสิ้น');
-                }
+                    swal({
+                        title: "การแจ้งเตือน",
+                        text: "ตอบกลับเรียบร้อยแล้ว",
+                        icon: "success",
+                        button: "ตกลง",
+                    });                }
             });
         });
 
@@ -176,7 +183,7 @@
             let notsure = "notsure";
             let id = $('#id');
 
-            
+
             $.ajax({
                 type: "POST",
                 url: "replying.php",
@@ -188,7 +195,12 @@
                 success: function(data) {
                     $('#replying').css("display", "none");
                     $('#success').css("display", "");
-                    alert('เสร็จสิ้น');
+                    swal({
+                        title: "การแจ้งเตือน",
+                        text: "ตอบกลับเรียบร้อยแล้ว",
+                        icon: "success",
+                        button: "ตกลง",
+                    });
                 }
             });
         });
@@ -197,7 +209,7 @@
             let accept = "accept";
             let id = $('#id');
 
-            
+
             $.ajax({
                 type: "POST",
                 url: "replying.php",
@@ -209,8 +221,12 @@
                 success: function(data) {
                     $('#replying').css("display", "none");
                     $('#success').css("display", "");
-                    alert('เสร็จสิ้น');
-                }
+                    swal({
+                        title: "การแจ้งเตือน",
+                        text: "ตอบกลับเรียบร้อยแล้ว",
+                        icon: "success",
+                        button: "ตกลง",
+                    });                }
             });
         });
     </script>

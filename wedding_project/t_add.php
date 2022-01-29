@@ -1,3 +1,24 @@
+<?php $t_id = $_POST['t_id'] ?>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function sweet01(){
+        Swal.fire({
+            icon: 'success',
+            title: 'เพิ่มข้อมูลเรียบร้อยแล้ว',
+        }).then((result)=>{
+            window.location="t_action.php?t_id=<?=$t_id?>"
+            })
+        }
+        function sweet02(){
+        Swal.fire({
+            icon: 'error',
+            title: 'เพิ่มข้อมูลไม่สำเร็จ',
+        }).then((result)=>{
+            window.location="t_action.php?t_id=<?=$t_id?>"
+            })
+        }
+</script>
+<body>
 <?php
 // print_r($_POST);
 // exit();
@@ -5,12 +26,7 @@ include('condb.php');
 $sql_id = "SELECT * FROM activity ORDER BY a_id DESC LIMIT 1";
 $query_id = mysqli_query($conn, $sql_id);
 $row_id = mysqli_fetch_assoc($query_id);
-$a_id = "";
-if ($row_id['a_id'] == "") {
-    $a_id = "a0001";
-} else {
-    $a_id = ++$row_id['a_id'];
-}
+$a_id = ++$row_id['a_id'];
 $a_name = $_POST['a_name'];
 $t_id = $_POST['t_id'];
 $a_detail = $_POST['a_detail'];
@@ -29,12 +45,12 @@ if (isset($_POST['item_list'])) {
 // exit();
 if ($query) {
     echo "<script>";
-    echo "alert('สำเร็จ');";
-    echo "window.location = 't_action.php?t_id=" . $_POST['t_id'] . "' ;";
+    echo "sweet01()";
     echo "</script>";
 } else {
     echo "<script>";
-    echo "alert('ไม่สำเร็จ');";
-    echo "window.location = 't_action.php?t_id=" . $_POST['t_id'] . "' ;";
+    echo "sweet02()";
     echo "</script>";
 }
+?>
+</body>

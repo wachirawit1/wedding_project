@@ -31,8 +31,8 @@ if (isset($_POST['p_id'])) {
     $mail->isSMTP();
     $mail->Host = "smtp.gmail.com";
     $mail->SMTPAuth = true;
-    $mail->Username = "weddingplanner.official2021@gmail.com"; // enter your email address
-    $mail->Password = "WDplanner2021"; // enter your password
+    $mail->Username = "khemloveice@gmail.com"; // enter your email address
+    $mail->Password = "0999170023dd"; // enter your password
     $mail->Port = 465;
     $mail->SMTPSecure = "ssl";
 

@@ -73,75 +73,10 @@ include('condb.php');
         exit;
     }
     ?>
-    <nav class="navbar navbar-expand-lg py-3 ml-0 navbar-light bg-white ">
-    <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0  flex-wrap flex-md-nowrap justify-content-between">
-    <a class="navbar-brand" href="traditional.php" style="line-height: 25px; ">
-                <div class="d-table m-auto">
-                    <img src="assets/images/logo.png" width="70"></a>
-                    
-                </div>
-    </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <form action="category_store.php" method="post" class="form-inline">
-        <input type="hidden" name="action" value="search">
-        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" name="submit" type="submit">Search</button>
-    </form>
-</nav>
-   <div class="container-fluid">
-    <div class="row">
-  
-        <nav id="sidebar" class="nav flex-column" >
-            <div class="position-sticky">
-                <ul class="nav flex-column">
-                  <!----   <li class="nav-item text-center p-3 ">
-                    <a class="nav-link" href="profile.php">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                        <span class="ml-2">ดูข้อมูลส่วนตัว</span></a>
-                    </li> ---->
-                    <li class="nav-item text-center p-2 ">
-                        <a class="nav-link active"  href="traditional.php">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers">
-                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                                <polyline points="2 17 12 22 22 17"></polyline>
-                                <polyline points="2 12 12 17 22 12"></polyline>
-                            </svg>
+     <?php
 
-                            <span class="ml-2">จัดการประเพณี</span>
-                        </a>
-                    </li>
-                    <li class="nav-item ml-0">
-                        <a class="nav-link" href="admin_post.php">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
-                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
-                                <polyline points="13 2 13 9 20 9"></polyline>
-                            </svg>
-                            <span class="ml-2">อนุมัติโพสต์</span>
-                        </a>
-                    </li>
-                    <li class="nav-item text-center p-3 ">
-                        <a class="nav-link" href="category_store.php">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
-                            <span class="ml-2">หมวดหมู่ร้านค้า</span>
-                        </a>
-                    </li>
-                   
-                    <li class="nav-item text-center p-2 ml-0">
-                        <a type="nav-link" class="btn dropdown-item" data-toggle="modal" data-target="#logout" style="color: red;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> 
-                            <span class="ml-2">ออกจากระบบ</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+include('navbar_admin.php');
+?>
 <div class="card container py-5 my-5 bg-light shadow rounded" id="box"  >
 <div class="container " >
 <div class="col d-flex justify-content-between">
@@ -149,7 +84,7 @@ include('condb.php');
             <?php
             if(isset($_POST["action"]) && $_POST["action"] == "search"){
                 echo "ผลการค้นหา : \"".$_POST["search"]."\"";
-                $where_condition = "WHERE cate_name LIKE '%".$_POST["search"]."%' ";
+                $where_condition = "WHERE cate_name LIKE '%".$_POST["strsearch"]."%' ";
             }else{
                 $where_condition = "";
             }
@@ -165,6 +100,7 @@ include('condb.php');
             <thead>
                 <th scope="col">#</th>
                 <th scope="col">หมวดหมู่</th>
+                <th scope="col">รูปภาพ</th>
                 <th scope="col">ตัวเลือก</th>
             </thead>
             <?php include('condb.php');
@@ -191,6 +127,7 @@ include('condb.php');
                     <!-- <th scope="row"><?php echo $i++ ?></th> -->
                     <th class="align-middle " scope="row"><?php echo $row['cate_id'] ?></th>
                     <td class="align-middle"><?php echo $row['cate_name'] ?></td>
+                    <td class="align-middle"><img src="assets/images/cate_icon/<?= $row['cate_pic'] ?>" width="150px"></td>
 
 
                     <td class="align-middle">
@@ -249,7 +186,20 @@ include('condb.php');
                                 <input type="text" class="form-control" name="cate_name" id="#">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="#" class="col-sm-3 col-form-label">รูปภาพ</label>
+                            <div class="col-sm-9">
+                                <img src="" class="my-2" id="blah" alt="category pic" width="200">
 
+                                <div class="input-group mb-3">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile02" value="" name="cate_img" onchange="readURL(this);">
+                                        <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                     <div class="modal-footer">
@@ -324,6 +274,20 @@ include('condb.php');
                             </div>
 
                         </div>
+                        <div class="form-group row">
+                                <label for="#" class="col-sm-3 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;รูปภาพ</label>
+                                <div class="col-sm-9">
+                                    <img src="assets/category_img/<?php echo $row['cate_img'] ?>" class="my-2" id="blah<?php echo $cate_id; ?>" alt="category pic" width="200">
+
+                                    <div class="input-group mb-3">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="inputGroupFile02" value="<?php echo $row['cate_img']; ?>" name="cate_img" onchange="readURL<?php echo $cate_id; ?>(this);">
+                                            <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                             <button class="btn btn-success" type="submit" class="btn btn-primary">ยืนยัน</button>
@@ -346,7 +310,39 @@ include('condb.php');
         </div>
         <!-- Copyright -->
     </footer>
+    <?php
+    $sql_del = "SELECT * FROM category";
+    $query_del = mysqli_query($conn, $sql_del);
+    while ($row = mysqli_fetch_array($query_del)) {
+        $cate_id = $row['cate_id'];
+    ?>
+        <script type="text/javascript">
+            function readURL<?php echo $cate_id ?>(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
 
+                    reader.onload = function(e) {
+                        $('#blah<?php echo $cate_id; ?>').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
+    <?php } ?>
+    <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 
 
  
@@ -356,9 +352,9 @@ include('condb.php');
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     <script>
         AOS.init({
             duration: 1000

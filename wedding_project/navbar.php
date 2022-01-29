@@ -15,11 +15,6 @@
             <li class="nav-item ">
                 <a class="nav-link" href="#post">โพสต์ <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">เกี่ยวกับ <span class="sr-only">(current)</span></a>
-            </li>
-
-
 
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -88,7 +83,7 @@
                             <input type="password" name="password" class="form-control" id="password" placeholder="รหัสผ่าน" value="" required>
 
                             <div class="input-group-append">
-                                <span class="input-group-text" onclick="showpassword()"><img src="assets/images/eye.png" width="10" alt=""></span>
+                                <span class="input-group-text btn" onclick="showupassword()"><i class="far fa-eye "></i></span>
                             </div>
                         </div>
                     </span>
@@ -98,14 +93,14 @@
                     </div>
 
                     <script type="text/javascript">
-                        function showpassword() {
+                        function showupassword() {
                             var data = document.getElementById('password');
                             if (data.type == 'password') {
                                 data.type = 'text';
-
+                                $('.far').attr('class', 'far fa-eye-slash');
                             } else {
                                 data.type = 'password';
-
+                                $('.far').attr('class', 'far fa-eye');
                             }
 
                         }
@@ -157,7 +152,7 @@
                             <input type="password" name="password" class="form-control" id="spassword" placeholder="รหัสผ่าน" value="" required>
 
                             <div class="input-group-append">
-                                <span class="input-group-text" onclick="showpassword()"><img src="assets/images/eye.png" width="10" alt=""></span>
+                                <span class="input-group-text btn" onclick="showpassword()"><i class="far fa-eye "></i></span>
                                 <!-- <button type="button" id="eyeop" onclick="showpassword()" class="input-group-text"><span class="glyphicon glyphicon-eye-open"></span></button> -->
                             </div>
                         </div>
@@ -168,10 +163,10 @@
                             var data = document.getElementById('spassword');
                             if (data.type == 'password') {
                                 data.type = 'text';
-
+                                $('.far').attr('class', 'far fa-eye-slash');
                             } else {
                                 data.type = 'password';
-
+                                $('.far').attr('class', 'far fa-eye');
                             }
 
                         }

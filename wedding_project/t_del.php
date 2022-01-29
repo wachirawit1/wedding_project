@@ -1,3 +1,24 @@
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function sweet01(){
+        Swal.fire({
+            icon: 'success',
+            title: 'ลบเรียบร้อยแล้ว',
+        }).then((result)=>{
+            window.history.back();
+            })
+        }
+        function sweet02(){
+        Swal.fire({
+            icon: 'error',
+            title: 'ลบไม่สำเร็จ',
+        }).then((result)=>{
+         window.history.back();
+            })
+        }
+</script>
+<body>
 <?php
 include('condb.php');
 
@@ -9,15 +30,14 @@ $sql_item = "DELETE FROM activity_listitem WHERE a_id = '$a_id'";
 $query_item = mysqli_query($conn,$sql_item);
 
 if ($query) {
-    echo "<script>" ;
-    echo  "alert('ลบสำเร็จ');";
-    echo "window.location = 't_action.php?t_id=".$_GET['t_id']."' ;"; 
-    echo  "</script>";
+   echo "<script>";
+    echo "sweet01()";
+    echo "</script>";
 
  } else { 
-    echo "<script>" ;
-    echo  "alert('ไม่ลบสำเร็จ');";
-    echo "window.location = 't_action.php?t_id=".$_GET['t_id']."' ;"; 
-    echo  "</script>";
+   echo "<script>";
+    echo "sweet02()";
+    echo "</script>";
  }
 ?>
+</body>

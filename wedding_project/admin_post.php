@@ -74,159 +74,68 @@ include('condb.php');
         exit;
     }
     ?>
-    <nav class="navbar navbar-expand-lg py-3 ml-0 navbar-light bg-white ">
-        <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0  flex-wrap flex-md-nowrap justify-content-between">
-            <a class="navbar-brand" href="traditional.php" style="line-height: 25px; ">
-                <div class="d-table m-auto">
-                    <img src="assets/images/logo2.png" width="160px">
-                </div>
-            </a>
+    <?php
+
+    include('navbar_admin.php');
+    ?>
+    <div class="card container py-5 my-5 bg-light shadow rounded" id="box">
+
+        <table class="table table-light table-hover text-center align-center">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">หัวข้อโพสต์</th>
+                <th scope="col">ผู้โพสต์</th>
+                <th scope="col">รูปภาพ</th>
+                <th scope="col">ตัวเลือก</th>
+            </thead>
+            <?php include('condb.php');
+
+            if (!isset($_POST['search'])) {
+
+                $sql = "SELECT *,post.name as p_name,post.id as p_id FROM post LEFT JOIN store ON post.u_id = store.s_id ORDER BY post.id DESC";
+                $query = mysqli_query($conn, $sql);
+            } else {
+
+                $sql = "SELECT *,post.name as p_name,post.id as p_id FROM post , store where post.u_id = store.s_id and store.s_name LIKE '%" . $keyword . "%' ORDER BY post.id DESC";
+                $query = mysqli_query($conn, $sql);
+            }
+            ?>
+            <tbody>
+
+                <?php
+                $i = 1;
+                while ($row = mysqli_fetch_array($query)) {
+                ?>
 
 
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <form method="post" class="form-inline">
-            <input class="form-control mr-sm-2" name="search"  type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" name="submit" type="submit">Search</button>
-        </form>
-    </nav>
+                    <!-- <th scope="row"><?php echo $i++ ?></th> -->
+                    <tr>
+                        <th class="align-middle " scope="row"><?php echo $row['p_id'] ?></th>
+                        <td class="align-middle"><?php echo $row['p_name'] ?></td>
+                        <td class="align-middle"><?php echo $row['s_name'] ?></td>
+                        <td class="align-middle"><img src="img/<?= $row['picture'] ?>" width="150px"></td>
+                        <td class="align-middle">
+                            <form action="approve_post.php" method="POST" style="display: inline-block;">
+                                <input type="hidden" name="p_id" value="<?= $row['p_id'] ?>">
+                                <?php if ($row['status'] == 0) { ?>
+                                    <button type="submit" class="btn btn-warning" name="btn_submit">ตรวจสอบ</button>
+                                <?php } elseif ($row['status'] == 1) { ?>
+                                    <button type="submit" class="btn btn-success" name="btn_submit">อนุมัติแล้ว</button>
+                                <?php } else { ?>
+                                    <!--<a href="approve_post.php?id=<?= $row['p_id'] ?>" class="btn btn-secondary">ไม่อนุมัติ</a>-->
+                                    <button type="submit" class="btn btn-secondary" name="btn_submit">ไม่อนุมัติ</button>
+                                <?php } ?>
+                            </form>
+                            <a href="#delete<?php echo $row['p_id']; ?>" class="btn btn-danger" data-toggle="modal">ลบ</a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
 
-    <!-- Modal -->
-<div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน!!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ต้องการออกจากระบบ?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">ยกเลิก</button>
-                <a href="logout.php?logout=1" type="button" class="btn btn-danger">ยืนยัน</a>
-            </div>
-        </div>
+        </table>
+
     </div>
-</div>
-    
-    <div class="container-fluid">
-        <div class="row">
-            <nav id="sidebar" class="nav flex-column">
-                <div class="position-sticky">
-                    <ul class="nav flex-column">
-                        <!----    <li class="nav-item text-center p-3 ">
-                    <a class="nav-link" href="profile.php">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                        <span class="ml-2">ดูข้อมูลส่วนตัว</span></a>
-                    </li> --->
-                        <li class="nav-item text-center p-2 ">
-                            <a class="nav-link active" href="traditional.php">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers">
-                                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                                    <polyline points="2 17 12 22 22 17"></polyline>
-                                    <polyline points="2 12 12 17 22 12"></polyline>
-                                </svg>
-
-                                <span class="ml-2">จัดการประเพณี</span>
-                            </a>
-                        </li>
-                        <li class="nav-item ml-0">
-                            <a class="nav-link" href="admin_post.php">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
-                                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
-                                    <polyline points="13 2 13 9 20 9"></polyline>
-                                </svg>
-                                <span class="ml-2">อนุมัติโพสต์</span>
-                            </a>
-                        </li>
-                        <li class="nav-item text-center p-3 ">
-                            <a class="nav-link" href="category_store.php">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="9" cy="7" r="4"></circle>
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                </svg>
-                                <span class="ml-2">หมวดหมู่ร้านค้า</span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item text-center p-2 ml-0">
-                            <a type="nav-link" class="btn dropdown-item" data-toggle="modal" data-target="#logout" style="color: red;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
-                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                    <polyline points="16 17 21 12 16 7"></polyline>
-                                    <line x1="21" y1="12" x2="9" y2="12"></line>
-                                </svg>
-                                <span class="ml-2">ออกจากระบบ</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <div class="card container py-5 my-5 bg-light shadow rounded" id="box">
-
-                <table class="table table-light table-hover text-center align-center">
-                    <thead>
-                        <th scope="col">#</th>
-                        <th scope="col">หัวข้อโพสต์</th>
-                        <th scope="col">ผู้โพสต์</th>
-                        <th scope="col">รูปภาพ</th>
-                        <th scope="col">ตัวเลือก</th>
-                    </thead>
-                    <?php include('condb.php');
-
-                    if (!isset($_POST['search'])) {
-
-                        $sql = "SELECT *,post.name as p_name,post.id as p_id FROM post LEFT JOIN store ON post.u_id = store.s_id ORDER BY post.id DESC";
-                        $query = mysqli_query($conn, $sql);
-                    } else {
-
-                        $sql = "SELECT *,post.name as p_name,post.id as p_id FROM post , store where post.u_id = store.s_id and store.s_name LIKE '%" . $keyword . "%' ORDER BY post.id DESC";
-                        $query = mysqli_query($conn, $sql);
-                    }
-                    ?>
-                    <tbody>
-
-                        <?php
-                        $i = 1;
-                        while ($row = mysqli_fetch_array($query)) {
-                        ?>
-
-
-                            <!-- <th scope="row"><?php echo $i++ ?></th> -->
-                            <tr>
-                                <th class="align-middle " scope="row"><?php echo $row['p_id'] ?></th>
-                                <td class="align-middle"><?php echo $row['p_name'] ?></td>
-                                <td class="align-middle"><?php echo $row['s_name'] ?></td>
-                                <td class="align-middle"><img src="img/<?= $row['picture'] ?>" width="150px"></td>
-                                <td class="align-middle">
-                                    <form action="approve_post.php" method="POST" style="display: inline-block;">
-                                        <input type="hidden" name="p_id" value="<?= $row['p_id'] ?>">
-                                        <?php if ($row['status'] == 0) { ?>
-                                            <button type="submit" class="btn btn-warning" name="btn_submit">ตรวจสอบ</button>
-                                        <?php } elseif ($row['status'] == 1) { ?>
-                                            <button type="submit" class="btn btn-success" name="btn_submit">อนุมัติแล้ว</button>
-                                        <?php } else { ?>
-                                            <!--<a href="approve_post.php?id=<?= $row['p_id'] ?>" class="btn btn-secondary">ไม่อนุมัติ</a>-->
-                                            <button type="submit" class="btn btn-secondary" name="btn_submit">ไม่อนุมัติ</button>
-                                        <?php } ?>
-                                    </form>
-                                    <a href="#delete<?php echo $row['p_id']; ?>" class="btn btn-danger" data-toggle="modal">ลบ</a>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-
-                </table>
-
-            </div>
-        </div>
+    </div>
 
     </div>
 
@@ -302,20 +211,12 @@ include('condb.php');
     </form>
 
 
-    <footer class="bg-light text-center text-lg-start bg-white border fixed-bottom">
-        <!-- Copyright -->
-        <div class="text-center p-3">
-            © 2020 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     <script>
         AOS.init({
             duration: 1000

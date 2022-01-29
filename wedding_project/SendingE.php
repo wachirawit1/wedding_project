@@ -95,7 +95,7 @@ include('condb.php');
 
         <?php
         $userid = $_SESSION['userid'];
-        $sql = "SELECT `header`, `detail`, `e_id` , `attach_file` FROM `email` WHERE e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid)";
+        $sql = "SELECT `header`, `detail`, `e_id` , `attach_file` FROM `email` WHERE e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid AND status = 1)";
         $query = mysqli_query($conn, $sql);
         $num_row = mysqli_num_rows($query);
         $row = mysqli_fetch_array($query);
@@ -115,11 +115,16 @@ include('condb.php');
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="imgInp" name="image" type="file" aria-describedby="inputGroupFileAddon01">
                     <label class="custom-file-label" for="inputGroupFile01">เลือกการ์ดเชิญ</label>
+                    <input type="hidden" id="fileName" name="fileName" value="">
                 </div>
             </div>
-            <div class="row justify-content-md-center">
+            <div class="row justify-content-md-center my-3">
+                <div class="card border-0 bg-light">
+                    <div class="card-body">
 
-                <img src="" alt="การ์ดเชิญของคุณ" id="blah" width="300" height="400">
+                        <img src="assets/images/image-regular.svg" alt="การ์ดเชิญของคุณ" id="blah" width="300" height="400">
+                    </div>
+                </div>
 
             </div>
             <div class="form-group text-center">
@@ -159,32 +164,6 @@ include('condb.php');
     <div id="email_list" data-aos="fade-up" data-aos-duration="800" style="display: none;">
         <div class="container shadow bg-light border text-center mb-3">
             <h4 class="my-3">การส่งการ์ดเชิญ</h4>
-            <!-- <form class="my-3">
-                <div class="row my-3" id="row2">
-                    <div class="col">
-                        <input type="text" class="form-control" id="e_name" name="name" placeholder="ชื่อ-นามสกุลแขก" autofocus>
-                    </div>
-                    <div class="col input-group">
-                        <select class="form-control" id="relation" name="relation">
-                            <option>เลือกความสัมพันธ์</option>
-                            <option value="เพื่อนเจ้าบ่าว">เพื่อนเจ้าบ่าว</option>
-                            <option value="เพื่อนเจ้าสาว">เพื่อนเจ้าสาว</option>
-                            <option value="อื่นๆ">อื่นๆ</option>
-                            <option value="ไม่ระบุ">ไม่ระบุ</option>
-                        </select>
-
-                    </div>
-                    <div class="col">
-                        <input type="email" class="form-control" id="email" name="email" onkeyup="check_mail()" placeholder="อีเมล">
-                    </div>
-
-                </div>
-                <div class="row justify-content-md-center my-3">
-                    <div class="col col-2">
-                        <button class="btn" type="button" id="sendEmail" onclick="send_email(this)">ส่ง</button>
-                    </div>
-                </div>
-            </form> -->
 
 
             <div class="my-3">
@@ -336,22 +315,12 @@ include('condb.php');
                         </tbody>
                     </table>
 
-                   
+
 
 
             </div>
         </div>
     </div>
-
-
-    <footer class="bg-light text-center text-lg-start">
-        <!-- Copyright -->
-        <div class="text-center p-3 border-top bg-white">
-            © 2020 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
 
 
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
@@ -405,7 +374,7 @@ include('condb.php');
             // }
 
 
-            if (isNotEmpty(header) && isNotEmpty(detail) && isNotEmpty(fileName)) {
+            if (isNotEmpty(header) && isNotEmpty(detail) && file_data ) {
                 $('#email_list').css('display', '');
 
 
@@ -425,7 +394,7 @@ include('condb.php');
                             icon: "success",
                             button: "ตกลง"
                         });
-                        fileName.val(data.fileName);
+                        $('#fileName').val(data.fileName);
                     },
                     error: function(err) {
                         console.log('err');
@@ -474,7 +443,7 @@ include('condb.php');
             var header = $('#header');
             var detail = $('#detail');
             let fileName = $('#fileName');
-
+            console.log(fileName);
             let file_data = $('#imgInp').prop("files")[0];
             let form_data = new FormData();
 
@@ -492,11 +461,11 @@ include('condb.php');
             // }
 
             swal({
-                        title: "การแจ้งเตือน",
-                        text: "ขั้นตอนนี้จำเป็นต้องใช้เวลาจำนวนมาก",
-                        icon: "warning",
-                        button: "ตกลง"
-                    });
+                title: "การแจ้งเตือน",
+                text: "ขั้นตอนนี้จำเป็นต้องใช้เวลาจำนวนมาก",
+                icon: "warning",
+                button: "ตกลง"
+            });
 
             $("#enable").html('<div class="spinner-border text-light" role="status"><span class="sr-only">Loading...</span></div>');
 
@@ -509,6 +478,7 @@ include('condb.php');
                 data: form_data,
                 method: 'POST',
                 success: function(data) {
+                    console.log(data);
                     let append_element = $("#excel_data").html();
                     $("#here").append(append_element);
 
@@ -532,6 +502,8 @@ include('condb.php');
                         icon: "error",
                         button: "ตกลง"
                     });
+                    $("#enable").html('บันทึกและส่ง');
+
                 }
             });
 
@@ -628,8 +600,6 @@ include('condb.php');
             }
 
         });
-
-        
     </script>
 
 </body>

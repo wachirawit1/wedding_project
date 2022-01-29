@@ -81,11 +81,7 @@ include('condb.php');
 
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     <script>
@@ -111,13 +107,14 @@ include('condb.php');
                         $('#submit').text('ส่ง');
                         $('#show').empty();
                         email.val(null);
-                        $('#show').append('<div class="alert alert-success" role="alert">ระบบได้ส่งอีเมลแล้ว กรุณาตรวจสอบอีเมล</div>');
+                        $('#show').html('<div class="alert alert-success" role="alert">ระบบได้ส่งอีเมลแล้ว กรุณาตรวจสอบอีเมล</div>');
                         email.css('border', '1px solid #d4edda')
                     },
                     error: function(data) {
-                        $('#show').append('<div class="alert alert-danger" role="alert">ไม่พบบัญชีอีเมลดังกล่าว กรุณาตรวจสอบใหม่อีกครั้ง</div>');
+                        $('#show').html('<div class="alert alert-danger" role="alert">ไม่พบบัญชีอีเมลดังกล่าว กรุณาตรวจสอบใหม่อีกครั้ง</div>');
                         email.css('border', '1px solid red')
-
+                        $('#submit').text('ส่ง');
+                        console.error(data);
                     }
                 });
             }

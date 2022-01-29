@@ -26,7 +26,7 @@ if (isset($_SESSION['username'])) {
 
 <head>
   <!-- favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
   <!-- button Icon -->
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
@@ -71,6 +71,18 @@ if (isset($_SESSION['username'])) {
         reader.readAsDataURL(input.files[0]);
       }
     }
+
+    function readURL1(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          $('#blah1').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
   </script>
   <br>
   <br>
@@ -85,7 +97,7 @@ if (isset($_SESSION['username'])) {
           <div class="card bg-light">
             <div class="card-body mx-3">
               <center>
-                <img class="img1" src="assets/images/logo2.png" alt="logo" width="20%">
+                <img class="img1" src="assets/images/logo.png" alt="logo" width="20%">
                 <h3 class="my-4">สมัครบัญชีร้านค้า</h3>
 
               </center>
@@ -207,12 +219,42 @@ if (isset($_SESSION['username'])) {
                     <input type="text" name="s_tel" class="form-control" id="" placeholder="" value="" pattern="[0-9]{10}" required>
 
                   </div>
+                </div>
+                <div class="form-group row">
+                  <label for="staticEmail" class="col-sm-2 col-form-label">ที่อยู่</label>
+                  <div class="col-sm-10">
 
+                  <textarea type="text" name="s_address" required class="form-control col-6 col-sm-10"></textarea>
+
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="" class="col-sm-2 col-form-label">รูปภาพบัตรประชาชน</label>
+                  <div class="col-sm-10">
+
+
+
+
+                    เลือกไฟล์ใหม่<br>
+
+
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="img1" name="IDcard_img" onchange="readURL1(this);">
+                      <label class="custom-file-label" for="file">Choose file</label>
+                    </div>
+                    <br><br>
+
+
+                    <img id="blah1" src="#" alt="your image" width="300" />
+
+
+                  </div>
                 </div>
 
 
                 <div class="form-group row">
-                  <label for="" class="col-sm-2 col-form-label">รูปภาพ</label>
+                  <label for="" class="col-sm-2 col-form-label">รูปภาพโปรไฟล์</label>
                   <div class="col-sm-10">
 
 

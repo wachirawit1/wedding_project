@@ -1,3 +1,23 @@
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function sweet01(){
+        Swal.fire({
+            icon: 'success',
+            title: 'ลบข้อมูลเรียบร้อยแล้ว',
+        }).then((result)=>{
+            window.location="category_store.php";
+            })
+        }
+        function sweet02(){
+        Swal.fire({
+            icon: 'error',
+            title: 'ลบข้อมูลไม่สำเร็จ',
+        }).then((result)=>{
+            window.location="category_store.php";
+            })
+        }
+</script>
+<body>
 <?php
 include('condb.php');
 
@@ -10,15 +30,13 @@ if (isset($_POST['cate_id'])) {
 
    if ($query) {
       echo "<script>";
-      echo  "alert('ลบสำเร็จ');";
-      echo  " window.location = 'category_store.php';";
-      echo  "</script>";
-   } else {
+      echo "sweet01()";
+      echo "</script>";
+  } else {
       echo "<script>";
-      echo  "alert('ไม่ลบสำเร็จ');";
-      echo  " window.location = 'category_store.php';";
-      echo  "</script>";
-   }
+      echo "sweet02()";
+      echo "</script>";
+  }
 }else{
    echo "<script>";
    echo "console.log('ไม่มีค่าส่งมา')" ;

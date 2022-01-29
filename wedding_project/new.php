@@ -26,6 +26,10 @@ include('condb.php');
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
+    <!-- c3 font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,500;1,600;1,700&family=Charm:wght@400;700&display=swap" rel="stylesheet">
 
     <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
@@ -58,6 +62,11 @@ include('condb.php');
         .test {
             font-family: 'Chakra Petch', sans-serif
         }
+
+        #c3 {
+            font-family: 'Chakra Petch', sans-serif;
+            font-family: 'Charm', cursive;
+        }
     </style>
 </head>
 
@@ -87,6 +96,21 @@ include('condb.php');
         </ol>
     </nav>
 
+    <?php
+    $userid = $_SESSION['userid'];
+    $sql = "SELECT * FROM event where userid = '$userid' AND status = 1";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($result);
+    $due_date = "";
+    if (isset($row['due_date']) == "0000-00-00" || isset($row['due_date']) == "") {
+        $due_date = '
+        <div class="alert alert-danger" role="alert">
+        ยังไม่ได้กำหนดวันแต่ง <a href="schedule.php" class="alert-link">กลับไปกำหนด?</a>
+      </div>';
+    } else {
+        $due_date = $row['due_date'];
+    }
+    ?>
 
     <div class="container p-3 bg-light shadow">
 
@@ -102,20 +126,22 @@ include('condb.php');
                             <img src="assets/images/invite_card/c1_template.png" alt="" width="100%" crossorigin="anonymous">
                             <div class="position-absolute" id="husband" style="color:white;top: 16rem;left:0; right: 0; text-align: center;">ชื่อเจ้าบ่าว</div>
                             <div class="position-absolute" id="wife" style=" color:white;top: 22rem;left:0; right: 0; text-align: center;">ชื่อเจ้าสาว</div>
-                            <div class="position-absolute" style="color:white;top: 30rem; left:0; right: 0; text-align: center;">เวลา</div>
-                            <div class="position-absolute" style="color:white;top: 27rem;left:0; right: 0; text-align: center;">สถานที่</div>
+                            <div class="position-absolute" id="date" style="color:white;top: 30rem; left:0; right: 0; text-align: center;"><?= $due_date ?></div>
+                            <div class="position-absolute" id="place" style="color:white;top: 27rem;left:0; right: 0; text-align: center;">สถานที่</div>
                         <?php } elseif ($card == 2) { ?>
                             <img src="assets/images/invite_card/c2_template.png" alt="" width="100%" crossorigin="anonymous">
-                            <div class="position-absolute" id="husband" style="color:#d09e6a;top: 12rem;left:0; right: 0; text-align: center;">ชื่อเจ้าบ่าว</div>
-                            <div class="position-absolute" id="wife" style=" color:#d09e6a;top: 20rem;left:0; right: 0; text-align: center;">ชื่อเจ้าสาว</div>
-                            <div class="position-absolute" style="color:#d09e6a;top: 24.5rem; left:0; right: 0; text-align: center;">เวลา</div>
-                            <div class="position-absolute" style="color:#d09e6a;top: 29rem;left:0; right: 0; text-align: center;">สถานที่</div>
+                            <div class="position-absolute" id="husband" style="color:#56676f;top: 12rem;left:0; right: 0; text-align: center;font-size: 30px;">ชื่อเจ้าบ่าว</div>
+                            <div class="position-absolute" id="wife" style=" color:#56676f;top: 20rem;left:0; right: 0; text-align: center;font-size: 30px">ชื่อเจ้าสาว</div>
+                            <div class="position-absolute" id="date" style="color:#56676f;top: 24.5rem; left:0; right: 0; text-align: center;"><?= $due_date ?></div>
+                            <div class="position-absolute" id="place" style="color:#56676f;top: 29rem;left:0; right: 0; text-align: center;">สถานที่</div>
                         <?php } else { ?>
                             <img src="assets/images/invite_card/c3_template.png" alt="" width="100%" crossorigin="anonymous">
-                            <div class="position-absolute" id="husband" style="color:#5d5956;top: 14rem;left:0; right: 0; text-align: center;">ชื่อเจ้าบ่าว</div>
-                            <div class="position-absolute" id="wife" style=" color:#5d5956;top: 22rem;left:0; right: 0; text-align: center;">ชื่อเจ้าสาว</div>
-                            <div class="position-absolute" style="color:#5d5956;top: 33rem; left:0; right: 0; text-align: center;">เวลา</div>
-                            <div class="position-absolute" style="color:#5d5956;top: 30rem;left:0; right: 0; text-align: center;">สถานที่</div>
+                            <div id="c3">
+                                <div class="position-absolute" id="husband" style="color:#5d5956;top: 14rem;left:0; right: 0; text-align: center;font-size: 30px;">ชื่อเจ้าบ่าว</div>
+                                <div class="position-absolute" id="wife" style=" color:#5d5956;top: 22rem;left:0; right: 0; text-align: center;font-size: 30px">ชื่อเจ้าสาว</div>
+                            </div>
+                            <div class="position-absolute" id="date" style="color:#5d5956;top: 33rem; left:0; right: 0; text-align: center;"><?= $due_date ?></div>
+                            <div class="position-absolute" id="place" style="color:#5d5956;top: 30rem;left:0; right: 0; text-align: center;">สถานที่</div>
                         <?php } ?>
                     </div>
 
@@ -148,7 +174,17 @@ include('condb.php');
                             <div class="row">
                                 <div class="col">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" id="#" placeholder="สถานที่" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                        <input type="text" class="form-control" id="place_input" placeholder="สถานที่" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-primary" type="button" id="button-addon2">ตกลง</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="#" placeholder="เวลา" aria-label="Recipient's username" aria-describedby="button-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-primary" type="button" id="button-addon2">ตกลง</button>
                                         </div>
@@ -169,11 +205,13 @@ include('condb.php');
             <div class="col">
 
                 <div class="justify-content-start">
-                    <h4 class="">ตัวอย่างรูปภาพ : </h4>
+                    <h4 class="">ตัวอย่างการ์ดเชิญ : </h4>
                 </div>
                 <div class="d-flex justify-content-end">
                     <span class="mr-2"><button id="save" disabled class="btn btn-success">ดาวน์โหลด</button></span>
-                    <button class="btn btn-primary" id="next" disabled>ถัดไป</button>
+                    <form action="SendingE.php" method="post">
+                        <button class="btn btn-primary" id="next" disabled>ถัดไป</button>
+                    </form>
                 </div>
 
 
@@ -220,15 +258,32 @@ include('condb.php');
     <script type="text/javascript" src="captureHTML/canvas2image.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            // write on card
             let husband = $('#husband');
             $('#husband_input').on('input', function() {
                 husband.html($('#husband_input').val());
-            })
+            });
 
             let wife = $('#wife');
             $('#wife_input').on('input', function() {
                 wife.html($('#wife_input').val());
+            });
+
+            let place = $('#place');
+            $('#place_input').on('input', function() {
+                place.html($('#place_input').val());
             })
+
+            // // date 
+            // const month = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤษจิกายน", "ธันวาคม"];
+
+            // const date = new Date();
+            // console.log(date);
+            // let d = date.getDay();
+            // let mName = month[date.getMonth()];
+            // let y = parseInt(date.getFullYear()) + 543;
+            // $('#date').html(d + " " + mName + " " + y);
+
         });
 
         var test = $(".test").get(0);

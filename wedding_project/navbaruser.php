@@ -27,9 +27,6 @@
             <li class="nav-item ">
                 <a class="nav-link" href="progress.php">อีเวนท์<span class="sr-only"></span></a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="#">เกี่ยวกับ <span class="sr-only"></span></a>
-            </li>
 
 
             <li class="nav-item dropdown ">

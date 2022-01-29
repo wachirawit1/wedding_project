@@ -158,23 +158,23 @@ include('condb.php');
             </div>
         </div>
 
-        <div class="row justify-content-md-end m-3">
-            <div class="row">
-                <div class="col">
-                    <select id="myFilter" class="form-control">
-                        <option value="">ทั้งหมด</option>
-                        <option value="เตรียมแล้ว">เตรียมแล้ว</option>
-                        <option value="ยังไม่เตรียม">ยังไม่เตรียม</option>
-                    </select>
-                </div>
+        <div class="row justify-content-md-end my-3">
+            <div class="col col-2">
+                <select id="myFilter" class="form-control">
+                    <option value="">ทั้งหมด</option>
+                    <option value="เตรียมแล้ว">เตรียมแล้ว</option>
+                    <option value="ยังไม่เตรียม">ยังไม่เตรียม</option>
+                </select>
             </div>
             <div class="col col-md-1">
                 <a href="edit_schedule.php" class="btn btn-primary"><i class="fas fa-edit">แก้ไข</i></a>
             </div>
+            <div class="col col-md-1">
+                <button class="btn btn-success">สำเร็จ</button>
+            </div>
         </div>
 
         <div class="overflow-auto" style=" height: 500px; ">
-
 
             <?php
             $userid = $_SESSION['userid'];
@@ -230,7 +230,7 @@ include('condb.php');
                                     <td><?php echo $row['item_name']; ?></td>
                                     <td><?php echo $row['amount']; ?></td>
                                     <td><?php echo number_format($row['price'], 0); ?></td>
-                                    <td>
+                                    <td class="text-center">
 
                                         <?php
                                         if ($row['ae_status'] == 'uncheck' || $row['status'] == '') { ?>
@@ -256,15 +256,12 @@ include('condb.php');
 
         </div>
 
-
-
-
     </div>
 
 
 
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
     <script>
         let count = $(".count").length;
         let task = $(".task").length;
@@ -325,66 +322,63 @@ include('condb.php');
             xhttp.send(params);
         }
 
-       
-            let date = document.getElementById('date');
-            let days = document.getElementById('days');
-            let hours = document.getElementById('hours')
-            let minutes = document.getElementById('minutes');
-            let seconds = document.getElementById('seconds');
-            if (date.value) {
+
+        let date = document.getElementById('date');
+        let days = document.getElementById('days');
+        let hours = document.getElementById('hours')
+        let minutes = document.getElementById('minutes');
+        let seconds = document.getElementById('seconds');
+        if (date.value) {
 
 
-                // Set the date we're counting down to
-                var countDownDate = new Date(date.value).getTime();
+            // Set the date we're counting down to
+            var countDownDate = new Date(date.value).getTime();
 
-                // Update the count down every 1 second
-                var x = setInterval(function() {
+            // Update the count down every 1 second
+            var x = setInterval(function() {
 
-                    // Get today's date and time
-                    var now = new Date().getTime();
+                // Get today's date and time
+                var now = new Date().getTime();
 
-                    // Find the distance between now and the count down date
-                    var distance = countDownDate - now;
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
 
-                    // Time calculations for days, hours, minutes and seconds
-                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                    // Display the result in the element with id="demo"
-                    document.getElementById("days").innerHTML = days + " วัน ";
-                    document.getElementById("hours").innerHTML = hours + " ชั่วโมง ";
-                    document.getElementById("minutes").innerHTML = minutes + " นาที ";
-                    document.getElementById("seconds").innerHTML = seconds + " วินาที ";
+                // Display the result in the element with id="demo"
+                document.getElementById("days").innerHTML = days + " วัน ";
+                document.getElementById("hours").innerHTML = hours + " ชั่วโมง ";
+                document.getElementById("minutes").innerHTML = minutes + " นาที ";
+                document.getElementById("seconds").innerHTML = seconds + " วินาที ";
 
-                    if (!countDownDate) {
-                        document.getElementById("showCountDown").innerHTML = "ยังไม่กำหนด";
-                    }
+                if (!countDownDate) {
+                    document.getElementById("showCountDown").innerHTML = "ยังไม่กำหนด";
+                }
 
-                    // If the count down is finished, write some text
-                    if (distance < 0) {
-                        clearInterval(x);
-                        document.getElementById("showCountDown").innerHTML = "ครบกำหนด";
-                    }
-                }, 1000);
+                // If the count down is finished, write some text
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("showCountDown").innerHTML = "ครบกำหนด";
+                }
+            }, 1000);
 
-                task++;
+            task++;
 
-                let totalCount = task / count * 100;
-                let toPercent = parseInt(totalCount) + "%";
+            let totalCount = task / count * 100;
+            let toPercent = parseInt(totalCount) + "%";
 
-                $("#text-progress").html("เตรียมงานไปแล้ว(" + task + "จาก" + count + ")");
-                $("#progress").attr("style", "width:" + toPercent);
-                $("#progress").html(toPercent);
+            $("#text-progress").html("เตรียมงานไปแล้ว(" + task + "จาก" + count + ")");
+            $("#progress").attr("style", "width:" + toPercent);
+            $("#progress").html(toPercent);
 
-            } else if (!date.value) {
+        } else if (!date.value) {
 
-                document.getElementById('showCountDown').style.display = "none";
-            }
-        
-        
-            
+            document.getElementById('showCountDown').style.display = "none";
+        }
     </script>
 
 
@@ -402,14 +396,6 @@ include('condb.php');
 
 
 
-    <footer class="bg-light text-center text-lg-start">
-        <!-- Copyright -->
-        <div class="text-center p-3">
-            © 2020 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
 
 
 
@@ -417,9 +403,9 @@ include('condb.php');
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
 </body>
 
 

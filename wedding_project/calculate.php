@@ -100,9 +100,9 @@
 
 
     <form action="calculatedb.php" method="post">
-        <div class="container p-4 mb-2 rounded bg-light">
+        <div class="container p-4 my-3 rounded bg-light shadow">
 
-            <h3 class="text-center font-weight-bold text-muted">สิ่งของภายในงาน</h3>
+            <h3 class="text-center font-weight-bold text-muted">การเตรียมตัวภายในงาน</h3>
 
             <div data-aos="fade-up" style=" height: 510px; overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">
 
@@ -123,11 +123,7 @@
                         include('condb.php');
 
                         $activity = $_POST['selected'];
-                        $_SESSION['activity'] = $activity;
                         $t_id = $_POST['t_id'];
-                        $activity = $_SESSION['activity'];
-                        // print_r($_SESSION);
-                        // exit();
                         $sql = "SELECT * FROM activity WHERE";
                         $isFirst = true;
                         foreach ($activity as $value) {
@@ -138,28 +134,16 @@
                                 $sql .= " OR a_id='$value'";
                             }
                         }
+
                         $query = mysqli_query($conn, $sql);
-                        // echo $sql;
-                        // exit();
-                        // $sql = "SELECT * FROM activity_listitem JOIN activity ON activity_listitem.a_id = activity.a_id
-                        // JOIN item_list ON activity_listitem.list_id = item_list.list_id WHERE";
-                        // $isFirst = true;
-                        // foreach ($activity as $value) {
-                        //     if ($isFirst) {
-                        //         $sql .= " activity_listitem.a_id='$value'";
-                        //         $isFirst = false;
-                        //     } else {
-                        //         $sql .= " OR activity_listitem.a_id='$value'";
-                        //     }
-                        // }
-                        ?>
-                        <?php foreach ($query as $key => $value) { ?>
+
+                        foreach ($query as $key => $value) { ?>
                             <tr>
-                                <td colspan="5" class="text-center" style="background-color: #dbb89a; color:white ;"><b><?= $value['a_name'] ?></b></td>
+                                <td colspan="5" class="text-center" style="background-color: #dbb89a; color:white ;">
+                                    <b><?= $value['a_name'] ?></b>
+                                </td>
                             </tr>
                             <?php
-                            // echo $sql;
-                            // exit();
                             $a_id = $value['a_id'];
                             $sql = "SELECT * FROM activity_listitem LEFT JOIN item_list ON activity_listitem.list_id = item_list.list_id WHERE activity_listitem.a_id = '$a_id'";
                             $query = mysqli_query($conn, $sql);
@@ -172,7 +156,6 @@
                                     <td><?php echo $row['item_name']; ?></td>
                                     <td><?php echo $row['amount']; ?></td>
                                 </tr>
-
                                 <input type="hidden" name="a_id[]" value="<?= $row['a_id'] ?>">
                                 <input type="hidden" name="list_id[]" value="<?= $row['list_id'] ?>">
                                 <input type="hidden" name="t_id" value="<?= $t_id ?>">
@@ -185,21 +168,13 @@
                 </table>
 
 
-
-
-
-
             </div>
 
-
-
-        </div>
-        <div class="container my-3">
-            <span class="row m-2 d-flex flex-row mr-auto">
-
-                <button type="submit" class="btn btn-primary">สร้าง</button>
-
-            </span>
+            <div class="row justify-content-end my-3">
+                <div class="col col-1">
+                    <button type="submit" class="btn btn-primary">สร้าง</button>
+                </div>
+            </div>
         </div>
 
     </form>
@@ -213,22 +188,11 @@
 
 
 
-
-    <footer class="bg-light text-center text-lg-start mt-3">
-        <!-- Copyright -->
-        <div class="text-center p-3">
-            © 2020 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
-
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     <script>
         AOS.init({
             duration: 1000

@@ -20,6 +20,7 @@ include('condb.php');
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <title>wedding</title>
@@ -64,53 +65,50 @@ include('condb.php');
         exit;
     }
     ?>
- <?php
+    <?php
 
 include('navbar_admin.php');
 ?>
-        <div class="card container col-10 py-5 my-5 bg-light shadow rounded" id="box"  >
-        <div class="container col-12  " >
-        
-        <div class="col  d-flex justify-content-between">
-            <div class="p-2">
-                <?php
-                if(isset($_POST["action"]) && $_POST["action"] == "search"){
-                    echo "ผลการค้นหา : \"".$_POST["strsearch"]."\"";
-                    $where_condition = "WHERE trad_name LIKE '%".$_POST["strsearch"]."%' ";
-                }else{
-                    $where_condition = "";
-                }
-                ?>
       
-        </div>
-            <div class="p-2">
-                <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#addmodal">
-                    เพิ่มอุปกรณ์    
-                </button>
-            </div>
-        </div>
+    <!-- breadcrumb -->
+   
+    
+    
+    
+    <div class="card container py-5 my-5 bg-light shadow rounded" id="box"  >
+        <div class="container " >
+    <div class="col d-flex justify-content-end">
+        <!-- <div class="row"> -->
+        <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+        เพิ่มอุปกรณ์แต่งงาน
+        </button>
+       
+    </div>
+</div>
+   
    
         <!--  -->
-        <table class="table table-light table-hover  text-center align-center">
-        <thead>
+        <table class="table table-light table-hover mt-3">
+            <tr>
                 <th scope="col">#</th>
                 <th scope="col">อุปกรณ์</th>
                 <th scope="col">จำนวน</th>
                 <th scope="col">ตัวเลือก</th>
+            </tr>
             </thead>
             <?php include('condb.php');
-
+            $t_id = $_GET['t_id'];
             
 
             if(!isset($_POST['search'])){
 
-                $sql = "SELECT * FROM item_list  ORDER BY list_id DESC";
+                $sql = "SELECT * FROM item_list WHERE t_id = $t_id  ORDER BY list_id DESC";
                 $query = mysqli_query($conn, $sql);
     
             }
             else{
                 
-                $sql = "SELECT * FROM item_list where  item_name LIKE '%".$keyword."%'";
+                $sql = "SELECT * FROM item_list where t_id = $t_id and  item_name LIKE '%".$keyword."%'";
                 $query = mysqli_query($conn, $sql);
             }
 
@@ -165,7 +163,7 @@ include('navbar_admin.php');
         </div>
     </div>
     <!-- popup เพิ่มitem -->
-    <div class="modal fade" id="addmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -176,7 +174,7 @@ include('navbar_admin.php');
                 </div>
                 <form action="item_add.php" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
-
+                        <input type="hidden" value="<?=$t_id?>" name="t_id">
                         <div class="form-group row">
                             <label for="#" class="col-sm-3 col-form-label">ชื่ออุปกรณ์</label>
                             <div class="col-sm-9">

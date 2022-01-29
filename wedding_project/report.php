@@ -239,12 +239,13 @@ include('condb.php');
                             <div class="py-2 d-flex justify-content-end">
 
                                 <select id="myFilter" class="form-control" style="width: 9rem;">
-                                    <option value="">ทั้งหมด</option>
-                                    <option value="รอการตอบรับ">รอการตอบรับ</option>
-                                    <option value="เข้าร่วม">เข้าร่วม</option>
-                                    <option value="ไม่เข้าร่วม">ไม่เข้าร่วม</option>
-                                    <option value="ไม่แน่ใจ">ไม่แน่ใจ</option>
+                                    <option value="100">ทั้งหมด</option>
+                                    <option value="">รอการตอบรับ</option>
+                                    <option value="accept">เข้าร่วม</option>
+                                    <option value="reject">ไม่เข้าร่วม</option>
+                                    <option value="notsure">ไม่แน่ใจ</option>
                                 </select>
+
                                 <button class="btn btn-success ml-2" onclick="ExportToExcel('xlsx')">
                                     <i class="bi bi-file-earmark-excel"></i>ดาวน์โหลด
                                 </button>
@@ -334,10 +335,12 @@ include('condb.php');
         
         <div class="text-center p-3 border-top bg-white">
             © 2020 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            <a class="text-dark" href="https://mdbootstrap.com/">weddingplanner.com</a>
         </div>
         
     </footer>  -->
+
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -350,7 +353,7 @@ include('condb.php');
         $(document).ready(function() {
             let replying = $('.replying');
             replying.each(function() {
-                console.log($(this).html().trim());
+                // console.log($(this).html().trim());
                 if ($(this).html().trim() == "เข้าร่วม") {
                     $(this).append('<i class="bi bi-check-circle-fill"></i>')
                     $(this).attr("class", "text-success");
@@ -367,12 +370,45 @@ include('condb.php');
 
             });
 
+            // filtering ************
             $("#myFilter").on("change", function() {
-                var value = $(this).val().toLowerCase();
-                $("#myTable tr").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                let value = $(this).find('option').filter(':selected').val();
+                $.ajax({
+                    url: 'filter.php',
+                    method: 'post',
+                    data: {
+                        value: value
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        $('.overflow-auto').html(data)
+                        let replying = $('.replying');
+                        replying.each(function() {
+                            // console.log($(this).html().trim());
+                            if ($(this).html().trim() == "เข้าร่วม") {
+                                $(this).append('<i class="bi bi-check-circle-fill"></i>')
+                                $(this).attr("class", "text-success");
+                            } else if ($(this).html().trim() == "ไม่เข้าร่วม") {
+                                $(this).append('<i class="bi bi-x-circle-fill"></i>')
+                                $(this).attr("class", "text-danger");
+                            } else if ($(this).html().trim() == "ไม่แน่ใจ") {
+                                $(this).append('<i class="bi bi-question-circle"></i>')
+                                $(this).attr("class", "text-warning");
+                            } else {
+                                $(this).append('<i class="bi bi-clock"></i>')
+                                $(this).attr("class", "text-info");
+                            }
+
+                        });
+                    },
+                    error: function(data) {
+                        console.log("no");
+                        console.error(data);
+                    }
                 });
             });
+
+
 
 
         });

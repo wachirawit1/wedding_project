@@ -1,29 +1,25 @@
-<head>
-    <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
-
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <title>wedding</title>
-
-    <style>
-        body {
-            font-family: 'Prompt', sans-serif;
-            background-color: #f0e1dc;
-
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function sweet01(){
+        Swal.fire({
+            icon: 'success',
+            title: 'แก้ไขข้อมูลเรียบร้อยแล้ว',
+        }).then((result)=>{
+            window.location="traditional.php"
+            })
         }
-    </style>
-</head>
+        function sweet02(){
+        Swal.fire({
+            icon: 'error',
+            title: 'แก้ไขข้อมูลไม่สำเร็จ',
+        }).then((result)=>{
+            window.location="traditional.php"
+            })
+        }
+</script>
 
 <body>
-    <div class="container">
+
 
         <?php
         include('condb.php');
@@ -60,27 +56,15 @@
             $query = mysqli_query($conn, $sql);
         }
 
-        if ($sql) { ?>
-            <div class="card box d-flex mt-5">
-                <div class="card-header">แจ้งเตือน</div>
-                <div class="card-body">
-                    <div class="alert alert-success " role="alert">
-                        <h5 class="card-title text-center">แก้ไขสำเร็จ !!</h5>
-                    </div>
-                    <meta http-equiv="refresh" content="2; url=traditional.php">
-                </div>
-            </div>
-        <?php } else { ?>
-            <div class="card box d-flex mt-5">
-                <div class="card-header">แจ้งเตือน</div>
-                <div class="card-body">
-                    <div class="alert alert-success " role="alert">
-                        <h5 class="card-title text-center">แก้ไขไม่สำเร็จ !!</h5>
-                    </div>
-                    <meta http-equiv="refresh" content="2; url=traditional.php">
-                </div>
-            </div>
-        <?php } ?>
+        if ($query) {
+            echo "<script>";
+            echo "sweet01()";
+            echo "</script>";
+        } else {
+            echo "<script>";
+            echo "sweet02()";
+            echo "</script>";
+        }
+       ?>
 
-    </div>
 </body>

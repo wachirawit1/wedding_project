@@ -57,7 +57,6 @@
         $t_id = $_POST['t_id'];
 
 
-
         // $budget = $_POST['budget'];
 
 
@@ -108,7 +107,7 @@
 
 
         ?>
-            
+
             <script>
                 swal({
                     title: "การแจ้งเตือน",

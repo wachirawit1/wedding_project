@@ -31,7 +31,7 @@ $row_post = mysqli_fetch_assoc($query_post);
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -61,7 +61,24 @@ $row_post = mysqli_fetch_assoc($query_post);
     </style>
 
 </head>
-
+<script>
+    function sweet01(){
+        Swal.fire({
+            icon: 'success',
+            title: 'แก้ไขข้อมูลเรียบร้อยแล้ว',
+        }).then((result)=>{
+            window.location = 'storepost.php'
+            })
+        }
+        function sweet02(){
+        Swal.fire({
+            icon: 'error',
+            title: 'แก้ไขข้อมูลไม่สำเร็จ',
+        }).then((result)=>{
+            window.location = 'storepost.php'
+            })
+        }
+</script>
 
 <body>
     <?php
@@ -127,15 +144,13 @@ $row_post = mysqli_fetch_assoc($query_post);
         }
         $sql = "UPDATE post  SET name = '$name' , u_id = '$u_id', picture = '$pic', price = '$price', detail = '$detail',gallery1 = '$gallery1', gallery2 = '$gallery2', gallery3 = '$gallery3' , gallery4 = '$gallery4' , gallery5 = '$gallery5' , gallery6 = '$gallery6' WHERE id = $id";
         $query = mysqli_query($conn,$sql);
-        if($query){
+        if ($query) {
             echo "<script>";
-            echo "alert('แก้ไขข้อมูลแล้ว');";
-            echo "window.location = 'storepost.php';";
+            echo "sweet01()";
             echo "</script>";
-        }else{
+        } else {
             echo "<script>";
-            echo "alert('เกิดข้อผิดพลาด');";
-            echo "window.location = 'storepost.php';";
+            echo "sweet02()";
             echo "</script>";
         }
     }

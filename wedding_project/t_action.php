@@ -37,8 +37,8 @@ include('condb.php');
         }
 
 
-     /* Standard syntax */
-     a.nav-link:hover {
+        /* Standard syntax */
+        a.nav-link:hover {
             background-color: white;
         }
 
@@ -51,10 +51,11 @@ include('condb.php');
         a.nav-link:hover {
             color: #dbb89a !important;
         }
-        .rightbox1{
-        float:right;
-        width:100%;
-        margin-right: -90px;
+
+        .rightbox1 {
+            float: right;
+            width: 100%;
+            margin-right: -90px;
         }
     </style>
 
@@ -65,7 +66,7 @@ include('condb.php');
     <?php
     $t_id = $_GET['t_id'];
     $keyword = null;
-    if(isset($_POST['search'])){
+    if (isset($_POST['search'])) {
         $keyword = $_POST['search'];
     }
 
@@ -80,113 +81,113 @@ include('condb.php');
         exit;
     }
     ?>
-     <?php
+    <?php
 
-include('navbar_admin.php');
-?>
-      
+    include('navbar_admin.php');
+    ?>
+
     <!-- breadcrumb -->
-   
-    
-    
-    
-    <div class="card container py-5 my-5 bg-light shadow rounded" id="box"  >
-        <div class="container " >
-        <nav aria-label="breadcrumb">
-        <ol class="breadcrumb" style=" background-color: #ffffff;">
-            <li class="breadcrumb-item"><a href="traditional.php">traditional</a></li>
-            <li class="breadcrumb-item active" aria-current="page">action</li>
-        </ol>
-    </nav>
-        <div class="col d-flex justify-content-between">
-            <div class="p-2">
-            <?php
-            if(isset($_POST["action"]) && $_POST["action"] == "search"){
-                echo "ผลการค้นหา : \"".$_POST["search"]."\"";
-                $where_condition = "WHERE a_name LIKE '%".$_POST["strsearch"]."%' ";
-            }else{
-                $where_condition = "";
-            }
-            ?>
-        </div> 
-        
- 
-    <div class="col d-flex justify-content-end">
-        
-        <!-- <div class="row"> -->
-        <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
-            เพิ่มพิธีการ
-        </button>
-        <a href="item.php" class="btn btn-success" name="button" id="button">เพิ่มอุปกรณ์</a>
-    </div>
-</div>
-        <!-- Table -->
-        <table class="table table-bordered table-light table-hover">
-            <thead>
-                <th>รหัส</th>
-                <th style="width: 200px;">พิธีการ</th>
-                <th>รายละเอียด</th>
-                <th>อุปกรณ์</th>
-                <th>ตัวเลือก</th>
-            </thead>
-            <?php include('condb.php');
-            //$t_id = $_GET['t_id'];
 
-            if(isset($_GET['t_id'])){
-                $t_id = $_GET['t_id'];
-            }else if(isset($_POST['t_id'])){
-                $t_id = $_POST['t_id'];
-            }
-            
-            
-            if(!isset($_POST['search'])){
 
-                $sql = "SELECT * FROM activity WHERE t_id = $t_id ORDER BY a_id DESC";
-                $query = mysqli_query($conn, $sql);
-    
-            }
-            else{
-                
-                $sql = "SELECT * FROM activity WHERE t_id = $t_id and a_name LIKE '%".$keyword."%' ORDER BY a_id DESC";
-                $query = mysqli_query($conn, $sql);
-            }
-            ?>
-            <tbody>
-          
-                <?php 
+
+
+    <div class="card container py-5 my-5 bg-light shadow rounded" id="box">
+        <div class="container ">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style=" background-color: #ffffff;">
+                    <li class="breadcrumb-item"><a href="traditional.php">traditional</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">action</li>
+                </ol>
+            </nav>
+            <div class=" d-flex justify-content-between">
+                <div class="p-2">
+                    <?php
+                    if (isset($_POST["action"]) && $_POST["action"] == "search") {
+                        echo "ผลการค้นหา : \"" . $_POST["search"] . "\"";
+                        $where_condition = "WHERE a_name LIKE '%" . $_POST["strsearch"] . "%' ";
+                    } else {
+                        $where_condition = "";
+                    }
+                    ?>
+                </div>
+
+                <div class=" d-flex justify-content-end my-3">
+                    <!-- <div class="row"> -->
+                    <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+                        เพิ่มพิธีการ
+                    </button>
+                    <a href="item.php?t_id=<?= $t_id ?>" class="btn btn-success" name="button" id="button">เพิ่มอุปกรณ์</a>
+                </div>
+            </div>
+            <!-- Table -->
+            <table class="table table-bordered table-light table-hover">
+                <thead>
+                    <th>รหัส</th>
+                    <th style="width: 200px;">พิธีการ</th>
+                    <th>รายละเอียด</th>
+                    <th>อุปกรณ์</th>
+                    <th>ตัวเลือก</th>
+                </thead>
+                <?php include('condb.php');
+                //$t_id = $_GET['t_id'];
+
+                if (isset($_GET['t_id'])) {
+                    $t_id = $_GET['t_id'];
+                } else if (isset($_POST['t_id'])) {
+                    $t_id = $_POST['t_id'];
+                }
+
+
+                if (!isset($_POST['search'])) {
+
+                    $sql = "SELECT * FROM activity WHERE t_id = $t_id ORDER BY a_id DESC";
+                    $query = mysqli_query($conn, $sql);
+                } else {
+
+                    $sql = "SELECT * FROM activity WHERE t_id = $t_id and a_name LIKE '%" . $keyword . "%' ORDER BY a_id DESC";
+                    $query = mysqli_query($conn, $sql);
+                }
+                ?>
+                <tbody style="font-size: 14px;">
+
+                    <?php
                     $i = 1;
                     while ($row = mysqli_fetch_array($query)) {
-                 ?>
-                
-                   
+                    ?>
+
+
                         <!-- <th scope="row"><?php echo $i++ ?></th> -->
-                        <th class="align-middle " scope="row"><?php echo $row['a_id'] ?></th>
-                        <td class="align-middle"><?php echo $row['a_name'] ?></td>
-                        <td class="align-middle"><?php echo $row['a_detail'] ?></td>
-                        <td class="align-middle"><?php
-                        $sql_listitem = "SELECT * FROM activity_listitem LEFT JOIN item_list ON activity_listitem.list_id = item_list.list_id WHERE a_id = '".$row['a_id']."'";
-                        $query_listitem = mysqli_query($conn,$sql_listitem);
-                        $num = 1;
-                        foreach($query_listitem as $value_item){
-                            echo $num++,'.',$value_item['item_name'];
-                            echo "<br>";
-                        }
-                        ?>
+                        <th class="align-baseline " scope="row"><?php echo $row['a_id'] ?></th>
+                        <td class="align-baseline"><?php echo $row['a_name'] ?></td>
+                        <td class="align-baseline" style="width: 30rem;">
+                            <?php echo $row['a_detail'] ?>
                         </td>
-                        <td class="align-middle">
-                            <a href="#edit<?=$row['a_id']?>" class="btn btn-warning" data-toggle="modal">แก้ไข</a> 
-                            <a href="#delete<?php echo $row['a_id']; ?>" class="btn btn-danger" data-toggle="modal">ลบ</a></td>
-                </tr>
-                <?php } ?>
-            </tbody>
+                        <td class="align-baseline">
+                            <?php
+                            $sql_listitem = "SELECT * FROM activity_listitem LEFT JOIN item_list ON activity_listitem.list_id = item_list.list_id WHERE a_id = '" . $row['a_id'] . "'";
+                            $query_listitem = mysqli_query($conn, $sql_listitem);
+                            $num = 1;
+                            foreach ($query_listitem as $value_item) {
+                                echo $num++, '.', $value_item['item_name'];
+                                echo "<br>";
+                            }
+                            ?>
+                        </td>
+                        <td class="align-baseline" style="width: 10rem;">
+                            <a href="#edit<?= $row['a_id'] ?>" class="btn btn-warning" data-toggle="modal">แก้ไข</a>
+                            <a href="#delete<?php echo $row['a_id']; ?>" class="btn btn-danger" data-toggle="modal">ลบ</a>
+                        </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
 
-        </table>
+            </table>
 
         </div>
-        </div>
-    </div> 
-    
-</div> 
+    </div>
+    </div>
+
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -207,9 +208,9 @@ include('navbar_admin.php');
             </div>
         </div>
     </div>
-   <!-- popup เพิ่มพิธีการ -->
-   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <!-- popup เพิ่มพิธีการ -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลพิธีการ</h5>
@@ -219,8 +220,8 @@ include('navbar_admin.php');
                 </div>
                 <form action="t_add.php" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
-                    <input type="hidden" name="t_id" value="<?=$_GET['t_id']?>">
-                    <div class="form-group row">
+                        <input type="hidden" name="t_id" value="<?= $_GET['t_id'] ?>">
+                        <div class="form-group row">
                             <label for="#" class="col-sm-3 col-form-label">ชื่อพิธีการ</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" name="a_name" id="#" placeholder="">
@@ -230,38 +231,38 @@ include('navbar_admin.php');
                         <div class="form-group row">
                             <label for="#" class="col-sm-3 col-form-label">รายละเอียดพิธีการ</label>
                             <div class="col-sm-9">
-                                <textarea type="text" class="form-control" name="a_detail" id="#" placeholder=""></textarea>
+                                <textarea type="text" class="form-control" rows="15" name="a_detail" id="#" placeholder=""></textarea>
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mr-1">
                             <label for="#" class="col-sm-3 col-form-label">อุปกรณ์</label>
-                            <div class="col-sm-9">
-                                <?php 
-                                $sql_item = "SELECT * FROM item_list";
-                                $query_item = mysqli_query($conn,$sql_item);
+                            <div class="col-sm-9 overflow-auto" style="height: 18rem;">
+                                <?php
+                                $sql_item = "SELECT * FROM item_list WHERE t_id = $t_id";
+                                $query_item = mysqli_query($conn, $sql_item);
                                 foreach ($query_item as $value2) {
                                 ?>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="item_list[]" value="<?=$value2['list_id']?>">
-                                    <label class="form-check-label">
-                                    <?=$value2['item_name']?>
-                                    </label>
-                                </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="checkbox" name="item_list[]" value="<?= $value2['list_id'] ?>">
+                                        <label class="form-check-label">
+                                            <?= $value2['item_name'] ?>
+                                        </label>
+                                    </div>
                                 <?php } ?>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                        <button class="btn btn-primary" type="submit" class="btn btn-primary">เพิ่ม</button>
+                        <button class="btn btn-success" type="submit" class="btn btn-primary">เพิ่ม</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-   
-<!----ลบ---->
+
+    <!----ลบ---->
     <?php
     $sql_del = "SELECT * FROM activity";
     $query_del = mysqli_query($conn, $sql_del);
@@ -269,7 +270,7 @@ include('navbar_admin.php');
         $a_id = $row['a_id'];
     ?>
         <div class="modal fade" id="delete<?php echo $a_id ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
-        
+
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -278,14 +279,14 @@ include('navbar_admin.php');
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    
+
                     <div class="modal-body">
                         ต้องการลบ?
                     </div>
                     <div class="modal-footer">
-                
+
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                        <a href="t_del.php?id=<?php echo $a_id ?>&t_id=<?=$_GET['t_id']?>" type="button" class="btn btn-primary">ยืนยัน</a>
+                        <a href="t_del.php?id=<?php echo $a_id ?>&t_id=<?= $_GET['t_id'] ?>" type="button" class="btn btn-primary">ยืนยัน</a>
                     </div>
                 </div>
             </div>
@@ -303,9 +304,9 @@ include('navbar_admin.php');
         $a_id = $row['a_id']
     ?>
         <!-- แก้ไข -->
-        <div class="modal fade" id="edit<?=$a_id?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <input type="hidden" name="t_id" value="<?=$_GET['t_id']?>">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" id="edit<?= $a_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <input type="hidden" name="t_id" value="<?= $_GET['t_id'] ?>">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">แก้ไข</h5>
@@ -313,56 +314,55 @@ include('navbar_admin.php');
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                <form action="t_edit.php" method="POST" enctype="multipart/form-data">
-                    <div class="modal-body">
-                    <input type="hidden" value="<?=$a_id?>" name="a_id">
-                    <div class="form-group row">
-                    <input type="hidden" name="t_id" value="<?=$_GET['t_id']?>">
-                            <label for="#" class="col-sm-3 col-form-label">ชื่อพิธีการ</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" name="a_name" id="#" value="<?=$row['a_name']?>" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="#" class="col-sm-3 col-form-label">รายละเอียดพิธีการ</label>
-                            <div class="col-sm-9">
-                                <textarea type="text" class="form-control" name="a_detail" id="#" placeholder=""><?=$row['a_detail']?></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="#" class="col-sm-3 col-form-label">อุปกรณ์</label>
-                            <div class="col-sm-9">
-                                <?php 
-                                $sql_item = "SELECT * FROM item_list";
-                                $query_item = mysqli_query($conn,$sql_item);
-                                $sql_check = "SELECT * FROM activity_listitem WHERE a_id = '".$row['a_id']."'";
-                                $query_check = mysqli_query($conn,$sql_check);
-                                foreach ($query_item as $value2) {
-                                ?>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="item_list[]" value="<?=$value2['list_id']?>" 
-                                    <?php 
-                                    foreach($query_check as $check){
-                                        if($check['list_id'] == $value2['list_id']){
-                                            echo 'checked';
-                                        }
-                                    }
-                                    ?>>
-                                    <label class="form-check-label">
-                                    <?=$value2['item_name']?>
-                                    </label>
+                    <form action="t_edit.php" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <input type="hidden" value="<?= $a_id ?>" name="a_id">
+                            <div class="form-group row">
+                                <input type="hidden" name="t_id" value="<?= $_GET['t_id'] ?>">
+                                <label for="#" class="col-sm-3 col-form-label">ชื่อพิธีการ</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="a_name" id="#" value="<?= $row['a_name'] ?>" placeholder="">
                                 </div>
-                                <?php } ?>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="#" class="col-sm-3 col-form-label">รายละเอียดพิธีการ</label>
+                                <div class="col-sm-9">
+                                    <textarea type="text" class="form-control" name="a_detail" id="#" placeholder=""><?= $row['a_detail'] ?></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mr-1">
+                                <label for="#" class="col-sm-3 col-form-label">อุปกรณ์</label>
+                                <div class="col-sm-9 overflow-auto" style="height: 18rem;">
+                                    <?php
+                                    $sql_item = "SELECT * FROM item_list WHERE t_id = $t_id";
+                                    $query_item = mysqli_query($conn, $sql_item);
+                                    $sql_check = "SELECT * FROM activity_listitem WHERE a_id = '" . $row['a_id'] . "'";
+                                    $query_check = mysqli_query($conn, $sql_check);
+                                    foreach ($query_item as $value2) {
+                                    ?>
+                                        <div class="form-check ">
+                                            <input class="form-check-input" type="checkbox" name="item_list[]" value="<?= $value2['list_id'] ?>" <?php
+                                                                                                                                                    foreach ($query_check as $check) {
+                                                                                                                                                        if ($check['list_id'] == $value2['list_id']) {
+                                                                                                                                                            echo 'checked';
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                    ?>>
+                                            <label class="form-check-label">
+                                                <?= $value2['item_name'] ?>
+                                            </label>
+                                        </div>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                        <button class="btn btn-success" type="submit" class="btn btn-primary">ยืนยัน</button>
-                    </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                            <button class="btn btn-success" type="submit" class="btn btn-primary">ยืนยัน</button>
+                        </div>
+                    </form>
                 </div>
 
             </div>
@@ -384,9 +384,9 @@ include('navbar_admin.php');
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     <script>
         AOS.init({
             duration: 1000

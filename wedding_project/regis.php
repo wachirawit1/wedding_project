@@ -10,11 +10,6 @@ if (isset($_SESSION['username'])) {
       alert('คุณได้สมัครสมาชิกแล้ว');
       window.location = 'mainshop.php';
     </script>
-  <?php } else { ?>
-    <script>
-      alert('คุณได้สมัครสมาชิกแล้ว');
-      window.location = 'mainshop.php';
-    </script>
   <?php } ?>
 
 <?php }
@@ -28,7 +23,8 @@ if (isset($_SESSION['username'])) {
   <!-- favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
+  <!-- icon -->
+  <script src="https://kit.fontawesome.com/80c612fc1e.js" crossorigin="anonymous"></script>
 
   <!-- font family -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,7 +66,7 @@ if (isset($_SESSION['username'])) {
         }
 
         reader.readAsDataURL(input.files[0]);
-      } 
+      }
     }
   </script>
   <br>
@@ -96,7 +92,7 @@ if (isset($_SESSION['username'])) {
 
               <?php
 
-              if ($_SESSION['errors'] != null) {
+              if (isset($_SESSION['errors']) != null) {
                 echo "<div class='alert alert-danger py-2' role='alert'>";
                 echo $_SESSION['errors'];
                 echo "</div>";
@@ -128,7 +124,7 @@ if (isset($_SESSION['username'])) {
                         <input type="password" name="password" class="form-control" id="password" placeholder="" pattern=".{6,}" required>
 
                         <div class="input-group-append">
-                          <span class="input-group-text" onclick="showpassword()"><img src="assets/images/eye.png" width="10" alt=""></span>
+                          <span class="input-group-text btn" onclick="showpassword()"><i class="far fa-eye"></i></span>
                           <!-- <button type="button" id="eyeop" onclick="showpassword()" class="input-group-text"><span class="glyphicon glyphicon-eye-open"></span></button> -->
                         </div>
                       </div>
@@ -138,9 +134,11 @@ if (isset($_SESSION['username'])) {
                         var data = document.getElementById('password');
                         if (data.type == 'password') {
                           data.type = 'text';
+                          $('.far').attr('class', 'far fa-eye-slash');
 
                         } else {
                           data.type = 'password';
+                          $('.far').attr('class', 'far fa-eye');
 
                         }
 
@@ -243,8 +241,12 @@ if (isset($_SESSION['username'])) {
                     </div>
                     <br><br>
 
+                    <div class="card text-center border-0">
+                      <div class="card-body ">
 
-                    <img id="blah" src="#" alt="your image" width="300" />
+                        <img id="blah" src="assets/images/image-regular.svg"nn alt="your image" width="300" />
+                      </div>
+                    </div>
 
 
                   </div>
@@ -265,7 +267,7 @@ if (isset($_SESSION['username'])) {
 
             </div>
             <div class="card-footer">
-              <p class="font-weight-light">มีบัญชีแล้ว? <a href="login.php">เข้าสู่ระบบเลย</a></p>
+              <p class="font-weight-light">มีบัญชีแล้ว? <a href="index.php">เข้าสู่ระบบเลย</a></p>
               <button type="submit" name="register" class="btn btn-success btn-block ">สมัครสมาชิก</button>
             </div>
 
@@ -300,9 +302,9 @@ if (isset($_SESSION['username'])) {
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
 
   <script>
     AOS.init({
