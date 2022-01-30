@@ -6,7 +6,7 @@
             icon: 'success',
             title: 'สมัครเสร็จสิ้น',
         }).then((result)=>{
-			window.location = 'login_store.php'
+			window.location = 'index.php'
             })
         }
         function sweet02(){
@@ -14,7 +14,7 @@
             icon: 'error',
             title: 'สมัครไม่สำเร็จ',
         }).then((result)=>{
-			window.location = 'login_store.php'
+			window.location = 'index.php'
             })
         }
 </script>
@@ -47,7 +47,7 @@ if (isset($_POST['register'])) {
 		$type = strrchr($_FILES['s_img']['name'], ".");
 		$newname = $numrand . $date1 . $type;
 		$path_copy = $path . $newname;
-		$path_copy1 = "assets/category_img/" . $newname;
+		$path_copy1 = "img/" . $newname;
 		$path_link = "img/" . $newname;
 		
 		move_uploaded_file($_FILES['IDcard_img']['tmp_name'], $path_copy1);

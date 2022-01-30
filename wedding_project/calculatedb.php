@@ -21,7 +21,7 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <title>wedding</title>
+    <title>Wedding Planner</title>
     <style>
         body {
             font-family: 'Prompt', sans-serif;

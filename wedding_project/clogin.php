@@ -16,13 +16,14 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
   $row = mysqli_fetch_array($result);
 
+  $type = $row['type'];
   if ($result->num_rows > 0) {
-    if ($row['type'] == "01") {
+    if ($type == "01") {
       $_SESSION['userid'] = $row['id'];
       $_SESSION['username'] = $username;
       $_SESSION['name'] = $row['name'];
       $_SESSION['lastname'] = $row['lastname'];
-      $_SESSION['type'] = $row['type'];
+      $_SESSION['type'] = $type;
 
       // <!-- <div class="card box d-flex mt-5">
       //       <div class="card-header">แจ้งเตือน</div>
@@ -45,12 +46,12 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
       //     <meta http-equiv="refresh" content="2; url=mainuser.php"> -->
 
 
-    } else if ($row['type'] == "02") {
+    } else if ($type == "02") {
       $_SESSION['userid'] = $row['id'];
       $_SESSION['username'] = $username;
       $_SESSION['name'] = $row['name'];
       $_SESSION['lastname'] = $row['lastname'];
-      $_SESSION['type'] = $row['type'];
+      $_SESSION['type'] = $type;
 
       // <!-- <div class="card box d-flex mt-5">
       //       <div class="card-header">แจ้งเตือน</div>
@@ -74,11 +75,11 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
     }
   } else {
-   
+    $type = "0";
   }
 }
 
-echo json_encode(array("type" => $row['type']));
+echo json_encode(array("type" => $type));
 
 
 

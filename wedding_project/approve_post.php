@@ -31,7 +31,7 @@ $row_select = mysqli_fetch_assoc($query_select);
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="carousel-slideshow-mibreit/dist/mibreit-gallery/css/mibreitGallery.css" />
-    <title>wedding</title>
+    <title>Wedding Planner</title>
     <style>
         body {
             font-family: 'Prompt', sans-serif;

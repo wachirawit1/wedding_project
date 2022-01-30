@@ -137,46 +137,64 @@
                 <!-- notification -->
 
                 <div id="serrors"></div>
+                <form action="clogin_store.php" method="POST">
+                    <!-- notification -->
 
+                    <?php
 
-
-                <div class="form-group">
-                    <label for="email" class="sr-only">ชื่อผู้ใช้</label>
-                    <input type="text" name="username" id="susername" class="form-control" placeholder="ชื่อผู้ใช้">
-                </div>
-                <div class="form-group mb-4">
-                    <label for="password" class="sr-only">รหัสผ่าน</label>
-                    <span>
-                        <div class="input-group">
-
-                            <input type="password" name="password" class="form-control" id="spassword" placeholder="รหัสผ่าน" value="" required>
-
-                            <div class="input-group-append">
-                                <span class="input-group-text btn" onclick="showpassword()"><i class="far fa-eye "></i></span>
-                                <!-- <button type="button" id="eyeop" onclick="showpassword()" class="input-group-text"><span class="glyphicon glyphicon-eye-open"></span></button> -->
-                            </div>
+                    if (isset($_SESSION['errors'])) { ?>
+                        <div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>
+                            <?php echo $_SESSION['errors']; ?>
                         </div>
-                    </span>
+                    <?php
+                        $_SESSION['errors'] = null;
+                    } else {
+                        $_SESSION['errors'] = null;
+                        echo $_SESSION['errors'];
+                    }
 
-                    <script type="text/javascript">
-                        function showpassword() {
-                            var data = document.getElementById('spassword');
-                            if (data.type == 'password') {
-                                data.type = 'text';
-                                $('.far').attr('class', 'far fa-eye-slash');
-                            } else {
-                                data.type = 'password';
-                                $('.far').attr('class', 'far fa-eye');
+                    ?>
+
+
+
+                    <div class="form-group">
+                        <label for="email" class="sr-only">ชื่อผู้ใช้</label>
+                        <input type="text" name="susername" id="susername" class="form-control" placeholder="ชื่อผู้ใช้">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="spassword" class="sr-only">รหัสผ่าน</label>
+                        <span>
+                            <div class="input-group">
+
+                                <input type="password" name="spassword" class="form-control" id="spassword" placeholder="รหัสผ่าน" value="" required>
+
+                                <div class="input-group-append">
+                                    <span class="input-group-text btn" onclick="showpassword()"><i class="far fa-eye "></i></span>
+                                    <!-- <button type="button" id="eyeop" onclick="showpassword()" class="input-group-text"><span class="glyphicon glyphicon-eye-open"></span></button> -->
+                                </div>
+                            </div>
+                        </span>
+
+                        <script type="text/javascript">
+                            function showpassword() {
+                                var data = document.getElementById('spassword');
+                                if (data.type == 'spassword') {
+                                    data.type = 'text';
+                                    $('.far').attr('class', 'far fa-eye-slash');
+                                } else {
+                                    data.type = 'spassword';
+                                    $('.far').attr('class', 'far fa-eye');
+                                }
+
                             }
-
-                        }
-                    </script>
+                        </script>
 
 
-                </div>
+                    </div>
 
-                <button type="button" id="slogin" class="btn btn-block login-btn mb-4" style="background-color: #dbb89a;color: white;" onclick="login_store()">เข้าสู่ระบบ</button>
-
+                    <button type="button" id="slogin" class="btn btn-block login-btn mb-4" style="background-color: #dbb89a;color: white;" onclick="login_store()">เข้าสู่ระบบ</button>
+                    <!--<button type="button" id="slogin" class="btn btn-block login-btn mb-4" style="background-color: #dbb89a;color: white;" onclick="login_store()">เข้าสู่ระบบ</button>-->
+                </form>
                 <p class="login-card-footer-text">ไม่มีบัญชี? <a href="regis_store.php" class="">สมัครที่นี่</a></p>
             </div>
         </div>
@@ -214,7 +232,7 @@
                         }, 1000)
 
 
-                    } else {
+                    } else if (data.type == 02) {
                         setTimeout(function() {
                             swal({
                                 title: "การแจ้งเตือน",
@@ -225,15 +243,21 @@
                                 window.location = "traditional.php";
                             });
                         }, 1000)
+                    } else {
+                        setTimeout(function() {
+                            $("#errors").html("<div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</div>");
+                        }, 1000);
+
                     }
                 },
-                error: function(data) {
-                    // console.error(data);
-                    // console.log("no");
-                    $("#errors").html("<div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</div>");
-                }
+                // error: function(data) {
+                //     // console.error(data);
+                //     // console.log("no");
+                //     $("#errors").html("<div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</div>");
+                // }
             });
         } else {
+
             $("#errors").html("<div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>กรุณากรอกข้อมูล</div>");
 
         }
@@ -254,27 +278,32 @@
                 data: formdata,
                 method: 'POST',
                 success: function(data) {
+                    if (data.text == "success") {
 
-                    setTimeout(function() {
-                        swal({
-                            title: "การแจ้งเตือน",
-                            text: "เข้าสู่ระบบสำเร็จ",
-                            icon: "success",
-                            button: "ตกลง"
-                        }).then((value) => {
-                            window.location = "storepost.php";
-                        });
-                    }, 1000)
+                        setTimeout(function() {
+                            swal({
+                                title: "การแจ้งเตือน",
+                                text: "เข้าสู่ระบบสำเร็จ",
+                                icon: "success",
+                                button: "ตกลง"
+                            }).then((value) => {
+                                window.location = "storepost.php";
+                            });
+                        }, 1000)
 
 
+                    } else {
+                        setTimeout(function() {
+                            $("#serrors").html("<div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</div>");
+                        }, 1000)
 
+                    }
                 },
-                error: function(data) {
-                    console.log(data.text);
-                    // console.error(data);
-                    // console.log("no");
-                    $("#serrors").html("<div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</div>");
-                }
+                // error: function(data) {
+                //     console.error(data);
+                //     console.log(data.text);
+                //     $("#errors").html("<div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</div>");
+                // }
             });
         } else {
             $("#serrors").html("<div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>กรุณากรอกข้อมูล</div>");

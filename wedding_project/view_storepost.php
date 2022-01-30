@@ -56,7 +56,7 @@ if(isset($_GET['del'])&& !empty($_GET['del'])){
     <!-- gallery -->
     <link rel="stylesheet" href="carousel-slideshow-mibreit/dist/mibreit-gallery/css/mibreitGallery.css" />
 
-    <title>wedding</title>
+    <title>Wedding Planner</title>
     <style>
         body {
             font-family: 'Prompt', sans-serif;

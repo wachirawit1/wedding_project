@@ -27,7 +27,7 @@ include('condb.php');
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <title>wedding</title>
+    <title>Wedding Planner</title>
     <style>
         body {
             font-family: 'Prompt', sans-serif;

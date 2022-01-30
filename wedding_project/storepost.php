@@ -60,7 +60,7 @@
             })
         }
         </script>
-        <title>wedding</title>
+        <title>Wedding Planner</title>
         <style>
             body {
                 font-family: 'Prompt', sans-serif;
@@ -159,7 +159,7 @@
                 </div>
             </div>
             <hr>
-            <div class="row d-block justify-content-center">
+            <div class="row justify-content-center">
 
 
                 <?php

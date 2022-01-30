@@ -39,7 +39,7 @@ include('condb.php');
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <title>wedding</title>
+    <title>Wedding Planner</title>
     <style>
         body {
             font-family: 'Prompt', sans-serif;
