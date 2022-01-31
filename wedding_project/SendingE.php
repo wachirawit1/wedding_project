@@ -95,7 +95,7 @@ include('condb.php');
 
         <?php
         $userid = $_SESSION['userid'];
-        $sql = "SELECT `header`, `detail`, `e_id` , `attach_file` FROM `email` WHERE e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid AND status = 1)";
+        $sql = "SELECT * FROM `email` WHERE e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid AND status = 1)";
         $query = mysqli_query($conn, $sql);
         $num_row = mysqli_num_rows($query);
         $row = mysqli_fetch_array($query);
@@ -287,10 +287,17 @@ include('condb.php');
                     </div>
                 <?php
                 } else { ?>
-                    <h4 class='my-3'>รายชื่อแขก</h4>
+                    <h4 class='my-3'>รายชื่อแขกที่ส่งการ์ดเชิญแล้ว</h4>
 
 
 
+                    <div class="row justify-content-end my-3">
+                        <div class="col col-2">
+                            <form action="report.php">
+                                <button class="btn btn-block btn-light" style="background-color: #dbb89a; color: white;">ดูผลลัพธ์ที่นี่</button>
+                            </form>
+                        </div>
+                    </div>
 
                     <table class="table bg-white table-hover ">
                         <thead class="thead-light">
@@ -354,12 +361,13 @@ include('condb.php');
         }
 
         let count = <?= $i ?>;
+
+
         //บันทึกข้อความที่เพิ่มในการส่งเมล
         function saveEmail() {
             var header = $('#header');
             var detail = $('#detail');
             let fileName = $('#fileName');
-            let img = $('#imgInp');
 
             let file_data = $('#imgInp').prop("files")[0];
             let form_data = new FormData();
@@ -374,7 +382,7 @@ include('condb.php');
             // }
 
 
-            if (isNotEmpty(header) && isNotEmpty(detail) && file_data ) {
+            if (isNotEmpty(header) && isNotEmpty(detail) && fileName) {
                 $('#email_list').css('display', '');
 
 
@@ -480,7 +488,7 @@ include('condb.php');
                 success: function(data) {
                     console.log(data);
                     let append_element = $("#excel_data").html();
-                    $("#here").append(append_element);
+                    $("#here").html(append_element);
 
                     $("#enable").html('บันทึกและส่ง');
 

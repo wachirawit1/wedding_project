@@ -295,28 +295,7 @@
                         </div>
                     <?php } ?>
 
-                    <div class="col">
-                        <center><i class="fas fa-angle-double-right" id="arrow"></i></center>
-                    </div>
-
-                    <div class="col" style=" width: 50px; height:100px">
-                        <div class="card">
-                            <div class="card-body">
-                                <!-- คำนวณเงิน -->
-                                <center>
-                                    <a href="report.php" class="btn">
-                                        <i class="fas fa-check-square" id="icon"></i>
-                                    </a>
-                                </center>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col">
-                                <p class="text-center ">ดูรายงาน</p>
-                            </div>
-                        </div>
-                    </div>
-
+                    
 
                 </div>
 

@@ -169,9 +169,7 @@ include('condb.php');
             <div class="col col-md-1">
                 <a href="edit_schedule.php" class="btn btn-primary"><i class="fas fa-edit">แก้ไข</i></a>
             </div>
-            <div class="col col-md-1">
-                <button class="btn btn-success">สำเร็จ</button>
-            </div>
+            
         </div>
 
         <div class="overflow-auto" style=" height: 500px; ">

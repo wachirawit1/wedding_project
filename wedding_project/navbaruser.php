@@ -48,7 +48,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: 90px;">
                         <a class="dropdown-item" href="profile.php">ดูข้อมูลส่วนตัว</a>
 
-                        <a class="dropdown-item" href="#">งานที่กำลังทำ</a>
+                        <!-- <a class="dropdown-item" href="#">งานที่กำลังทำ</a> -->
                         <div class="dropdown-divider"></div>
 
                         <!-- Button trigger modal -->
@@ -61,7 +61,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-5" aria-controls="navbarSupportedContent-5" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent-5">
+            <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent-5">
 
                 <ul class="navbar-nav ml-auto nav-flex-icons">
                     <li class="nav-item avatar dropdown">
@@ -89,7 +89,7 @@
                         </div>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </ul>
     </div>
 </nav>

@@ -89,7 +89,7 @@ include('condb.php');
 
 
     <div class="container">
-        <div class="row mt-3">
+        <div class="row my-3">
             <div class="col-4 ">
                 <?php
 
@@ -108,7 +108,6 @@ include('condb.php');
                 <div class="list-group shadow" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">ข้อมูล</a>
                     <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">อุปกรณ์</a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">การตอบรับการเข้าร่วมงาน</a>
                 </div>
 
             </div>
@@ -132,6 +131,98 @@ include('condb.php');
 
                             <div class="d-flex justify-content-center p-4">
                                 <span class="text-success" style="font-size: 19px;"><?php echo "งบประมาณที่ใช้ : " . number_format($row['total_budget'], 2) . " บาท"; ?></span>
+                            </div>
+
+                            <!-- การตอบกลับอีเมล -->
+                            <?php
+                            $userid = $_SESSION['userid'];
+                            $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))";
+                            $query = mysqli_query($conn, $sql);
+                            $num_rows = mysqli_num_rows($query);
+                            $n = 1;
+                            ?>
+
+                            <div class="py-2 d-flex justify-content-end">
+
+                                <select id="myFilter" class="form-control" style="width: 9rem;">
+                                    <option value="100">ทั้งหมด</option>
+                                    <option value="">รอการตอบรับ</option>
+                                    <option value="accept">เข้าร่วม</option>
+                                    <option value="reject">ไม่เข้าร่วม</option>
+                                    <option value="notsure">ไม่แน่ใจ</option>
+                                </select>
+
+                                <button class="btn btn-success ml-2" onclick="ExportToExcel('xlsx')">
+                                    <i class="bi bi-file-earmark-excel"></i>ดาวน์โหลด
+                                </button>
+
+                            </div>
+                            <div class="overflow-auto" style="height: auto;">
+                                <?php
+                                if ($num_rows == 0) { ?>
+                                    <table class="table mt-1 bg-white table-hover">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">ชื่อ-นามสกุล</th>
+                                                <th scope="col">ความสัมพันธ์</th>
+                                                <th scope="col">ที่อยู่อีเมล</th>
+                                                <th scope="col">การตอบรับ</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <!-- แจ้งเตือน -->
+                                    <div class="alert alert-warning" role="alert">
+                                        ดูเหมือนว่าคุณยังไม่ได้ส่งอีเมลใช่ไหม? <a href="SendingE.php" class="alert-link">กลับไปส่งอีเมลเดี๋ยวนี้</a>
+                                    </div>
+
+                                <?php } else { ?>
+                                    <table id="tbl_exporttable_to_xls" class="table mt-1 bg-white table-hover">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">ชื่อ-นามสกุล</th>
+                                                <th scope="col">ความสัมพันธ์</th>
+                                                <th scope="col">ที่อยู่อีเมล</th>
+                                                <th scope="col">การตอบรับ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="myTable">
+                                            <?php while ($row = mysqli_fetch_array($query)) { ?>
+                                                <tr>
+                                                    <th scope="row"><?= $n ?></th>
+                                                    <td><?= $row['e_name'] ?></td>
+                                                    <td>
+                                                        <?php if ($row['relation'] == "") {
+                                                            echo "ไม่ระบุ";
+                                                        } else {
+                                                            echo $row['relation'];
+                                                        } ?>
+                                                    </td>
+                                                    <td><?= $row['address'] ?></td>
+                                                    <td class="replying">
+                                                        <?php
+                                                        $reply = $row['replying'];
+                                                        if ($reply == "accept") {
+                                                            $reply = "เข้าร่วม";
+                                                            echo $reply;
+                                                        } else if ($reply == "reject") {
+                                                            $reply = "ไม่เข้าร่วม";
+                                                            echo $reply;
+                                                        } else if ($reply == "notsure") {
+                                                            $reply = "ไม่แน่ใจ";
+                                                            echo $reply;
+                                                        } else {
+                                                            $reply = "รอการตอบรับ";
+                                                            echo $reply;
+                                                        } ?>
+                                                    </td>
+                                                </tr>
+                                            <?php $n++;
+                                            } ?>
+                                        </tbody>
+                                    </table>
+                                <?php } ?>
                             </div>
 
                         </div>
@@ -226,99 +317,7 @@ include('condb.php');
                                 </div>
                             </div>
                         </div>
-                        <!-- data3 -->
-                        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-                            <?php
-                            $userid = $_SESSION['userid'];
-                            $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))";
-                            $query = mysqli_query($conn, $sql);
-                            $num_rows = mysqli_num_rows($query);
-                            $n = 1;
-                            ?>
 
-                            <div class="py-2 d-flex justify-content-end">
-
-                                <select id="myFilter" class="form-control" style="width: 9rem;">
-                                    <option value="100">ทั้งหมด</option>
-                                    <option value="">รอการตอบรับ</option>
-                                    <option value="accept">เข้าร่วม</option>
-                                    <option value="reject">ไม่เข้าร่วม</option>
-                                    <option value="notsure">ไม่แน่ใจ</option>
-                                </select>
-
-                                <button class="btn btn-success ml-2" onclick="ExportToExcel('xlsx')">
-                                    <i class="bi bi-file-earmark-excel"></i>ดาวน์โหลด
-                                </button>
-
-                            </div>
-                            <div class="overflow-auto" style="height: auto;">
-                                <?php
-                                if ($num_rows == 0) { ?>
-                                    <table class="table mt-1 bg-white table-hover">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">ชื่อ-นามสกุล</th>
-                                                <th scope="col">ความสัมพันธ์</th>
-                                                <th scope="col">ที่อยู่อีเมล</th>
-                                                <th scope="col">การตอบรับ</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                    <!-- แจ้งเตือน -->
-                                    <div class="alert alert-warning" role="alert">
-                                        ดูเหมือนว่าคุณยังไม่ได้ส่งอีเมบใช่ไหม? <a href="SendingE.php" class="alert-link">กลับไปส่งอีเมลเดี๋ยวนี้</a>
-                                    </div>
-
-                                <?php } else { ?>
-                                    <table id="tbl_exporttable_to_xls" class="table mt-1 bg-white table-hover">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">ชื่อ-นามสกุล</th>
-                                                <th scope="col">ความสัมพันธ์</th>
-                                                <th scope="col">ที่อยู่อีเมล</th>
-                                                <th scope="col">การตอบรับ</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="myTable">
-                                            <?php while ($row = mysqli_fetch_array($query)) { ?>
-                                                <tr>
-                                                    <th scope="row"><?= $n ?></th>
-                                                    <td><?= $row['e_name'] ?></td>
-                                                    <td>
-                                                        <?php if ($row['relation'] == "") {
-                                                            echo "ไม่ระบุ";
-                                                        } else {
-                                                            echo $row['relation'];
-                                                        } ?>
-                                                    </td>
-                                                    <td><?= $row['address'] ?></td>
-                                                    <td class="replying">
-                                                        <?php
-                                                        $reply = $row['replying'];
-                                                        if ($reply == "accept") {
-                                                            $reply = "เข้าร่วม";
-                                                            echo $reply;
-                                                        } else if ($reply == "reject") {
-                                                            $reply = "ไม่เข้าร่วม";
-                                                            echo $reply;
-                                                        } else if ($reply == "notsure") {
-                                                            $reply = "ไม่แน่ใจ";
-                                                            echo $reply;
-                                                        } else {
-                                                            $reply = "รอการตอบรับ";
-                                                            echo $reply;
-                                                        } ?>
-                                                    </td>
-                                                </tr>
-                                            <?php $n++;
-                                            } ?>
-                                        </tbody>
-                                    </table>
-                                <?php } ?>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
