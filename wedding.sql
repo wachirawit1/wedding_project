@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2022 at 04:59 PM
+-- Generation Time: Jan 31, 2022 at 02:56 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -273,38 +273,39 @@ CREATE TABLE `item_event` (
 CREATE TABLE `item_list` (
   `list_id` varchar(6) NOT NULL,
   `item_name` varchar(50) NOT NULL,
-  `amount` varchar(10) NOT NULL
+  `amount` varchar(10) NOT NULL,
+  `t_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `item_list`
 --
 
-INSERT INTO `item_list` (`list_id`, `item_name`, `amount`) VALUES
-('l0001', 'พานขันหมาก', '1'),
-('l0002', 'พานสิดสอดทองหมั้น', '1'),
-('l0003', 'พานแหวนหมั้น', '1'),
-('l0004', 'พานธูปเทียนแพ', '1'),
-('l0005', 'พานต้นกล้วย', '1 คู่'),
-('l0006', 'พานต้นอ้อย', '1 คู่'),
-('l0007', 'พานขันหมากโท', '1'),
-('l0008', 'พานเชิญขันหมาก', '1'),
-('l0009', 'ชุดโต๊ะหมู่บูชา', '1'),
-('l0010', 'แจกันดอกไม้', '2 ชุด'),
-('l0011', 'ธูป', '3 ดอก'),
-('l0012', 'เทียนสีเหลือง', '2'),
-('l0013', 'เทียนต่อ', '1'),
-('l0014', 'เชิงเทียนและกระถางธูป', '1'),
-('l0015', 'อาสนะ', '9 ที่'),
-('l0016', 'ที่กรวดน้ำ กระโถน แก้วน้ำ ทิชชู่', '1 ชุด'),
-('l0017', 'ขันน้ำมนต์และที่สำหรับประพรมน้ำมนต์', '1 ชุด'),
-('l0018', 'แป้งเจิม', '1'),
-('l0019', 'ชุดเครื่องเซ่นสำหรับพระพุทธและพระภูมิเจ้าที่', '1'),
-('l0020', 'อาหารสำหรับตักบาตร ขันข้าว ทัพพี', '1 ชุด'),
-('l0021', 'ดอกไม้ธูปเทียน ถวายพระ', '9 ชุด'),
-('l0022', 'พานใส่ของถวายพระ', '1'),
-('l0023', 'ด้ายสายสิญจน์สำหรับทำพิธี', '1'),
-('l0024', 'สายสิญจน์ที่ทำเป็นมงคลคู่ หรือมงคลแฝด', '1');
+INSERT INTO `item_list` (`list_id`, `item_name`, `amount`, `t_id`) VALUES
+('l0001', 'พานขันหมาก', '1', 1),
+('l0002', 'พานสิดสอดทองหมั้น', '1', 1),
+('l0003', 'พานแหวนหมั้น', '1', 1),
+('l0004', 'พานธูปเทียนแพ', '1', 1),
+('l0005', 'พานต้นกล้วย', '1 คู่', 1),
+('l0006', 'พานต้นอ้อย', '1 คู่', 1),
+('l0007', 'พานขันหมากโท', '1', 1),
+('l0008', 'พานเชิญขันหมาก', '1', 1),
+('l0009', 'ชุดโต๊ะหมู่บูชา', '1', 1),
+('l0010', 'แจกันดอกไม้', '2 ชุด', 1),
+('l0011', 'ธูป', '3 ดอก', 1),
+('l0012', 'เทียนสีเหลือง', '2', 1),
+('l0013', 'เทียนต่อ', '1', 1),
+('l0014', 'เชิงเทียนและกระถางธูป', '1', 1),
+('l0015', 'อาสนะ', '9 ที่', 1),
+('l0016', 'ที่กรวดน้ำ กระโถน แก้วน้ำ ทิชชู่', '1 ชุด', 1),
+('l0017', 'ขันน้ำมนต์และที่สำหรับประพรมน้ำมนต์', '1 ชุด', 1),
+('l0018', 'แป้งเจิม', '1', 1),
+('l0019', 'ชุดเครื่องเซ่นสำหรับพระพุทธและพระภูมิเจ้าที่', '1', 1),
+('l0020', 'อาหารสำหรับตักบาตร ขันข้าว ทัพพี', '1 ชุด', 1),
+('l0021', 'ดอกไม้ธูปเทียน ถวายพระ', '9 ชุด', 1),
+('l0022', 'พานใส่ของถวายพระ', '1', 1),
+('l0023', 'ด้ายสายสิญจน์สำหรับทำพิธี', '1', 1),
+('l0024', 'สายสิญจน์ที่ทำเป็นมงคลคู่ หรือมงคลแฝด', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -386,7 +387,11 @@ CREATE TABLE `store` (
   `s_email` varchar(50) NOT NULL,
   `cate_id` int(10) NOT NULL,
   `s_tel` varchar(10) NOT NULL,
+  `s_address` varchar(200) NOT NULL,
   `s_img` varchar(100) NOT NULL,
+  `IDcard_img` varchar(200) NOT NULL,
+  `status` int(11) NOT NULL,
+  `note` text NOT NULL,
   `date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -394,8 +399,11 @@ CREATE TABLE `store` (
 -- Dumping data for table `store`
 --
 
-INSERT INTO `store` (`s_id`, `username`, `password`, `s_name`, `s_email`, `cate_id`, `s_tel`, `s_img`, `date`) VALUES
-(1, 'user', '25f9e794323b453885f5181f1b624d0b', 'store', 'store@store.com', 1, '0613254595', '161632991520210827_215418.jpg', '2021-08-27');
+INSERT INTO `store` (`s_id`, `username`, `password`, `s_name`, `s_email`, `cate_id`, `s_tel`, `s_address`, `s_img`, `IDcard_img`, `status`, `note`, `date`) VALUES
+(1, 'user', '25f9e794323b453885f5181f1b624d0b', 'store', 'store@store.com', 1, '0613254595', '', '161632991520210827_215418.jpg', '', 1, '', '2021-08-27'),
+(5, 'test1', '25f9e794323b453885f5181f1b624d0b', 'test', 'test@test.com', 1, '0123456789', '', '205375693620220114_013218.jpg', '', 2, 'ข้อมูลผิดพลาด', '2022-01-14'),
+(6, 'test2', '25f9e794323b453885f5181f1b624d0b', 'test2', 'test2@test.com', 2, '0123456789', '', '135469897220220114_013243.jpg', '', 0, '', '2022-01-14'),
+(7, 'user123', 'f5bb0c8de146c67b44babbf4e6584cc0', 'assaaa', 'sonaaaaaekaky@gmail.com', 1, '0657377779', 'sdadasd', 'store.png', 'store.png', 2, 'test', '2022-01-29');
 
 -- --------------------------------------------------------
 
@@ -574,7 +582,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT for table `store`
 --
 ALTER TABLE `store`
-  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `traditional`
