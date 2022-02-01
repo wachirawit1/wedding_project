@@ -9,12 +9,12 @@ if (isset($_SESSION['username'])) {
   <?php } elseif (isset($_SESSION['type']) == "02") { ?>
     <script>
       alert('คุณได้เข้าสู่ระบบแล้ว');
-      window.location = 'mainshop.php';
+      window.location = 'storepost.php';
     </script>
   <?php } else { ?>
     <script>
       alert('คุณได้เข้าสู่ระบบแล้ว');
-      window.location = 'mainadmin.php';
+      window.location = 'traditional.php';
     </script>
   <?php } ?>
 
@@ -82,7 +82,7 @@ if (isset($_SESSION['username'])) {
                   <img src="assets/images/new_logo.png" alt="logo" class="" width="25%">
                 </div> -->
                 <p class="login-card-description">เข้าสู่ระบบ</p>
-                <form action="cindex.php" method="POST">
+                <form action="clogin.php" method="POST">
                   <!-- notification -->
 
                   <?php
@@ -176,7 +176,7 @@ if (isset($_SESSION['username'])) {
       const password = $('#password');
       btn.click(function() {
         $.ajax({
-          url: 'cindex.php',
+          url: 'clogin.php',
           type: 'POST',
           data: {
             username: username.val(),

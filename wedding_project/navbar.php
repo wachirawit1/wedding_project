@@ -1,5 +1,28 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<?php
+session_start();
+if (isset($_SESSION['username'])) {
+    if (isset($_SESSION['type']) == "01") { ?>
+        <script>
+            alert('คุณได้เข้าสู่ระบบแล้ว');
+            window.location.replace('mainuser.php');
+        </script>
+    <?php } elseif (isset($_SESSION['type']) == "02") { ?>
+        <script>
+            alert('คุณได้เข้าสู่ระบบแล้ว');
+            window.location.replace('storepost.php');
+        </script>
+    <?php } else { ?>
+        <script>
+            alert('คุณได้เข้าสู่ระบบแล้ว');
+            window.location.replace('traditional.php');
+        </script>
+    <?php } ?>
 
+<?php } else {
+    echo "";
+}
+?>
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow sticky-top">
     <a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" width="70"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,31 +53,8 @@
 
 </nav>
 
-<!-- form login -->
-<!-- <?php
-        session_start();
-        if (isset($_SESSION['username'])) {
-            if (isset($_SESSION['type']) == "01") { ?>
-        <script>
-            alert('คุณได้เข้าสู่ระบบแล้ว');
-            window.location = 'mainuser.php';
-        </script>
-    <?php } elseif (isset($_SESSION['type']) == "02") { ?>
-        <script>
-            alert('คุณได้เข้าสู่ระบบแล้ว');
-            window.location = 'mainshop.php';
-        </script>
-    <?php } else { ?>
-        <script>
-            alert('คุณได้เข้าสู่ระบบแล้ว');
-            window.location = 'mainadmin.php';
-        </script>
-    <?php } ?>
+<!-- form login user -->
 
-<?php } else {
-            echo "";
-        }
-?> -->
 <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -170,10 +170,12 @@
 
                                 <div class="input-group-append">
                                     <span class="input-group-text btn" onclick="showpassword()"><i class="far fa-eye "></i></span>
-                                    <!-- <button type="button" id="eyeop" onclick="showpassword()" class="input-group-text"><span class="glyphicon glyphicon-eye-open"></span></button> -->
                                 </div>
                             </div>
                         </span>
+                        <div class="d-flex justify-content-end mt-3">
+                            <a href="forgot_pass.php">ลืมรหัสผ่าน</a>
+                        </div>
 
                         <script type="text/javascript">
                             function showpassword() {
@@ -205,12 +207,13 @@
 <script>
     // user*****
     function login_user() {
+        console.log("blaaaa");
         if ($('#username').val() != "" && $('#password').val() != "") {
             let formdata = new FormData();
             formdata.append("username", $('#username').val());
             formdata.append('password', $('#password').val());
             $.ajax({
-                url: 'cindex.php',
+                url: 'clogin.php',
                 dataType: 'json',
                 cache: false,
                 contentType: false,

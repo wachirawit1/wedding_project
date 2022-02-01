@@ -50,6 +50,7 @@ include('condb.php');
 <body>
     <?php
     $id = $_GET['id'];
+    $type = $_GET['type'];
     ?>
     <div class="mt-3" id="content">
         <div class="card text-center shadow mx-auto my-auto" style="width: 30rem;">
@@ -67,6 +68,7 @@ include('condb.php');
                 <div class="form-group">
                     <input class="form-control" type="password" placeholder="ยืนยันรหัสผ่าน" id="verifypass">
                     <input type="hidden" id="id" value="<?= $id ?>">
+                    <input type="hidden" id="type" value="<?= $type ?>">
                 </div>
                 <button type="button" class="btn btn-block btn-primary" onclick="changePass()">ยืนยัน</button>
             </div>
@@ -106,6 +108,7 @@ include('condb.php');
         let newpass = $('#newpass');
         let verifypass = $('#verifypass');
         let id = $('#id');
+        let type = $('#type');
 
         function changePass() {
             if (newpass.val() == "" || verifypass.val() == "") {
@@ -133,23 +136,26 @@ include('condb.php');
 
                     verifypass.val(null);
                 } else {
-                    console.log(newpass.val());
-                    console.log(id.val());
                     $.ajax({
                         url: 'change_password_db.php',
                         method: 'POST',
                         dataType: 'json',
                         data: {
                             newpass: newpass.val(),
-                            id: id.val()
+                            id: id.val(),
+                            type: type.val()
                         },
                         success: function(data) {
-                            $('#show').html('<div class="alert alert-success" role="alert">เปลี่ยนรหัสผ่านเสร็จสิ้น</div>')
                             // $('.card').css('dispaly', 'none');
                             // $('#card').css('display', 'block');
+                            $('#show').html('<div class="alert alert-success" role="alert">เปลี่ยนรหัสผ่านเสร็จสิ้น</div>')
                             setTimeout(function() {
                                 window.location.replace('index.php');
                             }, 2000);
+                            console.log(data.status);
+                            console.log(data.id);
+                            console.log(data.type);
+
                         },
                         error: function(data) {
                             console.error(data)

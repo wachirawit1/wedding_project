@@ -8,12 +8,12 @@ if (isset($_SESSION['username'])) {
   <?php } elseif (isset($_SESSION['type']) == "02") { ?>
     <script>
       alert('คุณได้สมัครสมาชิกแล้ว');
-      window.location = 'mainshop.php';
+      window.location = 'storepost.php';
     </script>
   <?php } else { ?>
     <script>
       alert('คุณได้สมัครสมาชิกแล้ว');
-      window.location = 'mainshop.php';
+      window.location = 'storepost.php';
     </script>
   <?php } ?>
 

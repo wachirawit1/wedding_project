@@ -9,6 +9,7 @@ if (isset($_POST['email'])) {
     $header = "เปลี่ยนรหัสผ่าน";
 
     $email = $_POST['email'];
+    
 
     $sql = "SELECT `id`, `email` FROM `member` WHERE email = '$email'";
     $check = mysqli_query($conn, $sql);
@@ -19,11 +20,11 @@ if (isset($_POST['email'])) {
     if ($num > 0) {
         $row = mysqli_fetch_array($check);
         $id = $row['id'];
-
+        $type = "user";
         $detail = 'กรุณาเปลี่ยนรหัสผ่านที่ลิงก์ข้างล่างนี้ <br><br>
     
         ---------------------------------------------------------------------------<br>
-        http://localhost/wedding_project/change_password.php?id=' . "$id" . '        <br>
+        http://localhost/wedding_project/change_password.php?id=' . "$id" . '&type=' . $type . '       <br>
         ----------------------------------------------------------------------------
         ';
 
@@ -65,11 +66,12 @@ if (isset($_POST['email'])) {
         if ($num > 0) {
             $row = mysqli_fetch_array($check);
             $id = $row['s_id'];
+            $type = "store";
 
             $detail = 'กรุณาเปลี่ยนรหัสผ่านที่ลิงก์ข้างล่างนี้ <br><br>
         
             ---------------------------------------------------------------------------<br>
-            http://localhost/wedding_project/change_password.php?id=' . "$id" . '        <br>
+            http://localhost/wedding_project/change_password.php?id=' . "$id" . '&type=' . $type . '        <br>
             ----------------------------------------------------------------------------
             ';
 
@@ -104,8 +106,7 @@ if (isset($_POST['email'])) {
                 $status = "failed";
                 $response = "Something is wrong" . $mail->ErrorInfo;
             }
-        }else{
-
+        } else {
         }
     }
 

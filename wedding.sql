@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2022 at 02:56 PM
+-- Generation Time: Feb 01, 2022 at 08:39 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -69,29 +69,53 @@ CREATE TABLE `activity_event` (
 
 INSERT INTO `activity_event` (`ae_id`, `a_id`, `list_id`, `price`, `e_id`, `ae_status`) VALUES
 (1, 'a0001', 'l0001', 200, '1', 'check'),
-(2, 'a0001', 'l0002', 0, '1', 'uncheck'),
-(3, 'a0001', 'l0003', 0, '1', 'uncheck'),
-(4, 'a0001', 'l0004', 0, '1', 'uncheck'),
-(5, 'a0001', 'l0005', 0, '1', 'uncheck'),
-(6, 'a0001', 'l0006', 0, '1', 'uncheck'),
-(7, 'a0001', 'l0007', 0, '1', 'uncheck'),
-(8, 'a0001', 'l0008', 0, '1', 'uncheck'),
-(9, 'a0002', 'l0009', 0, '1', 'uncheck'),
-(10, 'a0002', 'l0010', 0, '1', 'uncheck'),
-(11, 'a0002', 'l0011', 0, '1', 'uncheck'),
-(12, 'a0002', 'l0012', 0, '1', 'uncheck'),
-(13, 'a0002', 'l0013', 0, '1', 'uncheck'),
-(14, 'a0002', 'l0014', 0, '1', 'uncheck'),
-(15, 'a0002', 'l0015', 0, '1', 'uncheck'),
-(16, 'a0002', 'l0016', 0, '1', 'uncheck'),
-(17, 'a0002', 'l0017', 0, '1', 'uncheck'),
-(18, 'a0002', 'l0018', 0, '1', 'uncheck'),
-(19, 'a0002', 'l0019', 0, '1', 'uncheck'),
-(20, 'a0002', 'l0020', 0, '1', 'uncheck'),
-(21, 'a0002', 'l0021', 0, '1', 'uncheck'),
-(22, 'a0002', 'l0022', 0, '1', 'uncheck'),
-(23, 'a0002', 'l0023', 0, '1', 'uncheck'),
-(24, 'a0002', 'l0024', 0, '1', 'uncheck');
+(2, 'a0001', 'l0002', 100, '1', 'check'),
+(3, 'a0001', 'l0003', 100, '1', 'check'),
+(4, 'a0001', 'l0004', 100, '1', 'check'),
+(5, 'a0001', 'l0005', 100, '1', 'check'),
+(6, 'a0001', 'l0006', 150, '1', 'check'),
+(7, 'a0001', 'l0007', 200, '1', 'check'),
+(8, 'a0001', 'l0008', 200, '1', 'check'),
+(9, 'a0002', 'l0009', 100, '1', 'check'),
+(10, 'a0002', 'l0010', 100, '1', 'check'),
+(11, 'a0002', 'l0011', 100, '1', 'check'),
+(12, 'a0002', 'l0012', 100, '1', 'check'),
+(13, 'a0002', 'l0013', 100, '1', 'check'),
+(14, 'a0002', 'l0014', 100, '1', 'check'),
+(15, 'a0002', 'l0015', 100, '1', 'check'),
+(16, 'a0002', 'l0016', 100, '1', 'check'),
+(17, 'a0002', 'l0017', 100, '1', 'check'),
+(18, 'a0002', 'l0018', 100, '1', 'check'),
+(19, 'a0002', 'l0019', 100, '1', 'check'),
+(20, 'a0002', 'l0020', 250, '1', 'check'),
+(21, 'a0002', 'l0021', 400, '1', 'check'),
+(22, 'a0002', 'l0022', 300, '1', 'check'),
+(23, 'a0002', 'l0023', 120, '1', 'check'),
+(24, 'a0002', 'l0024', 150, '1', 'check'),
+(25, 'a0001', 'l0001', 0, '2', 'uncheck'),
+(26, 'a0001', 'l0002', 0, '2', 'uncheck'),
+(27, 'a0001', 'l0003', 0, '2', 'uncheck'),
+(28, 'a0001', 'l0004', 0, '2', 'uncheck'),
+(29, 'a0001', 'l0005', 0, '2', 'uncheck'),
+(30, 'a0001', 'l0006', 0, '2', 'uncheck'),
+(31, 'a0001', 'l0007', 0, '2', 'uncheck'),
+(32, 'a0001', 'l0008', 0, '2', 'uncheck'),
+(33, 'a0002', 'l0009', 0, '2', 'uncheck'),
+(34, 'a0002', 'l0010', 0, '2', 'uncheck'),
+(35, 'a0002', 'l0011', 0, '2', 'uncheck'),
+(36, 'a0002', 'l0012', 0, '2', 'uncheck'),
+(37, 'a0002', 'l0013', 0, '2', 'uncheck'),
+(38, 'a0002', 'l0014', 0, '2', 'uncheck'),
+(39, 'a0002', 'l0015', 0, '2', 'uncheck'),
+(40, 'a0002', 'l0016', 0, '2', 'uncheck'),
+(41, 'a0002', 'l0017', 0, '2', 'uncheck'),
+(42, 'a0002', 'l0018', 0, '2', 'uncheck'),
+(43, 'a0002', 'l0019', 0, '2', 'uncheck'),
+(44, 'a0002', 'l0020', 0, '2', 'uncheck'),
+(45, 'a0002', 'l0021', 0, '2', 'uncheck'),
+(46, 'a0002', 'l0022', 0, '2', 'uncheck'),
+(47, 'a0002', 'l0023', 0, '2', 'uncheck'),
+(48, 'a0002', 'l0024', 0, '2', 'uncheck');
 
 -- --------------------------------------------------------
 
@@ -200,7 +224,8 @@ CREATE TABLE `email` (
 --
 
 INSERT INTO `email` (`email_id`, `header`, `detail`, `e_id`, `attach_file`) VALUES
-(1, 'ทดสอบส่งอีเมลกับไฟล์แนบ', 'cvxv', 1, '1003781502-20220128_223055.png');
+(1, 'การ์ดเชิญงานแต่งงานของ ดริว และ เอี้ยง', 'วันที่ 12 มีนาคม พ.ศ. 2565 เป็นวันที่ฤกษ์งามยามดี เป็นงานแต่งงานของ ดริว และ เอี้ยง จึงขอเชิญชวนพ่อแม่พี่น้องมางานแต่งนี้ งานเช้าเวลา 8.00 น. เป็นต้นไป งานเย็น 17.00 น. ขอความกรุณาตอบกลับการเข้าร่วมงานในอีเมลด้วย ติดต่อ โทร 099-917-0023 ขอบคุณครับ', 1, '1519488048-20220201_010824.png'),
+(2, 'test 1', 'ฟดกหเด', 2, '2103518214-20220201_012528.png');
 
 -- --------------------------------------------------------
 
@@ -227,7 +252,12 @@ INSERT INTO `email_list` (`id`, `e_name`, `relation`, `address`, `e_status`, `em
 (2, 'สิงโต ทองคำ', '-', 'goldenlion@gmail.com', '', 1, ''),
 (3, 'โอ๋เอ๋ ดุ๊กดิ๊ก', 'เพื่อนเจ้าบ่าว', 'oadukdig@hotmail.com', '', 1, ''),
 (4, 'บิลลี่ อินทร์', '-', 'billy_intr@outlook.com', '', 1, ''),
-(5, 'ดริว ดริว', '-', 'wachirawitzy@gmail.com', '', 1, '');
+(5, 'ดริว ดริว', '-', 'wachirawitzy@gmail.com', '', 1, ''),
+(6, 'ดริว', '-', 'wachirawitku@kkuail.com', '', 2, ''),
+(7, 'ไก่', 'เพื่อใคร', 'khemloveice@gmail.com', '', 2, ''),
+(8, 'อารยา ภูตะวัน', 'เพื่อนเจ้าสาว', 'araya.po@kkumail.com', '', 2, ''),
+(9, 'ปอนด์', '-', 'kasama_ko@kkumail.com', '', 2, ''),
+(10, 'ดริว', 'เพื่อนเจ้าบ่าว', 'wachirawitku@kkumail.com', '', 2, '');
 
 -- --------------------------------------------------------
 
@@ -249,7 +279,8 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`e_id`, `userid`, `t_id`, `due_date`, `total_budget`, `status`) VALUES
-(1, '1', 1, '2022-03-12', 200, 1);
+(1, '1', 1, '2022-03-12', 3470, 1),
+(2, '3', 1, '2022-03-12', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -424,7 +455,8 @@ CREATE TABLE `traditional` (
 INSERT INTO `traditional` (`t_id`, `trad_name`, `trad_img`) VALUES
 (1, 'วัฒนธรรมไทย', '41589094720210418_021445.jpg'),
 (2, 'วัฒนธรรมจีน', '142000061320210418_023201.jpg'),
-(3, 'วัฒนธรรมสากล', '170043857820210418_030220.jpg');
+(3, 'วัฒนธรรมสากล', '170043857820210418_030220.jpg'),
+(4, 'อีสาน', '23125814420220201_021703.png');
 
 --
 -- Indexes for dumped tables
@@ -522,7 +554,7 @@ ALTER TABLE `traditional`
 -- AUTO_INCREMENT for table `activity_event`
 --
 ALTER TABLE `activity_event`
-  MODIFY `ae_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ae_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `activity_listitem`
@@ -546,19 +578,19 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `email`
 --
 ALTER TABLE `email`
-  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `email_list`
 --
 ALTER TABLE `email_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `e_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `e_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `item_event`
