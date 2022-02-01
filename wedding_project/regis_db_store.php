@@ -74,7 +74,7 @@ if (isset($_POST['register'])) {
 				echo "<script type='text/javascript'>";
 				echo "alert('สมัครเสร็จสิ้น');";
 
-				echo "window.location = 'login_store.php'; ";
+				echo "window.location = 'index.php'; ";
 				echo "</script>";
 			} else {
 				echo "<script type='text/javascript'>";
