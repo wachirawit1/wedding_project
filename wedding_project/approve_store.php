@@ -149,7 +149,7 @@ $row_data = mysqli_fetch_assoc($query_data);
                 <div class="card-footer text-center">
                     
                 <a href="approve_store_db.php?id=<?=$id?>" type="submit" onclick="return confirm('ต้องการอนุมัติร้านค้านี้ใช่หรือไม่')" class="btn btn-success">อนุมัติ</a>
-                <a href="approve_store.php?id=<?=$id?>&function=reject" class="btn btn-success">ไม่อนุมัติ</a>
+                <a href="approve_store.php?id=<?=$id?>&function=reject" class="btn btn-danger">ไม่อนุมัติ</a>
             <?php }elseif($row_data['status'] == 2){  ?>
                 <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">หมายเหตุ :</label>
