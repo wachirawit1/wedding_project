@@ -4,9 +4,13 @@
 <head>
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
+
     <!-- effect -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- icon -->
+    <script src="https://kit.fontawesome.com/80c612fc1e.js" crossorigin="anonymous"></script>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -88,8 +92,8 @@
         </div>
     </div> -->
     <div class="container">
-        <?php $category = $_GET['cate_name'] ;?>
-        <h2 class="text-secondary">หมวด <?=  "$category"?></h2>
+        <?php $category = $_GET['cate_name']; ?>
+        <h2 class="text-secondary">หมวด <?= "$category" ?></h2>
         <div class="row row-cols-1 row-cols-md-3 m-5">
 
             <?php
