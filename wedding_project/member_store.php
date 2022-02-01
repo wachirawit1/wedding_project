@@ -56,44 +56,45 @@ include('condb.php');
 </head>
 
 <script>
-    function sweet01(){
+    function sweet01() {
         Swal.fire({
             icon: 'success',
             title: 'ลบเรียบร้อยแล้ว',
-        }).then((result)=>{
-            window.location="member_store.php";
-            })
-        }
-        function sweet02(){
+        }).then((result) => {
+            window.location = "member_store.php";
+        })
+    }
+
+    function sweet02() {
         Swal.fire({
             icon: 'error',
             title: 'ลบไม่สำเร็จ',
-        }).then((result)=>{
-         window.history.back();
-            })
-        }
+        }).then((result) => {
+            window.history.back();
+        })
+    }
 </script>
+
 <body>
-    <?php 
-    if(isset($_GET['del']) && !empty($_GET['del'])){
+    <?php
+    if (isset($_GET['del']) && !empty($_GET['del'])) {
         $id = $_GET['del'];
         $del = "DELETE FROM store WHERE s_id = $id";
-        $query = mysqli_query($conn,$del);
+        $query = mysqli_query($conn, $del);
         if ($query) {
             echo "<script>";
-             echo "sweet01()";
-             echo "</script>";
-         
-          } else { 
+            echo "sweet01()";
+            echo "</script>";
+        } else {
             echo "<script>";
-             echo "sweet02()";
-             echo "</script>";
-          }
+            echo "sweet02()";
+            echo "</script>";
+        }
     }
     ?>
     <?php
     $keyword = null;
-    if(isset($_POST['search'])){
+    if (isset($_POST['search'])) {
         $keyword = $_POST['search'];
     }
     if (!isset($_SESSION['username'])) { ?>
@@ -107,89 +108,87 @@ include('condb.php');
         exit;
     }
     ?>
-     <?php
+    <?php
 
-include('navbar_admin.php');
-?>
-<div class="card container py-5 my-5 bg-light shadow rounded" id="box"  >
-<div class="container " >
-<div class="col d-flex justify-content-between">
-            <div class="p-2">
-            <?php
-            if(isset($_POST["action"]) && $_POST["action"] == "search"){
-                echo "ผลการค้นหา : \"".$_POST["search"]."\"";
-                $where_condition = "WHERE cate_name LIKE '%".$_POST["strsearch"]."%' ";
-            }else{
-                $where_condition = "";
-            }
-            ?>
-        </div>
-        </div>
-        <table class="table table-light table-hover  text-center">
-            <thead>
-                <th scope="col">#</th>
-                <th scope="col">ชื่อร้านค้า</th>
-                <th scope="col">Email</th>
-                <th scope="col">บัตรประชาชน</th>
-                <th scope="col">สถานะ</th>
-                <th>ตัวเลือก</th>
-            </thead>
-            <?php include('condb.php');
+    include('navbar_admin.php');
+    ?>
+    <div class="card container py-5 my-5 bg-light shadow rounded" id="box">
+        <div class="container ">
+            <div class="col d-flex justify-content-between">
+                <div class="p-2">
+                    <?php
+                    if (isset($_POST["action"]) && $_POST["action"] == "search") {
+                        echo "ผลการค้นหา : \"" . $_POST["search"] . "\"";
+                        $where_condition = "WHERE cate_name LIKE '%" . $_POST["strsearch"] . "%' ";
+                    } else {
+                        $where_condition = "";
+                    }
+                    ?>
+                </div>
+            </div>
+            <table class="table table-light table-hover  text-center">
+                <thead>
+                    <th scope="col">#</th>
+                    <th scope="col">ชื่อร้านค้า</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">บัตรประชาชน</th>
+                    <th scope="col">สถานะ</th>
+                    <th>ตัวเลือก</th>
+                </thead>
+                <?php include('condb.php');
 
-            if(!isset($_POST['search'])){
+                if (!isset($_POST['search'])) {
 
-                $sql = "SELECT * FROM store  ";
-                $query = mysqli_query($conn, $sql);
-    
-            }
-            else{
-                
-                $sql = "SELECT * FROM store WHERE LIKE '%".$keyword."%'";
-                $query = mysqli_query($conn, $sql);
-            }
-            ?>
-            <tbody>
+                    $sql = "SELECT * FROM store  ";
+                    $query = mysqli_query($conn, $sql);
+                } else {
 
-                <?php
-                $i = 1;
-                while ($row = mysqli_fetch_array($query)) {
+                    $sql = "SELECT * FROM store WHERE LIKE '%" . $keyword . "%'";
+                    $query = mysqli_query($conn, $sql);
+                }
                 ?>
+                <tbody>
 
-                    <!-- <th scope="row"><?php echo $i++ ?></th> -->
-                    <th class="align-middle " scope="row"><?php echo $row['s_id'] ?></th>
-                    <td class="align-middle"><?php echo $row['s_name'] ?></td>
-                    <td class="align-middle"><?=$row['s_email']?></td>
-                    <td class="align-middle"><img src="assets/category_img/<?= $row['IDcard_img'] ?>" width="150px"></td>
-                    <td class="align-middle">
-                    <?php if($row['status'] == 0){ ?>
-                        <p class="text-warning">รอการตรวจสอบ</p>
-                    <?php }elseif($row['status'] == 1){ ?>
-                        <p class="text-success">อนุมัติแล้ว</p>
-                    <?php }else{ ?>
-                        <p class="text-danger">ไม่อนุมัติ</p>
+                    <?php
+                    $i = 1;
+                    while ($row = mysqli_fetch_array($query)) {
+                    ?>
+
+                        <!-- <th scope="row"><?php echo $i++ ?></th> -->
+                        <th class="align-middle " scope="row"><?php echo $row['s_id'] ?></th>
+                        <td class="align-middle"><?php echo $row['s_name'] ?></td>
+                        <td class="align-middle"><?= $row['s_email'] ?></td>
+                        <td class="align-middle"><img src="assets/category_img/<?= $row['IDcard_img'] ?>" width="150px"></td>
+                        <td class="align-middle">
+                            <?php if ($row['status'] == 0) { ?>
+                                <p class="text-warning">รอการตรวจสอบ</p>
+                            <?php } elseif ($row['status'] == 1) { ?>
+                                <p class="text-success">อนุมัติแล้ว</p>
+                            <?php } else { ?>
+                                <p class="text-danger">ไม่อนุมัติ</p>
+                            <?php } ?>
+                        </td>
+
+                        <td class="align-middle">
+                            <?php if ($row['status'] == 0) { ?>
+                                <a href="approve_store.php?id=<?= $row['s_id'] ?>" class="btn btn-warning">ตรวจสอบ</a>
+                            <?php } elseif ($row['status'] == 1) { ?>
+                                <a href="approve_store.php?id=<?= $row['s_id'] ?>" class="btn btn-secondary">ดูข้อมูล</a>
+                            <?php } else { ?>
+                                <a href="approve_store.php?id=<?= $row['s_id'] ?>" class="btn btn-secondary">ดูข้อมูล</a>
+                            <?php } ?>
+                            <a href="#delete<?php echo $row['s_id']; ?>" class="btn btn-danger" data-toggle="modal">ลบ</a>
+                        </td>
+                        </tr>
                     <?php } ?>
-                    </td>
+                </tbody>
 
-                    <td class="align-middle">
-                        <?php if($row['status'] == 0){ ?>
-                            <a href="approve_store.php?id=<?= $row['s_id'] ?>" class="btn btn-warning">ตรวจสอบ</a>
-                        <?php }elseif($row['status'] == 1){?>
-                            <a href="approve_store.php?id=<?= $row['s_id'] ?>" class="btn btn-secondary">ดูข้อมูล</a>
-                        <?php }else{ ?>
-                            <a href="approve_store.php?id=<?= $row['s_id'] ?>" class="btn btn-secondary">ดูข้อมูล</a>
-                        <?php } ?>
-                        <a href="#delete<?php echo $row['s_id']; ?>" class="btn btn-danger" data-toggle="modal">ลบ</a>
-                    </td>
-                    </tr>
-                <?php } ?>
-            </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
 
-        </table>
-        </div>
-        </div>
-    </div> 
-    
-</div> 
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -210,10 +209,10 @@ include('navbar_admin.php');
             </div>
         </div>
     </div>
-   
-    
 
-    
+
+
+
 
 
     <?php
@@ -238,7 +237,7 @@ include('navbar_admin.php');
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                            <a href="?del=<?=$s_id?>" type="submit" class="btn btn-primary">ยืนยัน</a>
+                            <a href="?del=<?= $s_id ?>" type="submit" class="btn btn-primary">ยืนยัน</a>
                         </div>
                     </form>
                 </div>
@@ -248,23 +247,8 @@ include('navbar_admin.php');
     <?php
     }
     ?>
-</div>
+    </div>
 
-    
-
-
-<footer class="bg-light text-center text-lg-start bg-white border fixed-bottom" >
-        <!-- Copyright -->
-        <div class="text-center p-3">
-            © 2020 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
-
-
-
- 
 
 
 
