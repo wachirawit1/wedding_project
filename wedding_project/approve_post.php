@@ -9,7 +9,7 @@ if (isset($_GET['id'])) {
     $p_id = $_POST['p_id'];
 }
 
-$sql_select = "SELECT *,post.name as p_name,post.id as p_id FROM post LEFT JOIN store ON post.u_id = store.s_id WHERE post.id = $p_id";
+$sql_select = "SELECT *,post.name as p_name,post.id as p_id,post.status FROM post LEFT JOIN store ON post.u_id = store.s_id WHERE post.id = $p_id";
 $query_select = mysqli_query($conn, $sql_select);
 $row_select = mysqli_fetch_assoc($query_select);
 ?>
@@ -317,7 +317,26 @@ $row_select = mysqli_fetch_assoc($query_select);
         }
     </script>
 
-
+<!-- Modal -->
+<div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ต้องการออกจากระบบ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">ยกเลิก</button>
+                    <a href="logout.php?logout=1" type="button" class="btn btn-danger">ยืนยัน</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

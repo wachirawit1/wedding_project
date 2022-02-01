@@ -77,30 +77,8 @@ include('condb.php');
     <?php
 
     include('navbar_admin.php');
-
-
     ?>
-    <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน!!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ต้องการออกจากระบบ?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">ยกเลิก</button>
-                    <a href="logout.php?logout=1" type="button" class="btn btn-danger">ยืนยัน</a>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="card container py-5 my-5 bg-light shadow rounded" id="box">
-
 
         <table class="table table-light table-hover text-center align-center">
             <thead>
@@ -114,11 +92,11 @@ include('condb.php');
 
             if (!isset($_POST['search'])) {
 
-                $sql = "SELECT *,post.name as p_name,post.id as p_id FROM post LEFT JOIN store ON post.u_id = store.s_id ORDER BY post.id DESC";
+                $sql = "SELECT *,post.name as p_name,post.id as p_id,post.status FROM post LEFT JOIN store ON post.u_id = store.s_id ORDER BY post.id DESC";
                 $query = mysqli_query($conn, $sql);
             } else {
 
-                $sql = "SELECT *,post.name as p_name,post.id as p_id FROM post , store where post.u_id = store.s_id and store.s_name LIKE '%" . $keyword . "%' ORDER BY post.id DESC";
+                $sql = "SELECT *,post.name as p_name,post.id as p_id,post.status FROM post , store where post.u_id = store.s_id and store.s_name LIKE '%" . $keyword . "%' ORDER BY post.id DESC";
                 $query = mysqli_query($conn, $sql);
             }
             ?>
@@ -157,7 +135,9 @@ include('condb.php');
         </table>
 
     </div>
+    </div>
 
+    </div>
 
 
     <?php
@@ -192,7 +172,26 @@ include('condb.php');
     ?>
     </div>
 
-
+<!-- Modal -->
+<div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ต้องการออกจากระบบ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">ยกเลิก</button>
+                    <a href="logout.php?logout=1" type="button" class="btn btn-danger">ยืนยัน</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <?php
