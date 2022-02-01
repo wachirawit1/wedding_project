@@ -210,7 +210,7 @@
             formdata.append("username", $('#username').val());
             formdata.append('password', $('#password').val());
             $.ajax({
-                url: 'clogin.php',
+                url: 'cindex.php',
                 dataType: 'json',
                 cache: false,
                 contentType: false,

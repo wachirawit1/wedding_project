@@ -72,7 +72,7 @@
             <h4 class='alert-heading'>แจ้งเตือน !</h4>
             <p>คุณยังไม่ได้เข้าสู่ระบบ โปรดเข้าสู่ระบบอีกครั้ง</p>
             <hr>
-            <p class='mb-0'><a href='login.php' class='alert-link'>กลับไปเข้าสู่ระบบ</a></p>
+            <p class='mb-0'><a href='index.php' class='alert-link'>กลับไปเข้าสู่ระบบ</a></p>
         </div>
     <?php
         exit;

@@ -109,7 +109,6 @@ include('condb.php');
                         email.val(null);
                         $('#show').html('<div class="alert alert-success" role="alert">ระบบได้ส่งอีเมลแล้ว กรุณาตรวจสอบอีเมล</div>');
                         email.css('border', '1px solid #d4edda')
-                        console.log(data);
                     },
                     error: function(data) {
                         $('#show').html('<div class="alert alert-danger" role="alert">ไม่พบบัญชีอีเมลดังกล่าว กรุณาตรวจสอบใหม่อีกครั้ง</div>');

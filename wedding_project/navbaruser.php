@@ -38,7 +38,7 @@
                 } else {
                     echo "<script type='text/javascript'>";
                     echo "alert('ยังไม่ได้เข้าสู่ระบบ โปรดเข้าสู่ระบบอีกครั้ง');";
-                    echo "window.location = 'login.php ;";
+                    echo "window.location = 'index.php ;";
                     echo "</script>";
                 }
 

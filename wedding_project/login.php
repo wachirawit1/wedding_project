@@ -82,7 +82,7 @@ if (isset($_SESSION['username'])) {
                   <img src="assets/images/new_logo.png" alt="logo" class="" width="25%">
                 </div> -->
                 <p class="login-card-description">เข้าสู่ระบบ</p>
-                <form action="clogin.php" method="POST">
+                <form action="cindex.php" method="POST">
                   <!-- notification -->
 
                   <?php
@@ -176,7 +176,7 @@ if (isset($_SESSION['username'])) {
       const password = $('#password');
       btn.click(function() {
         $.ajax({
-          url: 'clogin.php',
+          url: 'cindex.php',
           type: 'POST',
           data: {
             username: username.val(),

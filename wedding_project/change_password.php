@@ -108,36 +108,56 @@ include('condb.php');
         let id = $('#id');
 
         function changePass() {
-            if (newpass.val() != verifypass.val()) {
-                newpass.css('border', '1px solid red');
-                verifypass.css('border', '1px solid red');
-                $('#alert').css('display', 'block');
-                verifypass.val(null);
-            } else {
-                console.log(newpass.val());
-                console.log(id.val());
-                $.ajax({
-                    url: 'change_password_db.php',
-                    method: 'POST',
-                    dataType: 'json',
-                    data: {
-                        newpass: newpass.val(),
-                        id: id.val()
-                    },
-                    success: function(data) {
-                        $('#show').append('<div class="alert alert-success" role="alert">เปลี่ยนรหัสผ่านเสร็จสิ้น</div>')
-                        // $('.card').css('dispaly', 'none');
-                        // $('#card').css('display', 'block');
-                        setTimeout(function() {
-                            window.location.replace('login.php');
-                        }, 2000);
-                    },
-                    error: function(data) {
-                        console.error(data)
-                        $('#show').append('<div class="alert alert-danger" role="alert">เกิดปัญหา</div>')
+            if (newpass.val() == "" || verifypass.val() == "") {
+                if (newpass.val() == "") {
+                    newpass.css('border', '1px solid red');
+                    $('#alert').css('display', 'block');
+                    $('#alert').html('<strong>กรุณากรอกรหัสผ่าน</strong>');
+                } else if (verifypass.val() == "") {
+                    verifypass.css('border', '1px solid red');
+                    $('#alert').css('display', 'block');
+                    $('#alert').html('<strong>กรุณากรอกรหัสผ่าน</strong>');
 
-                    }
-                });
+                } else {
+                    newpass.css('border', '1px solid red');
+                    verifypass.css('border', '1px solid red');
+                    $('#alert').css('display', 'block');
+                    $('#alert').html('<strong>กรุณากรอกรหัสผ่าน</strong>');
+                }
+            } else {
+                if (newpass.val() != verifypass.val()) {
+                    newpass.css('border', '1px solid red');
+                    verifypass.css('border', '1px solid red');
+                    $('#alert').css('display', 'block');
+                    $('#alert').html('<strong>รหัสผ่านไม่ตรงกัน</strong>');
+
+                    verifypass.val(null);
+                } else {
+                    console.log(newpass.val());
+                    console.log(id.val());
+                    $.ajax({
+                        url: 'change_password_db.php',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {
+                            newpass: newpass.val(),
+                            id: id.val()
+                        },
+                        success: function(data) {
+                            $('#show').html('<div class="alert alert-success" role="alert">เปลี่ยนรหัสผ่านเสร็จสิ้น</div>')
+                            // $('.card').css('dispaly', 'none');
+                            // $('#card').css('display', 'block');
+                            setTimeout(function() {
+                                window.location.replace('index.php');
+                            }, 2000);
+                        },
+                        error: function(data) {
+                            console.error(data)
+                            $('#show').html('<div class="alert alert-danger" role="alert">เกิดปัญหา</div>')
+
+                        }
+                    });
+                }
             }
 
         }
