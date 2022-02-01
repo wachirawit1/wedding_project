@@ -179,12 +179,13 @@ if (isset($_SESSION['username'])) {
 
                         <script type="text/javascript">
                             function showpassword() {
+
                                 var data = document.getElementById('spassword');
-                                if (data.type == 'spassword') {
+                                if (data.type == 'password') {
                                     data.type = 'text';
                                     $('.far').attr('class', 'far fa-eye-slash');
                                 } else {
-                                    data.type = 'spassword';
+                                    data.type = 'password';
                                     $('.far').attr('class', 'far fa-eye');
                                 }
 

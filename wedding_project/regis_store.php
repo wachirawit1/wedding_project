@@ -29,9 +29,12 @@ if (isset($_SESSION['username'])) {
   <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
   <!-- button Icon -->
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
+  <script src="https://kit.fontawesome.com/80c612fc1e.js" crossorigin="anonymous"></script>
+
+  <!-- font family -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
 
   <!-- เอฟเฟค -->
@@ -139,7 +142,7 @@ if (isset($_SESSION['username'])) {
                         <input type="password" name="password" class="form-control" id="password" placeholder="" pattern=".{6,}" required>
 
                         <div class="input-group-append">
-                          <span class="input-group-text" onclick="showpassword()"><img src="assets/images/eye.png" width="10" alt=""></span>
+                          <span class="input-group-text" onclick="showpassword()"><i class="far fa-eye "></i></span>
                           <!-- <button type="button" id="eyeop" onclick="showpassword()" class="input-group-text"><span class="glyphicon glyphicon-eye-open"></span></button> -->
                         </div>
                       </div>
@@ -149,9 +152,11 @@ if (isset($_SESSION['username'])) {
                         var data = document.getElementById('password');
                         if (data.type == 'password') {
                           data.type = 'text';
+                          $('.far').attr('class', 'far fa-eye-slash');
 
                         } else {
                           data.type = 'password';
+                          $('.far').attr('class', 'far fa-eye');
 
                         }
 
@@ -224,7 +229,7 @@ if (isset($_SESSION['username'])) {
                   <label for="staticEmail" class="col-sm-2 col-form-label">ที่อยู่</label>
                   <div class="col-sm-10">
 
-                  <textarea type="text" name="s_address" required class="form-control col-6 col-sm-10"></textarea>
+                    <textarea type="text" name="s_address" required class="form-control col-6 col-sm-10"></textarea>
 
                   </div>
                 </div>

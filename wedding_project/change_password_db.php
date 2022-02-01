@@ -5,7 +5,7 @@ $type = $_POST['type'];
 if (isset($_POST['newpass'])) {
     $newpass = md5($_POST['newpass']);
     if ($type == "user") {
-        $sql = "UPDATE `member` SET `password`='$newpass' WHERE 'id' = $id ";
+        $sql = "UPDATE `member` SET `password` = '$newpass' WHERE `member`.`id` = $id";
         $query = mysqli_query($conn, $sql);
         if ($query) {
             echo json_encode(array("status" => "เปลี่ยนรหัสผ่านสำเร็จ"));
@@ -13,7 +13,7 @@ if (isset($_POST['newpass'])) {
             echo json_encode(array("status" => "เปลี่ยนรหัสผ่านไม่สำเร็จ"));
         }
     } else {
-        $sql = "UPDATE `store` SET `password`='$newpass' WHERE 's_id' = '$id' ";
+        $sql = "UPDATE `store` SET `password` = '$newpass' WHERE `store`.`s_id` = $id";
         $query = mysqli_query($conn, $sql);
         if ($query) {
             echo json_encode(array("status" => "เปลี่ยนรหัสผ่านสำเร็จ"));
@@ -22,5 +22,5 @@ if (isset($_POST['newpass'])) {
         }
     }
 } else {
-    echo json_encode(array("status" => "เปลี่ยนรหัสผ่านไม่สำเร็จ", "id" => $id, "type" => $type));
+    echo json_encode(array("status" => "เปลี่ยนรหัสผ่านไม่สำเร็จ", "id" => $id, "type" => $type ,"pass" => $newpass));
 }

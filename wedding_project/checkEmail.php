@@ -40,7 +40,7 @@ if (isset($_POST['email'])) {
         $mail->Host = "smtp.gmail.com";
         $mail->SMTPAuth = true;
         $mail->Username = "weddingplanner.official2021@gmail.com"; // enter your email address
-        $mail->Password = "WDplanner2021"; // enter your password
+        $mail->Password = "iloveweddingplanner"; // enter your password
         $mail->Port = 465;
         $mail->SMTPSecure = "ssl";
 
@@ -87,7 +87,7 @@ if (isset($_POST['email'])) {
             $mail->Host = "smtp.gmail.com";
             $mail->SMTPAuth = true;
             $mail->Username = "weddingplanner.official2021@gmail.com"; // enter your email address
-            $mail->Password = "WDplanner2021"; // enter your password
+            $mail->Password = "iloveweddingplanner"; // enter your password
             $mail->Port = 465;
             $mail->SMTPSecure = "ssl";
 

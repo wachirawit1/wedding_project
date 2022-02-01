@@ -269,6 +269,7 @@ include('condb.php');
             <div class="my-3 border-bottom"></div>
 
             <div id="here">
+
                 <?php
                 $userid = $_SESSION['userid'];
                 $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))";
@@ -290,7 +291,6 @@ include('condb.php');
                     <h4 class='my-3'>รายชื่อแขกที่ส่งการ์ดเชิญแล้ว</h4>
 
 
-
                     <div class="row justify-content-end my-3">
                         <div class="col col-2">
                             <form action="report.php">
@@ -298,6 +298,7 @@ include('condb.php');
                             </form>
                         </div>
                     </div>
+
 
                     <table class="table bg-white table-hover ">
                         <thead class="thead-light">
@@ -428,7 +429,7 @@ include('condb.php');
         }
 
 
-
+        // sendmailllllllllllllllllllllllllllll
         function send_email() {
 
             let nameArr = [];
@@ -491,6 +492,8 @@ include('condb.php');
                     $("#here").html(append_element);
 
                     $("#enable").html('บันทึกและส่ง');
+
+                    $('#email_list').html('<div class="row justify-content-end my-3"><div class="col col-2"><form action="report.php"><button class="btn btn-block btn-light" style="background-color: #dbb89a; color: white;">ดูผลลัพธ์ที่นี่</button></form></div></div>')
 
                     swal({
                         title: "การแจ้งเตือน",

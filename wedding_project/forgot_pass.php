@@ -103,6 +103,7 @@ include('condb.php');
                         email: email.val()
                     },
                     success: function(data) {
+                        console.log(data);
                         // alert(data.status);
                         $('#submit').text('ส่ง');
                         $('#show').empty();

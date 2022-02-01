@@ -109,6 +109,7 @@ include('condb.php');
         let verifypass = $('#verifypass');
         let id = $('#id');
         let type = $('#type');
+        
 
         function changePass() {
             if (newpass.val() == "" || verifypass.val() == "") {
@@ -152,9 +153,10 @@ include('condb.php');
                             setTimeout(function() {
                                 window.location.replace('index.php');
                             }, 2000);
-                            console.log(data.status);
-                            console.log(data.id);
-                            console.log(data.type);
+                            console.log(data);
+                            // console.log(data.id);
+                            // console.log(data.type);
+                            // console.log(data.pass);
 
                         },
                         error: function(data) {
