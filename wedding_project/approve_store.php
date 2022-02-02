@@ -6,7 +6,7 @@ include('condb.php');
 
 <head>
     <!-- favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -185,16 +185,7 @@ $row_data = mysqli_fetch_assoc($query_data);
         </div>
     </div>
 
- <footer class="bg-light text-center text-lg-start bg-white border fixed-bottom" >
-        <!-- Copyright -->
-        <div class="text-center p-3">
-            © 2020 Copyright:
-            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
-
-
+ 
 
  
 
