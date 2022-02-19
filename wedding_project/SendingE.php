@@ -295,7 +295,7 @@ include('condb.php');
                     <div class="row justify-content-end my-3">
                         <div class="col col-2">
                             <form action="report.php">
-                                <button class="btn btn-block btn-light" style="background-color: #dbb89a; color: white;">ดูผลลัพธ์ที่นี่</button>
+                                <button class="btn btn-block btn-light" style="background-color: #dbb89a; color: white;">ดูผลลัพธ์</button>
                             </form>
                         </div>
                     </div>

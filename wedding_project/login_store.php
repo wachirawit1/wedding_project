@@ -66,7 +66,7 @@ if (isset($_SESSION['username'])) { ?>
             <div class="col-md-5 ">
               <div class="card-body">
                 <!-- <div class="brand-wrapper ">
-                  <img src="assets/images/logo2.png" alt="logo" class="" width="25%">
+                  <img src="assets/images/logo.png" alt="logo" class="" width="25%">
                 </div> -->
                 <p class="login-card-description">เข้าสู่ระบบร้านค้า</p>
                 <form action="clogin_store.php" method="POST">

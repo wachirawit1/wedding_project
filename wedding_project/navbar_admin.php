@@ -33,22 +33,27 @@
         margin-left: 50px;
     }
 </style>
-
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
-<div id="mySidenav" class="sidenav">
+<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue" style="background-color:gray;" >
+		
+			
+				<div class="m-header" >
+					<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+					<a href="#!" class="b-brand">
+						<!-- ========   change your logo hear   ============ -->
+                        <img src="assets/images/logo.png" width="75px" style="margin-left:50px;margin-right:100px;">
+                        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+					</a>
+					<a href="#!" class="mob-toggler">
+						<i class="feather icon-more-vertical"></i>
+					</a>
+				</div>
+				
+			
+</header>
+<div id="mySidenav" class="sidenav" style="margin-top:90px;">
 
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <?php if ($_SESSION['username'] != "admin") : ?>
-
-        <nav class="navbar navbar-expand-lg py-3 ml-0 mb-5 navbar-light bg-white ">
-            <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0  flex-wrap flex-md-nowrap justify-content-between">
-                <a class="navbar-brand my-3" href="traditional.php" style="line-height: 25px; ">
-                    <div class="d-table m-auto">
-                        <img src="assets/images/logo.png" width="70px">
-                    </div>
-                </a>
-            </div>
-        </nav>
 </div>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -128,12 +133,6 @@
 
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                <!-- Sidebar - Brand -->
-                <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0  flex-wrap flex-md-nowrap justify-content-between">
-                    <a class="navbar-brand" href="traditional.php" style="line-height: 25px; ">
-                        <img src="assets/images/logo.png" width="130px"></a>
-
-                </div>
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
 

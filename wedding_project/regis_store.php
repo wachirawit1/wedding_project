@@ -28,14 +28,14 @@ if (isset($_SESSION['username'])) {
   <!-- favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
 
-  <!-- font -->
+  <!-- icon -->
+  <script src="https://kit.fontawesome.com/80c612fc1e.js" crossorigin="anonymous"></script>
+
+  <!-- font family -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-
-  <!-- button Icon -->
-  <script src="https://kit.fontawesome.com/80c612fc1e.js" crossorigin="anonymous"></script>
 
   <!-- เอฟเฟค -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -100,7 +100,7 @@ if (isset($_SESSION['username'])) {
           <div class="card bg-light">
             <div class="card-body mx-3">
               <center>
-                <img class="img1" src="assets/images/logo2.png" alt="logo" width="20%">
+                <img class="img1" src="assets/images/logo.png" alt="logo" width="20%">
                 <h3 class="my-4">สมัครบัญชีร้านค้า</h3>
 
               </center>

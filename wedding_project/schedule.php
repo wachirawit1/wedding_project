@@ -360,7 +360,7 @@ include('condb.php');
                 // If the count down is finished, write some text
                 if (distance < 0) {
                     clearInterval(x);
-                    document.getElementById("showCountDown").innerHTML = "ครบกำหนด";
+                    document.getElementById("showCountDown").innerHTML = "<p class='text-danger'>ครบกำหนดแล้ว</p>";
                 }
             }, 1000);
 

@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!doctype html>
 <html lang="en">
 
@@ -59,16 +56,16 @@ session_start();
 
 <body>
     <?php
-    if (isset($_SESSION['username'])) {
-        if (isset($_SESSION['type']) == "01") {
-            include('navbaruser.php');
-        }
-    } else {
+    session_start();
+    if (!isset($_SESSION['username'])) {
+        session_destroy();
         include('navbar.php');
+    } else {
+        include('navbaruser.php');
     }
     ?>
 
-    
+
     <div class="container">
         <?php $category = $_GET['cate_name']; ?>
         <h2 class="text-secondary">หมวด <?= "$category" ?></h2>

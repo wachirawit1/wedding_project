@@ -48,7 +48,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: 90px;">
                         <a class="dropdown-item" href="profile.php">ดูข้อมูลส่วนตัว</a>
 
-                        <!-- <a class="dropdown-item" href="#">งานที่กำลังทำ</a> -->
+                        <a class="dropdown-item" href="report.php">งานที่กำลังทำ</a>
                         <div class="dropdown-divider"></div>
 
                         <!-- Button trigger modal -->
