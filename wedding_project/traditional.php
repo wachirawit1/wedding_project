@@ -21,7 +21,7 @@ include('condb.php');
 
     <title>Wedding Planner</title>
     <style>
-         body {
+        body {
             font-family: 'Prompt', sans-serif;
             background-color: #ffffff;
         }
@@ -65,75 +65,72 @@ include('condb.php');
         exit;
     }
     ?>
-   <?php
+    <?php
 
-include('navbar_admin.php');
-?>
-        <div class="card container col-10 py-5 my-5 bg-light shadow rounded" id="box"  >
-        <div class="container col-12  " >
-        
-        <div class="col  d-flex justify-content-between">
-            <div class="p-2">
-                <?php
-                if(isset($_POST["action"]) && $_POST["action"] == "search"){
-                    echo "ผลการค้นหา : \"".$_POST["strsearch"]."\"";
-                    $where_condition = "WHERE trad_name LIKE '%".$_POST["strsearch"]."%' ";
-                }else{
-                    $where_condition = "";
-                }
-                ?>
-      
-        </div>
-            <div class="p-2">
-                <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#addmodal">
-                    เพิ่มประเพณี
-                </button>
+    include('navbar_admin.php');
+    ?>
+    <div class="overflow-auto">
+        <div class="card container col-10 bg-light shadow rounded" id="box">
+            <div class="container col-12  ">
+
+                <div class="col  d-flex justify-content-between">
+                    <div class="p-2">
+                        <?php
+                        if (isset($_POST["action"]) && $_POST["action"] == "search") {
+                            echo "ผลการค้นหา : \"" . $_POST["strsearch"] . "\"";
+                            $where_condition = "WHERE trad_name LIKE '%" . $_POST["strsearch"] . "%' ";
+                        } else {
+                            $where_condition = "";
+                        }
+                        ?>
+
+                    </div>
+                    <div class="p-2">
+                        <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#addmodal">
+                            เพิ่มประเพณี
+                        </button>
+                    </div>
+                </div>
+                <table class="table table-light table-hover  text-center align-center">
+                    <thead>
+                        <th scope="col">#</th>
+                        <th scope="col">ประเพณี</th>
+                        <th scope="col">รูปภาพ</th>
+                        <th scope="col">ตัวเลือก</th>
+                    </thead>
+                    <?php include('condb.php');
+
+                    $sql = "SELECT * FROM traditional $where_condition ORDER BY t_id DESC";
+                    $query = mysqli_query($conn, $sql);
+                    ?>
+                    <tbody>
+
+                        <?php
+                        $i = 1;
+                        while ($row = mysqli_fetch_array($query)) {
+                        ?>
+
+
+                            <!-- <th scope="row"><?php echo $i++ ?></th> -->
+                            <th class="align-middle " scope="row"><?php echo $row['t_id'] ?></th>
+                            <td class="align-middle"><?php echo $row['trad_name'] ?></td>
+                            <td class="align-middle"><img src="assets/tradition_img/<?= $row['trad_img'] ?>" width="150px"></td>
+
+                            <td class="align-middle">
+                                <a href="t_action.php?t_id=<?= $row['t_id'] ?>" class="btn btn-success" target="_blank">จัดการพิธีการ</a>
+                                <a href="#edit<?= $row['t_id'] ?>" class="btn btn-warning" data-toggle="modal">แก้ไข</a>
+                                <a href="#delete<?php echo $row['t_id']; ?>" class="btn btn-danger" data-toggle="modal">ลบ</a>
+                            </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+
+                </table>
+
             </div>
         </div>
-     <table class="table table-light table-hover  text-center align-center">
-            <thead>
-                <th scope="col">#</th>
-                <th scope="col">ประเพณี</th>
-                <th scope="col">รูปภาพ</th>
-                <th scope="col">ตัวเลือก</th>
-            </thead>
-            <?php include('condb.php');
-
-            $sql = "SELECT * FROM traditional $where_condition ORDER BY t_id DESC"; 
-            $query = mysqli_query($conn, $sql);
-            ?>
-            <tbody>
-
-                <?php
-                $i = 1;
-                while ($row = mysqli_fetch_array($query)) {
-                ?>
-
-
-                    <!-- <th scope="row"><?php echo $i++ ?></th> -->
-                    <th class="align-middle " scope="row"><?php echo $row['t_id'] ?></th>
-                    <td class="align-middle"><?php echo $row['trad_name'] ?></td>
-                    <td class="align-middle"><img src="assets/tradition_img/<?= $row['trad_img'] ?>" width="150px"></td>
-
-                    <td class="align-middle">
-                        <a href="t_action.php?t_id=<?= $row['t_id'] ?>" class="btn btn-success" target="_blank">จัดการพิธีการ</a>
-                        <a href="#edit<?= $row['t_id'] ?>" class="btn btn-warning" data-toggle="modal">แก้ไข</a>
-                        <a href="#delete<?php echo $row['t_id']; ?>" class="btn btn-danger" data-toggle="modal">ลบ</a>
-                    </td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-
-        </table>
-
     </div>
-        </div>
-    </div> 
-    
-</div> 
 
-   
-    
 
     <!-- popup เพิ่มประเพณี -->
     <div class="modal fade" id="addmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

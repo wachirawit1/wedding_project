@@ -33,24 +33,24 @@
         margin-left: 50px;
     }
 </style>
-<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue" style="background-color:gray;" >
-		
-			
-				<div class="m-header" >
-					<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
-					<a href="#!" class="b-brand">
-						<!-- ========   change your logo hear   ============ -->
-                        <img src="assets/images/logo.png" width="75px" style="margin-left:50px;margin-right:100px;">
-                        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
-					</a>
-					<a href="#!" class="mob-toggler">
-						<i class="feather icon-more-vertical"></i>
-					</a>
-				</div>
-				
-			
+<header style="background-color:gray;overflow:hidden;position:fixed;top:0;width:100%;">
+
+
+    <div class="m-header">
+        <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+        <a href="#!" class="b-brand">
+            <!-- ========   change your logo hear   ============ -->
+            <img src="assets/images/logo.png" width="5%" style="margin-left:50px;margin-right:100px;">
+            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+        </a>
+        <a href="#!" class=" mob-toggler">
+            <i class="feather icon-more-vertical"></i>
+        </a>
+    </div>
+
+
 </header>
-<div id="mySidenav" class="sidenav" style="margin-top:90px;">
+<div id="mySidenav" class="sidenav" style="margin-top:5%;">
 
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <?php if ($_SESSION['username'] != "admin") : ?>
@@ -181,13 +181,13 @@
                     </a>
                 </li>
                 <li class="nav-item text-center p-3 ">
-                    <a data-toggle="modal" data-target="#logout" class="nav-link">
+                    <a data-toggle="modal" data-target="#logout" class="btn nav-link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                             <polyline points="16 17 21 12 16 7"></polyline>
                             <line x1="21" y1="12" x2="9" y2="12"></line>
                         </svg>
-                        <span class="ml-2">ออกจากระบบ</span>
+                        <span class="ml-2 text-danger">ออกจากระบบ</span>
                     </a>
                 </li>
 
@@ -209,4 +209,4 @@
         <?php endif ?>
 
         </div>
-    </div>
+    </div><br><br><br><br>

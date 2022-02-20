@@ -158,18 +158,17 @@ include('condb.php');
             </div>
         </div>
 
-        <div class="row justify-content-md-end my-3">
-            <div class="col col-2">
+        <div class="row justify-content-end my-3 mr-3">
+            <div class="col-2">
                 <select id="myFilter" class="form-control">
                     <option value="">ทั้งหมด</option>
                     <option value="เตรียมแล้ว">เตรียมแล้ว</option>
                     <option value="ยังไม่เตรียม">ยังไม่เตรียม</option>
                 </select>
             </div>
-            <div class="col col-md-1">
+            <div class="col-1 ">
                 <a href="edit_schedule.php" class="btn btn-primary"><i class="fas fa-edit">แก้ไข</i></a>
             </div>
-            
         </div>
 
         <div class="overflow-auto" style=" height: 500px; ">

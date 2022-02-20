@@ -26,6 +26,7 @@
 
 <body>
 	<?php
+	session_start();
 	if (isset($_POST['register'])) {
 
 		include('condb.php');
@@ -97,7 +98,12 @@
 				$result1 = mysqli_query($conn, $sql);
 
 
-				if ($result1) { ?>
+				if ($result1) {
+					$_SESSION['username'] = $username;
+					$_SESSION['s_name'] = $s_name;
+					$_SESSION['status'] = 0;
+
+	?>
 					<script>
 						swal({
 							title: "การแจ้งเตือน",
@@ -106,7 +112,7 @@
 							button: false
 						});
 					</script>
-					<meta http-equiv="refresh" content="2; url=index.php">
+					<meta http-equiv="refresh" content="2; url=traditional.php">
 
 				<?php
 				} else { ?>

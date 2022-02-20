@@ -7,7 +7,6 @@
 
     <!-- effect -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- icon -->
     <script src="https://kit.fontawesome.com/80c612fc1e.js" crossorigin="anonymous"></script>
@@ -49,6 +48,7 @@
         .nav-item .btn {
             border: 1px solid grey;
         }
+
     </style>
 
 </head>
@@ -67,41 +67,55 @@
 
 
     <div class="container">
-        <?php $category = $_GET['cate_name']; ?>
-        <h2 class="text-secondary">หมวด <?= "$category" ?></h2>
-        <div class="row row-cols-1 row-cols-md-3 m-5">
+        <div class="py-5">
+
+            <?php $category = $_GET['cate_name']; ?>
+            <div class="my-3 text-center">
+                <h2 class="text-secondary">หมวด <?= "$category" ?></h2>
+            </div>
 
             <?php
             $cate_id = $_GET['cate_id'];
             include('condb.php');
-            $sql = "SELECT * FROM post WHERE u_id = $cate_id AND status = 1";
+            $sql = "SELECT * FROM `post` INNER JOIN store ON post.u_id = store.s_id WHERE store.cate_id = $cate_id AND post.status = 1;";
             $query = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_array($query)) { ?>
-                <form action="view_post.php" method="POST">
-                    <div class="col mb-4 ">
-                        <div class="card">
-                            <img src="img/<?= $row['picture'] ?>" class="card-img-top img-responsive" alt="..." height="125">
-                            <div class="card-body">
-                                <h5 class="card-title"><?= $row['name'] ?></h5>
-                                <p class="card-text">
-                                    <?= $row['detail'] ?>
-                                </p>
+            $num = mysqli_num_rows($query);
+            if ($num == 0) { ?>
+                <div class="my-3 py-5 text-center">
+                    <i class="fas fa-times-circle fa-10x text-muted"></i>
+                </div>
+            <?php } else { ?>
+                <div class="row row-cols-1 row-cols-md-3 ">
+
+                    <?php while ($row = mysqli_fetch_array($query)) { ?>
+                        <form action="view_post.php" method="POST">
+                            <div data-aos="zoom-in" data-aos-duration="800">
+                                <div class="col mb-4 ">
+                                    <div class="card">
+                                        <img src="img/<?= $row['picture'] ?>" class="card-img-top img-responsive" alt="..." height="125">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?= $row['name'] ?></h5>
+                                            <p class="card-text">
+                                                <?= $row['detail'] ?>
+                                            </p>
+                                        </div>
+                                        <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                        <div class="text-center p-2">
+                                            <button type="submit" class="btn btn-block" style="background-color: #dbb89a ;color:white;" name="btn_submit">ดูโพสต์</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                            <div class="text-center p-2">
-                                <button type="submit" class="btn btn-block" style="background-color: #dbb89a ;color:white;" name="btn_submit">ดูโพสต์</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            <?php } ?>
+                        </form>
+                <?php }
+                } ?>
 
 
+
+                </div>
 
         </div>
-
     </div>
-
 
 
 
@@ -114,7 +128,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
             duration: 1000

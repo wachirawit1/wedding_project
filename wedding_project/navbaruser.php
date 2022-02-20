@@ -19,7 +19,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto" style="font-size: 18px;">
             <li class="nav-item ">
-                <a class="nav-link" href="mainuser.php">หน้าแรก <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.php">หน้าแรก <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item ">
                 <a class="nav-link" href="#post">โพสต์ <span class="sr-only"></span></a>

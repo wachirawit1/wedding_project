@@ -1,20 +1,4 @@
-<?php session_start();
-if (isset($_SESSION['username'])) {
-  if ($_SESSION['type'] == "01") { ?>
-    <script>
-      alert('คุณได้สมัครสมาชิกแล้ว');
-      window.location = 'mainuser.php';
-    </script>
-  <?php } elseif (isset($_SESSION['type']) == "02") { ?>
-    <script>
-      alert('คุณได้สมัครสมาชิกแล้ว');
-      window.location = 'storepost.php';
-    </script>
-  <?php } ?>
-
-<?php }
-?>
-
+<?php session_start() ?>
 
 <!doctype html>
 <html lang="en">
@@ -244,7 +228,7 @@ if (isset($_SESSION['username'])) {
                     <div class="card text-center border-0">
                       <div class="card-body ">
 
-                        <img id="blah" src="assets/images/image-regular.svg"nn alt="your image" width="300" />
+                        <img id="blah" src="assets/images/image-regular.svg" nn alt="your image" width="300" />
                       </div>
                     </div>
 

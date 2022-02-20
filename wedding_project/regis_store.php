@@ -1,26 +1,4 @@
-<?php session_start();
-if (isset($_SESSION['username'])) {
-  if ($_SESSION['type'] == "01") { ?>
-    <script>
-      alert('คุณได้สมัครสมาชิกแล้ว');
-      window.location = 'mainuser.php';
-    </script>
-  <?php } elseif (isset($_SESSION['type']) == "02") { ?>
-    <script>
-      alert('คุณได้สมัครสมาชิกแล้ว');
-      window.location = 'mainshop.php';
-    </script>
-  <?php } else { ?>
-    <script>
-      alert('คุณได้สมัครสมาชิกแล้ว');
-      window.location = 'mainshop.php';
-    </script>
-  <?php } ?>
-
-<?php }
-?>
-
-
+<?php session_start() ?>
 <!doctype html>
 <html lang="en">
 

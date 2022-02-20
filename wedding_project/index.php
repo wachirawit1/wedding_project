@@ -57,8 +57,8 @@
             color: #dbb89a !important;
         }
 
-        .nav-item .btn {
-            border: 1px solid grey;
+        #btn {
+            border: 1px solid lightgrey;
         }
     </style>
 
@@ -67,8 +67,14 @@
 
 <body>
     <?php
-
-    include('navbar.php');
+    session_start();
+    if (isset($_SESSION['username'])) {
+        if ($_SESSION['type']==01) {
+            include('navbaruser.php');
+        }
+    }else{
+        include('navbar.php');
+    }
     ?>
 
     <div data-aos="fade-up" data-aos-anchor-placement="center-center">
@@ -108,7 +114,7 @@
             <p class="lead text-secondary">สามารถเลือกสินค้าคุณภาพตามที่คุณต้องการ</p>
 
 
-            <div class="row row-cols-2 row-cols-md-5">
+            <div class="row row-cols-2 row-cols-md-6">
                 <?php
                 include('condb.php');
                 $sql = "SELECT * FROM `category` ";

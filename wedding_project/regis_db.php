@@ -95,7 +95,12 @@
 							VALUES ('$name', '$lastname', '$birthday', '$tel', '$email', '$mtype', '$newname', '$username', '$password', current_timestamp(), '$gender')";
 				$result1 = mysqli_query($conn, $sql);
 
-				if ($result1) { ?>
+				if ($result1) {
+					$_SESSION['username'] = $username;
+					$_SESSION['name'] = $name;
+					$_SESSION['lastname'] = $lastname;
+					$_SESSION['type'] = $type;
+	?>
 					<script>
 						swal({
 							title: "การแจ้งเตือน",

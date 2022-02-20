@@ -1,28 +1,5 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<?php
-session_start();
-if (isset($_SESSION['username'])) {
-    if (isset($_SESSION['type']) == "01") { ?>
-        <script>
-            alert('คุณได้เข้าสู่ระบบแล้ว');
-            window.location.replace('mainuser.php');
-        </script>
-    <?php } elseif (isset($_SESSION['type']) == "02") { ?>
-        <script>
-            alert('คุณได้เข้าสู่ระบบแล้ว');
-            window.location.replace('storepost.php');
-        </script>
-    <?php } else { ?>
-        <script>
-            alert('คุณได้เข้าสู่ระบบแล้ว');
-            window.location.replace('traditional.php');
-        </script>
-    <?php } ?>
 
-<?php } else {
-    echo "";
-}
-?>
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow sticky-top">
     <a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" width="70"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +22,7 @@ if (isset($_SESSION['username'])) {
                 <button class="btn px-4" style="border: 1px solid #dbb89a; color: #dbb89a;" data-toggle="modal" data-target="#login_store">เข้าสู่ระบบร้านค้า</button>
             </li>
             <li class="nav-item">
-                <button class="btn px-4" data-toggle="modal" data-target="#login" style="color: grey;">สมัครสมาชิก/เข้าสู่ระบบ</button>
+                <button class="btn px-4" id="btn" data-toggle="modal" data-target="#login" style="color: grey;">สมัครสมาชิก/เข้าสู่ระบบ</button>
             </li>
 
         </ul>
@@ -229,9 +206,9 @@ if (isset($_SESSION['username'])) {
                                 title: "การแจ้งเตือน",
                                 text: "เข้าสู่ระบบสำเร็จ",
                                 icon: "success",
-                                button: "ตกลง"
+                                button: false
                             }).then((value) => {
-                                window.location = "mainuser.php";
+                                window.location = "index.php";
                             });
                         }, 1000)
 
@@ -289,7 +266,7 @@ if (isset($_SESSION['username'])) {
                                 title: "การแจ้งเตือน",
                                 text: "เข้าสู่ระบบสำเร็จ",
                                 icon: "success",
-                                button: "ตกลง"
+                                button: false
                             }).then((value) => {
                                 window.location = "storepost.php";
                             });
