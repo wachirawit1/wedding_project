@@ -73,7 +73,7 @@
     <!-- breadcrumb -->
     <nav aria-label="breadcrumb position-static">
         <ol class="breadcrumb" style=" background-color: #ffffff;">
-            <li class="breadcrumb-item"><a href="mainuser.php" class="text-decoration-none">Home</a></li>
+            <li class="breadcrumb-item"><a href="index.php" class="text-decoration-none">Home</a></li>
             <li class="breadcrumb-item"><a href="progress.php" class="text-decoration-none">progress</a></li>
             <li class="breadcrumb-item active" aria-current="page">traditional</li>
         </ol>

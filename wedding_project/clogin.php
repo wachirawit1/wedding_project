@@ -43,7 +43,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
       //       });
       //     </script>
 
-      //     <meta http-equiv="refresh" content="2; url=mainuser.php"> -->
+      //     <meta http-equiv="refresh" content="2; url=index.php"> -->
 
 
     } else if ($type == "02") {

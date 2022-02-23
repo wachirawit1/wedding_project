@@ -90,7 +90,7 @@
     <!-- breadcrumb -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style=" background-color: #ffffff;">
-            <li class="breadcrumb-item"><a href="mainuser.php">Home</a></li>
+            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
             <li class="breadcrumb-item"><a href="progress.php">progress</a></li>
             <li class="breadcrumb-item"><a href="t_select.php">traditional</a></li>
             <li class="breadcrumb-item"><a href="t_activity.php">activity</a></li>

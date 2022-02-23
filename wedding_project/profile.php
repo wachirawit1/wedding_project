@@ -120,7 +120,7 @@
     <!-- breadcrums -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style=" background-color: #ffffff;">
-            <li class="breadcrumb-item"><a href="mainuser.php">Home</a></li>
+            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">profile</li>
         </ol>
     </nav>
@@ -203,7 +203,7 @@
 
                         <div class="from-group row mx-auto">
                             <div class="col">
-                                <a type="button" class="btn btn-secondary" href="mainuser.php" class="">กลับ</a>
+                                <a type="button" class="btn btn-secondary" href="index.php" class="">กลับ</a>
                             </div>
 
 

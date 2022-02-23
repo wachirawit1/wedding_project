@@ -206,7 +206,8 @@
                                 title: "การแจ้งเตือน",
                                 text: "เข้าสู่ระบบสำเร็จ",
                                 icon: "success",
-                                button: false
+                                button: false,
+                                timer:1500
                             }).then((value) => {
                                 window.location = "index.php";
                             });
@@ -266,7 +267,8 @@
                                 title: "การแจ้งเตือน",
                                 text: "เข้าสู่ระบบสำเร็จ",
                                 icon: "success",
-                                button: false
+                                button: false,
+                                timer:1500
                             }).then((value) => {
                                 window.location = "storepost.php";
                             });

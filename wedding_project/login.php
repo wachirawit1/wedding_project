@@ -4,7 +4,7 @@ if (isset($_SESSION['username'])) {
   if (isset($_SESSION['type']) == "01") { ?>
     <script>
       alert('คุณได้เข้าสู่ระบบแล้ว');
-      window.location = 'mainuser.php';
+      window.location = 'index.php';
     </script>
   <?php } elseif (isset($_SESSION['type']) == "02") { ?>
     <script>
