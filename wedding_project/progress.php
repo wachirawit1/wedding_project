@@ -25,7 +25,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
     <title>Progess Page</title>
     <style>
         body {
@@ -56,10 +55,16 @@
             color: darkgray;
         }
 
+
         .container {
 
-            height: 100% !important;
-
+            position: absolute;
+            left: 50%;
+            /* relative to nearest positioned ancestor or body element */
+            top: 50%;
+            /*  relative to nearest positioned ancestor or body element */
+            transform: translate(-50%, -50%);
+            /* relative to element's height & width */
         }
 
         button {
@@ -104,24 +109,87 @@
     </div>
 
 
+    <div class="container">
 
-
-
-    <div>
-        <!-- content -->
-
-        <?php
-        $userid = $_SESSION['userid'];
-        include('condb.php');
-        $sql = "SELECT status FROM event WHERE userid = '$userid'";
-        $status = mysqli_fetch_array(mysqli_query($conn, $sql));
-
-        ?>
 
 
         <div data-aos="fade-right">
-            <div class="container p-5 ">
-                <div class="row  align-items-center">
+            <!-- content -->
+            <div class="row align-items-center">
+                <?php
+                $userid = $_SESSION['userid'];
+                include('condb.php');
+                $sql = "SELECT status FROM event WHERE userid = '$userid' AND status = 1 ";
+                $status = mysqli_fetch_array(mysqli_query($conn, $sql));
+                $num = mysqli_num_rows(mysqli_query($conn, $sql));
+                if ($num == 0) { ?>
+                    <div class="col" style=" width: 50px; height:100px">
+                        <div class="card">
+                            <div class="card-body">
+                                <center>
+                                    <form action="t_select.php">
+                                        <button class="btn">
+                                            <i class="far fa-calendar-plus" id="icon"></i>
+                                        </button>
+                                    </form>
+                                </center>
+
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <p class="text-center">สร้างงานแต่งงาน</p>
+                        </div>
+                    </div>
+
+                    <div class="col col-1">
+                        <center><i class="fas fa-angle-double-right" id="arrow"></i></center>
+                    </div>
+
+                    <div class="col" style=" width: 50px; height:100px">
+                        <div class="card">
+                            <div class="card-body ">
+                                <!-- กำหนดการ -->
+                                <center>
+                                    <form action="schedule.php">
+                                        <button class="btn" disabled>
+                                            <i class="far fa-calendar-alt card-text" id="icon"></i>
+                                        </button>
+                                    </form>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <p class="text-center">กำหนดการ & งบประมาณ</p>
+
+                        </div>
+                    </div>
+
+                    <div class="col-1">
+                        <center><i class="fas fa-angle-double-right" id="arrow"></i></center>
+                    </div>
+
+                    <div class="col" style=" width: 50px; height:100px">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- ส่งจดหมาย -->
+                                <center>
+                                    <form action="card_template.php">
+                                        <button class="btn" disabled>
+                                            <i class="far fa-envelope " id="icon"></i>
+                                        </button>
+                                    </form>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <p class="text-center ">ส่งการ์ดเชิญ</p>
+
+                        </div>
+
+                    </div>
+
+                <?php } else { ?>
+
                     <?php
                     if (isset($status["status"]) > 1 || !isset($status["status"])) { ?>
                         <div class="col" style=" width: 50px; height:100px">
@@ -137,7 +205,7 @@
 
                                 </div>
                             </div>
-                            <div class="row mt-3">
+                            <div class="mt-3">
                                 <div class="col">
                                     <p class="text-center">สร้างงานแต่งงาน</p>
                                 </div>
@@ -157,11 +225,9 @@
 
                                 </div>
                             </div>
-                            <div class="row mt-3">
+                            <div class="mt-3">
                                 <div class="col">
-                                    <p class="text-center">สร้างงานเเต่งงาน <br>
-                                    <p class="text-success text-lg-center">สำเร็จแล้ว</p>
-                                    </p>
+                                    <p class="text-center">สร้างงานเเต่งงาน</p>
                                 </div>
                             </div>
                         </div>
@@ -173,28 +239,7 @@
                     </div>
 
                     <?php
-                    if (isset($status['status']) == 0 || !isset($status['status'])) { ?>
-                        <div class="col" style=" width: 50px; height:100px">
-                            <div class="card">
-                                <div class="card-body ">
-                                    <!-- กำหนดการ -->
-                                    <center>
-                                        <form action="schedule.php">
-                                            <button class="btn" disabled>
-                                                <i class="far fa-calendar-alt card-text" id="icon"></i>
-                                            </button>
-                                        </form>
-                                    </center>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col">
-                                    <p class="text-center">กำหนดการ & <br> งบประมาณ</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    <?php } elseif (isset($status['status']) == 1) { ?>
+                    if (isset($status['status']) == 1) { ?>
                         <div class="col" style=" width: 50px; height:100px">
                             <div class="card">
                                 <div class="card-body ">
@@ -208,40 +253,13 @@
                                     </center>
                                 </div>
                             </div>
-                            <div class="row mt-3">
+                            <div class="mt-3">
                                 <div class="col">
-                                    <p class="text-center">กำหนดการ & <br> งบประมาณ</p>
-                                    <p class="text-center text-warning">กำลังดำเนินการ</p>
+                                    <p class="text-center">กำหนดการ & งบประมาณ</p>
                                 </div>
                             </div>
                         </div>
-                    <?php } else { ?>
-                        <div class="col" style=" width: 50px; height:100px">
-                            <div class="card">
-                                <div class="card-body ">
-                                    <!-- กำหนดการ -->
-                                    <center>
-                                        <form action="schedule.php">
-                                            <button class="btn" disabled>
-                                                <i class="far fa-calendar-alt card-text" id="icon"></i>
-                                            </button>
-                                        </form>
-                                    </center>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col">
-                                    <p class="text-center">กำหนดการ & <br> งบประมาณ</p>
-                                    <p class="text-center text-success">สำเร็จแล้ว</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    <?php }
-                    ?>
-
-
+                    <?php } ?>
 
                     <div class="col">
                         <center><i class="fas fa-angle-double-right" id="arrow"></i></center>
@@ -249,61 +267,33 @@
 
 
                     <?php
-                    if (isset($status['status']) == 0 || !isset($status['status'])) { ?>
-
+                    if (isset($status['status']) > 0) { ?>
                         <div class="col" style=" width: 50px; height:100px">
                             <div class="card">
                                 <div class="card-body">
                                     <!-- ส่งจดหมาย -->
                                     <center>
-                                        <form action="card_template.php">
-                                            <button class="btn" disabled>
+                                        <form action="SendingE.php">
+                                            <button class="btn">
                                                 <i class="far fa-envelope " id="icon"></i>
                                             </button>
                                         </form>
                                     </center>
                                 </div>
                             </div>
-                            <div class="row mt-3">
-                                <div class="col">
-                                    <p class="text-center ">ส่งการ์ดเชิญ</p>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    <?php } else { ?>
-                        <div class="col" style=" width: 50px; height:100px">
-                            <div class="card">
-                                <div class="card-body">
-                                    <!-- ส่งจดหมาย -->
-                                    <center>
-                                        <form action="card_template.php">
-                                            <button class="btn" >
-                                                <i class="far fa-envelope " id="icon"></i>
-                                            </button>
-                                        </form>
-                                    </center>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col">
-                                    <p class="text-center ">ส่งการ์ดเชิญ</p>
-                                </div>
+                            <div class="mt-3">
+                                <p class="text-center ">ส่งการ์ดเชิญ</p>
 
                             </div>
 
                         </div>
                     <?php } ?>
-
-                    
-
-                </div>
-
+                <?php } ?>
             </div>
-        </div>
 
+        </div>
     </div>
+
 
 
 

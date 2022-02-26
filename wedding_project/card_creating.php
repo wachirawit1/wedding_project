@@ -157,9 +157,7 @@ include('condb.php');
                                 <div class="col">
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" id="husband_input" placeholder="ชื่อเจ้าบ่าว" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-primary" type="button" id="button-addon2">ตกลง</button>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -167,9 +165,7 @@ include('condb.php');
                                 <div class="col">
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" id="wife_input" placeholder="ชื่อเจ้าสาว" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-primary" type="button" id="button-addon2">ตกลง</button>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -177,22 +173,11 @@ include('condb.php');
                                 <div class="col">
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" id="place_input" placeholder="สถานที่" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-primary" type="button" id="button-addon2">ตกลง</button>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" id="#" placeholder="เวลา" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-primary" type="button" id="button-addon2">ตกลง</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                           
                         </div>
                         <span class="toCanvas"> <a href="javascript:void(0);" class="btn btn-primary"> ดูตัวอย่างรูปภาพ </a></span>
                     </div>
@@ -255,6 +240,8 @@ include('condb.php');
             $('#place_input').on('input', function() {
                 place.html($('#place_input').val());
             })
+
+           
 
             // date 
             const month = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤษจิกายน", "ธันวาคม"];

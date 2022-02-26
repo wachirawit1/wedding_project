@@ -100,6 +100,7 @@ include('condb.php');
         <ol class="breadcrumb" style=" background-color: #ffffff;">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
             <li class="breadcrumb-item"><a href="progress.php">progress</a></li>
+            <li class="breadcrumb-item"><a href="SendingE.php">inviting</a></li>
             <li class="breadcrumb-item active" aria-current="page">Data</li>
         </ol>
     </nav>
@@ -107,7 +108,7 @@ include('condb.php');
     <?php
 
     $userid = $_SESSION['userid'];
-    $sql = "SELECT * FROM event where userid = '$userid' AND status > 0";
+    $sql = "SELECT * FROM event where userid = '$userid' AND status = 1";
     $result = mysqli_query($conn, $sql);
     $num = mysqli_num_rows($result);
     $row = mysqli_fetch_array($result);
@@ -197,11 +198,9 @@ include('condb.php');
                                         INNER JOIN item_list ON activity_event.list_id = item_list.list_id 
                                         INNER JOIN event ON activity_event.e_id = event.e_id
                                         WHERE activity_event.e_id = (SELECT e_id FROM event WHERE event.userid = $userid )
-                                        AND event.status = 1  ";
+                                        AND event.status > 0  ";
                                             $query1 = mysqli_query($conn, $sql . " GROUP BY activity_event.a_id");
                                             $row = mysqli_fetch_array($query1);
-
-
 
 
                                             ?>
@@ -451,6 +450,54 @@ include('condb.php');
 
             $('#endBtn').hide();
 
+            let date = document.getElementById('date');
+            let days = document.getElementById('days');
+            let hours = document.getElementById('hours')
+            let minutes = document.getElementById('minutes');
+            let seconds = document.getElementById('seconds');
+
+            if (date.value) {
+
+
+                // Set the date we're counting down to
+                var countDownDate = new Date(date.value).getTime();
+
+                // Update the count down every 1 second
+                var x = setInterval(function() {
+
+                    // Get today's date and time
+                    var now = new Date().getTime();
+
+                    // Find the distance between now and the count down date
+                    var distance = countDownDate - now;
+
+                    // Time calculations for days, hours, minutes and seconds
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    // Display the result in the element with id="demo"
+                    document.getElementById("days").innerHTML = days + " วัน ";
+                    document.getElementById("hours").innerHTML = hours + " ชั่วโมง ";
+                    document.getElementById("minutes").innerHTML = minutes + " นาที ";
+                    document.getElementById("seconds").innerHTML = seconds + " วินาที ";
+
+                    if (!countDownDate) {
+                        document.getElementById("showCountDown").innerHTML = "ยังไม่กำหนด";
+                    }
+
+                    // If the count down is finished, write some text
+                    if (distance < 0) {
+                        clearInterval(x);
+                        document.getElementById("showCountDown").innerHTML = "<p class='text-danger'>ครบกำหนดแล้ว</p>";
+                        $('#endBtn').show();
+                    }
+                }, 1000);
+            } else if (!date.value) {
+
+                document.getElementById('showCountDown').style.display = "none";
+            }
 
         });
 
@@ -470,54 +517,7 @@ include('condb.php');
                 XLSX.writeFile(wb, fn || ('การตอบรับการเข้าร่วมงาน.' + (type || 'xlsx')));
         }
 
-        let date = document.getElementById('date');
-        let days = document.getElementById('days');
-        let hours = document.getElementById('hours')
-        let minutes = document.getElementById('minutes');
-        let seconds = document.getElementById('seconds');
 
-        if (date.value) {
-
-
-            // Set the date we're counting down to
-            var countDownDate = new Date(date.value).getTime();
-
-            // Update the count down every 1 second
-            var x = setInterval(function() {
-
-                // Get today's date and time
-                var now = new Date().getTime();
-
-                // Find the distance between now and the count down date
-                var distance = countDownDate - now;
-
-                // Time calculations for days, hours, minutes and seconds
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                // Display the result in the element with id="demo"
-                document.getElementById("days").innerHTML = days + " วัน ";
-                document.getElementById("hours").innerHTML = hours + " ชั่วโมง ";
-                document.getElementById("minutes").innerHTML = minutes + " นาที ";
-                document.getElementById("seconds").innerHTML = seconds + " วินาที ";
-
-                if (!countDownDate) {
-                    document.getElementById("showCountDown").innerHTML = "ยังไม่กำหนด";
-                }
-
-                // If the count down is finished, write some text
-                if (distance < 0) {
-                    clearInterval(x);
-                    document.getElementById("showCountDown").innerHTML = "<p class='text-danger'>ครบกำหนดแล้ว</p>";
-                    $('#endBtn').show("slow", "swing");
-                }
-            }, 1000);
-        } else if (!date.value) {
-
-            document.getElementById('showCountDown').style.display = "none";
-        }
 
         function endEvent() {
             swal({
@@ -543,6 +543,7 @@ include('condb.php');
                                     .then((value) => {
                                         $('#endBtn button').text("เสร็จสิ้นอีเวนท์แล้ว");
                                         $('#endBtn button').attr("class", "btn btn-success");
+                                        window.location.replace("history.php")
                                     });
 
                             }

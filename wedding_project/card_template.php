@@ -77,67 +77,57 @@ include('condb.php');
             <li class="breadcrumb-item active" aria-current="page">template</li>
         </ol>
     </nav>
-    <?php
-    $userid = $_SESSION['userid'];
-    $sql = "SELECT * FROM email where e_id = (SELECT event.e_id FROM event WHERE event.userid = '$userid' )";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_array($result);
-    $num = mysqli_num_rows($result);
-    if ($num == 0) { ?>
-        <div class="container p-3 my-3 bg-light shadow">
-            <div class="row justify-content-md-center">
-                <div class="card text-center" style="width: 30rem;">
+    
+    <div class="container p-3 my-3 bg-light shadow">
+        <div class="row justify-content-md-center">
+            <div class="card text-center" style="width: 30rem;">
 
-                    <div class="card-body">
-                        <h5 class="card-title">เลือกเทมเพลทการ์ดเชิญ</h5>
-                        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="false" data-touch="false" data-interval="false">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="assets/images/invite_card/c1.png" class="d-block w-100 img-responsive" alt="...">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <form action="card_creating.php" method="POST">
-                                            <input type="hidden" value="1" name="card">
-                                            <button type="submit" class="btn btn-primary ">เลือก</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="assets/images/invite_card/c2.png" class="d-block w-100" alt="...">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <form action="card_creating.php" method="POST">
-                                            <input type="hidden" value="2" name="card">
-                                            <button type="submit" class="btn btn-primary ">เลือก</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="assets/images/invite_card/c3.png" class="d-block w-100" alt="...">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <form action="card_creating.php" method="POST">
-                                            <input type="hidden" value="3" name="card">
-                                            <button type="submit" class="btn btn-primary ">เลือก</button>
-                                        </form>
-                                    </div>
+                <div class="card-body">
+                    <h5 class="card-title">เลือกเทมเพลทการ์ดเชิญ</h5>
+                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="false" data-touch="false" data-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="assets/images/invite_card/c1.png" class="d-block w-100 img-responsive" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <form action="card_creating.php" method="POST">
+                                        <input type="hidden" value="1" name="card">
+                                        <button type="submit" class="btn btn-primary ">เลือก</button>
+                                    </form>
                                 </div>
                             </div>
-                            <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
+                            <div class="carousel-item">
+                                <img src="assets/images/invite_card/c2.png" class="d-block w-100" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <form action="card_creating.php" method="POST">
+                                        <input type="hidden" value="2" name="card">
+                                        <button type="submit" class="btn btn-primary ">เลือก</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/invite_card/c3.png" class="d-block w-100" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <form action="card_creating.php" method="POST">
+                                        <input type="hidden" value="3" name="card">
+                                        <button type="submit" class="btn btn-primary ">เลือก</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
+                        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    <?php } else { ?>
-        <script>
-            window.location.replace("sendingE.php");
-        </script>
-    <?php } ?>
+    </div>
+
 
 
 

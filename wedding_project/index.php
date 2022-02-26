@@ -60,6 +60,9 @@
         #btn {
             border: 1px solid lightgrey;
         }
+        .footer-16371 .nav-links li a:hover{
+            color: #dbb89a;
+        }
     </style>
 
 </head>
@@ -173,7 +176,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-9 text-center">
                     <div class="footer-site-logo mb-4">
-                        <a href="#">Wedding Planner</a>
+                        <a href="#" style="color: #dbb89a;">Wedding Planner</a>
                     </div>
                     <ul class="list-unstyled nav-links mb-5">
                         <li><a href="about.php">About</a></li>
@@ -197,7 +200,7 @@
                     </div>
 
                     <div class="copyright">
-                        <p class="mb-0"><small>&copy; Colorlib. All Rights Reserved.</small></p>
+                        <p class="mb-0"><small>&copy; Wedding planner official</small></p>
                     </div>
 
 

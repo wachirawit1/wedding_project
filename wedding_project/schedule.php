@@ -158,16 +158,16 @@ include('condb.php');
             </div>
         </div>
 
-        <div class="row justify-content-end my-3 mr-3">
-            <div class="col-2">
+        <div class="row justify-content-end my-3 ">
+            <div class="col-2 text-right">
                 <select id="myFilter" class="form-control">
                     <option value="">ทั้งหมด</option>
                     <option value="เตรียมแล้ว">เตรียมแล้ว</option>
                     <option value="ยังไม่เตรียม">ยังไม่เตรียม</option>
                 </select>
             </div>
-            <div class="col-1 ">
-                <a href="edit_schedule.php" class="btn btn-primary"><i class="fas fa-edit">แก้ไข</i></a>
+            <div class="col-md-2 text-right">
+                <a href="edit_schedule.php" class="btn btn-primary"><i class="fas fa-edit">แก้ไขงบประมาณ</i></a>
             </div>
         </div>
 
@@ -177,10 +177,8 @@ include('condb.php');
             $userid = $_SESSION['userid'];
             $sql = "SELECT * FROM `activity_event` 
             INNER JOIN activity ON activity_event.a_id = activity.a_id 
-            INNER JOIN item_list ON activity_event.list_id = item_list.list_id 
-            INNER JOIN event ON activity_event.e_id = event.e_id
-            WHERE activity_event.e_id = (SELECT e_id FROM event WHERE event.userid = $userid )
-            AND event.status = 1  ";
+            INNER JOIN item_list ON activity_event.list_id = item_list.list_id  
+            WHERE e_id = (SELECT e_id FROM event WHERE event.userid = $userid AND event.status=1);";
             $query1 = mysqli_query($conn, $sql . " GROUP BY activity_event.a_id");
             $row = mysqli_fetch_array($query1);
 
@@ -263,8 +261,8 @@ include('condb.php');
         let count = $(".count").length;
         let task = $(".task").length;
 
-        console.log(count);
-        console.log(task);
+        // console.log(count);
+        // console.log(task);
         $(document).ready(function() {
 
             // tasking progress

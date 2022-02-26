@@ -66,24 +66,14 @@
         // $all_budget = array_sum($budget);
 
         //เพิ่มอีเว้นท์
-        $sql = "INSERT INTO event (userid , t_id) VALUES ('$userid','$t_id')";
+        $sql = "INSERT INTO event (userid , t_id,status) VALUES ('$userid','$t_id',$status)";
         $result = mysqli_query($conn, $sql);
 
 
-        $sql = "SELECT e_id FROM event WHERE userid = '$userid' AND status = '' ";
+        $sql = "SELECT e_id FROM event WHERE userid = '$userid' AND status = 1 ";
         $result = mysqli_query($conn, $sql);
 
-        $row = mysqli_fetch_array($result);
-        $get_eid = $row['e_id'];
-
-        // foreach ($activity as $value) {
-        //     $sql = "INSERT INTO activity_event (activity_listitem_id , e_id )
-        //     SELECT activity_listitem.id , $get_eid 
-        //     FROM activity_listitem
-        //     WHERE activity_listitem.a_id = '$value'";
-        //     mysqli_query($conn, $sql);
-        // }
-
+    
 
 
         foreach ($a_id as $index => $a) {
@@ -91,7 +81,8 @@
             $l = $list_id[$index];
 
 
-            $sql = "INSERT INTO activity_event (a_id , list_id, e_id, ae_status) VALUES ( '$a' , '$l' , '$get_eid', 'uncheck' ) ";
+            $sql = "INSERT INTO activity_event (a_id , list_id, e_id, ae_status) 
+            VALUES ( '$a' , '$l' ,  (SELECT event.e_id FROM event WHERE event.userid = $userid AND event.status = 1), 'uncheck' ) ";
             mysqli_query($conn, $sql);
         }
 
@@ -102,10 +93,6 @@
 
 
         if ($result) {
-            $sql = "UPDATE event SET status = $status WHERE userid = '$userid'";
-            mysqli_query($conn, $sql);
-
-
         ?>
 
             <script>
@@ -117,22 +104,7 @@
                 });
             </script>
             <meta http-equiv="refresh" content="2; url=progress.php">
-        <?php
-
-        } else { ?>
-            <div class="card box d-flex mt-5">
-                <div class="card-header">แจ้งเตือน</div>
-                <div class="card-body">
-                    <h5 class="card-title">การสร้างงานแต่งงาน</h5>
-                    <div class="alert alert-danger " role="alert">
-                        <p class="card-text">ไม่สำเร็จ!!!!</p>
-                        <meta http-equiv="refresh" content="2; url=progress.php">
-                    </div>
-                </div>
-            </div>
-        <?php }
-
-        ?>
+        <?php } ?>
 
     </div>
 

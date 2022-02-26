@@ -49,6 +49,9 @@
                         <a class="dropdown-item" href="profile.php">ดูข้อมูลส่วนตัว</a>
 
                         <a class="dropdown-item" href="report.php">งานที่กำลังทำ</a>
+
+                        <a class="dropdown-item" href="history.php">ประวัติอีเวนท์</a>
+
                         <div class="dropdown-divider"></div>
 
                         <!-- Button trigger modal -->
@@ -61,35 +64,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-5" aria-controls="navbarSupportedContent-5" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent-5">
-
-                <ul class="navbar-nav ml-auto nav-flex-icons">
-                    <li class="nav-item avatar dropdown">
-                        <a class="nav-link btn waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <i class="fas fa-bell">
-                                <span class="badge badge-danger ml-2"></span>
-                            </i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5">
-                            <?php
-                            $userid = $_SESSION['userid'];
-
-                            include('condb.php');
-                            $sql = "SELECT status FROM event WHERE userid = '$userid'";
-                            $status = mysqli_fetch_array(mysqli_query($conn, $sql));
-                            $status = isset($status['status']);
-                            if ($status == "") {
-                            } else if ($status == "1") { ?>
-                                <div class="dropdown-item waves-effect waves-light">
-                                    คุณสร้างอีเวนท์สำเร็จ
-                                </div>
-
-                            <?php } ?>
-
-                        </div>
-                    </li>
-                </ul>
-            </div> -->
+           
         </ul>
     </div>
 </nav>

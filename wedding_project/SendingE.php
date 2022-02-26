@@ -99,7 +99,7 @@ include('condb.php');
     if ($nums == 0) {
         echo "";
     } else { ?>
-        <div class="container shadow bg-light border text-center my-3">
+        <div class="container shadow bg-light border my-3">
             <h4 class="my-3 text-center">สร้างจดหมายเชิญ</h4>
 
 
@@ -117,16 +117,25 @@ include('condb.php');
                 <div class="form-group">
                     <textarea class="form-control" type="text" id="detail" placeholder="เพิ่มคำอธิบาย เช่น หมายเลขพร้อมเพย์" rows="4" cols="50"></textarea>
                 </div>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupFileAddon01">อัพโหลด</span>
+                <div class="row">
+                    <div class="col-6 input-group">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">อัพโหลด</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="imgInp" name="image" type="file" aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">เลือกการ์ดเชิญ</label>
+                            <input type="hidden" id="fileName" name="fileName" value="">
+                        </div>
                     </div>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="imgInp" name="image" type="file" aria-describedby="inputGroupFileAddon01">
-                        <label class="custom-file-label" for="inputGroupFile01">เลือกการ์ดเชิญ</label>
-                        <input type="hidden" id="fileName" name="fileName" value="">
+
+                    <div class="col-2">
+                        <a class="btn " href="card_template.php" style="background-color: #dbb89a;color: #ffffff;">ออกแบบการ์ดเชิญ</a>
                     </div>
                 </div>
+
+
                 <div class="row justify-content-md-center my-3">
                     <div class="card border-0 bg-light">
                         <div class="card-body">
@@ -146,15 +155,24 @@ include('condb.php');
                 <div class="form-group">
                     <textarea class="form-control" type="text" id="detail" placeholder="เพิ่มคำอธิบาย เช่น หมายเลขพร้อมเพย์" rows="4" cols="50"><?= $row['detail'] ?></textarea>
                 </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupFileAddon01">อัพโหลด</span>
+                <div class="row">
+
+                    <div class="col-6 input-group mb-3">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">อัพโหลด</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="imgInp" name="image" type="file" value="" aria-describedby="inputGroupFileAddon01">
+                            <input type="hidden" id="fileName" name="fileName" value="<?= $row['attach_file'] ?>">
+                            <label class="custom-file-label" for="inputGroupFile01">เลือกการ์ดเชิญ</label>
+                        </div>
                     </div>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="imgInp" name="image" type="file" value="" aria-describedby="inputGroupFileAddon01">
-                        <input type="hidden" id="fileName" name="fileName" value="<?= $row['attach_file'] ?>">
-                        <label class="custom-file-label" for="inputGroupFile01">เลือกการ์ดเชิญ</label>
+
+                    <div class="col-2">
+                        <a class="btn " href="card_template.php" style="background-color: #dbb89a;color: #ffffff;">ออกแบบการ์ดเชิญ</a>
                     </div>
+
                 </div>
                 <div class="row justify-content-md-center p-0">
 
@@ -172,11 +190,11 @@ include('condb.php');
 
         <div id="email_list" data-aos="fade-up" data-aos-duration="800" style="display: none;">
             <div class="container shadow bg-light border text-center mb-3">
-                <h4 class="my-3">การส่งการ์ดเชิญ</h4>
+                <h3 class="my-3">การส่งการ์ดเชิญ</h3>
 
 
                 <div class="my-3">
-                    <b>วิธีการส่งการ์ดเชิญ</b>
+                    <p class="text-secondary">วิธีการส่งการ์ดเชิญ</p>
                 </div>
 
                 <div class="accordion" id="accordionExample">
@@ -277,62 +295,60 @@ include('condb.php');
 
                 <div class="my-3 border-bottom"></div>
 
-                <div id="here">
 
-                    <?php
-                    $userid = $_SESSION['userid'];
-                    $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))";
-                    $query = mysqli_query($conn, $sql);
-                    $num = mysqli_num_rows($query);
+                <?php
+                $userid = $_SESSION['userid'];
+                $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))";
+                $query = mysqli_query($conn, $sql);
+                $num = mysqli_num_rows($query);
 
-                    $i = 1;
-                    if ($num == 0) { ?>
-                        <div id="email_list">
-                            <div class="alert alert-danger" role="alert" id="none">
-                                ยังไม่มีรายชื่อแขก
-                            </div>
-                            <div id="show">
-
-                            </div>
+                $i = 1;
+                if ($num == 0) { ?>
+                    <div id="email_list">
+                        <div class="alert alert-danger" role="alert" id="none">
+                            ยังไม่มีรายชื่อแขก
                         </div>
-                    <?php
-                    } else { ?>
-                        <h4 class='my-3'>รายชื่อแขกที่ส่งการ์ดเชิญแล้ว</h4>
+                        <div id="show">
 
-
-                        <div class="row justify-content-end my-3">
-                            <div class="col col-2">
-                                <form action="report.php">
-                                    <button class="btn btn-block btn-light" style="background-color: #dbb89a; color: white;">ดูผลลัพธ์</button>
-                                </form>
-                            </div>
                         </div>
+                    </div>
+                <?php
+                } else { ?>
+                    <h4 class='my-3'>รายชื่อแขกที่ส่งการ์ดเชิญแล้ว</h4>
 
 
-                        <table class="table bg-white table-hover ">
-                            <thead class="thead-light">
+                    <div class="row justify-content-end my-3">
+                        <div class="col col-2">
+                            <form action="report.php">
+                                <button class="btn btn-block btn-light" style="background-color: #dbb89a; color: white;">ดูผลลัพธ์</button>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <table class="table bg-white table-hover ">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">ลำดับ</th>
+                                <th scope="col">ชื่อ</th>
+                                <th scope="col">ความสัมพันธ์</th>
+                                <th scope="col">ที่อยู่อีเมล</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($row = mysqli_fetch_array($query)) { ?>
                                 <tr>
-                                    <th scope="col">ลำดับ</th>
-                                    <th scope="col">ชื่อ</th>
-                                    <th scope="col">ความสัมพันธ์</th>
-                                    <th scope="col">ที่อยู่อีเมล</th>
+                                    <th scope="row"><?= $i ?></th>
+                                    <td><?= $row['e_name'] ?></td>
+                                    <td><?= $row['relation'] ?></td>
+                                    <td><?= $row['address'] ?></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php while ($row = mysqli_fetch_array($query)) { ?>
-                                    <tr>
-                                        <th scope="row"><?= $i ?></th>
-                                        <td><?= $row['e_name'] ?></td>
-                                        <td><?= $row['relation'] ?></td>
-                                        <td><?= $row['address'] ?></td>
-                                    </tr>
-                            <?php $i++;
-                                }
-                            } ?>
-                            </tbody>
-                        </table>
+                        <?php $i++;
+                            }
+                        } ?>
+                        </tbody>
+                    </table>
 
-                </div>
             </div>
         <?php } ?>
 
@@ -351,25 +367,28 @@ include('condb.php');
                 duration: 1000
             });
 
+            $(document).ready(function() {
 
-            // let img = $('#blah');
-            // if (!img.val()) {
-            //     img.attr('class', "d-none");
-            // }
+                imgInp.onchange = evt => {
 
-            imgInp.onchange = evt => {
-
-                const [file] = imgInp.files
-                if (file) {
-                    blah.src = URL.createObjectURL(file)
+                    const [file] = imgInp.files
+                    if (file) {
+                        blah.src = URL.createObjectURL(file)
+                    }
                 }
-            }
 
-            if ($('#header').val() != "" && $('#detail').val() != "" && $('#filename').val() != "") {
-                $('#email_list').css('display', '');
-            }
+                if ($('#header').val() != "" && $('#detail').val() != "" && $('#filename').val() != "") {
+                    $('#email_list').show();
+                    $("html, body").animate({
+                        scrollTop: $(
+                            'html, body').get(0).scrollHeight
+                    }, 2000);
+                }
 
-            let count = <?= $i ?>;
+            });
+
+
+
 
 
             //บันทึกข้อความที่เพิ่มในการส่งเมล
@@ -392,7 +411,7 @@ include('condb.php');
 
 
                 if (isNotEmpty(header) && isNotEmpty(detail) && fileName) {
-                    $('#email_list').css('display', '');
+                    $('#email_list').show();
 
 
                     $.ajax({
@@ -404,7 +423,6 @@ include('condb.php');
                         data: form_data,
                         type: 'POST',
                         success: function(data) {
-                            console.log(data);
                             swal({
                                 title: "การแจ้งเตือน",
                                 text: "บันทึกข้อมูลสำเร็จ",
@@ -412,6 +430,12 @@ include('condb.php');
                                 button: "ตกลง"
                             });
                             $('#fileName').val(data.fileName);
+
+
+                            $("html, body").animate({
+                                scrollTop: $(
+                                    'html, body').get(0).scrollHeight
+                            }, 2000);
                         },
                         error: function(err) {
                             console.log('err');
@@ -460,7 +484,6 @@ include('condb.php');
                 var header = $('#header');
                 var detail = $('#detail');
                 let fileName = $('#fileName');
-                console.log(fileName);
                 let file_data = $('#imgInp').prop("files")[0];
                 let form_data = new FormData();
 
@@ -495,22 +518,21 @@ include('condb.php');
                     data: form_data,
                     method: 'POST',
                     success: function(data) {
-                        console.log(data);
-                        let append_element = $("#excel_data").html();
-                        $("#here").html(append_element);
 
-                        $("#enable").html('บันทึกและส่ง');
+                        $("#enable").text('บันทึกและส่ง');
 
-                        $('#email_list').html('<div class="row justify-content-end my-3"><div class="col col-2"><form action="report.php"><button class="btn btn-block btn-light" style="background-color: #dbb89a; color: white;">ดูผลลัพธ์ที่นี่</button></form></div></div>')
 
-                        swal({
-                            title: "การแจ้งเตือน",
-                            text: "ส่งอีเมลแล้ว",
-                            icon: "success",
-                            button: "ตกลง"
-                        });
+                        setTimeout(function() {
+                            swal({
+                                title: "การแจ้งเตือน",
+                                text: "ส่งอีเมลแล้ว",
+                                icon: "success",
+                                button: "ตกลง"
+                            }).then((value) => {
+                                location.reload();
+                            });
 
-                        $("#excel_data").html(" ");
+                        }, 2000)
 
                     },
                     error: function(data) {
