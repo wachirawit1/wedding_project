@@ -178,7 +178,7 @@ include('condb.php');
             $sql = "SELECT * FROM `activity_event` 
             INNER JOIN activity ON activity_event.a_id = activity.a_id 
             INNER JOIN item_list ON activity_event.list_id = item_list.list_id  
-            WHERE e_id = (SELECT e_id FROM event WHERE event.userid = $userid AND event.status=1);";
+            WHERE e_id = (SELECT e_id FROM event WHERE event.userid = $userid AND event.status=1)";
             $query1 = mysqli_query($conn, $sql . " GROUP BY activity_event.a_id");
             $row = mysqli_fetch_array($query1);
 
@@ -228,7 +228,7 @@ include('condb.php');
                                     <td class="text-center">
 
                                         <?php
-                                        if ($row['ae_status'] == 'uncheck' || $row['status'] == '') { ?>
+                                        if ($row['ae_status'] == 'uncheck' || $row['ae_status'] == '') { ?>
                                             <button class="btn btn-danger" id="btn_status" name="<?= $row['ae_id'] ?>" onclick="changeStatus('<?= $row['ae_id'] ?>')">ยังไม่เตรียม</button>
                                         <?php } else { ?>
                                             <button class="task btn btn-success" name="<?= $row['ae_id'] ?>">เตรียมแล้ว</button>

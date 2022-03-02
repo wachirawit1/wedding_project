@@ -24,7 +24,7 @@ include('condb.php');
 
 for ($i = 0; $i < sizeof($name_array); $i++) {
     $sql = "INSERT INTO `email_list`(`e_name`, `relation`, `address`, `email_id`) 
-    VALUES (" . "'" . $name_array[$i] . "'" . "," . "'" . $relation_array[$i] . "'" . "," . "'" . $email_array[$i] . "'" . ",(SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid)))";
+    VALUES (" . "'" . $name_array[$i] . "'" . "," . "'" . $relation_array[$i] . "'" . "," . "'" . $email_array[$i] . "'" . ",(SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid AND event.status = 1)))";
     $query = mysqli_query($conn, $sql);
 
     if ($query) {

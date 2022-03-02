@@ -29,15 +29,15 @@ if (isset($_FILES['file'])) {
     $newname = $_POST['fileName'];
 }
 
-$check = "SELECT * FROM `email` WHERE e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid AND status = 1)";
+$check = "SELECT * FROM `email` WHERE e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid AND event.status = 1)";
 $query_check = mysqli_query($conn, $check);
 $num_check = mysqli_num_rows($query_check);
 if ($num_check == 0) {
     $sql = "INSERT INTO `email`(`header`, `detail`,  `attach_file`, `e_id`) 
-    VALUES ('$header','$detail', '$newname' , (SELECT event.e_id FROM event WHERE event.userid = $userid))";
+    VALUES ('$header','$detail', '$newname' , (SELECT event.e_id FROM event WHERE event.userid = $userid AND event.status = 1))";
     $query = mysqli_query($conn, $sql);
 } else {
-    $sql = "UPDATE `email` SET `header`='$header',`detail`='$detail' , `attach_file`='$newname' WHERE e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid AND status = 1)";
+    $sql = "UPDATE `email` SET `header`='$header',`detail`='$detail' , `attach_file`='$newname' WHERE e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid AND event.status = 1)";
     $query = mysqli_query($conn, $sql);
 }
 

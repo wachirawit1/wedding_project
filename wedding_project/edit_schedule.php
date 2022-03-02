@@ -96,9 +96,9 @@ include('condb.php');
             <?php
             $userid = $_SESSION['userid'];
             $sql = "SELECT * FROM `activity_event` 
-                    INNER JOIN activity ON activity_event.a_id = activity.a_id 
-                    INNER JOIN item_list ON activity_event.list_id = item_list.list_id 
-                    WHERE e_id = (SELECT e_id FROM event WHERE event.userid = $userid )
+            INNER JOIN activity ON activity_event.a_id = activity.a_id 
+            INNER JOIN item_list ON activity_event.list_id = item_list.list_id  
+            WHERE e_id = (SELECT e_id FROM event WHERE event.userid = $userid AND event.status=1)
                     ";
 
             $query1 = mysqli_query($conn, $sql . " GROUP BY activity_event.a_id");

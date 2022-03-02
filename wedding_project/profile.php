@@ -25,6 +25,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <title>Wedding Planner</title>
     <style>
@@ -97,26 +98,7 @@
     <?php include('navbaruser.php') ?>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน!!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ต้องการออกจากระบบ?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    <a href="logout.php?logout=1" type="button" class="btn btn-success">ยืนยัน</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <!-- breadcrums -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style=" background-color: #ffffff;">
@@ -125,104 +107,139 @@
         </ol>
     </nav>
 
-    <div class="container mb-5">
-        <div class="row card ">
-            <div class="row mx-auto my-5">
-                <div class="col">
-                    <h2 class="font-weight-bold text-center text-secondary">ข้อมูลส่วนตัว</h2>
+    <div class="container p-3">
+        <div class="row">
+            <div class="col-3 ">
+                <div class="list-group shadow" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="myinfo" data-toggle="list" href="#list-home" role="tab" aria-controls="home">ข้อมูลส่วนตัว</a>
+                    <a class="list-group-item list-group-item-action text-danger" id="changepass" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">เปลี่ยนรหัสผ่าน</a>
                 </div>
             </div>
-
-            <div class="col card-body">
-                <div class="row justify-content-md-center">
-                    <div class="col col-lg-4 border-right">
-                        <div class="form-group row">
-                            <div class="col-6 ml-auto text-center"><a type="button" class="" href="#" data-toggle="modal" data-target="#edituser">
-                                    <i class="fas fa-edit">แก้ไขข้อมูล</i>
-                                </a>
+            <div class="col shadow">
+                <div class="tab-content" id="nav-tabContent">
+                    <!-- ข้อมูลส่วนตัว -->
+                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="myinfo">
+                        <div class="row card ">
+                            <div class="row mx-auto ">
+                                <div class="col">
+                                    <h2 class="font-weight-bold text-center text-secondary">ข้อมูลส่วนตัว</h2>
+                                </div>
                             </div>
 
+                            <div class="col card-body">
+                                <div class="row justify-content-center">
+                                    <div class="col col-6  border-right">
+                                        <div class="form-group row">
+                                            <div class="col-6 ml-auto text-center">
+                                                <a type="button" class="text-primary" href="#" data-toggle="modal" data-target="#edituser">
+                                                    <i class="fas fa-edit">แก้ไขข้อมูล</i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group row  my-1 mx-auto">
+                                            <div class="col">
+                                                <label for="formGroupExampleInput">ชื่อ</label>
+                                                <input class="form-control" type="text" placeholder="" value="<?php echo $row['name'] ?>" readonly>
+                                            </div>
+                                            <div class="col">
+                                                <label for="formGroupExampleInput">นามสกุล</label>
+                                                <input class="form-control" type="text" placeholder="" value="<?php echo $row['lastname'] ?>" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  my-1 justify-content-center">
+                                            <div class="col">
+                                                <label for="formGroupExampleInput">วันเกิด</label>
+                                                <input class="form-control text-center" type="text" placeholder="" value="<?php echo $row['birthday'] ?>" readonly>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group  my-1 justify-content-center">
+                                            <div class="col">
+                                                <label for="formGroupExampleInput">เพศ</label>
+                                                <input class="form-control text-center" type="text" placeholder="" value="<?php if ($row['gender'] == "01") {
+                                                                                                                                echo "ชาย";
+                                                                                                                            } else {
+                                                                                                                                echo "หญิง";
+                                                                                                                            } ?>" readonly>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group  mx-auto my-1">
+                                            <div class="col">
+                                                <label for="formGroupExampleInput">เบอร์โทรศัพท์</label>
+                                                <input class="form-control text-center" type="text" placeholder="" value="<?php echo $row['tel'] ?>" readonly>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <div class="col">
+                                                <div class="">
+                                                    <label for="formGroupExampleInput">อีเมล</label>
+                                                    <input class="form-control text-center" type="text" placeholder="" value="<?php echo $row['email'] ?>" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <div class="col">
+                                                <div class="">
+                                                    <label for="formGroupExampleInput">ประเภทผู้ใช้</label>
+                                                    <input class="form-control text-center bg-success text-white" type="text" placeholder="" value="<?php if ($row['type'] == "01") {
+                                                                                                                                                        echo "ผู้ใช้งานทั่วไป";
+                                                                                                                                                    } else {
+                                                                                                                                                        echo "ผู้ดูแลระบบ";
+                                                                                                                                                    } ?>" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="from-group row mx-auto">
+                                            <div class="col">
+                                                <a type="button" class="btn btn-secondary" href="index.php" class="">กลับ</a>
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col col-4">
+                                        <img src="<?php echo $path . $img ?>" alt="no image" class="card-img-top rounded" style="width: 170px; height: 200px;">
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-
-                        <div class="form-group row  my-1 mx-auto">
-                            <div class="col">
-                                <label for="formGroupExampleInput">ชื่อ</label>
-                                <input class="form-control" type="text" placeholder="" value="<?php echo $row['name'] ?>" readonly>
+                    </div>
+                    <!-- เปลี่ยนรหัสผ่าน -->
+                    <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="changepass">
+                        <div class="p-3">
+                            <div class="form-group ">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">รหัสผ่านเดิม</label>
+                                <div class="col-4">
+                                    <input type="password" class="form-control" id="staticEmail">
+                                </div>
                             </div>
-                            <div class="col">
-                                <label for="formGroupExampleInput">นามสกุล</label>
-                                <input class="form-control" type="text" placeholder="" value="<?php echo $row['lastname'] ?>" readonly>
+                            <div class="form-group ">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">รหัสผ่านใหม่</label>
+                                <div class="col-4">
+                                    <input type="password" class="form-control" id="inputPassword">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group  my-1 justify-content-center">
-                            <div class="col">
-                                <label for="formGroupExampleInput">วันเกิด</label>
-                                <input class="form-control text-center" type="text" placeholder="" value="<?php echo $row['birthday'] ?>" readonly>
-                            </div>
-
-                        </div>
-                        <div class="form-group  my-1 justify-content-center">
-                            <div class="col">
-                                <label for="formGroupExampleInput">เพศ</label>
-                                <input class="form-control text-center" type="text" placeholder="" value="<?php if ($row['gender'] == "01") {
-                                                                                                                echo "ชาย";
-                                                                                                            } else {
-                                                                                                                echo "หญิง";
-                                                                                                            } ?>" readonly>
-                            </div>
-
-                        </div>
-                        <div class="form-group  mx-auto my-1">
-                            <div class="col">
-                                <label for="formGroupExampleInput">เบอร์โทรศัพท์</label>
-                                <input class="form-control text-center" type="text" placeholder="" value="<?php echo $row['tel'] ?>" readonly>
-                            </div>
-
-                        </div>
-
-                        <div class="form-group ">
-                            <div class="col">
-                                <div class="">
-                                    <label for="formGroupExampleInput">อีเมล</label>
-                                    <input class="form-control text-center" type="text" placeholder="" value="<?php echo $row['email'] ?>" readonly>
+                            <div class="form-group ">
+                                <div class="col-4">
+                                    <button type="button" class=" btn btn-primary btn-block" id="submitbtn">เปลี่ยนรหัสผ่าน</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group ">
-                            <div class="col">
-                                <div class="">
-                                    <label for="formGroupExampleInput">ประเภทผู้ใช้</label>
-                                    <input class="form-control text-center bg-success text-white" type="text" placeholder="" value="<?php if ($row['type'] == "01") {
-                                                                                                                                        echo "ผู้ใช้งานทั่วไป";
-                                                                                                                                    } else {
-                                                                                                                                        echo "ผู้ดูแลระบบ";
-                                                                                                                                    } ?>" readonly>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="from-group row mx-auto">
-                            <div class="col">
-                                <a type="button" class="btn btn-secondary" href="index.php" class="">กลับ</a>
-                            </div>
-
-
-                        </div>
-
 
                     </div>
-                    <div class="col-md-auto">
 
-                    </div>
-                    <div class="col col-lg-4 ">
-                        <div class="form-group"></div>
-                        <img src="<?php echo $path . $img ?>" alt="no image" class="card-img-top rounded" style="width: 300px; height: 300px;">
-                    </div>
                 </div>
-
             </div>
         </div>
-    </div>
     </div>
 
     <!-- Modal -->

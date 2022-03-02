@@ -298,7 +298,7 @@ include('condb.php');
 
                 <?php
                 $userid = $_SESSION['userid'];
-                $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))";
+                $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid AND event.status = 1))";
                 $query = mysqli_query($conn, $sql);
                 $num = mysqli_num_rows($query);
 
