@@ -117,23 +117,6 @@
                 <form action="clogin_store.php" method="POST">
                     <!-- notification -->
 
-                    <?php
-
-                    if (isset($_SESSION['errors'])) { ?>
-                        <div class='alert alert-danger py-2' role='alert' style='font-size : 15px'>
-                            <?php echo $_SESSION['errors']; ?>
-                        </div>
-                    <?php
-                        $_SESSION['errors'] = null;
-                    } else {
-                        $_SESSION['errors'] = null;
-                        echo $_SESSION['errors'];
-                    }
-
-                    ?>
-
-
-
                     <div class="form-group">
                         <label for="email" class="sr-only">ชื่อผู้ใช้</label>
                         <input type="text" name="susername" id="susername" class="form-control" placeholder="ชื่อผู้ใช้">
@@ -183,6 +166,21 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 <script>
+    // $(document).ready(function() {
+    //     $(document).bind('keypress', function(e) {
+    //         if (e.keyCode == 13) {
+    //             if ($('#username').val()) {
+    //                 $('button#login').trigger('click');
+    //             } else if ($('#susername').val()) {
+    //                 $('button#slogin').trigger('click');
+    //             }else{
+    //                 $('.login_btn').trigger('click');
+    //             }
+    //         }
+    //     });
+    // });
+
+
     // user*****
     function login_user() {
         console.log("blaaaa");
@@ -207,7 +205,7 @@
                                 text: "เข้าสู่ระบบสำเร็จ",
                                 icon: "success",
                                 button: false,
-                                timer:1500
+                                timer: 1500
                             }).then((value) => {
                                 window.location = "index.php";
                             });
@@ -268,7 +266,7 @@
                                 text: "เข้าสู่ระบบสำเร็จ",
                                 icon: "success",
                                 button: false,
-                                timer:1500
+                                timer: 1500
                             }).then((value) => {
                                 window.location = "storepost.php";
                             });
