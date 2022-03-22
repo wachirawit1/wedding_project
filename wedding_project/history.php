@@ -87,17 +87,22 @@
     <div class="container p-3">
         <?php
         include('condb.php');
-        $userid = $_SESSION['userid'] ;
-        $sql = "SELECT * FROM `event` INNER JOIN traditional ON event.t_id = traditional.t_id WHERE userid = $userid";
+        $userid = $_SESSION['userid'];
+        $sql = "SELECT * FROM `event` INNER JOIN traditional ON event.t_id = traditional.t_id WHERE userid = $userid AND status = 2";
         $query = mysqli_query($conn, $sql);
+        $i = 1;
         while ($row = mysqli_fetch_array($query)) { ?>
 
-            <div class="card">
-                <div class="card-header"></div>
-                <div class="card-body"></div>
+            <div class="card mb-3 shadow-sm">
+                <div class="card-header"><?= $i . " " . $row['trad_name'] ?></div>
+                <div class="card-body">
+                    <img src="assets/tradition_img/<?= $row['trad_img'] ?>" class="" alt="" width="200">
+                    <?= $row['date'] ?>
+                </div>
             </div>
 
-        <?php } ?>
+        <?php $i++;
+        } ?>
     </div>
 
 

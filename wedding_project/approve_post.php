@@ -13,8 +13,9 @@ $sql_select = "SELECT *,post.name as p_name,post.id as p_id,post.status FROM pos
 $query_select = mysqli_query($conn, $sql_select);
 $row_select = mysqli_fetch_assoc($query_select);
 ?>
+
 <!doctype html>
-<html lang="en">
+<html lang="en" class="fullscreen-bg">
 
 <head>
     <!-- favicon -->
@@ -61,9 +62,10 @@ $row_select = mysqli_fetch_assoc($query_select);
 
 </head>
 
+   <body>
+      <div id="wrapper">
 
-<body>
-    <?php
+      <?php
     if (!isset($_SESSION['username'])) { ?>
         <div class='alert alert-danger' role='alert'>
             <h4 class='alert-heading'>แจ้งเตือน !</h4>
@@ -75,12 +77,36 @@ $row_select = mysqli_fetch_assoc($query_select);
         exit;
     }
     ?>
-<?php include('navbar_admin.php'); ?>
-                        
-           
-            <div class="card container py-5 bg-light shadow rounded">
 
-                <div class="card">
+<?php 
+         include('navbar_admin.php');
+            ?>
+
+            
+         <div class="main">
+
+         <?php 
+         include('navbar_top.php');
+            ?>
+ 
+ <?php
+    if (!isset($_SESSION['username'])) { ?>
+        <div class='alert alert-danger' role='alert'>
+            <h4 class='alert-heading'>แจ้งเตือน !</h4>
+            <p>คุณยังไม่ได้เข้าสู่ระบบ โปรดเข้าสู่ระบบอีกครั้ง</p>
+            <hr>
+            <p class='mb-0'><a href='index.php' class='alert-link'>กลับไปเข้าสู่ระบบ</a></p>
+        </div>
+    <?php
+        exit;
+    }
+    ?>
+         <div class="main-content">
+           
+<div class="overflow-auto">
+            <div class="container-fluid">
+
+                <div class="panel">
                     <div class="card-body">
                         <h2 class="text-center py-2"><?= $row_select['p_name'] ?></h2>
                         <div class="row py-2">
@@ -366,6 +392,5 @@ $row_select = mysqli_fetch_assoc($query_select);
             })
         })
     </script>
-</body>
-
+   </body>
 </html>

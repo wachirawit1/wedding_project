@@ -60,8 +60,14 @@
         #btn {
             border: 1px solid lightgrey;
         }
-        .footer-16371 .nav-links li a:hover{
+
+        .footer-16371 .nav-links li a:hover {
             color: #dbb89a;
+        }
+
+        .card-text.overflow-hidden {
+            width: 19rem;
+            height: 5rem;
         }
     </style>
 
@@ -72,10 +78,10 @@
     <?php
     session_start();
     if (isset($_SESSION['username'])) {
-        if ($_SESSION['type']==01) {
+        if ($_SESSION['type'] == 01) {
             include('navbaruser.php');
         }
-    }else{
+    } else {
         include('navbar.php');
     }
     ?>
@@ -151,10 +157,10 @@
                         <form action="view_post.php" method="POST">
                             <div class="col mb-4 ">
                                 <div class="card">
-                                    <img src="img/<?= $row['picture'] ?>" class="card-img-top" alt="post">
+                                    <img src="img/<?= $row['picture'] ?>" class="card-img-top" alt="post" height="200">
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $row['name'] ?></h5>
-                                        <p class="card-text">
+                                        <p class="card-text overflow-hidden">
                                             <?= $row['detail'] ?>
                                         </p>
                                     </div>

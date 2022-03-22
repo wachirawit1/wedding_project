@@ -166,21 +166,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 <script>
-    // $(document).ready(function() {
-    //     $(document).bind('keypress', function(e) {
-    //         if (e.keyCode == 13) {
-    //             if ($('#username').val()) {
-    //                 $('button#login').trigger('click');
-    //             } else if ($('#susername').val()) {
-    //                 $('button#slogin').trigger('click');
-    //             }else{
-    //                 $('.login_btn').trigger('click');
-    //             }
-    //         }
-    //     });
-    // });
-
-
+  
     // user*****
     function login_user() {
         console.log("blaaaa");
@@ -218,7 +204,8 @@
                                 title: "การแจ้งเตือน",
                                 text: "เข้าสู่ระบบสำเร็จ",
                                 icon: "success",
-                                button: "ตกลง"
+                                button: false,
+                                timer: 1500
                             }).then((value) => {
                                 window.location = "traditional.php";
                             });

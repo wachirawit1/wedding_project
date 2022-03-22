@@ -2,66 +2,12 @@
 include('condb.php');
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="en" class="fullscreen-bg">
 
-<head>
-    <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
+   <body>
+      <div id="wrapper">
 
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
-    <title>Wedding Planner</title>
-    <style>
-        body {
-            font-family: 'Prompt', sans-serif;
-            background-color: #ffffff;
-        }
-
-        .nav-item {
-            font-size: 16px;
-            padding-left: 16px;
-            padding-right: 16px;
-        }
-
-
-        /* Standard syntax */
-        a.nav-link:hover {
-            background-color: white;
-        }
-
-
-        a.nav-link {
-            color: grey;
-        }
-
-
-        a.nav-link:hover {
-            color: #dbb89a !important;
-        }
-    </style>
-
-</head>
-
-
-<body>
-    <?php
-    $keyword = null;
-    if(isset($_POST['search'])){
-        $keyword = $_POST['search'];
-    }
+      <?php
     if (!isset($_SESSION['username'])) { ?>
         <div class='alert alert-danger' role='alert'>
             <h4 class='alert-heading'>แจ้งเตือน !</h4>
@@ -73,12 +19,24 @@ include('condb.php');
         exit;
     }
     ?>
-     <?php
 
-include('navbar_admin.php');
-?>
-<div class="card container py-5 my-5 bg-light shadow rounded" id="box"  >
-<div class="container " >
+      <?php 
+         include('navbar_admin.php');
+            ?>
+
+            
+         <div class="main">
+
+         <?php 
+         include('navbar_top.php');
+            ?>
+
+<div class="main-content">
+<div class="overflow-auto">
+
+
+<div class="container-fluid" id="box"  >
+<div class="panel " >
 <div class="col d-flex justify-content-between">
             <div class="p-2">
             <?php
@@ -90,13 +48,13 @@ include('navbar_admin.php');
             }
             ?>
         </div>
-            <div class="p-2">
+            <div class="panel-heading">
                 <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#addmodal">
                     เพิ่มหมวดหมู่ร้านค้า
                 </button>
             </div>
         </div>
-        <table class="table table-light table-hover ">
+        <table class="table table-striped no-margins ">
             <thead>
                 <th scope="col">#</th>
                 <th scope="col">หมวดหมู่</th>
@@ -128,8 +86,6 @@ include('navbar_admin.php');
                     <th class="align-middle " scope="row"><?php echo $row['cate_id'] ?></th>
                     <td class="align-middle"><?php echo $row['cate_name'] ?></td>
                     <td class="align-middle"><img src="assets/images/cate_icon/<?= $row['cate_pic'] ?>" width="150px"></td>
-
-
                     <td class="align-middle">
                         <a href="#edit<?= $row['cate_id'] ?>" class="btn btn-warning" data-toggle="modal">แก้ไข</a>
                         <a href="#delete<?php echo $row['cate_id']; ?>" class="btn btn-danger" data-toggle="modal">ลบ</a>
@@ -360,6 +316,5 @@ include('navbar_admin.php');
             duration: 1000
         });
     </script>
-</body>
-
+   </body>
 </html>

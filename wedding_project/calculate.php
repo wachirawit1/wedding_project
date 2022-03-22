@@ -46,6 +46,16 @@
         a.nav-link:hover {
             color: #dbb89a !important;
         }
+        .mybtn{
+            border-color: #dbb89a;
+            background-color: #dbb89a;
+            color: #ffffff;
+        }
+        .mybtn:hover{
+            border-color: #c5a58a;
+            background-color: #c5a58a;
+            color: #ffffff;
+        }
     </style>
 
 </head>
@@ -173,7 +183,7 @@
 
             <div class="row justify-content-end my-3">
                 <div class="col col-1">
-                    <button type="submit" class="btn btn-primary">สร้าง</button>
+                    <button type="submit" class="btn mybtn">สร้าง</button>
                 </div>
             </div>
         </div>

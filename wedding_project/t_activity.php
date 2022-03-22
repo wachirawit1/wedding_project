@@ -54,6 +54,17 @@
         a.nav-link:hover {
             color: #dbb89a !important;
         }
+
+        .btn-primary.btn-block {
+            border-color: #dbb89a;
+            background-color: #dbb89a;
+            color: #ffffff;
+        }
+
+        .btn-primary.btn-block:hover {
+            border-color: #dbb89a;
+            background-color: #caae95;
+        }
     </style>
 
 </head>
@@ -140,10 +151,16 @@
 
                 </div>
 
+                <div class="row justify-content-between">
+                    <div class="col-5">
+                        <a href="t_select.php" class="btn btn-outline-secondary btn-block">กลับ</a>
+                    </div>
+                    <div class="col-5">
+                        <button type="submit" class="btn btn-primary btn-block">ถัดไป</button>
+                    </div>
+                </div>
 
 
-                <button type="submit" class="btn btn-primary btn-md btn-block">ถัดไป</button>
-                <a href="t_select.php" class="btn btn-outline-secondary btn-md btn-block">กลับ</a>
             </div>
         </div>
     </form>

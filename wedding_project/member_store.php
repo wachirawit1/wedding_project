@@ -2,59 +2,7 @@
 include('condb.php');
 ?>
 <!doctype html>
-<html lang="en">
-
-<head>
-    <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
-
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
-    <title>wedding</title>
-    <style>
-        body {
-            font-family: 'Prompt', sans-serif;
-            background-color: #ffffff;
-        }
-
-        .nav-item {
-            font-size: 16px;
-            padding-left: 16px;
-            padding-right: 16px;
-        }
-
-
-        /* Standard syntax */
-        a.nav-link:hover {
-            background-color: white;
-        }
-
-
-        a.nav-link {
-            color: grey;
-        }
-
-
-        a.nav-link:hover {
-            color: #dbb89a !important;
-        }
-    </style>
-
-</head>
-
+<html lang="en" class="fullscreen-bg">
 <script>
     function sweet01() {
         Swal.fire({
@@ -74,46 +22,39 @@ include('condb.php');
         })
     }
 </script>
+   <body>
+      <div id="wrapper">
 
-<body>
-    <?php
-    if (isset($_GET['del']) && !empty($_GET['del'])) {
-        $id = $_GET['del'];
-        $del = "DELETE FROM store WHERE s_id = $id";
-        $query = mysqli_query($conn, $del);
-        if ($query) {
-            echo "<script>";
-            echo "sweet01()";
-            echo "</script>";
-        } else {
-            echo "<script>";
-            echo "sweet02()";
-            echo "</script>";
-        }
-    }
-    ?>
-    <?php
-    $keyword = null;
-    if (isset($_POST['search'])) {
-        $keyword = $_POST['search'];
-    }
+      <?php
     if (!isset($_SESSION['username'])) { ?>
         <div class='alert alert-danger' role='alert'>
             <h4 class='alert-heading'>แจ้งเตือน !</h4>
             <p>คุณยังไม่ได้เข้าสู่ระบบ โปรดเข้าสู่ระบบอีกครั้ง</p>
             <hr>
-            <p class='mb-0'><a href='login.php' class='alert-link'>กลับไปเข้าสู่ระบบ</a></p>
+            <p class='mb-0'><a href='index.php' class='alert-link'>กลับไปเข้าสู่ระบบ</a></p>
         </div>
     <?php
         exit;
     }
     ?>
-    <?php
 
-    include('navbar_admin.php');
-    ?>
-    <div class="card container py-5 my-5 bg-light shadow rounded" id="box">
-        <div class="container ">
+      <?php 
+         include('navbar_admin.php');
+            ?>
+
+            
+         <div class="main">
+
+         <?php 
+         include('navbar_top.php');
+            ?>
+
+<div class="main-content">
+<div class="overflow-auto">
+
+
+    <div class="container-fluid" id="box">
+        <div class="panel">
             <div class="col d-flex justify-content-between">
                 <div class="p-2">
                     <?php
@@ -126,7 +67,7 @@ include('condb.php');
                     ?>
                 </div>
             </div>
-            <table class="table table-light table-hover  text-center">
+            <table id="datatable" class="table table-striped no-margins">
                 <thead>
                     <th scope="col">#</th>
                     <th scope="col">ชื่อร้านค้า</th>
@@ -263,6 +204,7 @@ include('condb.php');
             duration: 1000
         });
     </script>
-</body>
-
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+   <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+   </body>
 </html>

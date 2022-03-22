@@ -52,6 +52,14 @@ include('condb.php');
         a.nav-link:hover {
             color: #dbb89a !important;
         }
+
+        .swal-button {
+            background-color: #dbb89a;
+        }
+
+        .swal-button:hover {
+            background-color: #caae95;
+        }
     </style>
 
 </head>

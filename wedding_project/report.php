@@ -418,7 +418,7 @@ include('condb.php');
                         value: value
                     },
                     success: function(data) {
-                        console.log(data);
+                        // console.log(data);
                         $('.overflow-auto').html(data)
                         let replying = $('.replying');
                         replying.each(function() {
@@ -446,7 +446,6 @@ include('condb.php');
                 });
             });
 
-            $('#endBtn').hide();
 
             let date = document.getElementById('date');
             let days = document.getElementById('days');

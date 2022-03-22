@@ -47,6 +47,17 @@
         a.nav-link:hover {
             color: #dbb89a !important;
         }
+
+        .btn-primary.d-block {
+            border-color: #dbb89a;
+            background-color: #dbb89a;
+            color: #ffffff;
+        }
+
+        .btn-primary.d-block:hover {
+            border-color: #dbb89a;
+            background-color: #caae95;
+        }
     </style>
 
 </head>

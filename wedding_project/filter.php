@@ -7,11 +7,11 @@ if (isset($_POST['value'])) {
     $userid = $_SESSION['userid'];
     $sql = "";
     if ($value == 100) {
-        $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))";
+        $sql = "SELECT * FROM `email_list` WHERE email_id = (SELECT email.email_id FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid AND status = 1))";
     } else {
         $sql = "SELECT * FROM `email_list` 
         WHERE email_id = (SELECT email.email_id 
-        FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid))
+        FROM email WHERE email.e_id = (SELECT event.e_id FROM event WHERE event.userid = $userid AND status = 1))
         AND replying = '$value'";
     }
 

@@ -51,6 +51,11 @@
         a.nav-link:hover {
             color: #dbb89a !important;
         }
+
+        .list-group-item.active {
+            background-color: #dbb89a;
+            border-color: #dbb89a;
+        }
     </style>
 
     <script type="text/javascript">
@@ -125,7 +130,7 @@
                                 <div class="row">
                                     <div class="col-5 ml-auto text-right">
                                         <a type="button" class="text-primary" href="#" data-toggle="modal" data-target="#edituser">
-                                            <i class="fas fa-edit">แก้ไขข้อมูล</i>
+                                            <i class="fas fa-edit" style="color: #dbb89a;">แก้ไขข้อมูล</i>
                                         </a>
                                     </div>
 
@@ -211,21 +216,26 @@
                     <!-- เปลี่ยนรหัสผ่าน -->
                     <div class="tab-pane fade" id="list-changepass" role="tabpanel" aria-labelledby="changepass">
                         <div class="p-3">
+
                             <div class="form-group ">
+                                <div class="alert alert-danger p-1 text-center col-4" role="alert">
+                                    -----/////-----
+                                </div>
                                 <label for="staticEmail" class="col-sm-2 col-form-label">รหัสผ่านเดิม</label>
                                 <div class="col-4">
-                                    <input type="password" class="form-control" id="staticEmail">
+
+                                    <input type="password" class="form-control" id="oldpass">
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <label for="inputPassword" class="col-sm-2 col-form-label">รหัสผ่านใหม่</label>
                                 <div class="col-4">
-                                    <input type="password" class="form-control" id="inputPassword">
+                                    <input type="password" class="form-control" id="newpass">
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <div class="col-4">
-                                    <button type="button" class=" btn btn-primary btn-block" id="submitbtn">เปลี่ยนรหัสผ่าน</button>
+                                    <button type="button" class="btn btn-block" id="submitbtn" style="background-color: #dbb89a;color: #ffff;">เปลี่ยนรหัสผ่าน</button>
                                 </div>
                             </div>
                         </div>
@@ -336,15 +346,58 @@
 
 
 
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         AOS.init({
             duration: 1000
+        });
+
+        $(document).ready(function() {
+            $('.alert').hide();
+            $('#submitbtn').click(function() {
+                let oldpass = $('#oldpass');
+                let newpass = $('#newpass');
+                if (oldpass.val() == "" || newpass == "") {
+                    oldpass.css("border", "1px solid #dc3545");
+                    newpass.css("border", "1px solid #dc3545");
+                } else {
+                    $.ajax({
+                        url: "newpass.php",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            oldpass: oldpass.val(),
+                            newpass: newpass.val()
+                        },
+                        success: function(data) {
+                            if (data.text == "success") {
+                                swal({
+                                    text: "เปลี่ยนรหัสผ่านสำเร็จ",
+                                    icon: "success",
+                                    button: false,
+                                    timer: 1000
+                                }).then((value) => {
+                                    newpass.val("");
+                                    oldpass.val("");
+                                });
+                            } else {
+                                $('.alert').show(500);
+                                $('.alert').text('รหัสผ่านไม่ถูกต้อง');
+                            }
+                        },
+                        error: function(data) {
+                            console.error(data);
+                            console.log(data.text);
+                        }
+                    });
+                }
+            });
+
         });
     </script>
 </body>

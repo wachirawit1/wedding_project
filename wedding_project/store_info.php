@@ -51,6 +51,11 @@
         a.nav-link:hover {
             color: #dbb89a !important;
         }
+
+        .list-group-item.active {
+            background-color: #dbb89a;
+            border-color: #dbb89a;
+        }
     </style>
 
     <script type="text/javascript">
@@ -84,7 +89,7 @@
     }
 
     if (isset($_SESSION['username'])) {
-        
+
         include('condb.php');
         $username = $_SESSION['username'];
 
@@ -109,63 +114,108 @@
     </nav>
 
     <div class="container mb-5">
-        <div class="row card ">
-            <div class="row mx-auto my-5">
-                <div class="col bg-light">
-                    <h2 class="font-weight-bold text-center">ข้อมูลร้านค้า</h2>
+        <div class="row">
+            <div class="col-3 ">
+                <div class="list-group shadow" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="myinfo" data-toggle="list" href="#list-myinfo" role="tab" aria-controls="home">ข้อมูลส่วนตัว</a>
+                    <a class="list-group-item list-group-item-action text-danger" id="changepass" data-toggle="list" href="#list-changepass" role="tab" aria-controls="profile">เปลี่ยนรหัสผ่าน</a>
                 </div>
             </div>
+            <div class="col shadow">
+                <div class="tab-content" id="nav-tabContent">
+                    <!-- ข้อมูลส่วนตัว -->
+                    <div class="tab-pane fade show active" id="list-myinfo" role="tabpanel" aria-labelledby="myinfo">
 
-            <div class="col card-body">
-                <div class="row justify-content-md-center">
-                    <div class="col col-lg-4 border-right">
-                        <div class="form-group row">
-                            <div class="col-6 ml-auto text-center">
-                                <a type="button" class="" href="#" data-toggle="modal" data-target="#edituser">
-                                    <i class="fas fa-edit">แก้ไขข้อมูล</i>
-                                </a>
+                        <div class="row justify-content-around p-3">
+
+
+                            <div class="col">
+                                <div class="row justify-content-md-center">
+                                    <div class="col col-lg-4 border-right">
+                                        <div class="form-group row">
+                                            <div class="col-6 ml-auto text-center">
+                                                <a type="button" class="" href="#" data-toggle="modal" data-target="#edituser">
+                                                    <i class="fas fa-edit" style="color: #dbb89a;">แก้ไขข้อมูล</i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group row  my-1 mx-auto">
+                                            <div class="col">
+                                                <label for="formGroupExampleInput">ชื่อร้านค้า</label>
+                                                <input class="form-control text-center" type="text" placeholder="" value="<?php echo $row['s_name'] ?>" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group  mx-auto my-1">
+                                            <div class="col">
+                                                <label for="formGroupExampleInput">เบอร์โทรศัพท์</label>
+                                                <input class="form-control text-center" type="text" placeholder="" value="<?php echo $row['s_tel'] ?>" readonly>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <div class="col">
+                                                <div class="">
+                                                    <label for="formGroupExampleInput">อีเมล</label>
+                                                    <input class="form-control text-center" type="text" placeholder="" value="<?php echo $row['s_email'] ?>" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="col-md-auto">
+
+                                    </div>
+                                    <div class="col col-lg-4 ">
+                                        <div class="form-group"></div>
+                                        <img src="<?php echo $path . $img ?>" alt="no image" class="card-img-top rounded" style="width: 300px; height: 300px;">
+                                    </div>
+                                </div>
+
                             </div>
+
 
                         </div>
 
-                        <div class="form-group row  my-1 mx-auto">
-                            <div class="col">
-                                <label for="formGroupExampleInput">ชื่อร้านค้า</label>
-                                <input class="form-control text-center" type="text" placeholder="" value="<?php echo $row['s_name'] ?>" readonly>
-                            </div>
-                        </div>
 
-                        <div class="form-group  mx-auto my-1">
-                            <div class="col">
-                                <label for="formGroupExampleInput">เบอร์โทรศัพท์</label>
-                                <input class="form-control text-center" type="text" placeholder="" value="<?php echo $row['s_tel'] ?>" readonly>
-                            </div>
+                    </div>
 
-                        </div>
 
-                        <div class="form-group ">
-                            <div class="col">
-                                <div class="">
-                                    <label for="formGroupExampleInput">อีเมล</label>
-                                    <input class="form-control text-center" type="text" placeholder="" value="<?php echo $row['s_email'] ?>" readonly>
+
+                    <!-- เปลี่ยนรหัสผ่าน -->
+                    <div class="tab-pane fade" id="list-changepass" role="tabpanel" aria-labelledby="changepass">
+                        <div class="p-3">
+                            <div class="form-group">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">รหัสผ่านเดิม</label>
+                                <div class="col-4">
+                                    <input type="password" class="form-control" id="staticEmail">
                                 </div>
                             </div>
+                            <div class="form-group ">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">รหัสผ่านใหม่</label>
+                                <div class="col-4">
+                                    <input type="password" class="form-control" id="inputPassword">
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="col-4">
+                                    <button type="button" class=" btn btn-block" id="submitbtn" style="background-color: #dbb89a;color: #ffff;">เปลี่ยนรหัสผ่าน</button>
+                                </div>
+                            </div>
+
                         </div>
 
-
-
                     </div>
-                    <div class="col-md-auto">
 
-                    </div>
-                    <div class="col col-lg-4 ">
-                        <div class="form-group"></div>
-                        <img src="<?php echo $path . $img ?>" alt="no image" class="card-img-top rounded" style="width: 300px; height: 300px;">
-                    </div>
                 </div>
-
             </div>
         </div>
+
     </div>
     </div>
 
