@@ -90,18 +90,25 @@
         $userid = $_SESSION['userid'];
         $sql = "SELECT * FROM `event` INNER JOIN traditional ON event.t_id = traditional.t_id WHERE userid = $userid AND status = 2";
         $query = mysqli_query($conn, $sql);
-        $i = 1;
-        while ($row = mysqli_fetch_array($query)) { ?>
-
-            <div class="card mb-3 shadow-sm">
-                <div class="card-header"><?= $i . " " . $row['trad_name'] ?></div>
-                <div class="card-body">
-                    <img src="assets/tradition_img/<?= $row['trad_img'] ?>" class="" alt="" width="200">
-                    <?= $row['date'] ?>
-                </div>
+        $num = mysqli_num_rows($query);
+        if ($num == 0) { ?>
+            <div class="my-3 py-5 text-center">
+                <i class="fas fa-times-circle fa-10x text-muted"></i>
             </div>
+            <?php } else {
+            $i = 1;
+            while ($row = mysqli_fetch_array($query)) { ?>
+
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-header"><?= $i . " " . $row['trad_name'] ?></div>
+                    <div class="card-body">
+                        <img src="assets/tradition_img/<?= $row['trad_img'] ?>" class="" alt="" width="200">
+                        <?= $row['date'] ?>
+                    </div>
+                </div>
 
         <?php $i++;
+            }
         } ?>
     </div>
 

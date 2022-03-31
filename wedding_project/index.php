@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="footer_style.css">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
 
-
     <!-- effect -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -78,9 +77,7 @@
     <?php
     session_start();
     if (isset($_SESSION['username'])) {
-        if ($_SESSION['type'] == 01) {
-            include('navbaruser.php');
-        }
+        include('navbaruser.php');
     } else {
         include('navbar.php');
     }

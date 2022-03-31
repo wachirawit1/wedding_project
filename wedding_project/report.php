@@ -76,6 +76,15 @@ include('condb.php');
             color: #ffffff;
             background-color: grey;
         }
+
+        .center {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            width: 100%;
+            text-align: center;
+            transform: translate(-50%, -50%);
+        }
     </style>
 </head>
 
@@ -96,14 +105,6 @@ include('condb.php');
     ?>
     <?php include('navbaruser.php'); ?>
 
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb" style=" background-color: #ffffff;">
-            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-            <li class="breadcrumb-item"><a href="progress.php">progress</a></li>
-            <li class="breadcrumb-item"><a href="SendingE.php">inviting</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data</li>
-        </ol>
-    </nav>
 
     <?php
 
@@ -116,9 +117,22 @@ include('condb.php');
     ?>
     <div class="container">
         <?php
-        if ($num == 0) {
-            echo "ยังไม่ได้สร้างอีเวนท์";
-        } else { ?>
+        if ($num == 0) { ?>
+            <div class="my-3 center ">
+                <h5>ยังไม่ได้สร้างอีเวนท์</h5>
+                <i class="fas fa-times-circle fa-10x text-muted"></i>
+
+            </div>
+        <?php } else { ?>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style=" background-color: #ffffff;">
+                    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                    <li class="breadcrumb-item"><a href="progress.php">progress</a></li>
+                    <li class="breadcrumb-item"><a href="SendingE.php">inviting</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Data</li>
+                </ol>
+            </nav>
+
             <div class="row my-3">
                 <div class="col-4 ">
 
@@ -446,6 +460,7 @@ include('condb.php');
                 });
             });
 
+            $('#endBtn').hide();
 
             let date = document.getElementById('date');
             let days = document.getElementById('days');

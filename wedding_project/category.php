@@ -49,6 +49,10 @@
             border: 1px solid grey;
         }
 
+        .card-text.overflow-hidden {
+            width: 19rem;
+            height: 5rem;
+        }
     </style>
 
 </head>
@@ -70,7 +74,7 @@
         <div class="py-5">
 
             <?php $category = $_GET['cate_name']; ?>
-            <div class="my-3 text-center">
+            <div class="mb-5 text-center">
                 <h2 class="text-secondary">หมวด <?= "$category" ?></h2>
             </div>
 
@@ -92,10 +96,10 @@
                             <div data-aos="zoom-in" data-aos-duration="800">
                                 <div class="col mb-4 ">
                                     <div class="card">
-                                        <img src="img/<?= $row['picture'] ?>" class="card-img-top img-responsive" alt="..." height="125">
+                                        <img src="img/<?= $row['picture'] ?>" class="card-img-top img-responsive" alt="..." height="200">
                                         <div class="card-body">
                                             <h5 class="card-title"><?= $row['name'] ?></h5>
-                                            <p class="card-text">
+                                            <p class="card-text overflow-hidden">
                                                 <?= $row['detail'] ?>
                                             </p>
                                         </div>

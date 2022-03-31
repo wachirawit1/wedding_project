@@ -46,12 +46,14 @@
         a.nav-link:hover {
             color: #dbb89a !important;
         }
-        .mybtn{
+
+        .mybtn {
             border-color: #dbb89a;
             background-color: #dbb89a;
             color: #ffffff;
         }
-        .mybtn:hover{
+
+        .mybtn:hover {
             border-color: #c5a58a;
             background-color: #c5a58a;
             color: #ffffff;
@@ -62,41 +64,11 @@
 
 
 <body>
-    <?php
-    if (!isset($_SESSION['username'])) { ?>
-        <div class='alert alert-danger' role='alert'>
-            <h4 class='alert-heading'>แจ้งเตือน !</h4>
-            <p>คุณยังไม่ได้เข้าสู่ระบบ โปรดเข้าสู่ระบบอีกครั้ง</p>
-            <hr>
-            <p class='mb-0'><a href='index.php' class='alert-link'>กลับไปเข้าสู่ระบบ</a></p>
-        </div>
-    <?php
-        exit;
-    }
-    ?>
+
 
     <?php include('navbaruser.php'); ?>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน!!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ต้องการออกจากระบบ?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                    <a href="logout.php?logout=1" type="button" class="btn btn-danger">ยืนยัน</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- breadcrumb -->
     <nav aria-label="breadcrumb">

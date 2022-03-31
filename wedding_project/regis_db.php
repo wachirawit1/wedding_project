@@ -96,6 +96,9 @@
 				$result1 = mysqli_query($conn, $sql);
 
 				if ($result1) {
+					$last_id = mysqli_insert_id($conn);
+
+					$_SESSION['userid'] = $last_id;
 					$_SESSION['username'] = $username;
 					$_SESSION['name'] = $name;
 					$_SESSION['lastname'] = $lastname;

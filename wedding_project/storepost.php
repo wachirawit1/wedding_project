@@ -80,10 +80,6 @@
                 padding-right: 16px;
             }
 
-            .jumbotron {
-                background-color: white;
-            }
-
 
             a.nav-link {
                 color: grey;

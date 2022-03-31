@@ -55,13 +55,13 @@
             color: #dbb89a !important;
         }
 
-        .btn-primary.btn-block {
+        .my-btn.btn-block {
             border-color: #dbb89a;
             background-color: #dbb89a;
             color: #ffffff;
         }
 
-        .btn-primary.btn-block:hover {
+        .my-btn.btn-block:hover {
             border-color: #dbb89a;
             background-color: #caae95;
         }
@@ -156,7 +156,7 @@
                         <a href="t_select.php" class="btn btn-outline-secondary btn-block">กลับ</a>
                     </div>
                     <div class="col-5">
-                        <button type="submit" class="btn btn-primary btn-block">ถัดไป</button>
+                        <button type="submit" class="btn my-btn btn-block">ถัดไป</button>
                     </div>
                 </div>
 

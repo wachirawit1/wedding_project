@@ -46,6 +46,7 @@
         var reader = new FileReader();
 
         reader.onload = function(e) {
+
           $('#blah').attr('src', e.target.result);
         }
 
@@ -228,7 +229,7 @@
                     <div class="card text-center border-0">
                       <div class="card-body ">
 
-                        <img id="blah" src="assets/images/image-regular.svg" nn alt="your image" width="300" />
+                        <img id="blah" src="assets/images/image-regular.svg" alt="your image" width="300" />
                       </div>
                     </div>
 

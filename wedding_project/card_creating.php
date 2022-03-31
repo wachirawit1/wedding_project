@@ -157,7 +157,7 @@ include('condb.php');
                                 <div class="col">
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" id="husband_input" placeholder="ชื่อเจ้าบ่าว" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +165,7 @@ include('condb.php');
                                 <div class="col">
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" id="wife_input" placeholder="ชื่อเจ้าสาว" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -173,11 +173,11 @@ include('condb.php');
                                 <div class="col">
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" id="place_input" placeholder="สถานที่" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                       
+
                                     </div>
                                 </div>
                             </div>
-                           
+
                         </div>
                         <span class="toCanvas"> <a href="javascript:void(0);" class="btn btn-primary"> ดูตัวอย่างรูปภาพ </a></span>
                     </div>
@@ -241,12 +241,12 @@ include('condb.php');
                 place.html($('#place_input').val());
             })
 
-           
+
 
             // date 
             const month = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤษจิกายน", "ธันวาคม"];
             let getDate = $('#date').html();
-            
+
             const date = new Date(getDate);
 
             if (isValidDate(date)) {
@@ -254,7 +254,7 @@ include('condb.php');
                 let mName = month[date.getMonth()];
                 let y = parseInt(date.getFullYear()) + 543;
                 $('#date').html(d + " " + mName + " " + y);
-            } 
+            }
 
             function isValidDate(d) {
                 return d instanceof Date && !isNaN(d);

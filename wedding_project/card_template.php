@@ -77,7 +77,7 @@ include('condb.php');
             <li class="breadcrumb-item active" aria-current="page">template</li>
         </ol>
     </nav>
-    
+
     <div class="container p-3 my-3 bg-light shadow">
         <div class="row justify-content-md-center">
             <div class="card text-center" style="width: 30rem;">

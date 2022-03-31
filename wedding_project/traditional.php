@@ -125,7 +125,8 @@ include('condb.php');
                 <div class="form-group row">
                     <label for="#" class="col-sm-3 col-form-label">รูปภาพ</label>
                     <div class="col-sm-9">
-                        <img src="" class="my-2" id="blah" alt="traditional pic" width="200">
+
+                        <img src="assets/images/image-regular.svg" class="my-2" id="blah" alt="traditional pic" width="200">
 
                         <div class="input-group mb-3">
                             <div class="custom-file">

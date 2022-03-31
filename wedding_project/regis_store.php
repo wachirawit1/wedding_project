@@ -88,9 +88,9 @@
 
               <?php
 
-              if ($_SESSION['errors'] != null) {
+              if (isset($_SESSION['errors']) != null) {
                 echo "<div class='alert alert-danger py-2' role='alert'>";
-                echo $_SESSION['errors'];
+                echo isset($_SESSION['errors']);
                 echo "</div>";
                 $_SESSION['errors'] = null;
               }
@@ -218,9 +218,11 @@
                     </div>
                     <br><br>
 
-
-                    <img id="blah1" src="#" alt="your image" width="300" />
-
+                    <div class="card text-center border-0">
+                      <div class="card-body ">
+                        <img id="blah1" src="assets/images/id_card.jpg" alt="your image" width="300" />
+                      </div>
+                    </div>
 
                   </div>
                 </div>
@@ -242,8 +244,13 @@
                     </div>
                     <br><br>
 
+                    <div class="card text-center border-0">
+                      <div class="card-body ">
 
-                    <img id="blah" src="#" alt="your image" width="300" />
+                        <img id="blah" src="assets/images/image-regular.svg" alt="your image" width="300" />
+
+                      </div>
+                    </div>
 
 
                   </div>
@@ -262,7 +269,7 @@
 
             </div>
             <div class="card-footer">
-              <p class="font-weight-light">มีบัญชีแล้ว? <a href="login_store.php">เข้าสู่ระบบเลย</a></p>
+              <p class="font-weight-light">มีบัญชีแล้ว? <a href="index.php">เข้าสู่ระบบเลย</a></p>
               <button type="submit" name="register" class="btn btn-success btn-block ">สมัครสมาชิก</button>
             </div>
 
